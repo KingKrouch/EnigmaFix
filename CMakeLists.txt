@@ -54,25 +54,26 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SpdLog)
 
 ## ImGui
+set(IMGUI_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/ImGui")
 FetchContent_Declare(
     ImGui
     GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
     GIT_TAG "origin/master"
-    SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/ImGui"
+    SOURCE_DIR "${IMGUI_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(ImGui)
 add_library(ImGui STATIC
-        Source/ThirdParty/ImGui/imgui.cpp
-        Source/ThirdParty/ImGui/imgui.h
-        Source/ThirdParty/ImGui/imgui_demo.cpp
-        Source/ThirdParty/ImGui/imgui_draw.cpp
-        Source/ThirdParty/ImGui/imgui_tables.cpp
-        Source/ThirdParty/ImGui/imgui_widgets.cpp)
+        ${IMGUI_SOURCE_DIR}/imgui.cpp
+        ${IMGUI_SOURCE_DIR}/imgui.h
+        ${IMGUI_SOURCE_DIR}/imgui_demo.cpp
+        ${IMGUI_SOURCE_DIR}/imgui_draw.cpp
+        ${IMGUI_SOURCE_DIR}/imgui_tables.cpp
+        ${IMGUI_SOURCE_DIR}/imgui_widgets.cpp)
 add_library(ImGuiBackends STATIC
-        Source/ThirdParty/ImGui/backends/imgui_impl_dx11.cpp
-        Source/ThirdParty/ImGui/backends/imgui_impl_dx11.h
-        Source/ThirdParty/ImGui/backends/imgui_impl_win32.cpp
-        Source/ThirdParty/ImGui/backends/imgui_impl_win32.h)
+        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.cpp
+        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.h
+        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.cpp
+        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.h)
 ### Include the ImGui header files with the ImGuiBackends, as we don't want to manually modify the includes to add a "../".
 target_include_directories(ImGuiBackends PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Source/ThirdParty/ImGui)
 target_link_libraries(ImGuiBackends d3dcompiler dwmapi)
@@ -80,16 +81,17 @@ target_link_libraries(ImGuiBackends d3dcompiler dwmapi)
 target_link_libraries(ImGui ImGuiBackends)
 
 ## Kiero
+set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero")
 FetchContent_Declare(
     Kiero
     GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
     GIT_TAG "origin/master"
-    SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero"
+    SOURCE_DIR "${KIERO_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(Kiero)
-add_library(Kiero STATIC
-    ${Kiero_SOURCE_DIR}/kiero.cpp
-    ${Kiero_SOURCE_DIR}/kiero.h
+add_library(Kiero STATIC 
+        ${KIERO_SOURCE_DIR}/kiero.cpp
+        ${KIERO_SOURCE_DIR}/kiero.h
 )
 
 ## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
