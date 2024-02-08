@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 # Set the Project Name.
 set(PROJECT_NAME                EnigmaFix)
 # Set the name of the target operating system.
