@@ -53,8 +53,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SpdLog)
 
-
 ## ImGui
+FetchContent_Declare(
+    ImGui
+    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
+    GIT_TAG "origin/master"
+    SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/ImGui"
+)
+FetchContent_MakeAvailable(ImGui)
 add_library(ImGui STATIC
         Source/ThirdParty/ImGui/imgui.cpp
         Source/ThirdParty/ImGui/imgui.h
@@ -74,9 +80,17 @@ target_link_libraries(ImGuiBackends d3dcompiler dwmapi)
 target_link_libraries(ImGui ImGuiBackends)
 
 ## Kiero
+FetchContent_Declare(
+    Kiero
+    GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
+    GIT_TAG "origin/master"
+    SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero"
+)
+FetchContent_MakeAvailable(Kiero)
 add_library(Kiero STATIC
-        Source/ThirdParty/Kiero/kiero.cpp
-        Source/ThirdParty/Kiero/kiero.h)
+    ${Kiero_SOURCE_DIR}/kiero.cpp
+    ${Kiero_SOURCE_DIR}/kiero.h
+)
 
 ## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
 FetchContent_Declare(
@@ -86,7 +100,6 @@ FetchContent_Declare(
         SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook"
 )
 FetchContent_MakeAvailable(MinHook)
-
 target_link_libraries(Kiero MinHook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
 
 ## IniPP
