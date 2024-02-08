@@ -113,6 +113,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(IniPP)
 
+## STB
+set(STB_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/STB")
+FetchContent_Declare(
+        STB
+        GIT_REPOSITORY "https://github.com/nothings/stb.git"
+        GIT_TAG "origin/master"
+        SOURCE_DIR "${STB_SOURCE_DIR}"
+)
+FetchContent_MakeAvailable(STB)
+
 # Now finally export our library file.
 ## Setup the project and set a few variables
 project(EnigmaFix)
