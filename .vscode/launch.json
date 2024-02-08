@@ -1,0 +1,208 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug EnigmaFix (Death end re;Quest)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:DERQ_INSTALL_DIR}/Application.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Death end re;Quest 2)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:DERQ2_INSTALL_DIR}/DeathEndReQuest2.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Neptunia VIIR)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:VIIR_INSTALL_DIR}/v2r.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Neptunia Virtual Stars)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:NVS_INSTALL_DIR}/NeptuniaVirtualStars.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Dragon Star Varnir)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:VARNIR_INSTALL_DIR}/DragonStarVarnir.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Mary Skelter 2)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:MS2_INSTALL_DIR}/MarySkelter2.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        },
+        {
+            "name": "Debug EnigmaFix (Mary Skelter Finale)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${env:MS2_INSTALL_DIR}/MarySkelterFinale.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:pickGDB}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint at DLL initialization",
+                    "text": "break DllMain",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "windows": {
+                "preLaunchTask": "build"
+            }
+        }
+    ]
+}
