@@ -1,0 +1,3078 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1062</ID>
+      <Description>"EnigmaFix (DERQ2)"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"Resolution Stuff"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1074</ID>
+              <Description>"Current Resolution (Read Only)"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1</ID>
+                  <Description>"Current Window Resolution Horizontal"</Description>
+                  <LastState Value="3440" RealAddress="FDF15FEC40"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"DeathEndReQuest2.exe"+0147CE20</Address>
+                  <Offsets>
+                    <Offset>160</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3</ID>
+                  <Description>"Current Window Resolution Vertical"</Description>
+                  <LastState Value="1440" RealAddress="FDF15FEC44"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"DeathEndReQuest2.exe"+0147CE20</Address>
+                  <Offsets>
+                    <Offset>164</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1084</ID>
+                  <Description>"Max Available Resolution"</Description>
+                  <LastState Value="10" RealAddress="7FF609FB087C"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>DeathEndReQuest2.exe+13E087C</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1048</ID>
+              <Description>"Config Variables (Read Only)"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1049</ID>
+                  <Description>"Screen Resolution Array"</Description>
+                  <LastState Value="9" RealAddress="7FF609FB0878"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>DeathEndReQuest2.exe+13E0878</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1047</ID>
+                  <Description>"Screen Mode (0 = Windowed, 1 = Fullscreen, 2 = Borderless)"</Description>
+                  <LastState Value="1" RealAddress="7FF609FB0874"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>DeathEndReQuest2.exe+13E0874</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1042</ID>
+              <Description>"1080p"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1073</ID>
+                  <Description>"Internal Resolution"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1499</ID>
+                      <Description>"Horizontal Internal Resolution"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>7FF6FC110AD8</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1500</ID>
+                      <Description>"Vertical Internal Resolution"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>7FF6FC110ADC</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1022</ID>
+                      <Description>"Fullscreen Mode Internal Horizontal Resolution (80 07 = 1920) (Not sure on where to find the vertical resolution)"</Description>
+                      <LastState Value="80 07 00 00 4C 8D 45 AF 89 5D AB 48 8D 55 A7" RealAddress="7FF608CF4EA7"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>15</ByteLength>
+                      <Address>DeathEndReQuest2.exe+124EA7</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1072</ID>
+                  <Description>"Window Size"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1069</ID>
+                      <Description>"Horizontal Window Size"</Description>
+                      <LastState Value="1920" RealAddress="7FF609FB0AD8"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>DeathEndReQuest2.exe+13E0AD8 </Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1071</ID>
+                      <Description>"Vertical Window Size"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>7FF6FC110ADC</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1066</ID>
+                      <Description>"Windowed Mode Size 1920x1080"</Description>
+                      <LastState Value="80 07 00 00 38 04" RealAddress="7FF609FB0AD8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>DeathEndReQuest2.exe+13E0AD8</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1040</ID>
+              <Description>"4K Native"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1076</ID>
+                  <Description>"Internal Resolution"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1037</ID>
+                      <Description>"Fullscreen Internal Resolution 4K Native mode (00 0F = 3840, 70 08 = 2160) (00 14 = 5120)"</Description>
+                      <LastState Value="00 0F 00 00 C7 45 EB 70 08" RealAddress="7FF608CF4F26"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>9</ByteLength>
+                      <Address>DeathEndReQuest2.exe+124F26</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1038</ID>
+                      <Description>"Windowed Mode Internal Resolution 4K Native Mode"</Description>
+                      <LastState Value="00 0F 00 00 48 8B C1 C7 41 04 70 08" RealAddress="7FF608D43DE6"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>12</ByteLength>
+                      <Address>DeathEndReQuest2.exe+173DE6</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1075</ID>
+                  <Description>"Window Size"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1059</ID>
+                      <Description>"Windowed Mode Size 4K Native"</Description>
+                      <LastState Value="00 0F 00 00 70 08" RealAddress="7FF609FB0AE8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>DeathEndReQuest2.exe+13E0AE8</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1063</ID>
+              <Description>"Aspect Ratio"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>223</ID>
+                  <Description>"Aspect Ratio for Save Crystals, other objects, and culling (2.370370388 for 21:9)"</Description>
+                  <LastState Value="1.777777791" RealAddress="222678D2C70"/>
+                  <VariableType>Float</VariableType>
+                  <Address>"DeathEndReQuest2.exe"+0AE77228</Address>
+                  <Offsets>
+                    <Offset>680</Offset>
+                    <Offset>20</Offset>
+                    <Offset>28</Offset>
+                    <Offset>38</Offset>
+                    <Offset>38</Offset>
+                    <Offset>38</Offset>
+                    <Offset>A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1035</ID>
+                  <Description>"Prevent aspect ratio value from being overwritten"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"DeathEndReQuest2.exe"+3D860E:
+db 90 90 90 90 90
+"DeathEndReQuest2.exe"+3D85D7:
+db 90 90 90 90 90
+"DeathEndReQuest2.exe"+3D2147:
+db 90 90 90
+[DISABLE]
+"DeathEndReQuest2.exe"+3D860E:
+db F3 0F 11 4F 50
+"DeathEndReQuest2.exe"+3D85D7:
+db F3 0F 11 4F 50
+"DeathEndReQuest2.exe"+3D2147:
+db 89 41 50
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>197</ID>
+              <Description>"Partial Horizontal UI/Bustup scale"</Description>
+              <LastState Value="3440" RealAddress="2226FEE8AD0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>"DeathEndReQuest2.exe"+0147D270</Address>
+              <Offsets>
+                <Offset>9E0</Offset>
+                <Offset>8</Offset>
+                <Offset>10</Offset>
+                <Offset>10</Offset>
+                <Offset>18</Offset>
+                <Offset>160</Offset>
+                <Offset>238</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1083</ID>
+              <Description>"Partial Vertical UI/Bustup scale"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>22EE8098AD4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1487</ID>
+              <Description>"More Resolution Related Stuff to dig through"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1086</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 83 24 01 00 00 38 04" RealAddress="7FF60999809C"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>12</ByteLength>
+                  <Address>DeathEndReQuest2.exe+DC809C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1087</ID>
+                  <Description>"Something Cursor Position Related"</Description>
+                  <LastState Value="80 07 00 00 C7 83 F0 03 00 00 38 04" RealAddress="7FF608CEFE4E"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>12</ByteLength>
+                  <Address>DeathEndReQuest2.exe+11FE4E</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1088</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 45 EB 38 04" RealAddress="7FF608CF4F36"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>9</ByteLength>
+                  <Address>DeathEndReQuest2.exe+124F36</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1089</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 44 24 54 38 04" RealAddress="7FF608FB5AE7"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>10</ByteLength>
+                  <Address>DeathEndReQuest2.exe+3E5AE7</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1090</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 85 B4 02 00 00 38 04" RealAddress="7FF608FB5B27"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>12</ByteLength>
+                  <Address>DeathEndReQuest2.exe+3E5B27</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1091</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 85 D4 02 00 00 38 04" RealAddress="7FF608FB5B3B"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>12</ByteLength>
+                  <Address>DeathEndReQuest2.exe+3E5B3B</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1092</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="80 07 00 00 C7 43 04 38 04" RealAddress="7FF6090CE7AD"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>9</ByteLength>
+                  <Address>DeathEndReQuest2.exe+4FE7AD</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1119</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="1920" RealAddress="7FF60999809C"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>DeathEndReQuest2.exe+DC809C</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1503</ID>
+              <Description>"UI Stuff"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1502</ID>
+                  <Description>"Enable Custom UI Scale"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+71ECE0) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,[DeathEndReQuest2.exe+2F34D8]
+
+originalcode:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+71ECE0:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DeathEndReQuest2.exe"+71ECE0:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1591</ID>
+                  <Description>"More UI Scale Stuff"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+5E16F9) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [rax+40],(int)2580
+
+originalcode:
+cvtsi2ss xmm1,[rax+40]
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+5E16F9:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DeathEndReQuest2.exe"+5E16F9:
+cvtsi2ss xmm1,[rax+40]
+//Alt: db F3 0F 2A 48 40
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1521</ID>
+                  <Description>"Minimap Scaling with custom aspect ratio (X)"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+alloc(newmem2,2048,"DeathEndReQuest2.exe"+71ECE0) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(int)2580
+
+originalcode2:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+exit2:
+jmp returnhere2
+
+"DeathEndReQuest2.exe"+71ECE0:
+jmp newmem2
+nop 4
+returnhere2:
+
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+382045) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+alloc(minimapScale,4)
+registersymbol(minimapScale)
+
+minimapScale:
+dd (float)2580.00
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm6,[minimapScale]
+
+originalcode:
+//movss xmm6,[DeathEndReQuest2.exe+EF0424]
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+382045:
+jmp newmem
+nop 3
+returnhere:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem2)
+"DeathEndReQuest2.exe"+71ECE0:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+dealloc(newmem)
+dealloc(minimapScale)
+"DeathEndReQuest2.exe"+382045:
+movss xmm6,[DeathEndReQuest2.exe+EF0424]
+//Alt: db F3 0F 10 35 D7 E3 B6 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1592</ID>
+                  <Description>"Another resolution opcode?"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+5E174C) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [rax+40],(int)1920
+
+originalcode:
+cvtsi2ss xmm1,[rax+40]
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+5E174C:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DeathEndReQuest2.exe"+5E174C:
+cvtsi2ss xmm1,[rax+40]
+//Alt: db F3 0F 2A 48 40
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1593</ID>
+                  <Description>"Another Resolution Opcode (Affects FMVs)"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+588E30) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov ecx,(int)2580
+
+originalcode:
+//mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+28]
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+588E30:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DeathEndReQuest2.exe"+588E30:
+mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+28]
+//Alt: db 8B 09 89 08 48 8B 44 24 28
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1501</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="2580" RealAddress="7FF608EC34D8"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>DeathEndReQuest2.exe+2F34D8</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1060</ID>
+          <Description>"Framerate Stuff"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>252</ID>
+              <Description>"In-Game Framerate"</Description>
+              <LastState Value="0" RealAddress="7FF609B4E140"/>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+F7E140</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>224</ID>
+              <Description>"Pause Menu Framerate"</Description>
+              <LastState Value="0" RealAddress="7FF609B4E148"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+F7E148</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1485</ID>
+              <Description>"Movement Speed 1 ((Current dt / 0.0166~) * 0.1)"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>7FF7B8EA7FF8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1486</ID>
+              <Description>"Movement Speed 2 ((Current dt / 0.0166~) * 0.2)"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>7FF7B8EA7FFC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1493</ID>
+              <Description>"Delta Time (1 / Current Framerate)"</Description>
+              <LastState Value="0.005708499812" RealAddress="FDF15FEC18"/>
+              <VariableType>Float</VariableType>
+              <Address>"DeathEndReQuest2.exe"+0147CE20</Address>
+              <Offsets>
+                <Offset>138</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1489</ID>
+              <Description>"Character Portrait Speed (Current dt / 0.0166~)"</Description>
+              <LastState Value="1.545097947" RealAddress="7FF609DB635C"/>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+11E635C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1491</ID>
+              <Description>"Pause Menu Speed ((Current dt / 0.0166~) * 0.5)"</Description>
+              <LastState Value="1.559863687" RealAddress="7FF613A781A8"/>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+AEA81A8</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1241</ID>
+          <Description>"Field of View"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1238</ID>
+              <Description>"Disable Functions that write to FOV"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"DeathEndReQuest2.exe"+3D780F:
+db 90 90 90 90 90 90 90 90
+
+"DeathEndReQuest2.exe"+3D2135:
+db 90 90 90
+
+"DeathEndReQuest2.exe"+3D861F:
+db 90 90 90 90 90 90 90
+
+// Battle FOV Overwrite
+"DeathEndReQuest2.exe"+3D718B:
+db 90 90 90 90 90 90 90 90
+
+[DISABLE]
+"DeathEndReQuest2.exe"+3D780F:
+db F3 0F 11 81 C4 04 00 00
+
+"DeathEndReQuest2.exe"+3D2135:
+db 89 41 44
+
+"DeathEndReQuest2.exe"+3D861F:
+db C7 47 44 00 00 34 42
+
+// Battle FOV Overwrite
+"DeathEndReQuest2.exe"+3D718B:
+db F3 0F 11 81 C4 04 00 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1239</ID>
+              <Description>"Field of View (45° Hor+ in Overworld, 43° Hor+ in Battle by default) (May affect in-game cutscenes)"</Description>
+              <LastState Value="45" RealAddress="222678D2C64"/>
+              <VariableType>Float</VariableType>
+              <Address>"DeathEndReQuest2.exe"+014D77C8</Address>
+              <Offsets>
+                <Offset>4C4</Offset>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1240</ID>
+              <Description>"Field of View Backup Pointer"</Description>
+              <LastState Value="45" RealAddress="222678D2C64"/>
+              <VariableType>Float</VariableType>
+              <Address>"DeathEndReQuest2.exe"+0AE72018</Address>
+              <Offsets>
+                <Offset>4C4</Offset>
+                <Offset>D0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1495</ID>
+          <Description>"Graphics"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1494</ID>
+              <Description>"Post Process Modification"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+
+// Disables something else
+alloc(newmem13,2048,"DeathEndReQuest2.exe"+77B841) 
+label(returnhere13)
+label(originalcode13)
+label(exit13)
+
+newmem13: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000000A4],00
+
+originalcode13:
+//mov [r14+r15+000000A4],al
+
+exit13:
+jmp returnhere13
+
+"DeathEndReQuest2.exe"+77B841:
+jmp newmem13
+nop 3
+returnhere13:
+
+// Disables something
+alloc(newmem12,2048,"DeathEndReQuest2.exe"+77B82C) 
+label(returnhere12)
+label(originalcode12)
+label(exit12)
+
+newmem12: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000981],00
+
+originalcode12:
+//mov [r14+r15+00000981],al
+
+exit12:
+jmp returnhere12
+
+"DeathEndReQuest2.exe"+77B82C:
+jmp newmem12
+nop 3
+returnhere12:
+
+
+
+// Disable Color Correction
+alloc(newmem11,2048,"DeathEndReQuest2.exe"+77BFE1) 
+label(returnhere11)
+label(originalcode11)
+label(exit11)
+
+newmem11: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+0C],00
+
+originalcode11:
+//mov [r14+r15+0C],al
+
+exit11:
+jmp returnhere11
+
+"DeathEndReQuest2.exe"+77BFE1:
+jmp newmem11
+returnhere11:
+
+
+
+
+// Glare Toggle
+alloc(newmem10,2048,"DeathEndReQuest2.exe"+77C4DB) 
+label(returnhere10)
+label(originalcode10)
+label(exit10)
+
+newmem10: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000000F0],00
+
+originalcode10:
+//mov [r14+r15+000000F0],al
+
+exit10:
+jmp returnhere10
+
+"DeathEndReQuest2.exe"+77C4DB:
+jmp newmem10
+nop 3
+returnhere10:
+
+
+
+// Fog Toggle
+alloc(newmem9,2048,"DeathEndReQuest2.exe"+77DA2F) 
+label(returnhere9)
+label(originalcode9)
+label(exit9)
+
+newmem9: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000988],00
+
+originalcode9:
+//mov [r14+r15+00000988],al
+
+exit9:
+jmp returnhere9
+
+"DeathEndReQuest2.exe"+77DA2F:
+jmp newmem9
+nop 3
+returnhere9:
+
+
+
+// RLR Toggle (unsure what the fuck this is)
+alloc(newmem8,2048,"DeathEndReQuest2.exe"+77D992) 
+label(returnhere8)
+label(originalcode8)
+label(exit8)
+
+newmem8: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000001FC],00
+
+originalcode8:
+//mov [r14+r15+000001FC],al
+
+exit8:
+jmp returnhere8
+
+"DeathEndReQuest2.exe"+77D992:
+jmp newmem8
+nop 3
+returnhere8:
+
+
+
+// SSAO Toggle
+alloc(newmem7,2048,"DeathEndReQuest2.exe"+77D47D) 
+label(returnhere7)
+label(originalcode7)
+label(exit7)
+
+newmem7: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000001A0],00
+
+originalcode7:
+//mov [r14+r15+000001A0],al
+
+exit7:
+jmp returnhere7
+
+"DeathEndReQuest2.exe"+77D47D:
+jmp newmem7
+nop 3
+returnhere7:
+
+
+
+// Motion Blur Toggle (Unsure how relevant this is in-game, but included it anyways)
+alloc(newmem6,2048,"DeathEndReQuest2.exe"+77D31D) 
+label(returnhere6)
+label(originalcode6)
+label(exit6)
+
+newmem6: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+60],00
+
+originalcode6:
+//mov [r14+r15+60],al
+
+exit6:
+jmp returnhere6
+
+"DeathEndReQuest2.exe"+77D31D:
+jmp newmem6
+returnhere6:
+
+
+
+// Temporal AA Toggle
+alloc(newmem5,2048,"DeathEndReQuest2.exe"+77CDFD) 
+label(returnhere5)
+label(originalcode5)
+label(exit5)
+
+newmem5: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+71],00
+
+originalcode5:
+//mov [r14+r15+71],al
+
+exit5:
+jmp returnhere5
+
+"DeathEndReQuest2.exe"+77CDFD:
+jmp newmem5
+returnhere5:
+
+
+
+// Generic AA toggle
+alloc(newmem4,2048,"DeathEndReQuest2.exe"+77CDB1) 
+label(returnhere4)
+label(originalcode4)
+label(exit4)
+
+newmem4: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+70],00
+
+originalcode4:
+//mov [r14+r15+70],al
+
+exit4:
+jmp returnhere4
+
+"DeathEndReQuest2.exe"+77CDB1:
+jmp newmem4
+returnhere4:
+
+
+
+// Chromatic Abberation
+alloc(newmem3,2048,"DeathEndReQuest2.exe"+77CCFD) 
+label(returnhere3)
+label(originalcode3)
+label(exit3)
+
+newmem3: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000184],00
+
+originalcode3:
+//mov [r14+r15+00000184],al
+
+exit3:
+jmp returnhere3
+
+"DeathEndReQuest2.exe"+77CCFD:
+jmp newmem3
+nop 3
+returnhere3:
+
+
+
+// Lens Distortion
+alloc(newmem2,2048,"DeathEndReQuest2.exe"+77CABD) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000198],00
+
+originalcode2:
+//mov [r14+r15+00000198],al
+
+exit2:
+jmp returnhere2
+
+"DeathEndReQuest2.exe"+77CABD:
+jmp newmem2
+nop 3
+returnhere2:
+
+
+//Depth of Field Toggle
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+77BB58) 
+label(returnhere)
+label(originalcode)
+label(exit)
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+0000014C],00
+originalcode:
+//mov [r14+r15+0000014C],al
+exit:
+jmp returnhere
+"DeathEndReQuest2.exe"+77BB58:
+jmp newmem
+nop 3
+returnhere:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem13)
+"DeathEndReQuest2.exe"+77B841:
+mov [r14+r15+000000A4],al
+//Alt: db 43 88 84 3E A4 00 00 00
+dealloc(newmem12)
+"DeathEndReQuest2.exe"+77B82C:
+mov [r14+r15+00000981],al
+//Alt: db 43 88 84 3E 81 09 00 00
+dealloc(newmem11)
+"DeathEndReQuest2.exe"+77BFE1:
+mov [r14+r15+0C],al
+//Alt: db 43 88 44 3E 0C
+dealloc(newmem10)
+"DeathEndReQuest2.exe"+77C4DB:
+mov [r14+r15+000000F0],al
+//Alt: db 43 88 84 3E F0 00 00 00
+dealloc(newmem9)
+"DeathEndReQuest2.exe"+77DA2F:
+mov [r14+r15+00000988],al
+//Alt: db 43 88 84 3E 88 09 00 00
+dealloc(newmem8)
+"DeathEndReQuest2.exe"+77D992:
+mov [r14+r15+000001FC],al
+//Alt: db 43 88 84 3E FC 01 00 00
+dealloc(newmem7)
+"DeathEndReQuest2.exe"+77D47D:
+mov [r14+r15+000001A0],al
+//Alt: db 43 88 84 3E A0 01 00 00
+dealloc(newmem6)
+"DeathEndReQuest2.exe"+77D31D:
+mov [r14+r15+60],al
+//Alt: db 43 88 44 3E 60
+dealloc(newmem5)
+"DeathEndReQuest2.exe"+77CDFD:
+mov [r14+r15+71],al
+//Alt: db 43 88 44 3E 71
+dealloc(newmem4)
+"DeathEndReQuest2.exe"+77CDB1:
+mov [r14+r15+70],al
+//Alt: db 43 88 44 3E 70
+dealloc(newmem3)
+"DeathEndReQuest2.exe"+77CCFD:
+mov [r14+r15+00000184],al
+//Alt: db 43 88 84 3E 84 01 00 00
+dealloc(newmem2)
+"DeathEndReQuest2.exe"+77CABD:
+mov [r14+r15+00000198],al
+//Alt: db 43 88 84 3E 98 01 00 00
+dealloc(newmem)
+"DeathEndReQuest2.exe"+77BB58:
+mov [r14+r15+0000014C],al
+//Alt: db 43 88 84 3E 4C 01 00 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1583</ID>
+              <Description>"SMAA?"</Description>
+              <Options moHideChildren="1" moManualExpandCollapse="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(smaaThreshold,4)
+registersymbol(smaaThreshold)
+
+smaaThreshold:
+db (float)0.1000000015
+
+alloc(newmem4,2048,"DeathEndReQuest2.exe"+77CF0F) 
+label(returnhere4)
+label(originalcode4)
+label(exit4)
+
+newmem4: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[smaaThreshold]
+
+originalcode4:
+movss [r14+r15+7C],xmm1
+
+exit4:
+jmp returnhere4
+
+"DeathEndReQuest2.exe"+77CF0F:
+jmp newmem4
+nop 2
+returnhere4:
+
+
+
+alloc(newmem3,2048,"DeathEndReQuest2.exe"+77CEAC) 
+label(returnhere3)
+label(originalcode3)
+label(exit3)
+
+newmem3: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+78],01
+
+originalcode3:
+//mov [r14+r15+78],eax
+
+exit3:
+jmp returnhere3
+
+"DeathEndReQuest2.exe"+77CEAC:
+jmp newmem3
+returnhere3:
+
+
+
+alloc(newmem2,2048,"DeathEndReQuest2.exe"+77CDB1) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+70],01
+
+originalcode2:
+//mov [r14+r15+70],al
+
+exit2:
+jmp returnhere2
+
+"DeathEndReQuest2.exe"+77CDB1:
+jmp newmem2
+returnhere2:
+
+
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+77CDFD) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+71],00
+
+originalcode:
+//mov [r14+r15+71],al
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+77CDFD:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+dealloc(smaaThreshold)
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem4)
+"DeathEndReQuest2.exe"+77CF0F:
+movss [r14+r15+7C],xmm1
+//Alt: db F3 43 0F 11 4C 3E 7C
+dealloc(newmem3)
+"DeathEndReQuest2.exe"+77CEAC:
+mov [r14+r15+78],eax
+//Alt: db 43 89 44 3E 78
+dealloc(newmem2)
+"DeathEndReQuest2.exe"+77CDB1:
+mov [r14+r15+70],al
+//Alt: db 43 88 44 3E 70
+dealloc(newmem)
+"DeathEndReQuest2.exe"+77CDFD:
+mov [r14+r15+71],al
+//Alt: db 43 88 44 3E 71
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1584</ID>
+                  <Description>"smaaThreshold"</Description>
+                  <LastState Value="1.249541283E-16" RealAddress="7FF608B40000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>smaaThreshold</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1560</ID>
+              <Description>"Motion Blur Tweaks"</Description>
+              <Options moHideChildren="1" moManualExpandCollapse="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(shutterRatio,4)
+registersymbol(shutterRatio)
+alloc(maxBlurLength,4)
+registersymbol(maxBlurLength)
+
+shutterRatio:
+dd (float)1.0
+
+maxBlurLength:
+dd (float)0.1000000015
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem3,2048,"DeathEndReQuest2.exe"+77D430) 
+label(returnhere3)
+label(originalcode3)
+label(exit3)
+
+newmem3: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[maxBlurLength]
+
+originalcode3:
+movss [r14+r15+6C],xmm1
+
+exit3:
+jmp returnhere3
+
+"DeathEndReQuest2.exe"+77D430:
+jmp newmem3
+nop 2
+returnhere3:
+
+alloc(newmem2,2048,"DeathEndReQuest2.exe"+77D3D2) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[shutterRatio]
+
+originalcode2:
+movss [r14+r15+68],xmm1
+
+exit2:
+jmp returnhere2
+
+"DeathEndReQuest2.exe"+77D3D2:
+jmp newmem2
+nop 2
+returnhere2:
+
+alloc(newmem,2048,"DeathEndReQuest2.exe"+77D31D) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+60],01
+
+originalcode:
+//mov [r14+r15+60],al
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+77D31D:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(shutterRatio)
+dealloc(maxBlurLength)
+dealloc(newmem3)
+"DeathEndReQuest2.exe"+77D430:
+movss [r14+r15+6C],xmm1
+//Alt: db F3 43 0F 11 4C 3E 6C
+dealloc(newmem2)
+"DeathEndReQuest2.exe"+77D3D2:
+movss [r14+r15+68],xmm1
+//Alt: db F3 43 0F 11 4C 3E 68
+dealloc(newmem)
+"DeathEndReQuest2.exe"+77D31D:
+mov [r14+r15+60],al
+//Alt: db 43 88 44 3E 60
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1561</ID>
+                  <Description>"Shutter Ratio"</Description>
+                  <LastState Value="1.249541283E-16" RealAddress="7FF608B40000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>shutterRatio</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1562</ID>
+                  <Description>"Max Blur Length"</Description>
+                  <LastState Value="3.074432015E-38" RealAddress="7FF608B40004"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>maxBlurLength</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1061</ID>
+          <Description>"Other Tweaks"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1024</ID>
+              <Description>"Skip Opening Videos"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"DeathEndReQuest2.exe"+F13400:
+db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 63 6F 70 79 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 76 69 6F 6C 65 6E 63 65 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 61 75 74 6F 73 61 76 65 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 6B 65 79 69 63 6F 6E 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+
+[DISABLE]
+"DeathEndReQuest2.exe"+F13400:
+db 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 45 4E 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 54 43 48 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 53 43 48 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 5F 30 30 31 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 45 4E 2F 67 61 6D 65 5F 6F 70 5F 30 30 31 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 54 43 48 2F 67 61 6D 65 5F 6F 70 5F 30 30 31 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 53 43 48 2F 67 61 6D 65 5F 6F 70 5F 30 30 31 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 69 66 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 63 68 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 73 69 6C 69 63 6F 6E 2E 75 73 6D 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 63 6F 70 79 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 76 69 6F 6C 65 6E 63 65 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 61 75 74 6F 73 61 76 65 00 00 00 00 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 6B 65 79 69 63 6F 6E 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 73 69 6C 69 63 6F 6E 5F 65 6E 2E 75 73 6D
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>918</ID>
+              <Description>"Time Dilation (60 = Default Speed)"</Description>
+              <LastState Value="60" RealAddress="7FF609AC8318"/>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+EF8318</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>917</ID>
+              <Description>"Camera Spring Arm Lag (Overworld) (Seemingly also affects camera movement when jumping or looking down and then suddenly moving)"</Description>
+              <LastState Value="0.6999999881" RealAddress="7FF60A0039F8"/>
+              <VariableType>Float</VariableType>
+              <Address>DeathEndReQuest2.exe+14339F8</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1258</ID>
+      <Description>"No description"</Description>
+      <LastState Value="0.01666666754" RealAddress="7FF609B06D1C"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F36D1C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1496</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1.777777791" RealAddress="7FF609B3E12C"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F6E12C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1497</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF6FAEA3DD5</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1498</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF6FAEA3DDF</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1504</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>10</ByteLength>
+      <Address>147B5400B20</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1505</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>147B5400B20</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1506</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>147B5400B24</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1507</ID>
+      <Description>"pointerscan result"</Description>
+      <LastState Value="1920" RealAddress="222A2EE0B20"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0147D270</Address>
+      <Offsets>
+        <Offset>40</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1508</ID>
+      <Description>"pointerscan result"</Description>
+      <LastState Value="1920" RealAddress="222A2EE0B20"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0AE9BE40</Address>
+      <Offsets>
+        <Offset>40</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1509</ID>
+      <Description>"pointerscan result"</Description>
+      <LastState Value="1080" RealAddress="222A2EE0B24"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0147D270</Address>
+      <Offsets>
+        <Offset>44</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1510</ID>
+      <Description>"pointerscan result"</Description>
+      <LastState Value="1080" RealAddress="222A2EE0B24"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0AE9BE40</Address>
+      <Offsets>
+        <Offset>44</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1511</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(newmem2,2048,"DeathEndReQuest2.exe"+3D85D7) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+alloc(aspectRatio,4)
+registersymbol(aspectRatio)
+
+aspectRatio:
+dd (float)2.388888888888889
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[aspectRatio]
+
+originalcode2:
+//movss [rdi+50],xmm1
+
+exit2:
+jmp returnhere2
+
+"DeathEndReQuest2.exe"+3D85D7:
+jmp newmem2
+returnhere2:
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DeathEndReQuest2.exe"+3D860E) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[aspectRatio]
+
+originalcode:
+movss [rdi+50],xmm1
+
+exit:
+jmp returnhere
+
+"DeathEndReQuest2.exe"+3D860E:
+jmp newmem
+returnhere:
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem2)
+"DeathEndReQuest2.exe"+3D85D7:
+movss [rdi+50],xmm1
+//Alt: db F3 0F 11 4F 50
+dealloc(newmem)
+"DeathEndReQuest2.exe"+3D860E:
+movss [rdi+50],xmm1
+//Alt: db F3 0F 11 4F 50
+dealloc(aspectRatio)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1512</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>7FF6F3A40408</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1513</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608D0D368"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+13D368</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1514</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609AC0424"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+EF0424</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1515</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609AE73B0"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F173B0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1516</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609AE73DC"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F173DC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1517</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609B06E10"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F36E10</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1518</ID>
+      <Description>"No description"</Description>
+      <LastState Value="960" RealAddress="7FF609AC0590"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+EF0590</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1520</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609AC0424"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+EF0424</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1522</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608C453A4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+753A4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1523</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608C541B4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+841B4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1524</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F6E760"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+39E760</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1525</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F6FE80"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+39FE80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1526</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F7B824"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3AB824</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1527</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F7B878"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3AB878</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1528</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F7BBCC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3ABBCC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1529</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F7CA9C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3ACA9C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1530</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F88550"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3B8550</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1531</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F885D0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3B85D0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1532</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F8A354"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3BA354</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1533</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F8A384"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3BA384</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1534</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF608F8A880"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+3BA880</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1535</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609074450"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+4A4450</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1536</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6090D5CDC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+505CDC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1537</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6093174A8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+7474A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1538</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60931EF70"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+74EF70</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1539</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609348BF0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+778BF0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1540</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60949DCDC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+8CDCDC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1541</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6094A9E54"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+8D9E54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1542</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6095BD374"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+9ED374</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1543</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6096CEA5C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+AFEA5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1544</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60976F4E4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+B9F4E4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1545</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609786DC8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+BB6DC8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1546</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60979D1B4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+BCD1B4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1547</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60979EF70"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+BCEF70</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1548</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60979FA58"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+BCFA58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1549</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF6098C2E54"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+CF2E54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1550</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60990C9E0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+D3C9E0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1551</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60999809C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+DC809C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1552</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609A8109C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+EB109C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1553</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF609FB0AD8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+13E0AD8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1554</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A02F740"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+145F740</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1555</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A0411B8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+14711B8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1556</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A04D008"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+147D008</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1557</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A04D020"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+147D020</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1558</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A0A0A08"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+14D0A08</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1559</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1920" RealAddress="7FF60A0A49A8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DeathEndReQuest2.exe+14D49A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1563</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8006D480</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1569</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8CEB16EC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1570</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8CEB253C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1571</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8CF0CA4C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1572</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8CF0F0C8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1573</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8CFF615C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1574</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D0C960C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1575</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D0E398C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1576</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D18E63C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1577</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D26B75C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1578</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D33A4DC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1579</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27B8D33C13C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1581</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>27BFC761BEC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1582</ID>
+      <Description>"No description"</Description>
+      <LastState Value="0.01666666754" RealAddress="7FF609B06D1C"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+F36D1C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1585</ID>
+      <Description>"Current Framerate Cap"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>19758320120</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1586</ID>
+      <Description>"Current Framerate Cap"</Description>
+      <LastState Value="5" RealAddress="2226DAE0120"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0147CE30</Address>
+      <Offsets>
+        <Offset>78</Offset>
+        <Offset>18</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1587</ID>
+      <Description>"Current Framerate Cap"</Description>
+      <LastState Value="5" RealAddress="2226DAE0120"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0147CE20</Address>
+      <Offsets>
+        <Offset>A0</Offset>
+        <Offset>40</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1588</ID>
+      <Description>"Current Framerate Cap"</Description>
+      <LastState Value="5" RealAddress="2226DAE0120"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0AE805D0</Address>
+      <Offsets>
+        <Offset>120</Offset>
+        <Offset>40</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1589</ID>
+      <Description>"Current Framerate Cap"</Description>
+      <LastState Value="5" RealAddress="2226DAE0120"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"DeathEndReQuest2.exe"+0AE805D0</Address>
+      <Offsets>
+        <Offset>120</Offset>
+        <Offset>58</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1590</ID>
+      <Description>"No description"</Description>
+      <LastState Value="145" RealAddress="7FF608E10EFC"/>
+      <VariableType>Float</VariableType>
+      <Address>DeathEndReQuest2.exe+240EFC</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry GroupHeader="1">
+      <Description>Sort through</Description>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov ecx,eax</Description>
+      <AddressString>DeathEndReQuest2.exe+5D84BB</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>A4</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of add rsp,00000098</Description>
+      <AddressString>DeathEndReQuest2.exe+5D84D1</AddressString>
+      <Before>
+        <Byte>94</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>81</Byte>
+        <Byte>C4</Byte>
+        <Byte>98</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>5F</Byte>
+        <Byte>5E</Byte>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+50],xmm1</Description>
+      <AddressString>DeathEndReQuest2.exe+3D85D7</AddressString>
+      <Before>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+50],xmm1</Description>
+      <AddressString>DeathEndReQuest2.exe+3D860E</AddressString>
+      <Before>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>47</Byte>
+        <Byte>40</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+50],eax</Description>
+      <AddressString>DeathEndReQuest2.exe+3D2147</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>42</Byte>
+        <Byte>54</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something else 3440x1440 related Code :cmp ebx,000005A0</Description>
+      <AddressString>DeathEndReQuest2.exe+124DFE</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>8D</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>81</Byte>
+        <Byte>FB</Byte>
+        <Byte>A0</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>10</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+00000748],xmm1</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE711</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+        <Byte>29</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8F</Byte>
+        <Byte>48</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>87</Byte>
+        <Byte>40</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je DeathEndReQuest2.exe+2FE73A</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE70F</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>29</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8F</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rdi+00000740]</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE719</AddressString>
+      <Before>
+        <Byte>8F</Byte>
+        <Byte>48</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>87</Byte>
+        <Byte>40</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+        <Byte>4C</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rdi+0000074C],eax</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE71F</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>40</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+        <Byte>4C</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>87</Byte>
+        <Byte>44</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rdi+00000744]</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE725</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>4C</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>87</Byte>
+        <Byte>44</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+        <Byte>50</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rdi+00000750],eax</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE72B</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>44</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+        <Byte>50</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>87</Byte>
+        <Byte>54</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov byte ptr [rdi+00000754],00</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE731</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>50</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>87</Byte>
+        <Byte>54</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>79</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jmp DeathEndReQuest2.exe+2FE7B3</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE738</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>79</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>B6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss xmm0,[DeathEndReQuest2.exe+14339F8]</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE73A</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>EB</Byte>
+        <Byte>79</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>B6</Byte>
+        <Byte>52</Byte>
+        <Byte>13</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>A1</Byte>
+        <Byte>C5</Byte>
+        <Byte>D2</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jna DeathEndReQuest2.exe+2FE708</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE6FB</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>CB</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C4</Byte>
+      </Before>
+      <Actual>
+        <Byte>76</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>A7</Byte>
+        <Byte>3C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jna DeathEndReQuest2.exe+2FE6F8</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE6E8</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>76</Byte>
+        <Byte>0E</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>9F</Byte>
+        <Byte>3C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :movss xmm1,[DeathEndReQuest2.exe+EF0408] (interesting 3D brightness stuff)</Description>
+      <AddressString>DeathEndReQuest2.exe+892252</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C3</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>AE</Byte>
+        <Byte>E1</Byte>
+        <Byte>65</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>FF</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rax,[rsp+50]</Description>
+      <AddressString>DeathEndReQuest2.exe+5FC921</AddressString>
+      <Before>
+        <Byte>FD</Byte>
+        <Byte>74</Byte>
+        <Byte>58</Byte>
+        <Byte>EB</Byte>
+        <Byte>7F</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call DeathEndReQuest2.exe+26049</Description>
+      <AddressString>DeathEndReQuest2.exe+7B0868</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>DC</Byte>
+        <Byte>57</Byte>
+        <Byte>87</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>06</Byte>
+        <Byte>BA</Byte>
+        <Byte>0A</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [DeathEndReQuest2.exe+B2AFD60]</Description>
+      <AddressString>DeathEndReQuest2.exe+12451E</AddressString>
+      <Before>
+        <Byte>20</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>3C</Byte>
+        <Byte>B8</Byte>
+        <Byte>18</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>74</Byte>
+        <Byte>24</Byte>
+        <Byte>2C</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov ecx,[rcx]</Description>
+      <AddressString>DeathEndReQuest2.exe+57078B</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>38</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>09</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rax]</Description>
+      <AddressString>DeathEndReQuest2.exe+71EF80</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rax]</Description>
+      <AddressString>DeathEndReQuest2.exe+588738</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [DeathEndReQuest2.exe+B2AF560]</Description>
+      <AddressString>DeathEndReQuest2.exe+5FC8DA</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>80</Byte>
+        <Byte>2C</Byte>
+        <Byte>CB</Byte>
+        <Byte>0A</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rsp+20]</Description>
+      <AddressString>DeathEndReQuest2.exe+5FC9A0</AddressString>
+      <Before>
+        <Byte>31</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>48</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je DeathEndReQuest2.exe+5FC921</Description>
+      <AddressString>DeathEndReQuest2.exe+5FC90F</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+        <Byte>F7</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+        <Byte>FA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rsp+58]</Description>
+      <AddressString>DeathEndReQuest2.exe+5FC902</AddressString>
+      <Before>
+        <Byte>E9</Byte>
+        <Byte>9E</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>58</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry GroupHeader="1">
+      <Description>Pillarbox Checks</Description>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something 3440 related Code :cmp r14d,00000D70</Description>
+      <AddressString>DeathEndReQuest2.exe+124DF1</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>91</Byte>
+        <Byte>CB</Byte>
+        <Byte>EE</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>81</Byte>
+        <Byte>FE</Byte>
+        <Byte>70</Byte>
+        <Byte>0D</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>8D</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry GroupHeader="1">
+      <Description>Disable Resolution Checks</Description>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Seems to control the available screen resolutions :cmp dword ptr [DeathEndReQuest2.exe+13E087C],0B</Description>
+      <AddressString>DeathEndReQuest2.exe+506198</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>A6</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>3D</Byte>
+        <Byte>DD</Byte>
+        <Byte>A6</Byte>
+        <Byte>ED</Byte>
+        <Byte>00</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>7D</Byte>
+        <Byte>39</Byte>
+        <Byte>44</Byte>
+        <Byte>88</Byte>
+        <Byte>B3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp [rbx+0C],edi (NOPING this seems to allow for switching to any screen resolution)</Description>
+      <AddressString>DeathEndReQuest2.exe+12459D</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>7B</Byte>
+        <Byte>0C</Byte>
+        <Byte>EB</Byte>
+        <Byte>06</Byte>
+      </Before>
+      <Actual>
+        <Byte>39</Byte>
+        <Byte>7B</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>4C</Byte>
+        <Byte>F8</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp dword ptr [DeathEndReQuest2.exe+13E087C],0B</Description>
+      <AddressString>DeathEndReQuest2.exe+5060DD</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>B1</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>3D</Byte>
+        <Byte>98</Byte>
+        <Byte>A7</Byte>
+        <Byte>ED</Byte>
+        <Byte>00</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>7D</Byte>
+        <Byte>3C</Byte>
+        <Byte>44</Byte>
+        <Byte>88</Byte>
+        <Byte>B3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rbx+0C],eax</Description>
+      <AddressString>DeathEndReQuest2.exe+12483F</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>05</Byte>
+        <Byte>09</Byte>
+        <Byte>F0</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>43</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>20</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call DeathEndReQuest2.exe+164B4</Description>
+      <AddressString>DeathEndReQuest2.exe+278F71</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>3E</Byte>
+        <Byte>D5</Byte>
+        <Byte>D9</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>47</Byte>
+        <Byte>1C</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Movement Speed Stuff :cmp al,01</Description>
+      <AddressString>DeathEndReQuest2.exe+2E8FF3</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>54</Byte>
+      </Before>
+      <Actual>
+        <Byte>3C</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>12</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Live2D animation speed :movss xmm10,[DeathEndReQuest2.exe+11E635C]</Description>
+      <AddressString>DeathEndReQuest2.exe+47FD03</AddressString>
+      <Before>
+        <Byte>93</Byte>
+        <Byte>68</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>50</Byte>
+        <Byte>66</Byte>
+        <Byte>D6</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>9B</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Pause Menu Speed :addss xmm4,[DeathEndReQuest2.exe+EF0408]</Description>
+      <AddressString>DeathEndReQuest2.exe+46B8E5</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>E6</Byte>
+        <Byte>EB</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>25</Byte>
+        <Byte>1B</Byte>
+        <Byte>4B</Byte>
+        <Byte>A8</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C9</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>UI scaling stuff :add byte ptr [rdi],00</Description>
+      <AddressString>1D31E360B20</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>80</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>00</Byte>
+        <Byte>38</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something resolution related near op playback :mov [rbx+00000120],00000780</Description>
+      <AddressString>DeathEndReQuest2.exe+DC8096</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>EB</Byte>
+        <Byte>14</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>83</Byte>
+        <Byte>20</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>80</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>83</Byte>
+        <Byte>24</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something minimap resolution related :movss xmm6,[DeathEndReQuest2.exe+EF0424]</Description>
+      <AddressString>DeathEndReQuest2.exe+382045</AddressString>
+      <Before>
+        <Byte>E0</Byte>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>4D</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>D7</Byte>
+        <Byte>E3</Byte>
+        <Byte>B6</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>5B</Byte>
+        <Byte>C0</Byte>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Seemingly writes to the framerate cap integer used for a branch statement :mov [rax+000000A0],ecx</Description>
+      <AddressString>DeathEndReQuest2.exe+57A802</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>88</Byte>
+        <Byte>A0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of divss xmm1,xmm0</Description>
+      <AddressString>DeathEndReQuest2.exe+2FE804</AddressString>
+      <Before>
+        <Byte>D3</Byte>
+        <Byte>FF</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>4F</Byte>
+        <Byte>40</Byte>
+        <Byte>E8</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>pitch</Name>
+      <Address>2653CF40000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>rot</Name>
+      <Address>1E562610000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"Application.exe"+D9702</Address>
+      <Comment>// Seems to control whether or not the mouse can move the camera when RMB is held down
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Application.exe"+4858C9</Address>
+      <Comment>Horizontal Internal Resolution (1920 by default)
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Application.exe"+4858D0</Address>
+      <Comment>Vertical Internal Resolution (1080 by default)
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>

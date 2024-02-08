@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"Framerate"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>0</ID>
+          <Description>"No description"</Description>
+          <LastState Value="0" RealAddress="7FF65382FBD4"/>
+          <VariableType>Float</VariableType>
+          <Address>DragonStarVarnir.exe+C2FBD4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+3A49B5) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+addss xmm4,[DragonStarVarnir.exe+CA2D80]
+
+originalcode:
+//addss xmm4,[DragonStarVarnir.exe+908BDB8]
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+3A49B5:
+jmp newmem
+nop 3
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+3A49B5:
+addss xmm4,[DragonStarVarnir.exe+908BDB8]
+//Alt: db F3 0F 58 25 FB 73 CE 08
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+3B4DA3) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm10,[DragonStarVarnir.exe+CA2D80]
+
+originalcode:
+//movss xmm10,[DragonStarVarnir.exe+BD2760]
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+3B4DA3:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+3B4DA3:
+movss xmm10,[DragonStarVarnir.exe+BD2760]
+//Alt: db F3 44 0F 10 15 B4 D9 81 00
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+4760D5) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm0,[DragonStarVarnir.exe+C00640]
+
+originalcode:
+//movss xmm0,[DragonStarVarnir.exe+BF37EC]
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+4760D5:
+jmp newmem
+nop 3
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+4760D5:
+movss xmm0,[DragonStarVarnir.exe+BF37EC]
+//Alt: db F3 0F 10 05 0F D7 77 00
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Test for game speed"</Description>
+          <LastState Value="0.4166666567" RealAddress="7FF6538A2D80"/>
+          <VariableType>Float</VariableType>
+          <Address>DragonStarVarnir.exe+CA2D80</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"No description"</Description>
+          <LastState Value="144" RealAddress="7FF653800640"/>
+          <VariableType>Float</VariableType>
+          <Address>DragonStarVarnir.exe+C00640</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"pointerscan result"</Description>
+          <LastState Value="0.007363799959" RealAddress="203884ADD5C"/>
+          <VariableType>Float</VariableType>
+          <Address>"DragonStarVarnir.exe"+090D5D40</Address>
+          <Offsets>
+            <Offset>78C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"pointerscan result"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"gameoverlayrenderer64.dll"+001BCDB8</Address>
+          <Offsets>
+            <Offset>78C</Offset>
+            <Offset>20</Offset>
+            <Offset>168</Offset>
+            <Offset>DE0</Offset>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>108</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"Other Tweaks"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"Camera Stuff"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"Field of View"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>28</ID>
+                  <Description>"Auto Assemble script"</Description>
+                  <LastState Activated="1"/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+32807F) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+nop
+
+originalcode:
+//movss [rcx+000004C4],xmm0
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+32807F:
+jmp newmem
+nop 3
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+32807F:
+movss [rcx+000004C4],xmm0
+//Alt: db F3 0F 11 81 C4 04 00 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26</ID>
+                  <Description>"pointerscan result"</Description>
+                  <LastState Value="25" RealAddress="202CBE813E4"/>
+                  <VariableType>Float</VariableType>
+                  <Address>"DragonStarVarnir.exe"+01087580</Address>
+                  <Offsets>
+                    <Offset>4C4</Offset>
+                    <Offset>40</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>27</ID>
+                  <Description>"pointerscan result"</Description>
+                  <LastState Value="25" RealAddress="202CBE813E4"/>
+                  <VariableType>Float</VariableType>
+                  <Address>"DragonStarVarnir.exe"+09088490</Address>
+                  <Offsets>
+                    <Offset>4C4</Offset>
+                    <Offset>D0</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+32674B) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(float)2.388888888888889
+
+originalcode:
+//mov eax,[rdi+000004D0]
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+32674B:
+jmp newmem
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+32674B:
+mov eax,[rdi+000004D0]
+//Alt: db 8B 87 D0 04 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"Post Process Tweaks"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+// Texture Overlay
+alloc(newmem14,2048,"DragonStarVarnir.exe"+611366) 
+label(returnhere14)
+label(originalcode14)
+label(exit14)
+
+newmem14: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rsi+00000A80],00
+
+originalcode14:
+//mov [r15+rsi+00000A80],al
+
+exit14:
+jmp returnhere14
+
+"DragonStarVarnir.exe"+611366:
+jmp newmem14
+nop 3
+returnhere14:
+
+
+
+// Fog
+alloc(newmem13,2048,"DragonStarVarnir.exe"+610808) 
+label(returnhere13)
+label(originalcode13)
+label(exit13)
+
+newmem13: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+r10+00000984],00
+
+originalcode13:
+//mov [r15+r10+00000984],al
+
+exit13:
+jmp returnhere13
+
+"DragonStarVarnir.exe"+610808:
+jmp newmem13
+nop 3
+returnhere13:
+
+
+
+// RLR
+alloc(newmem12,2048,"DragonStarVarnir.exe"+6106A4) 
+label(returnhere12)
+label(originalcode12)
+label(exit12)
+
+newmem12: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+000001F8],00
+
+originalcode12:
+//mov [r15+rcx+000001F8],al
+
+exit12:
+jmp returnhere12
+
+"DragonStarVarnir.exe"+6106A4:
+jmp newmem12
+nop 3
+returnhere12:
+
+
+
+// SSAO
+alloc(newmem11,2048,"DragonStarVarnir.exe"+61018E) 
+label(returnhere11)
+label(originalcode11)
+label(exit11)
+
+newmem11: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+r10+0000019C],00
+
+originalcode11:
+//mov [r15+r10+0000019C],al
+
+exit11:
+jmp returnhere11
+
+"DragonStarVarnir.exe"+61018E:
+jmp newmem11
+nop 3
+returnhere11:
+
+
+
+// Motion Blur Enable
+alloc(newmem10,2048,"DragonStarVarnir.exe"+610004) 
+label(returnhere10)
+label(originalcode10)
+label(exit10)
+
+newmem10: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+r10+60],01
+
+originalcode10:
+//mov [r15+r10+60],al
+
+exit10:
+jmp returnhere10
+
+"DragonStarVarnir.exe"+610004:
+jmp newmem10
+returnhere10:
+
+
+
+// TAA
+alloc(newmem9,2048,"DragonStarVarnir.exe"+60FA35) 
+label(returnhere9)
+label(originalcode9)
+label(exit9)
+
+newmem9: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [rcx+r15+71],00
+
+originalcode9:
+//mov [rcx+r15+71],al
+
+exit9:
+jmp returnhere9
+
+"DragonStarVarnir.exe"+60FA35:
+jmp newmem9
+returnhere9:
+
+
+
+// Anti-Aliasing Method
+alloc(newmem8,2048,"DragonStarVarnir.exe"+60FAF3) 
+label(returnhere8)
+label(originalcode8)
+label(exit8)
+
+newmem8: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+78],(int)00
+
+originalcode8:
+//mov [r15+rcx+78],eax
+
+exit8:
+jmp returnhere8
+
+"DragonStarVarnir.exe"+60FAF3:
+jmp newmem8
+returnhere8:
+
+
+
+//Anti-Aliasing
+alloc(newmem7,2048,"DragonStarVarnir.exe"+60F9E4) 
+label(returnhere7)
+label(originalcode7)
+label(exit7)
+
+newmem7: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+70],00
+
+originalcode7:
+//mov [r15+rcx+70],al
+
+exit7:
+jmp returnhere7
+
+"DragonStarVarnir.exe"+60F9E4:
+jmp newmem7
+returnhere7:
+
+
+
+// Lens Distortion
+alloc(newmem6,2048,"DragonStarVarnir.exe"+60F924) 
+label(returnhere6)
+label(originalcode6)
+label(exit6)
+
+newmem6: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+00000194],00
+
+originalcode6:
+//mov [r15+rcx+00000194],al
+
+exit6:
+jmp returnhere6
+
+"DragonStarVarnir.exe"+60F924:
+jmp newmem6
+nop 3
+returnhere6:
+
+
+
+// Glare
+alloc(newmem5,2048,"DragonStarVarnir.exe"+60F2D2) 
+label(returnhere5)
+label(originalcode5)
+label(exit5)
+
+newmem5: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+r10+000000F0],00
+
+originalcode5:
+//mov [r15+r10+000000F0],al
+
+exit5:
+jmp returnhere5
+
+"DragonStarVarnir.exe"+60F2D2:
+jmp newmem5
+nop 3
+returnhere5:
+
+
+
+// Color Correction
+alloc(newmem4,2048,"DragonStarVarnir.exe"+60ED84) 
+label(returnhere4)
+label(originalcode4)
+label(exit4)
+
+newmem4: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+0C],00
+
+originalcode4:
+//mov [r15+rcx+0C],al
+
+exit4:
+jmp returnhere4
+
+"DragonStarVarnir.exe"+60ED84:
+jmp newmem4
+returnhere4:
+
+
+
+// Depth of Field
+alloc(newmem3,2048,"DragonStarVarnir.exe"+60E8B2) 
+label(returnhere3)
+label(originalcode3)
+label(exit3)
+
+newmem3: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r9+r15+0000014C],00
+
+originalcode3:
+//mov [r9+r15+0000014C],al
+
+exit3:
+jmp returnhere3
+
+"DragonStarVarnir.exe"+60E8B2:
+jmp newmem3
+nop 3
+returnhere3:
+
+
+
+// Auto Exposure
+alloc(newmem2,2048,"DragonStarVarnir.exe"+60E5A9) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+000000A6],00
+
+originalcode2:
+//mov [r15+rcx+000000A6],al
+
+exit2:
+jmp returnhere2
+
+"DragonStarVarnir.exe"+60E5A9:
+jmp newmem2
+nop 3
+returnhere2:
+
+
+
+// Tonemapping
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+60E555) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+rcx+000000A4],00
+
+originalcode:
+//mov [r15+rcx+000000A4],al
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+60E555:
+jmp newmem
+nop 3
+returnhere:
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem14)
+"DragonStarVarnir.exe"+611366:
+mov [r15+rsi+00000A80],al
+//Alt: db 41 88 84 37 80 0A 00 00
+dealloc(newmem13)
+"DragonStarVarnir.exe"+610808:
+mov [r15+r10+00000984],al
+//Alt: db 43 88 84 17 84 09 00 00
+dealloc(newmem12)
+"DragonStarVarnir.exe"+6106A4:
+mov [r15+rcx+000001F8],al
+//Alt: db 41 88 84 0F F8 01 00 00
+dealloc(newmem11)
+"DragonStarVarnir.exe"+61018E:
+mov [r15+r10+0000019C],al
+//Alt: db 43 88 84 17 9C 01 00 00
+dealloc(newmem10)
+"DragonStarVarnir.exe"+610004:
+mov [r15+r10+60],al
+//Alt: db 43 88 44 17 60
+dealloc(newmem9)
+"DragonStarVarnir.exe"+60FA35:
+mov [rcx+r15+71],al
+//Alt: db 42 88 44 39 71
+dealloc(newmem8)
+"DragonStarVarnir.exe"+60FAF3:
+mov [r15+rcx+78],eax
+//Alt: db 41 89 44 0F 78
+dealloc(newmem9)
+"DragonStarVarnir.exe"+60FAF3:
+mov [r15+rcx+78],eax
+//Alt: db 41 89 44 0F 78
+dealloc(newmem8)
+"DragonStarVarnir.exe"+60FA35:
+mov [r15+rcx+71],al
+//Alt: db 41 88 44 0F 71
+dealloc(newmem7)
+"DragonStarVarnir.exe"+60F9E4:
+mov [r15+rcx+70],al
+//Alt: db 41 88 44 0F 70
+dealloc(newmem6)
+"DragonStarVarnir.exe"+60F924:
+mov [r15+rcx+00000194],al
+//Alt: db 41 88 84 0F 94 01 00 00
+dealloc(newmem5)
+"DragonStarVarnir.exe"+60F2D2:
+mov [r15+r10+000000F0],al
+//Alt: db 43 88 84 17 F0 00 00 00
+dealloc(newmem4)
+"DragonStarVarnir.exe"+60ED84:
+mov [r15+rcx+0C],al
+//Alt: db 41 88 44 0F 0C
+dealloc(newmem3)
+"DragonStarVarnir.exe"+60E8B2:
+mov [r9+r15+0000014C],al
+//Alt: db 43 88 84 39 4C 01 00 00
+dealloc(newmem2)
+"DragonStarVarnir.exe"+60E5A9:
+mov [r15+rcx+000000A6],al
+//Alt: db 41 88 84 0F A6 00 00 00
+dealloc(newmem)
+"DragonStarVarnir.exe"+60E555:
+mov [r15+rcx+000000A4],al
+//Alt: db 41 88 84 0F A4 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+5B3570) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,[DragonStarVarnir.exe+1B8A0C]
+
+originalcode:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+5B3570:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+5B3570:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>59</ID>
+      <Description>"Edge Rendering?"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+A7DB23) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+00000343],00
+
+originalcode:
+//mov [r14+00000343],al
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+A7DB23:
+jmp newmem
+nop 2
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+A7DB23:
+mov [r14+00000343],al
+//Alt: db 41 88 86 43 03 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>60</ID>
+      <Description>"Contour Rendering?"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+A7DAFB) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+00000343],00
+
+originalcode:
+//mov [r14+00000343],al
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+A7DAFB:
+jmp newmem
+nop 2
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+A7DAFB:
+mov [r14+00000343],al
+//Alt: db 41 88 86 43 03 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>62</ID>
+      <Description>"Enable Motion Blur (Disable Post Process Tweaks beforehand)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+// Enable Motion Blur Separately from Post Process Tweaks
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"DragonStarVarnir.exe"+610004) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r10+r15+60],01
+
+originalcode:
+//mov [r10+r15+60],al
+
+exit:
+jmp returnhere
+
+"DragonStarVarnir.exe"+610004:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"DragonStarVarnir.exe"+610004:
+mov [r10+r15+60],al
+//Alt: db 43 88 44 3A 60
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>61</ID>
+      <Description>"Sort Through"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"No description"</Description>
+          <LastState Value="2580" RealAddress="7FF652DB8A0C"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>DragonStarVarnir.exe+1B8A0C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"No Description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>105489913E4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"No description"</Description>
+          <LastState Value="1.777777791" RealAddress="7FF6537D2DEC"/>
+          <VariableType>Float</VariableType>
+          <Address>DragonStarVarnir.exe+BD2DEC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>3153FDD60</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>3153FDF60</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>46</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>105489913F0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>47</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>1054E7911A8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>48</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD5F0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD650</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD6B0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD710</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>52</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD770</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD7D0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD830</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>10581FBD890</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>105FF0E0350</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"No description"</Description>
+          <LastState Value="80 07 00 00 C7 45 1B 38 04" RealAddress="7FF652C9692B"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>9</ByteLength>
+          <Address>DragonStarVarnir.exe+9692B</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"No description"</Description>
+          <LastState Value="80 07 00 00 C7 45 D3 38 04" RealAddress="7FF652C96A8B"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>9</ByteLength>
+          <Address>DragonStarVarnir.exe+96A8B</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"No description"</Description>
+          <LastState Value="80 07 00 00 C7 45 D3 38 04" RealAddress="7FF652C96BA9"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>9</ByteLength>
+          <Address>DragonStarVarnir.exe+96BA9</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"No description"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>4</ByteLength>
+          <Address>20F69D413F0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>1054262AF9C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>44</ID>
+          <Description>"No description"</Description>
+          <VariableType>Float</VariableType>
+          <Address>1054262B00C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of call DragonStarVarnir.exe+26D480</Description>
+      <AddressString>DragonStarVarnir.exe+25F50D</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D6</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>6E</Byte>
+        <Byte>DF</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>E8</Byte>
+        <Byte>A6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call DragonStarVarnir.exe+608720</Description>
+      <AddressString>DragonStarVarnir.exe+612DDD</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>3E</Byte>
+        <Byte>59</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>E8</Byte>
+        <Byte>D6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rbx+000001B0],xmm7</Description>
+      <AddressString>DragonStarVarnir.exe+2C7BE5</AddressString>
+      <Before>
+        <Byte>5C</Byte>
+        <Byte>F8</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C7</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>BB</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>3E</Byte>
+        <Byte>03</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rbx+000001B4],xmm6</Description>
+      <AddressString>DragonStarVarnir.exe+2C7C0D</AddressString>
+      <Before>
+        <Byte>5C</Byte>
+        <Byte>F0</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>B3</Byte>
+        <Byte>B4</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>36</Byte>
+        <Byte>03</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of addss xmm1,[rbx+00000214]</Description>
+      <AddressString>DragonStarVarnir.exe+2C7BBE</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>F2</Byte>
+        <Byte>A3</Byte>
+        <Byte>93</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>8B</Byte>
+        <Byte>14</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8B</Byte>
+        <Byte>14</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rbx+00000214],xmm1</Description>
+      <AddressString>DragonStarVarnir.exe+2C7BC6</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>14</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8B</Byte>
+        <Byte>14</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>07</Byte>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something camera related :comiss xmm9,xmm6</Description>
+      <AddressString>DragonStarVarnir.exe+2C7BF2</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>3E</Byte>
+        <Byte>03</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>CE</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>07</Byte>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

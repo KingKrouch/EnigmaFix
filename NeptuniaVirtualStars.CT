@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"60FPS Cap"</Description>
+      <VariableType>Float</VariableType>
+      <Address>NeptuniaVirtualStars.exe+16A3B10</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"30FPS Cap"</Description>
+      <VariableType>Float</VariableType>
+      <Address>NeptuniaVirtualStars.exe+16A3B18</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Disable Post-Process and Fog Effects"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+// Disable Depth of Field
+alloc(newmem13,2048,"NeptuniaVirtualStars.exe"+976128) 
+label(returnhere13)
+label(originalcode13)
+label(exit13)
+
+newmem13: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r15+r14+00000154],00
+
+originalcode13:
+//mov [r15+r14+00000154],al
+
+exit13:
+jmp returnhere13
+
+"NeptuniaVirtualStars.exe"+976128:
+jmp newmem13
+nop 3
+returnhere13:
+
+
+
+// Disable Glare
+alloc(newmem12,2048,"NeptuniaVirtualStars.exe"+976AAB) 
+label(returnhere12)
+label(originalcode12)
+label(exit12)
+
+newmem12: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000000F8],00
+
+originalcode12:
+//mov [r14+r15+000000F8],al
+
+exit12:
+jmp returnhere12
+
+"NeptuniaVirtualStars.exe"+976AAB:
+jmp newmem12
+nop 3
+returnhere12:
+
+
+
+// Disable Anamorphic Lens Flare
+alloc(newmem11,2048,"NeptuniaVirtualStars.exe"+976F71) 
+label(returnhere11)
+label(originalcode11)
+label(exit11)
+
+newmem11: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000128],00
+
+originalcode11:
+//mov [r14+r15+00000128],al
+
+exit11:
+jmp returnhere11
+
+"NeptuniaVirtualStars.exe"+976F71:
+jmp newmem11
+nop 3
+returnhere11:
+
+
+
+// Disable Lens Distortion
+alloc(newmem10,2048,"NeptuniaVirtualStars.exe"+97708D) 
+label(returnhere10)
+label(originalcode10)
+label(exit10)
+
+newmem10: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000001A0],00
+
+originalcode10:
+//mov [r14+r15+000001A0],al
+
+exit10:
+jmp returnhere10
+
+"NeptuniaVirtualStars.exe"+97708D:
+jmp newmem10
+nop 3
+returnhere10:
+
+
+
+// Disable Chromatic Aberration
+alloc(newmem9,2048,"NeptuniaVirtualStars.exe"+9772CD) 
+label(returnhere9)
+label(originalcode9)
+label(exit9)
+
+newmem9: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+0000018C],00
+
+originalcode9:
+//mov [r14+r15+0000018C],al
+
+exit9:
+jmp returnhere9
+
+"NeptuniaVirtualStars.exe"+9772CD:
+jmp newmem9
+nop 3
+returnhere9:
+
+
+
+// Texture Overlay Disable
+alloc(newmem8,2048,"NeptuniaVirtualStars.exe"+978A7E) 
+label(returnhere8)
+label(originalcode8)
+label(exit8)
+
+newmem8: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000A9C],00
+
+originalcode8:
+//mov [r14+r15+00000A9C],al
+
+exit8:
+jmp returnhere8
+
+"NeptuniaVirtualStars.exe"+978A7E:
+jmp newmem8
+nop 3
+returnhere8:
+
+
+
+// eFog Disable
+alloc(newmem7,2048,"NeptuniaVirtualStars.exe"+978419) 
+label(returnhere7)
+label(originalcode7)
+label(exit7)
+
+newmem7: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000009E4],00
+
+originalcode7:
+//mov [r14+r15+000009E4],al
+
+exit7:
+jmp returnhere7
+
+"NeptuniaVirtualStars.exe"+978419:
+jmp newmem7
+nop 3
+returnhere7:
+
+
+
+// Fog Disable
+alloc(newmem6,2048,"NeptuniaVirtualStars.exe"+97808C) 
+label(returnhere6)
+label(originalcode6)
+label(exit6)
+
+newmem6: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000990],00
+
+originalcode6:
+//mov [r14+r15+00000990],al
+
+exit6:
+jmp returnhere6
+
+"NeptuniaVirtualStars.exe"+97808C:
+jmp newmem6
+nop 3
+returnhere6:
+
+
+
+// RLR Disable
+alloc(newmem5,2048,"NeptuniaVirtualStars.exe"+977FEF) 
+label(returnhere5)
+label(originalcode5)
+label(exit5)
+
+newmem5: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+00000204],00
+
+originalcode5:
+//mov [r14+r15+00000204],al
+
+exit5:
+jmp returnhere5
+
+"NeptuniaVirtualStars.exe"+977FEF:
+jmp newmem5
+nop 3
+returnhere5:
+
+
+
+// SSAO Disable
+alloc(newmem4,2048,"NeptuniaVirtualStars.exe"+977B5D) 
+label(returnhere4)
+label(originalcode4)
+label(exit4)
+
+newmem4: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+000001A8],00
+
+originalcode4:
+//mov [r14+r15+000001A8],al
+
+exit4:
+jmp returnhere4
+
+"NeptuniaVirtualStars.exe"+977B5D:
+jmp newmem4
+nop 3
+returnhere4:
+
+
+
+// Motion Blur Disable
+alloc(newmem3,2048,"NeptuniaVirtualStars.exe"+9778ED) 
+label(returnhere3)
+label(originalcode3)
+label(exit3)
+
+newmem3: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+60],00
+
+originalcode3:
+//mov [r14+r15+60],al
+
+exit3:
+jmp returnhere3
+
+"NeptuniaVirtualStars.exe"+9778ED:
+jmp newmem3
+returnhere3:
+
+
+
+// TAA Disable
+alloc(newmem2,2048,"NeptuniaVirtualStars.exe"+9773CD) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+79],00
+
+originalcode2:
+//mov [r14+r15+79],al
+
+exit2:
+jmp returnhere2
+
+"NeptuniaVirtualStars.exe"+9773CD:
+jmp newmem2
+returnhere2:
+
+
+// AA Disable
+alloc(newmem,2048,"NeptuniaVirtualStars.exe"+977381) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [r14+r15+78],00
+
+originalcode:
+//mov [r14+r15+78],al
+
+exit:
+jmp returnhere
+
+"NeptuniaVirtualStars.exe"+977381:
+jmp newmem
+returnhere:
+
+
+[DISABLE]
+dealloc(newmem13)
+"NeptuniaVirtualStars.exe"+976128:
+mov [r15+r14+00000154],al
+//Alt: db 43 88 84 37 54 01 00 00
+dealloc(newmem12)
+"NeptuniaVirtualStars.exe"+976AAB:
+mov [r14+r15+000000F8],al
+//Alt: db 43 88 84 3E F8 00 00 00
+dealloc(newmem11)
+"NeptuniaVirtualStars.exe"+976F71:
+mov [r14+r15+00000128],al
+//Alt: db 43 88 84 3E 28 01 00 00
+dealloc(newmem10)
+"NeptuniaVirtualStars.exe"+97708D:
+mov [r14+r15+000001A0],al
+//Alt: db 43 88 84 3E A0 01 00 00
+dealloc(newmem9)
+"NeptuniaVirtualStars.exe"+9772CD:
+mov [r14+r15+0000018C],al
+//Alt: db 43 88 84 3E 8C 01 00 00
+dealloc(newmem8)
+"NeptuniaVirtualStars.exe"+978A7E:
+mov [r14+r15+00000A9C],al
+//Alt: db 43 88 84 3E 9C 0A 00 00
+dealloc(newmem7)
+"NeptuniaVirtualStars.exe"+978419:
+mov [r14+r15+000009E4],al
+//Alt: db 43 88 84 3E E4 09 00 00
+dealloc(newmem6)
+"NeptuniaVirtualStars.exe"+97808C:
+mov [r14+r15+00000990],al
+//Alt: db 43 88 84 3E 90 09 00 00
+dealloc(newmem5)
+"NeptuniaVirtualStars.exe"+977FEF:
+mov [r14+r15+00000204],al
+//Alt: db 43 88 84 3E 04 02 00 00
+dealloc(newmem4)
+"NeptuniaVirtualStars.exe"+977B5D:
+mov [r14+r15+000001A8],al
+//Alt: db 43 88 84 3E A8 01 00 00
+dealloc(newmem3)
+"NeptuniaVirtualStars.exe"+9778ED:
+mov [r14+r15+60],al
+//Alt: db 43 88 44 3E 60
+dealloc(newmem2)
+"NeptuniaVirtualStars.exe"+9773CD:
+mov [r14+r15+79],al
+//Alt: db 43 88 44 3E 79
+dealloc(newmem)
+"NeptuniaVirtualStars.exe"+977381:
+mov [r14+r15+78],al
+//Alt: db 43 88 44 3E 78
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"No Description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>1FF2B880B20</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"No Description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>1FF2B880B24</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>NeptuniaVirtualStars.exe+1736E28</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>NeptuniaVirtualStars.exe+1627080</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>NeptuniaVirtualStars.exe+16552D0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>15</ByteLength>
+      <Address>NeptuniaVirtualStars.exe+13A737</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>12</ByteLength>
+      <Address>NeptuniaVirtualStars.exe+1A4257</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>12</ByteLength>
+      <Address>NeptuniaVirtualStars.exe+1A4235</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>12</ByteLength>
+      <Address>NeptuniaVirtualStars.exe+1A4246</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF76C45A6A1</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"Auto Assemble script"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"NeptuniaVirtualStars.exe"+91A610) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(int)2580
+
+originalcode:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+exit:
+jmp returnhere
+
+"NeptuniaVirtualStars.exe"+91A610:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"NeptuniaVirtualStars.exe"+91A610:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"Auto Assemble script"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"NeptuniaVirtualStars.exe"+91A621) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(int)1080
+
+originalcode:
+//mov eax,[rax+04]
+mov [rsp+000000F4],eax
+
+exit:
+jmp returnhere
+
+"NeptuniaVirtualStars.exe"+91A621:
+jmp newmem
+nop 5
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"NeptuniaVirtualStars.exe"+91A621:
+mov eax,[rax+04]
+mov [rsp+000000F4],eax
+//Alt: db 8B 40 04 89 84 24 F4 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Controls HUD Scaling and a few other things :mov eax,[rax]</Description>
+      <AddressString>NeptuniaVirtualStars.exe+91A610</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>F0</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Pause Menu and Other assorted speed :addss xmm4,[NeptuniaVirtualStars.exe+B5A0528]</Description>
+      <AddressString>NeptuniaVirtualStars.exe+6444C5</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>E6</Byte>
+        <Byte>EB</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>25</Byte>
+        <Byte>5B</Byte>
+        <Byte>C0</Byte>
+        <Byte>F5</Byte>
+        <Byte>0A</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C9</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something animation interpolation related :movss xmm0,[NeptuniaVirtualStars.exe+16552D0]</Description>
+      <AddressString>NeptuniaVirtualStars.exe+769062</AddressString>
+      <Before>
+        <Byte>11</Byte>
+        <Byte>04</Byte>
+        <Byte>24</Byte>
+        <Byte>EB</Byte>
+        <Byte>3A</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>66</Byte>
+        <Byte>C2</Byte>
+        <Byte>EE</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>04</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Live2D Anim Speed :movss xmm10,[NeptuniaVirtualStars.exe+110882C]</Description>
+      <AddressString>NeptuniaVirtualStars.exe+6588E3</AddressString>
+      <Before>
+        <Byte>93</Byte>
+        <Byte>68</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>40</Byte>
+        <Byte>FF</Byte>
+        <Byte>AA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>9B</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>Info about this table:
+</Comments>
+</CheatTable>

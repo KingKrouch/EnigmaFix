@@ -1,0 +1,2 @@
+Application.exe+69055B - E8 20FCE2FF           - call Application.exe+4C0180 (Something Speed related)
+Application.exe+69056C - F3 0F10 83 A8010000   - movss xmm0,[rbx+000001A8] (d

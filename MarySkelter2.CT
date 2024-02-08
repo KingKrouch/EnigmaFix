@@ -1,0 +1,2737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>194</ID>
+      <Description>"EnigmaFix (Mary Skelter 2 v1.01)"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>58</ID>
+          <Description>"Framerate"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>221</ID>
+              <Description>"Disable Framerate Cap (New)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+3B1AF6) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(int)1
+
+originalcode:
+//mov eax,[rax+000000A0]
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+3B1AF6:
+jmp newmem
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+3B1AF6:
+mov eax,[rax+000000A0]
+//Alt: db 8B 80 A0 00 00 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>45</ID>
+              <Description>"Disable Framerate Cap (Deprecated, only use for looking for functions)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+3B58B8)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+nop
+
+originalcode:
+//call MarySkelter2.exe+3BBDE0
+// Signature: e8 ? ? ? ? 48 8b 05 ? ? ? ? 48 89 84 24 ? ? ? ? 48 8b 84 24 ? ? ? ? 48 8b 00 48 8d 94 24 ? ? ? ? 48 8b 8c 24 ? ? ? ? ff 90
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+3B58B8:
+jmp newmem
+returnhere:
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+3B58B8:
+call MarySkelter2.exe+3BCD60
+//Alt: db E8 A3 74 00 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Disable 96FPS cap during gameplay (WILL CAUSE CRASHES)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+3BC5D5)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+nop
+
+originalcode:
+//call MarySkelter2.exe+3D4320
+// Signature: e8 ? ? ? ? 83 7c 24 ? ? 74 ? c6 44 24 ? ? eb ? c6 44 24 ? ? 0f b6 44 24 ? 85 c0 75 ? c7 44 24 ? ? ? ? ? eb ? c7 44 24 ? ? ? ? ? 0f b6 44 24 ? 88 44 24 ? 0f b6 44 24 ? 85 c0 74 ? 48 83 3d
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+3BC5D5:
+jmp newmem
+returnhere:
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+3BC5D5:
+call MarySkelter2.exe+3D52A0
+//Alt: db E8 C6 8C 01 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>59</ID>
+              <Description>"Fixes"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>57</ID>
+                  <Description>"WIP Character Bustup and Other Animation Speed Fix (Do not use atm)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+alloc(newmem2,2048,"MarySkelter2.exe"+119493)
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm10,[MarySkelter2.exe+794ED0]
+
+originalcode2:
+// movss xmm10,[MarySkelter2.exe+6FF588]
+// Signature: f3 44 0f 10 15 ? ? ? ? 45 0f 29 9b
+
+exit2:
+jmp returnhere2
+
+"MarySkelter2.exe"+119493:
+jmp newmem2
+nop 4
+returnhere2:
+
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+10D9B5)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+addss xmm4,[MarySkelter2.exe+794ED0]
+
+originalcode:
+//addss xmm4,[MarySkelter2.exe+D04168]
+//Signature: f3 0f 58 25 ? ? ? ? 0f 57 c9
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+10D9B5:
+jmp newmem
+nop 3
+returnhere:
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem2)
+"MarySkelter2.exe"+119493:
+movss xmm10,[MarySkelter2.exe+6FF588]
+//Alt: db F3 44 0F 10 15 3C 52 5E 00
+dealloc(newmem)
+"MarySkelter2.exe"+10D9B5:
+addss xmm4,[MarySkelter2.exe+D063F8]
+//Alt: db F3 0F 58 25 FB 68 BF 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>208</ID>
+                  <Description>"Some sort of animation speed?"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+1391D7) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+maxss xmm0,[MarySkelter2.exe+794ED0]
+
+originalcode:
+//maxss xmm0,[MarySkelter2.exe+6FF588]
+
+// signature: f3 0f 5f 05 ? ? ? ? c3 48 89 5c 24
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+1391D7:
+jmp newmem
+nop 3
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+1391D7:
+maxss xmm0,[MarySkelter2.exe+6FF588]
+//Alt: db F3 0F 5F 05 A9 63 5C 00
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>198</ID>
+              <Description>"Test Variable for Game Speed ((1 / 60) / (1 / 144)) "</Description>
+              <VariableType>Float</VariableType>
+              <Address>MarySkelter2.exe+794ED0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>219</ID>
+              <Description>"Something that will lead to other framerate related addresses."</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>7FF6E6780DC4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>207</ID>
+              <Description>"Original 1.0 game speed var"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>7FF6ED6DF588</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>92</ID>
+              <Description>"Seemingly controls the framerate of some on-screen animations (Apparently -1 does something and causes some transitions to get stuck)"</Description>
+              <VariableType>Float</VariableType>
+              <Address>MarySkelter2.exe+6FFDC4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"A float variable that may lead to some framerate dependent gameplay logic and other things"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>7FF75118E588</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"Resolution"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>40</ID>
+              <Description>"Remove Pillarboxing (on 3440x1440 monitor)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+34D876)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov edx,(int)2580
+movd xmm4,edx
+
+originalcode:
+//movd xmm4,[MarySkelter2.exe+70687C]
+// Signature: 66 0f 6e 25
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+34D876:
+jmp newmem
+nop 3
+returnhere:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+34D876:
+movd xmm4,[MarySkelter2.exe+70687C]
+//Alt: db 66 0F 6E 25 5E 8F 3B 00
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>247</ID>
+              <Description>"Adjust UI to center of screen (Currently causes issues with minimap and nightmare Jack's pulse meter)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(verticalScale,2048,"MarySkelter2.exe"+129FDC)
+label(verticalScaleReturn)
+label(verticalScaleExit)
+alloc(horizontalScale,2048,"MarySkelter2.exe"+129FE4)
+label(horizontalScaleReturn)
+label(horizontalScaleExit)
+alloc(uiScaleX,4)
+registersymbol(uiScaleX)
+alloc(uiScaleY,4)
+registersymbol(uiScaleY)
+
+uiScaleX:
+dd (float)1.488372093023256
+
+uiScaleY:
+dd (float)1.0
+
+
+verticalScale: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm1,[uiScaleY]
+
+verticalScaleExit:
+jmp verticalScaleReturn
+
+"MarySkelter2.exe"+129FDC:
+jmp verticalScale
+nop 3
+verticalScaleReturn:
+
+horizontalScale: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm2,[uiScaleX]
+
+horizontalScaleExit:
+jmp horizontalScaleReturn
+
+"MarySkelter2.exe"+129FE4:
+jmp horizontalScale
+nop 3
+horizontalScaleReturn:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(verticalScale)
+"MarySkelter2.exe"+129FDC:
+movss xmm1,[MarySkelter2.exe+6FF588]
+//Alt: db F3 0F 10 0D A4 55 5D 00
+dealloc(horizontalScale)
+"MarySkelter2.exe"+129FE4:
+movss xmm2,[MarySkelter2.exe+700980]
+//Alt: db F3 0F 10 15 94 69 5D 00
+unregistersymbol(UiScaleX)
+dealloc(uiScaleX)
+unregistersymbol(UiScaleY)
+dealloc(uiScaleY)
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>222</ID>
+                  <Description>"uiScaleX"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>uiScaleX</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>229</ID>
+                  <Description>"uiScaleY"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>uiScaleY</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"Change Screen Aspect Ratio"</Description>
+              <Options moHideChildren="1"/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+BCDF9)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+alloc(aspectRatio,4)
+registersymbol(aspectRatio)
+
+aspectRatio:
+dd (float)2.388888888888889
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,[aspectRatio]
+
+originalcode:
+//mov eax,[rdi+00000470]
+// Signature: 8b 87 ? ? ? ? 89 87 ? ? ? ? 8b 87 ? ? ? ? 89 87 ? ? ? ? 8b 87 ? ? ? ? 89 87 ? ? ? ? e8
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+BCDF9:
+jmp newmem
+nop
+returnhere:
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+BCDF9:
+mov eax,[rdi+00000470]
+//Alt: db 8B 87 70 04 00 00
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>227</ID>
+                  <Description>"aspectRatio"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>aspectRatio</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>62</ID>
+          <Description>"Camera"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>197</ID>
+              <Description>"Field of View (Max recommended FOV is 79 degrees at 21:9) (Still need to find out what's causing the mesh culling)"</Description>
+              <VariableType>Float</VariableType>
+              <Address>MarySkelter2.exe+10E5D54</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>93</ID>
+          <Description>"UI Stuff"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>48</ID>
+              <Description>"Affects Minimap Visibility"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MarySkelter2.exe+9C7A18</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>203</ID>
+          <Description>"What is seemingly causing the resolution list oddities with ultrawide monitors (Pattern: 80 07 ? 00 38 04 ? 00 00)"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>9</ByteLength>
+          <Address>MarySkelter2.exe+70687C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>202</ID>
+          <Description>"Adjust UI elements"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+// Vertical Res
+alloc(newmem2,2048,"MarySkelter2.exe"+38A51D) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov ecx,(int)1080
+
+originalcode2:
+//mov ecx,[rcx+04]
+mov [rax+04],ecx
+
+// signature: 8b 49 ? 89 48 ? 48 8b 44 24 ? 48 83 c4
+
+exit2:
+jmp returnhere2
+
+"MarySkelter2.exe"+38A51D:
+jmp newmem2
+nop
+returnhere2:
+
+
+
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+38A510) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov ecx,(int)2580
+
+originalcode:
+//mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+28]
+
+// signature: 8b 09 89 08 48 8b 44 24 ? 48 8b 0c 24 8b 49 ? 89 48 ? 48 8b 44 24 ? 48 83 c4
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+38A510:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem2)
+"MarySkelter2.exe"+38A51D:
+mov ecx,[rcx+04]
+mov [rax+04],ecx
+//Alt: db 8B 49 04 89 48 04
+dealloc(newmem)
+"MarySkelter2.exe"+38A510:
+mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+28]
+//Alt: db 8B 09 89 08 48 8B 44 24 28
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>206</ID>
+          <Description>"Fix Mouse Coordinates (Still need to find a way to center UI elements)"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+4698C0) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,(int)2580
+
+originalcode:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+//Signature: 8b 00 89 84 24 ? ? ? ? 48 8b 84 24 ? ? ? ? 8b 40 ? 89 84 24 ? ? ? ? eb
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+4698C0:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"MarySkelter2.exe"+4698C0:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>245</ID>
+          <Description>"Gameplay Tweaks"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>243</ID>
+              <Description>"Disable Minimap"</Description>
+              <Options moHideChildren="1"/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+3153D1) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+alloc(hudToggle,1)
+registersymbol(hudToggle)
+
+hudToggle:
+db (byte)0
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,[hudToggle]
+cmp [hudToggle],eax
+
+originalcode:
+//cmp dword ptr [rsi+08],00
+mov [rsp+78],rax
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+3153D1:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+unregistersymbol(hudToggle)
+dealloc(hudToggle)
+"MarySkelter2.exe"+3153D1:
+cmp dword ptr [rsi+08],00
+mov [rsp+78],rax
+//Alt: db 83 7E 08 00 48 89 44 24 78
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>244</ID>
+                  <Description>"Minimap Toggle"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>hudToggle</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>195</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+700DC4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>196</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+711F5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>200</ID>
+      <Description>"No Description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>19DFD490B20</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>201</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>19DFD490B24</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>204</ID>
+      <Description>"No Description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>2097D5A0B24</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>209</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>7FF6ED6E0DC4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>211</ID>
+      <Description>"No description"</Description>
+      <VariableType>Double</VariableType>
+      <Address>MarySkelter2.exe+70DD10</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>212</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+700638</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>216</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>81689AC5AC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>217</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>MarySkelter2.exe+110A960</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>218</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>7FF6E677F588</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>220</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+7270DC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>224</ID>
+      <Description>"frameDelta WIP (Need to make the variable an equivalent to 1 / currentFramerate)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"MarySkelter2.exe"+3BCD90) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+alloc(frameDelta,4)
+registersymbol(frameDelta)
+
+frameDelta:
+dd (float)0.0166666666666667
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+movss xmm2,xmm0
+movss xmm1,[MarySkelter2.exe+705FE4]
+divss xmm2,xmm1
+divss xmm2,xmm1
+movss [frameDelta],xmm2
+
+originalcode:
+divss xmm0,[MarySkelter2.exe+705FE4]
+
+exit:
+jmp returnhere
+
+"MarySkelter2.exe"+3BCD90:
+jmp newmem
+nop 3
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+unregistersymbol(frameDelta)
+dealloc(frameDelta)
+"MarySkelter2.exe"+3BCD90:
+divss xmm0,[MarySkelter2.exe+705FE4]
+//Alt: db F3 0F 5E 05 4C 92 34 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>225</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>7FF6D8720800</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>226</ID>
+      <Description>"No Description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>1E21C811D24</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>228</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+70CF08</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>230</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+700638</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>262</ID>
+      <Description>"Hunt Down the Framerate Limiter"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>263</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+700DC4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>264</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+711F5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>266</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+70177C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>267</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>MarySkelter2.exe+700638</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+44E890</Description>
+      <AddressString>MarySkelter2.exe+399AAC</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>DF</Byte>
+        <Byte>4D</Byte>
+        <Byte>0B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+44E890</Description>
+      <AddressString>MarySkelter2.exe+44E673</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>18</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+3D574C</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>EE</Byte>
+        <Byte>4B</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>28</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+32CC75</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>C5</Byte>
+        <Byte>D6</Byte>
+        <Byte>3C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>39</Byte>
+        <Byte>7B</Byte>
+        <Byte>38</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+34433D</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>FD</Byte>
+        <Byte>5F</Byte>
+        <Byte>3B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>87</Byte>
+        <Byte>44</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+344F1D</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>1D</Byte>
+        <Byte>54</Byte>
+        <Byte>3B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>83</Byte>
+        <Byte>44</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+345C55</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>E5</Byte>
+        <Byte>46</Byte>
+        <Byte>3B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+345C85</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>B5</Byte>
+        <Byte>46</Byte>
+        <Byte>3B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>BB</Byte>
+        <Byte>50</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+35CF65</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>D5</Byte>
+        <Byte>D3</Byte>
+        <Byte>39</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>43</Byte>
+        <Byte>08</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6D319D</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>9D</Byte>
+        <Byte>71</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>BF</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6D31E9</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>51</Byte>
+        <Byte>71</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>BF</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6D348D</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>AD</Byte>
+        <Byte>6E</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>BF</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD4B8</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>82</Byte>
+        <Byte>CE</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>38</Byte>
+        <Byte>73</Byte>
+        <Byte>10</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD4D5</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>65</Byte>
+        <Byte>CE</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD626</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>14</Byte>
+        <Byte>CD</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD815</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>25</Byte>
+        <Byte>CB</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>7B</Byte>
+        <Byte>10</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD845</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>F5</Byte>
+        <Byte>CA</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD8C7</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>73</Byte>
+        <Byte>CA</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>40</Byte>
+        <Byte>38</Byte>
+        <Byte>6B</Byte>
+        <Byte>10</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD8E5</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>55</Byte>
+        <Byte>CA</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DD9D8</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>62</Byte>
+        <Byte>C9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>7B</Byte>
+        <Byte>10</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DDA45</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>F5</Byte>
+        <Byte>C8</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DDB75</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>C5</Byte>
+        <Byte>C7</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>7B</Byte>
+        <Byte>11</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA340]</Description>
+      <AddressString>MarySkelter2.exe+6DE8D2</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>68</Byte>
+        <Byte>BA</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>B6</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp dword ptr [rsp+60],-01</Description>
+      <AddressString>MarySkelter2.exe+3D6123</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>48</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>1A</Byte>
+        <Byte>BA</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jne MarySkelter2.exe+3D6144</Description>
+      <AddressString>MarySkelter2.exe+3D6128</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>1A</Byte>
+      </Actual>
+      <After>
+        <Byte>BA</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jmp MarySkelter2.exe+3D615B</Description>
+      <AddressString>MarySkelter2.exe+3D6142</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>17</Byte>
+      </Actual>
+      <After>
+        <Byte>BA</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rsp+28],eax</Description>
+      <AddressString>MarySkelter2.exe+3D6157</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>D9</Byte>
+        <Byte>41</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA330]</Description>
+      <AddressString>MarySkelter2.exe+3D6151</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>D9</Byte>
+        <Byte>41</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rcx,[rax+08]</Description>
+      <AddressString>MarySkelter2.exe+3D614D</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rax,[rsp+50]</Description>
+      <AddressString>MarySkelter2.exe+3D6148</AddressString>
+      <Before>
+        <Byte>17</Byte>
+        <Byte>8B</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov edx,[rsp+60]</Description>
+      <AddressString>MarySkelter2.exe+3D6144</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>EB</Byte>
+        <Byte>17</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov edx,FFFFFFFF</Description>
+      <AddressString>MarySkelter2.exe+3D612A</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>BA</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rax,[rsp+50]</Description>
+      <AddressString>MarySkelter2.exe+3D612F</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rcx,[rax+08]</Description>
+      <AddressString>MarySkelter2.exe+3D6134</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>F2</Byte>
+        <Byte>41</Byte>
+        <Byte>32</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA330]</Description>
+      <AddressString>MarySkelter2.exe+3D6138</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>F2</Byte>
+        <Byte>41</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>EB</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rsp+28],eax</Description>
+      <AddressString>MarySkelter2.exe+3D613E</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>17</Byte>
+        <Byte>E9</Byte>
+        <Byte>B7</Byte>
+        <Byte>9E</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FA330]</Description>
+      <AddressString>MarySkelter2.exe+3572D6</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>70</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>54</Byte>
+        <Byte>30</Byte>
+        <Byte>3A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>70</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D4320</Description>
+      <AddressString>MarySkelter2.exe+3B9FC2</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>59</Byte>
+        <Byte>A3</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>BC</Byte>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D4320</Description>
+      <AddressString>MarySkelter2.exe+3BB565</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>B6</Byte>
+        <Byte>8D</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D4320</Description>
+      <AddressString>MarySkelter2.exe+3BB655</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>C6</Byte>
+        <Byte>8C</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Some sort of UI Scale? :movss xmm0,[MarySkelter2.exe+6FF588]</Description>
+      <AddressString>MarySkelter2.exe+12B6F2</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>EE</Byte>
+        <Byte>E7</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>8E</Byte>
+        <Byte>3E</Byte>
+        <Byte>5D</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something else FOV related? :movss xmm1,[MarySkelter2.exe+6FF588]</Description>
+      <AddressString>MarySkelter2.exe+411A8D</AddressString>
+      <Before>
+        <Byte>5E</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>F3</Byte>
+        <Byte>DA</Byte>
+        <Byte>2E</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Something UI Scaling related? :movss xmm1,[MarySkelter2.exe+6FF588]</Description>
+      <AddressString>MarySkelter2.exe+129FDC</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>48</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>A4</Byte>
+        <Byte>55</Byte>
+        <Byte>5D</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>94</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FB330]</Description>
+      <AddressString>MarySkelter2.exe+6D3544</AddressString>
+      <Before>
+        <Byte>BA</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>E6</Byte>
+        <Byte>7D</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>0D</Byte>
+        <Byte>0F</Byte>
+        <Byte>D4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je MarySkelter2.exe+3BC5E8</Description>
+      <AddressString>MarySkelter2.exe+3BC5DF</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>07</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3B0380</Description>
+      <AddressString>MarySkelter2.exe+3BC676</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>32</Byte>
+        <Byte>DD</Byte>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>05</Byte>
+        <Byte>3D</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D4890</Description>
+      <AddressString>MarySkelter2.exe+3BC68C</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>2C</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>FF</Byte>
+        <Byte>81</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>28</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D4E10</Description>
+      <AddressString>MarySkelter2.exe+3BC665</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>0F</Byte>
+        <Byte>1F</Byte>
+        <Byte>40</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>A6</Byte>
+        <Byte>87</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>4F</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Uncap :mov [MarySkelter2.exe+110A960],ax</Description>
+      <AddressString>MarySkelter2.exe+25BD1F</AddressString>
+      <Before>
+        <Byte>EA</Byte>
+        <Byte>00</Byte>
+        <Byte>66</Byte>
+        <Byte>FF</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>89</Byte>
+        <Byte>05</Byte>
+        <Byte>3A</Byte>
+        <Byte>EC</Byte>
+        <Byte>EA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>10</Byte>
+        <Byte>72</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Cap :mov [MarySkelter2.exe+110A960],r8w</Description>
+      <AddressString>MarySkelter2.exe+25BD47</AddressString>
+      <Before>
+        <Byte>88</Byte>
+        <Byte>0C</Byte>
+        <Byte>10</Byte>
+        <Byte>EB</Byte>
+        <Byte>0E</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>44</Byte>
+        <Byte>89</Byte>
+        <Byte>05</Byte>
+        <Byte>11</Byte>
+        <Byte>EC</Byte>
+        <Byte>EA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>88</Byte>
+        <Byte>0D</Byte>
+        <Byte>FB</Byte>
+        <Byte>EB</Byte>
+        <Byte>EA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FB330]</Description>
+      <AddressString>MarySkelter2.exe+3D52C8</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>62</Byte>
+        <Byte>60</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>EB</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+3BCE24</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>2C</Byte>
+        <Byte>C0</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>A7</Byte>
+        <Byte>7A</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+3BCE6D</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>73</Byte>
+        <Byte>09</Byte>
+        <Byte>33</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>5E</Byte>
+        <Byte>7A</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>B5</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+3B5B98</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>64</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>33</Byte>
+        <Byte>ED</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FB340]</Description>
+      <AddressString>MarySkelter2.exe+3D48DC</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>5E</Byte>
+        <Byte>6A</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>28</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FB330]</Description>
+      <AddressString>MarySkelter2.exe+3D52E1</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>49</Byte>
+        <Byte>60</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3BCD60</Description>
+      <AddressString>MarySkelter2.exe+3B58B8</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>A3</Byte>
+        <Byte>74</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>CC</Byte>
+        <Byte>DC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+44D9A0</Description>
+      <AddressString>MarySkelter2.exe+3BCE3C</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>5F</Byte>
+        <Byte>0B</Byte>
+        <Byte>09</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+        <Byte>48</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+6D0EB7</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>14</Byte>
+        <Byte>3A</Byte>
+        <Byte>D0</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>39</Byte>
+        <Byte>6B</Byte>
+        <Byte>44</Byte>
+        <Byte>74</Byte>
+        <Byte>F1</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+6D0995</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>36</Byte>
+        <Byte>3F</Byte>
+        <Byte>D0</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>7B</Byte>
+        <Byte>44</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+6D0767</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>64</Byte>
+        <Byte>41</Byte>
+        <Byte>D0</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>39</Byte>
+        <Byte>73</Byte>
+        <Byte>44</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+6D04EB</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>E0</Byte>
+        <Byte>43</Byte>
+        <Byte>D0</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>7B</Byte>
+        <Byte>44</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+6340F2</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>D9</Byte>
+        <Byte>07</Byte>
+        <Byte>DA</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>C4</Byte>
+        <Byte>F3</Byte>
+        <Byte>A3</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+4ADCB5</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>16</Byte>
+        <Byte>6C</Byte>
+        <Byte>F2</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+4AD355</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>76</Byte>
+        <Byte>75</Byte>
+        <Byte>F2</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+44E75E</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>6D</Byte>
+        <Byte>61</Byte>
+        <Byte>F8</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>94</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+3D4FB0</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>1B</Byte>
+        <Byte>F9</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>CA</Byte>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+39B6CE</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>FD</Byte>
+        <Byte>91</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>9E</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+39A753</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>78</Byte>
+        <Byte>A1</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>8E</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+39A563</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>68</Byte>
+        <Byte>A3</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>8E</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+39A42C</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>9F</Byte>
+        <Byte>A4</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>96</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call MarySkelter2.exe+3D48D0</Description>
+      <AddressString>MarySkelter2.exe+396CE4</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>E7</Byte>
+        <Byte>DB</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>58</Byte>
+        <Byte>DA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [MarySkelter2.exe+6FB1C0]</Description>
+      <AddressString>MarySkelter2.exe+44EB34</AddressString>
+      <Before>
+        <Byte>B9</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>86</Byte>
+        <Byte>C6</Byte>
+        <Byte>2A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jmp qword ptr [MarySkelter2.exe+6FB340]</Description>
+      <AddressString>MarySkelter2.exe+13A330</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>FF</Byte>
+        <Byte>25</Byte>
+        <Byte>09</Byte>
+        <Byte>10</Byte>
+        <Byte>5C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
