@@ -3,7 +3,7 @@
 
 ### A mod that aims to improve several aspects of the PC versions for games in the Death end re;Quest series.*
 #### * Support is also planned for MegaDimension Neptunia VIIR, Neptunia Virtual Stars, Dragon Star Varnir, and Mary Skelter 2.
-![BuildStatus](https://github.com/KingKrouch/EnigmaFix/actions/workflows/cmake.yml/badge.svg?branch=CLion-Development/)
+![BuildStatus](https://github.com/KingKrouch/EnigmaFix/actions/workflows/cmake.yml/badge.svg?branch=main/)
 
 **Key Features:**
 * Uncapped framerates above or below 60 FPS *(Including VSync options, and fixes for framerate dependent gameplay logic)*
@@ -61,6 +61,10 @@ Add ``WINEDLLOVERRIDES="dinput8=n,b" %command%`` to the Steam launch options aft
 * A *Legitimate* fully updated copy of the game from Steam or GOG (**I refuse** to provide technical support for pirated warez/scene cracked releases).<br />
 [***Compatible games are available for purchase on Steam.***](https://store.steampowered.com/search/?category1=998&developer=Idea+Factory)<br/>
 [***Compatible games are also available for purchase on GOG.***](https://www.gog.com/en/games?developers=idea-factory-compile-heart&hideDLCs=true)
+
+## Support The Project:
+☕ If you've enjoyed or gotten usage from my work *(keep in mind, I do a majority of this completely for free on my spare time with no donations or compensation)*, please consider supporting my Ko-Fi below:
+<br><br>[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/kingkrouch)
 
 ## Legal Stuff
 

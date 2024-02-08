@@ -25,7 +25,7 @@ set(CMAKE_BINARY_DIR               ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CM
 set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CMAKE_BUILD_TYPE})
 # Set our compile method to Ninja.
 set(CMAKE_GENERATOR Ninja)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 # Set up our ThirdParty libraries
 include(FetchContent)
