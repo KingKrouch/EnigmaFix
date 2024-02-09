@@ -157,8 +157,9 @@ add_library(EnigmaFix SHARED
         Source/Plugins/Plugin_DERQ.h
 )
 ## Add the dependencies we set up previously.
-add_dependencies(EnigmaFix ImGui Kiero inipp SafetyHook SpdLog)
-target_link_libraries(EnigmaFix d3dcompiler ImGui Kiero inipp)
+# NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
+add_dependencies(EnigmaFix ImGui Kiero SafetyHook IniPP SpdLog)
+target_link_libraries(EnigmaFix d3dcompiler ImGui Kiero IniPP)
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
