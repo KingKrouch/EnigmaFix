@@ -128,6 +128,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(IniPP)
 
+## JSON
+set(JSON_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/JSON")
+message(STATUS "Fetching JSON...")
+FetchContent_Declare(
+        JSON
+        GIT_REPOSITORY "https://github.com/nlohmann/json.git"
+        GIT_TAG "origin/develop"
+        SOURCE_DIR "${JSON_SOURCE_DIR}"
+)
+FetchContent_MakeAvailable(JSON)
+
 ## STB
 set(STB_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/STB")
 message(STATUS "Fetching STB...")
@@ -167,7 +178,7 @@ add_library(EnigmaFix SHARED
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
-add_dependencies(EnigmaFix imgui kiero safetyhook inipp spdlog)
+add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog)
 target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
