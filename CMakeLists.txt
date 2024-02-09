@@ -26,9 +26,8 @@ set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CM
 # Set our compile method to Ninja.
 set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
-
-# Find Boost
-find_package(Boost REQUIRED COMPONENTS filesystem system)
+## Setup Boost (Still need to sort out the error regarding "the target platform not supporting dynamic linking"
+find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
 # Include Boost directories
 include_directories(${Boost_INCLUDE_DIRS})
 
@@ -169,7 +168,7 @@ add_library(EnigmaFix SHARED
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
 add_dependencies(EnigmaFix imgui kiero safetyhook inipp spdlog)
-target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp)
+target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
