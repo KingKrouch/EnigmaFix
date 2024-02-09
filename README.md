@@ -22,6 +22,7 @@
 * [Ninja](https://ninja-build.org/)
 * [MinGW-w64 _(preferably with a full setup)_](https://www.mingw-w64.org/)
 * [Git](https://git-scm.com/)
+* [Boost C++ Libraries (If using MSYS2, follow the Arch Linux process below)](https://www.boost.org/)
 
 If you are using Ubuntu WSL, you can install the required dependencies using:
 
@@ -41,6 +42,8 @@ For Arch Linux, the process should be:
 * [JetBrains CLion](https://www.jetbrains.com/clion/) *(You can also use [Visual Studio](https://visualstudio.microsoft.com/vs/) to edit and compile the source code, assuming you install it with the C++ CMake tools for Windows component)*
 * [Windows Subsystem for Linux _(If using Windows)_](https://ubuntu.com/wsl)
 * [MSYS2 _(If using Windows)_](https://www.msys2.org)
+
+**NOTE:** If compiling through Visual Studio, you might need to [install the Boost C++ libraries separately](https://www.boost.org/doc/libs/1_73_0/more/getting_started/windows.html#install-boost-build).
 
 ### Setup Instructions:
 Assuming you have the development environment set up, you can follow these steps to compile the project:
