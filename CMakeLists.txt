@@ -36,6 +36,7 @@ option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" ON)
 if(SAFETYHOOK_FETCH_ZYDIS)
     add_definitions(-DSAFETYHOOK_FETCH_ZYDIS)
 endif()
+message(STATUS "Fetching SafetyHook...")
 FetchContent_Declare(
         SafetyHook
         GIT_REPOSITORY "https://github.com/cursey/safetyhook.git"
@@ -45,6 +46,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SafetyHook)
 
 ## SpdLog
+message(STATUS "Fetching SpdLog...")
 FetchContent_Declare(
         SpdLog
         GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
@@ -55,6 +57,7 @@ FetchContent_MakeAvailable(SpdLog)
 
 ## ImGui
 set(IMGUI_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/ImGui")
+message(STATUS "Fetching ImGui...")
 FetchContent_Declare(
     ImGui
     GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
@@ -82,6 +85,7 @@ target_link_libraries(ImGui ImGuiBackends)
 
 ## Kiero
 set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero")
+message(STATUS "Fetching Kiero...")
 FetchContent_Declare(
     Kiero
     GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
@@ -95,6 +99,7 @@ add_library(Kiero STATIC
 )
 
 ## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
+message(STATUS "Fetching MinHook...")
 FetchContent_Declare(
         MinHook
         GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
@@ -105,6 +110,7 @@ FetchContent_MakeAvailable(MinHook)
 target_link_libraries(Kiero MinHook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
 
 ## IniPP
+message(STATUS "Fetching IniPP...")
 FetchContent_Declare(
         IniPP
         GIT_REPOSITORY "https://github.com/mcmtroffaes/inipp.git"
@@ -115,6 +121,7 @@ FetchContent_MakeAvailable(IniPP)
 
 ## STB
 set(STB_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/STB")
+message(STATUS "Fetching STB...")
 FetchContent_Declare(
         STB
         GIT_REPOSITORY "https://github.com/nothings/stb.git"
