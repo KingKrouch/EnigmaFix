@@ -31,9 +31,16 @@ For Fedora, the process would be:
 
 `sudo dnf install git cmake ninja-build mingw64-\* g++ gcc -y`
 
+For Arch Linux, the process should be:
+
+`sudo pacman -S ninja cmake gcc mingw-w64-x86_64-toolchain mingw-w64-x86_64-boost --noconfirm`
+
+**NOTE:** If you remove "sudo", the Arch Linux instructions should also apply to MSYS2.
+
 ### Recommendations:
 * [JetBrains CLion](https://www.jetbrains.com/clion/) *(You can also use [Visual Studio](https://visualstudio.microsoft.com/vs/) to edit and compile the source code, assuming you install it with the C++ CMake tools for Windows component)*
 * [Windows Subsystem for Linux _(If using Windows)_](https://ubuntu.com/wsl)
+* [MSYS2 _(If using Windows)_](https://www.msys2.org)
 
 ### Setup Instructions:
 Assuming you have the development environment set up, you can follow these steps to compile the project:

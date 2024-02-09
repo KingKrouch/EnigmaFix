@@ -27,6 +27,11 @@ set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CM
 set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
 
+# Find Boost
+find_package(Boost REQUIRED COMPONENTS filesystem system)
+# Include Boost directories
+include_directories(${Boost_INCLUDE_DIRS})
+
 # Set up our ThirdParty libraries
 include(FetchContent)
 
@@ -36,22 +41,24 @@ option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" ON)
 if(SAFETYHOOK_FETCH_ZYDIS)
     add_definitions(-DSAFETYHOOK_FETCH_ZYDIS)
 endif()
+set(SAFETYHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SafetyHook")
 message(STATUS "Fetching SafetyHook...")
 FetchContent_Declare(
         SafetyHook
         GIT_REPOSITORY "https://github.com/cursey/safetyhook.git"
         GIT_TAG "origin/main"
-        SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SafetyHook"
+        SOURCE_DIR "${SAFETYHOOK_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(SafetyHook)
 
 ## SpdLog
+set(SPDLOG_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SpdLog")
 message(STATUS "Fetching SpdLog...")
 FetchContent_Declare(
         SpdLog
         GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
         GIT_TAG "origin/v1.x"
-        SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SpdLog"
+        SOURCE_DIR "${SPDLOG_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(SpdLog)
 
@@ -65,57 +72,60 @@ FetchContent_Declare(
     SOURCE_DIR "${IMGUI_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(ImGui)
-add_library(ImGui STATIC
+add_library(imgui STATIC
         ${IMGUI_SOURCE_DIR}/imgui.cpp
         ${IMGUI_SOURCE_DIR}/imgui.h
         ${IMGUI_SOURCE_DIR}/imgui_demo.cpp
         ${IMGUI_SOURCE_DIR}/imgui_draw.cpp
         ${IMGUI_SOURCE_DIR}/imgui_tables.cpp
         ${IMGUI_SOURCE_DIR}/imgui_widgets.cpp)
-add_library(ImGuiBackends STATIC
+add_library(imguibackends STATIC
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.cpp
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.h
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.cpp
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.h)
 ### Include the ImGui header files with the ImGuiBackends, as we don't want to manually modify the includes to add a "../".
-target_include_directories(ImGuiBackends PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Source/ThirdParty/ImGui)
-target_link_libraries(ImGuiBackends d3dcompiler dwmapi)
+target_include_directories(imguibackends PRIVATE ${IMGUI_SOURCE_DIR})
+target_link_libraries(imguibackends d3dcompiler dwmapi)
 ### We then finally link together ImGui and ImGuiBackends, so they're dependent on each other.
-target_link_libraries(ImGui ImGuiBackends)
+target_link_libraries(imgui imguibackends)
 
 ## Kiero
 set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero")
 message(STATUS "Fetching Kiero...")
 FetchContent_Declare(
-    Kiero
-    GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
-    GIT_TAG "origin/master"
-    SOURCE_DIR "${KIERO_SOURCE_DIR}"
+        Kiero
+        GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
+        GIT_TAG "origin/master"
+        SOURCE_DIR "${KIERO_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(Kiero)
-add_library(Kiero STATIC 
+add_library(kiero STATIC 
         ${KIERO_SOURCE_DIR}/kiero.cpp
         ${KIERO_SOURCE_DIR}/kiero.h
 )
 
 ## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
+set(MINHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook")
 message(STATUS "Fetching MinHook...")
 FetchContent_Declare(
         MinHook
         GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
         GIT_TAG "origin/master"
-        SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook"
+        SOURCE_DIR "${MINHOOK_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(MinHook)
-target_link_libraries(Kiero MinHook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
+target_link_libraries(kiero minHook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
+target_include_directories(kiero PRIVATE "${MINHOOK_SOURCE_DIR}/include")
 
 ## IniPP
+set(INIPP_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/IniPP")
 message(STATUS "Fetching IniPP...")
 FetchContent_Declare(
         IniPP
         GIT_REPOSITORY "https://github.com/mcmtroffaes/inipp.git"
         GIT_TAG "origin/develop"
-        SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/IniPP"
+        SOURCE_DIR "${INIPP_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(IniPP)
 
@@ -158,8 +168,8 @@ add_library(EnigmaFix SHARED
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
-add_dependencies(EnigmaFix ImGui Kiero SafetyHook IniPP SpdLog)
-target_link_libraries(EnigmaFix d3dcompiler ImGui Kiero IniPP)
+add_dependencies(EnigmaFix imgui kiero safetyhook inipp spdlog)
+target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp)
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
