@@ -15,6 +15,8 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     # Search for headers and libraries only in the target environment
     set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
     set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+    # Add Boost Include Directory (For MinGW).
+    set(Boost_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/include/)
 endif (UNIX)
 # Set our output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME})
