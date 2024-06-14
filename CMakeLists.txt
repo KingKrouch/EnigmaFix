@@ -17,7 +17,7 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
     set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
     # Add Boost Include Directory (For MinGW).
-    set(Boost_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/include/)
+    #set(Boost_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/include/)
 endif (UNIX)
 
 # Set our output directories
@@ -38,9 +38,9 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 ## Setup Boost (Still need to sort out the error regarding "the target platform not supporting dynamic linking"
-find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
+#find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
 # Include Boost directories
-include_directories(${Boost_INCLUDE_DIRS})
+#include_directories(${Boost_INCLUDE_DIRS})
 
 # Set up our ThirdParty libraries
 include(FetchContent)
@@ -190,7 +190,8 @@ add_library(EnigmaFix SHARED
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
 add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog)
-target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
+target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp)
+#target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
