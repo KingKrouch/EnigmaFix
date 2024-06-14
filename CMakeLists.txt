@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 set(PROJECT_NAME                EnigmaFix)
 # Set the name of the target operating system.
 set(CMAKE_SYSTEM_NAME           Windows)
+
 if (UNIX) # If compiling on Linux, manually configure MingW-64.
     set(CMAKE_C_COMPILER        x86_64-w64-mingw32-gcc)
     set(CMAKE_CXX_COMPILER      x86_64-w64-mingw32-g++)
@@ -18,16 +19,24 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     # Add Boost Include Directory (For MinGW).
     set(Boost_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/include/)
 endif (UNIX)
+
 # Set our output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME})
+
 # Set our intermediate directories.
 set(CMAKE_BINARY_DIR               ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CMAKE_BUILD_TYPE})
 set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CMAKE_BUILD_TYPE})
+
 # Set our compile method to Ninja.
 set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
+
+# Set a definition for a debug build through CMake.
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
 ## Setup Boost (Still need to sort out the error regarding "the target platform not supporting dynamic linking"
 find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
 # Include Boost directories
