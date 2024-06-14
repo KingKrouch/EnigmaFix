@@ -23,11 +23,27 @@ jobs:
     - name: Update System Packages.
       run: sudo apt update -y && sudo apt upgrade -y
     
-    - name: Install Dependencies
+    - name: Install Dependencies.
       # Installs the Dependencies needed before compiling.
-      run: sudo apt install git cmake ninja-build mingw-w64\* g++ gcc build-essential gdb -y
+      run: sudo apt install git cmake ninja-build mingw-w64\* libboost-all-dev g++ gcc build-essential gdb -y
+
+    - name: Build Boost
+      id: boost
+      uses: egor-tensin/build-boost@v1
+      with:
+          version: 1.71.0
+          toolset: mingw
+          libraries: filesystem program_options system
+          platform: x64
+          configuration: Release
+
+    - name: Show Paths (For Boost)
+      run: |
+          printf 'Boost has been unpacked to: %s\n' '${{ steps.boost.outputs.root }}'
+          printf 'Libraries can be found here: %s\n' '${{ steps.boost.outputs.librarydir }}'
+      shell: bash
       
-    - name: Initialize Submodules
+    - name: Initialize Submodules.
     # Grabs the source code for all of our submodules
       run: git submodule init && git submodule update
       
@@ -35,7 +51,7 @@ jobs:
       # Self explanatory
       run: sudo chmod +x ./Build_Debug.sh && sudo chmod +x ./Build_Release.sh
 
-    - name: Configure CMake project and compile
+    - name: Configure CMake project and compile.
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: ./Build_${{env.BUILD_TYPE}}.sh
