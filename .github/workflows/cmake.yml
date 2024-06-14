@@ -27,22 +27,22 @@ jobs:
       # Installs the Dependencies needed before compiling.
       run: sudo apt install git cmake ninja-build mingw-w64\* libboost-all-dev g++ gcc build-essential gdb -y
 
-    - name: Build Boost (For MinGW).
-      id: boost
-      uses: egor-tensin/build-boost@v1
-      with:
-          version: 1.71.0
-          toolset: mingw
-          libraries: filesystem program_options system
-          platform: x64
-          configuration: Release
+    #- name: Build Boost (For MinGW).
+      #id: boost
+      #uses: egor-tensin/build-boost@v1
+      #with:
+          #version: 1.71.0
+          #toolset: mingw
+          #libraries: filesystem program_options system
+          #platform: x64
+          #configuration: Release
           # directory: /usr/x86_64-w64-mingw32/sys-root/mingw/include/
 
-    - name: Show Paths (For Boost).
-      run: |
-          printf 'Boost has been unpacked to: %s\n' '${{ steps.boost.outputs.root }}'
-          printf 'Libraries can be found here: %s\n' '${{ steps.boost.outputs.librarydir }}'
-      shell: bash
+    #- name: Show Paths (For Boost).
+      #run: |
+          #printf 'Boost has been unpacked to: %s\n' '${{ steps.boost.outputs.root }}'
+          #printf 'Libraries can be found here: %s\n' '${{ steps.boost.outputs.librarydir }}'
+      #shell: bash
       
     - name: Initialize Submodules.
     # Grabs the source code for all of our submodules
