@@ -26,15 +26,15 @@
 
 If you are using Ubuntu WSL, you can install the required dependencies using:
 
-`sudo apt install git cmake ninja-build mingw-w64\* g++ gcc build-essential gdb -y`
+`sudo apt install git cmake ninja-build meson mingw-w64\* g++ gcc build-essential gdb libboost-all-dev -y`
 
 For Fedora, the process would be:
 
-`sudo dnf install git cmake ninja-build mingw64-\* g++ gcc -y`
+`sudo dnf install git cmake ninja-build meson mingw64-\* g++ gcc boost gdb -y`
 
 For Arch Linux, the process should be:
 
-`sudo pacman -S ninja cmake gcc mingw-w64-x86_64-toolchain mingw-w64-x86_64-boost --noconfirm`
+`sudo pacman -S ninja cmake meson gcc mingw-w64-toolchain boost gdb --noconfirm`
 
 **NOTE:** If you remove "sudo", the Arch Linux instructions should also apply to MSYS2.
 
