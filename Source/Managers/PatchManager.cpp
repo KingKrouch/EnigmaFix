@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2023 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
+// Internal Functionality
 #include "PatchManager.h"
 #include "../Settings/PlayerSettings.h"
+
+// Third Party Libraries
 //#include "../ThirdParty/ModUtils/MemoryMgr.h"
+#include <spdlog.h>
 
 auto& PlayerSettingsPm = EnigmaFix::PlayerSettings::Get();
 
@@ -33,28 +37,36 @@ namespace EnigmaFix {
     void PatchManager::InitPatch() { // Instead of running our game specific patches in InitPatch(), we will do that in RunPatches(). We just want to initialize the desired game mode and do any preliminary work here.
         //ScopedUnprotect::FullModule UnProtect(BaseModule);
         if (BaseModule = GetModuleHandleA("Application.exe")) { // We probably could do a prettier way of detecting the game (Such as looking for certain AOBs in the executable), where there's less margin for error (I.E: with executables that use the same executable name).
+            spdlog::info("Detected Death end re;Quest.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::DERQ;
         }
         else if (BaseModule = GetModuleHandleA("DeathEndReQuest2.exe")) {
+            spdlog::info("Detected Death end re;Quest 2.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::DERQ2;
         }
         else if (BaseModule = GetModuleHandleA("DragonStarVarnir.exe")) {
+            spdlog::info("Detected Dragon Star Varnir.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::Varnir;
         }
         else if (BaseModule = GetModuleHandleA("v2r.exe")) {
+            spdlog::info("Detected Neptunia VIIR.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::VIIR;
         }
         else if (BaseModule = GetModuleHandleA("NeptuniaVirtualStars.exe")) {
+            spdlog::info("Detected Neptunia Virtual Stars.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::NVS;
         }
         else if (BaseModule = GetModuleHandleA("MarySkelter2.exe")) {
+            spdlog::info("Detected Mary Skelter 2.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::MS2;
         }
         else if (BaseModule = GetModuleHandleA("MarySkelterFinale.exe")) {
+            spdlog::info("Detected Mary Skelter Finale.");
             PlayerSettingsPm.GameMode = PlayerSettingsPm.E_GameMode::MSF;
         }
         else {
             // Throw up a window prompt indicating that no compatible game was detected, and when OK is pressed, the process is closed.
+            spdlog::critical("No compatible game was detected.");
             MessageBox(NULL, "No Compatible game was detected.", "Error", MB_OK | MB_ICONERROR);
             exit(0);
         }
@@ -63,7 +75,6 @@ namespace EnigmaFix {
     void PatchManager::RunPatches() {
         switch (PlayerSettingsPm.GameMode) {
             case PlayerSettingsPm.E_GameMode::DERQ: {
-                // Patch internal resolution and other game patches here.
             }
             case PlayerSettingsPm.E_GameMode::DERQ2: {
             }

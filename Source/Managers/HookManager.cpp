@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2023 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,9 @@ SOFTWARE.
 // System Libraries
 #include <windows.h>
 #include <process.h>
+// Third Party Libraries
+#include <spdlog.h>
+
 // Variables
 HANDLE PatchThread; // Creates a handle to the patch thread, so it can be closed easier.
 HANDLE RenderThread; // Creates a handle to the D3D11 hooking thread, so it can be closed easier.
@@ -47,17 +50,25 @@ namespace EnigmaFix {
     void HookManager::frmThread() { framerateMgr.Update(); }
 
     void HookManager::BeginHook() {
+        spdlog::info("Reading Config File...");
         ConMan.ReadConfig();
+        spdlog::info("Initializing Patching (Checking what game is being ran)...");
         PatchMgr.InitPatch(); // Run InitPatch() first before we do RunPatches() in it's own thread. Reason being that we want to check for the game mode before we have stuff in their own specific threads checking for it.
+        spdlog::info("Creating PatchManager Thread...");
         PatchThread     = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))pmThread,  nullptr, 0, 0); // Calls InitPatch() in a new thread on start.
+        spdlog::info("Creating RenderManager Thread...");
         RenderThread    = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))rmThread,  nullptr, 0, 0); // Calls InitD3D11Hook() in a new thread after the initPatch() thread has started.
+        spdlog::info("Creating FramerateManager Thread...");
         FRManagerThread = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))frmThread, nullptr, 0, 0); // Calls InitD3D11Hook() in a new thread after the initPatch() thread has started.
     }
 
     void HookManager::EndHook() {
         //Add Kiero Shutdown here.
+        spdlog::info("Closing Patch Manager Thread...");
         CloseHandle(PatchThread);
+        spdlog::info("Closing RenderManager Thread...");
         CloseHandle(RenderThread);
+        spdlog::info("Closing FramerateManager Thread...");
         CloseHandle(FRManagerThread);
     }
 }

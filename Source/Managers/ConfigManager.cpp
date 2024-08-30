@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2023 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ SOFTWARE.
 #include <fstream>
 // Third Party Libraries
 #include <inipp.h>
+#include <spdlog.h>
 // Variables
 
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();
@@ -51,6 +52,7 @@ namespace EnigmaFix {
 
     void ConfigManager::SaveConfig() { // TODO: Find a way of writing configs with IniPP.
         if (AlreadyReadConfig) {
+            spdlog::info("Saving Config...");
             // Resolution Settings
             //ini.WriteBoolean("Resolution",  "UseCustomResolution",       PlayerSettingsConf.RES.UseCustomRes,      0);
             //ini.WriteInteger("Resolution",  "HorizontalResolution",      PlayerSettingsConf.RES.HorizontalRes,     0);
@@ -100,6 +102,7 @@ namespace EnigmaFix {
     }
 
     void ConfigManager::ReadConfig() {
+        spdlog::info("Reading Config...");
         cout.flush();
         //freopen(FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
         cout.clear();

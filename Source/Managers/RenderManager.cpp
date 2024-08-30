@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2023 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ SOFTWARE.
 //#include <comip.h>
 #include <memory>
 // Third Party Libraries
+#include <spdlog.h>
 #include "../ThirdParty/Kiero/kiero.h"
 #include "../ThirdParty/ImGui/imgui.h"
 #include "../ThirdParty/ImGui/backends/imgui_impl_win32.h"
@@ -191,10 +192,14 @@ bool vpResize(ID3D11DeviceContext* pContext)
     return false;
 }
 
-bool srResize(ID3D11DeviceContext* pContext, UINT NumRects, D3D11_RECT rect)
+bool srResize(ID3D11DeviceContext* pContext)
 {
     // This is where scissor rect resizing will occur.
-    if (NumRects == 1) {
+    UINT numRects = 0;
+    pContext->RSGetScissorRects(&numRects, nullptr);
+    if (numRects == 1) {
+        D3D11_RECT rect = {};
+        pContext->RSGetScissorRects(&numRects, &rect);
         if ((rect.right == 1920 && rect.bottom == 1080) ||
             (rect.right ==  960 && rect.bottom ==  540) ||
             //(rect.right == 640  && rect.bottom == 360)  ||
@@ -239,6 +244,8 @@ bool srResize(ID3D11DeviceContext* pContext, UINT NumRects, D3D11_RECT rect)
                                 // Viewport is the easy part
                                 rect.right = static_cast<LONG>(texdesc.Width);
                                 rect.bottom = static_cast<LONG>(texdesc.Height);
+                                pContext->RSSetScissorRects(1, &rect);
+                                return true;
                             }
                         }
                     }
@@ -350,6 +357,7 @@ namespace EnigmaFix {
         int ScreenSpaceEffectsScale = PlayerSettingsRm.RS.ScreenSpaceEffectsScale;
         int SSRScale = PlayerSettingsRm.RS.SSRScale;
 
+        
         // We are simply using this to update our current internal resolution for the rest of the logic.
         // Checks for the specific texture format for CopyDeferredColor_Hist, and checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
         // TODO: Figure out why our hook isn't fucking working. This should be working, yet it isn't doing anything.
@@ -423,28 +431,33 @@ namespace EnigmaFix {
         return rm_Instance.oCreateTexture2D(pDevice, pDesc, pInitialData, ppTexture2D);
     }
 
-    // Instead of dealing with our Draw and DrawIndexed hooks, I might find a way to force the change.
-    HRESULT __stdcall RenderManager::hkRSSetViewports(ID3D11DeviceContext *pContext, UINT NumViewports, D3D11_VIEWPORT *pViewports)
-    {
-        return rm_Instance.oRSSetViewports(pContext, NumViewports, pViewports);
-    }
-
-    HRESULT __stdcall RenderManager::hkRSSetScissorRects(ID3D11DeviceContext *pContext, UINT NumRects, D3D11_RECT *pRects)
-    {
-        srResize(pContext, NumRects, *pRects);
-        return rm_Instance.oRSSetScissorRects(pContext, NumRects, pRects);
-    }
-
     // A hook that contains the needed logic for running checks on Viewports and Scissor Rects.
     HRESULT __stdcall RenderManager::hkDrawIndexed(ID3D11DeviceContext *pContext, UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
     {
-        return rm_Instance.oDrawIndexed(pContext, IndexCount, StartIndexLocation, BaseVertexLocation);
+        bool preDraw = false;
+
+        if (IndexCount == 4 && StartIndexLocation == 0 && BaseVertexLocation == 0) {
+            preDraw = vpResize(pContext);
+        }
+        // Checks if both the viewports and scissor rects haven't been resized, and then return oDrawIndexed. I may need to find a better way of doing this to account for one not passing.
+        if (!preDraw) {
+            return rm_Instance.oDrawIndexed(pContext, IndexCount, StartIndexLocation, BaseVertexLocation);
+        }
+        return E_FAIL; // Default Return Statement, so Intellisense stops complaining.
     }
 
     // Another hook that contains the needed logic for running checks on Viewports and Scissor Rects.
     HRESULT __stdcall RenderManager::hkDraw(ID3D11DeviceContext *pContext, UINT VertexCount, UINT StartVertexLocation)
     {
-        return rm_Instance.oDraw(pContext, VertexCount, StartVertexLocation);
+        bool preDraw = false;
+
+        if (VertexCount == 4 && StartVertexLocation == 0) {
+            preDraw = vpResize(pContext) && srResize(pContext);
+        }
+        if (!preDraw) {
+            return rm_Instance.oDraw(pContext, VertexCount, StartVertexLocation);
+        }
+        return E_FAIL; // Default Return Statement, so Intellisense stops complaining.
     }
 
     DWORD __stdcall RenderManager::InitD3D11Hook(LPVOID lpReserved) {
@@ -460,21 +473,19 @@ namespace EnigmaFix {
                     case PlayerSettings::DERQ: {
                         // Binds the function we will be using to modify the render target size for shadows and other things.
                         kiero::bind(23, reinterpret_cast<void**>(&oCreateTexture2D), reinterpret_cast<void*>(this->hkCreateTexture2D));
-                        kiero::bind(74, reinterpret_cast<void**>(&oDraw), reinterpret_cast<void*>(this->hkDraw));
-                        kiero::bind(73, reinterpret_cast<void**>(&oDrawIndexed),reinterpret_cast<void*>(this->hkDrawIndexed));
                         // Binds the function we will be using for resizing viewports.
-                        kiero::bind(105, reinterpret_cast<void**>(&oRSSetViewports), reinterpret_cast<void*>(this->hkRSSetViewports));
-                        kiero::bind(106, reinterpret_cast<void**>(&oRSSetScissorRects), reinterpret_cast<void*>(this->hkRSSetScissorRects));
+                        kiero::bind(74, reinterpret_cast<void**>(&oDraw), reinterpret_cast<void*>(this->hkDraw));
+                        // Binds another function we will be using for resizing viewports.
+                        kiero::bind(73, reinterpret_cast<void**>(&oDrawIndexed),reinterpret_cast<void*>(this->hkDrawIndexed));
                         break;
                     }
                     case PlayerSettings::DERQ2: {
                         // Binds the function we will be using to modify the render target size for shadows and other things.
                         kiero::bind(23, reinterpret_cast<void**>(&oCreateTexture2D), reinterpret_cast<void*>(this->hkCreateTexture2D));
-                        kiero::bind(74, reinterpret_cast<void**>(&oDraw), reinterpret_cast<void*>(this->hkDraw));
-                        kiero::bind(73, reinterpret_cast<void**>(&oDrawIndexed),reinterpret_cast<void*>(this->hkDrawIndexed));
                         // Binds the function we will be using for resizing viewports.
-                        kiero::bind(105, reinterpret_cast<void**>(&oRSSetViewports), reinterpret_cast<void*>(this->hkRSSetViewports));
-                        kiero::bind(106, reinterpret_cast<void**>(&oRSSetScissorRects), reinterpret_cast<void*>(this->hkRSSetScissorRects));
+                        kiero::bind(74, reinterpret_cast<void**>(&oDraw), reinterpret_cast<void*>(this->hkDraw));
+                        // Binds another function we will be using for resizing viewports.
+                        kiero::bind(73, reinterpret_cast<void**>(&oDrawIndexed),reinterpret_cast<void*>(this->hkDrawIndexed));
                         break;
                     }
                     case PlayerSettings::Varnir: {
