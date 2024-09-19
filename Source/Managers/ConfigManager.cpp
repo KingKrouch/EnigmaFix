@@ -26,6 +26,7 @@ SOFTWARE.
 // System Libraries
 #include <iostream>
 #include <fstream>
+#include <windows.h>
 // Third Party Libraries
 #include <inipp.h>
 #include <spdlog/spdlog.h>
@@ -160,6 +161,7 @@ namespace EnigmaFix {
 
         // Show console window if EnableConsoleLog is enabled.
         if (PlayerSettingsConf.MS.EnableConsoleLog) {
+            AllocConsole();
             freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
         }
 
