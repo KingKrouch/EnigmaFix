@@ -96,6 +96,7 @@ namespace EnigmaFix {
             // Misc Settings
             //ini.WriteBoolean("Misc",        "SkipOpeningVideos",         PlayerSettingsConf.MS.SkipOpeningVideos,  0);
             //ini.WriteBoolean("Misc",        "CameraTweaks",              PlayerSettingsConf.MS.CameraTweaks,       0);
+            //ini.WriteBoolean("Misc",        "EnableConsoleLog",          PlayerSettingsConf.MS.EnableConsoleLog,   0);
             // Launcher Settings
             //ini.WriteBoolean("Launcher",    "IgnoreUpdates",             PlayerSettingsConf.LS.IgnoreUpdates,      0);
         }
@@ -104,7 +105,6 @@ namespace EnigmaFix {
     void ConfigManager::ReadConfig() {
         spdlog::info("Reading Config...");
         cout.flush();
-        //freopen(FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
         cout.clear();
         cin.clear();
         Init();
@@ -154,8 +154,15 @@ namespace EnigmaFix {
         // Misc Settings
         inipp::extract(config.sections["Misc"]["SkipOpeningVideos"], PlayerSettingsConf.MS.SkipOpeningVideos);
         inipp::extract(config.sections["Misc"]["CameraTweaks"], PlayerSettingsConf.MS.CameraTweaks);
+        inipp::extract(config.sections["Misc"]["EnableConsoleLog"], PlayerSettingsConf.MS.EnableConsoleLog);
         // Launcher Settings
         inipp::extract(config.sections["Launcher"]["IgnoreUpdates"], PlayerSettingsConf.LS.IgnoreUpdates);
+
+        // Show console window if EnableConsoleLog is enabled.
+        if (PlayerSettingsConf.MS.EnableConsoleLog) {
+            freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
+        }
+
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }
 }

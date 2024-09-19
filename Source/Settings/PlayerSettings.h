@@ -101,6 +101,7 @@ namespace EnigmaFix {
         struct MiscSettings {
             bool CameraTweaks      = true; // Enables functionality that improves the vertical clamping range of camera movement, alongside other things.
             bool SkipOpeningVideos = true; // Self Explanatory
+            bool EnableConsoleLog  = true; // Shows a debug window with logs when enabled.
         };
 
         struct LauncherSettings {
