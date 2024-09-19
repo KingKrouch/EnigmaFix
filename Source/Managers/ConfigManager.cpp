@@ -28,7 +28,7 @@ SOFTWARE.
 #include <fstream>
 // Third Party Libraries
 #include <inipp.h>
-#include <spdlog.h>
+#include <spdlog/spdlog.h>
 // Variables
 
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();

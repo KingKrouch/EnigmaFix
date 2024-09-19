@@ -26,7 +26,7 @@ SOFTWARE.
 
 // Third Party Libraries
 //#include "../ThirdParty/ModUtils/MemoryMgr.h"
-#include <spdlog.h>
+#include <spdlog/spdlog.h>
 
 auto& PlayerSettingsPm = EnigmaFix::PlayerSettings::Get();
 

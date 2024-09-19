@@ -88,12 +88,14 @@ add_library(imgui STATIC
         ${IMGUI_SOURCE_DIR}/imgui_demo.cpp
         ${IMGUI_SOURCE_DIR}/imgui_draw.cpp
         ${IMGUI_SOURCE_DIR}/imgui_tables.cpp
-        ${IMGUI_SOURCE_DIR}/imgui_widgets.cpp)
+        ${IMGUI_SOURCE_DIR}/imgui_widgets.cpp
+)
 add_library(imguibackends STATIC
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.cpp
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_dx11.h
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.cpp
-        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.h)
+        ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.h
+)
 ### Include the ImGui header files with the ImGuiBackends, as we don't want to manually modify the includes to add a "../".
 target_include_directories(imguibackends PRIVATE ${IMGUI_SOURCE_DIR})
 target_link_libraries(imguibackends d3dcompiler dwmapi)
@@ -110,7 +112,7 @@ FetchContent_Declare(
         SOURCE_DIR "${KIERO_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(Kiero)
-add_library(kiero STATIC 
+add_library(kiero STATIC
         ${KIERO_SOURCE_DIR}/kiero.cpp
         ${KIERO_SOURCE_DIR}/kiero.h
 )
@@ -190,7 +192,7 @@ add_library(EnigmaFix SHARED
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
 add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog)
-target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp)
+target_link_libraries(EnigmaFix d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog)
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")

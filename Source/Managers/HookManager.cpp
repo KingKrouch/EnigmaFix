@@ -30,7 +30,7 @@ SOFTWARE.
 #include <windows.h>
 #include <process.h>
 // Third Party Libraries
-#include <spdlog.h>
+#include <spdlog/spdlog.h>
 
 // Variables
 HANDLE PatchThread; // Creates a handle to the patch thread, so it can be closed easier.

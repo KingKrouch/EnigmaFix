@@ -29,7 +29,7 @@ SOFTWARE.
 //#include <comip.h>
 #include <memory>
 // Third Party Libraries
-#include <spdlog.h>
+#include <spdlog/spdlog.h>
 #include "../ThirdParty/Kiero/kiero.h"
 #include "../ThirdParty/ImGui/imgui.h"
 #include "../ThirdParty/ImGui/backends/imgui_impl_win32.h"
