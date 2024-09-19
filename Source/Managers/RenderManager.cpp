@@ -346,7 +346,7 @@ namespace EnigmaFix {
         }
 
         UINT syncInterval = PlayerSettingsRm.SYNC.VSync ? PlayerSettingsRm.SYNC.SyncInterval : 0; // Converts the vSync checks to a quick variable to clean up space.
-        return rm_Instance.oPresent(pSwapChain, syncInterval, DXGI_SWAP_EFFECT_FLIP_DISCARD | DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING);
+        return rm_Instance.oPresent(pSwapChain, syncInterval, static_cast<UINT>(DXGI_SWAP_EFFECT_FLIP_DISCARD) | DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING);
     }
 
     // A hook that contains the needed logic for changing the Shadow, SSR, SSAO, and Post Processing resolution.
