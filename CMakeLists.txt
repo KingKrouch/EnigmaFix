@@ -116,6 +116,9 @@ add_library(kiero STATIC
         ${KIERO_SOURCE_DIR}/kiero.cpp
         ${KIERO_SOURCE_DIR}/kiero.h
 )
+# NOTE: This is just in case I plan on porting SafetyHook to Kiero, rather than using MinHook.
+#target_link_libraries(kiero safetyhook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
+#target_include_directories(kiero PRIVATE "${SAFETYHOOK_SOURCE_DIR}/include")
 
 ## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
 set(MINHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook")
@@ -127,7 +130,7 @@ FetchContent_Declare(
         SOURCE_DIR "${MINHOOK_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(MinHook)
-target_link_libraries(kiero minHook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
+target_link_libraries(kiero minhook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
 target_include_directories(kiero PRIVATE "${MINHOOK_SOURCE_DIR}/include")
 
 ## IniPP
@@ -192,7 +195,7 @@ add_library(EnigmaFix SHARED
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
 add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog)
-target_link_libraries(EnigmaFix d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog)
+target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog)
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
