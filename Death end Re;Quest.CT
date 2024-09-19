@@ -616,6 +616,47 @@ mov rax,[rsp+48]
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
+              <ID>5481</ID>
+              <Description>"Framerate Uncap (Even Better! It jumps straight past the checks)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"Application.exe"+E88FA) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+jmp Application.exe+E8962
+
+originalcode:
+//mov eax,[rax+000000A0]
+
+// Address of signature = Application.exe + 0x000E88FA
+//"\x8B\x80\x00\x00\x00\x00\x89\x44\x00\x00\x83\x7C\x24\x44\x00\x74\x00\x83\x7C\x24\x44", "xx????xx??xxxx?x?xxxx"
+//"8B 80 ? ? ? ? 89 44 ? ? 83 7C 24 44 ? 74 ? 83 7C 24 44"
+
+exit:
+jmp returnhere
+
+"Application.exe"+E88FA:
+jmp newmem
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Application.exe"+E88FA:
+db 8B 80 A0 00 00 00
+//mov eax,[rax+000000A0]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
               <ID>5458</ID>
               <Description>"Framerate Uncap"</Description>
               <VariableType>Auto Assembler Script</VariableType>
