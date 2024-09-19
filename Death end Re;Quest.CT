@@ -56,15 +56,27 @@
                   <AssemblerScript>[ENABLE]
 "Application.exe"+6DDBB7:
   db 90 90 90
+// Address of signature = Application.exe + 0x006DDBB7
+// "\x89\x41\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x8B\x82", "xx?xx??xx??xx??xx??xx??xx??xx"
+// "89 41 ? 0F 10 ? ? 0F 11 ? ? 0F 10 ? ? 0F 11 ? ? 0F 10 ? ? 0F 11 ? ? 8B 82"
 
 "Application.exe"+6E2753:
   db 90 90 90 90 90
+// Address of signature = Application.exe + 0x006E2753
+// "\xF3\x0F\x00\x00\x00\xE8\x00\x00\x00\x00\x85\xC0\x75", "xx???x????xxx"
+// "F3 0F ? ? ? E8 ? ? ? ? 85 C0 75"
 
 "Application.exe"+6E2709:
   db 90 90 90 90 90
+// Address of signature = Application.exe + 0x006E2709
+// "\xF3\x0F\x00\x00\x00\x48\x8B\x00\x00\x00\x00\x00\x66\x0F", "xx???xx?????xx"
+// "F3 0F ? ? ? 48 8B ? ? ? ? ? 66 0F"
 
 "Application.exe"+6DDBB4:
   db 90 90 90
+// Address of signature = Application.exe + 0x006DDBB4
+// "\x8B\x42\x00\x89\x41\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x0F\x10\x00\x00\x0F\x11\x00\x00\x8B\x82", "xx?xx?xx??xx??xx??xx??xx??xx??xx"
+// "8B 42 ? 89 41 ? 0F 10 ? ? 0F 11 ? ? 0F 10 ? ? 0F 11 ? ? 0F 10 ? ? 0F 11 ? ? 8B 82"
 
 
 [DISABLE]
@@ -161,6 +173,14 @@ label(returnhere)
 label(originalcode)
 label(exit)
 
+//Address of signature for Code Cave = Application.exe + 0x004858B2
+//"\xE8\x00\x00\x00\x00\xEB\x00\xE8\x00\x00\x00\x00\x48\x8B\x00\x00\x00\x00\x00\x48\x8D", "x????x?x????xx?????xx"
+//"E8 ? ? ? ? EB ? E8 ? ? ? ? 48 8B ? ? ? ? ? 48 8D"
+
+// Address of signature for E1840 address to call = Application.exe + 0x000E1840
+// "\x48\x89\x00\x00\x00\x48\x89\x00\x00\x00\x48\x81\xEC\x00\x00\x00\x00\xC7\x44\x24\x40\x00\x00\x00\x00\x48\x8D", "xx???xx???xxx????xxxx????xx"
+// "48 89 ? ? ? 48 89 ? ? ? 48 81 EC ? ? ? ? C7 44 24 40 ? ? ? ? 48 8D"
+
 newmem: //this is allocated memory, you have read,write,execute access
 //place your code here
 call Application.exe+E1840
@@ -210,19 +230,45 @@ db E8 89 BF C5 FF
 //code from here to '[DISABLE]' will be used to enable the cheat
 "Application.exe"+485576:
 db 90 90 90 90
+// Address of signature = Application.exe + 0x00485576
+// "\x41\x89\x00\x00\x48\x83\xC4\x00\x41\x00\x5F\x5E\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x83\xEC", "xx??xxx?x?xxxxxxxxxxxxxxxxxxx"
+// "41 89 ? ? 48 83 C4 ? 41 ? 5F 5E C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC"
+
 "Application.exe"+7C9292:
 db 90 90 90 90 90 90 90
+// Address of signature = Application.exe + 0x007C9292
+// "\x83\x3D\x73\xF2\x78\x00", "xxxxxx"
+// "83 3D 73 F2 78 00"
+
 "Application.exe"+7C9329:
 db 90 90 90 90 90 90 90
+// Address of signature = Application.exe + 0x007C9329
+// "\x83\x3D\xDC\xF1\x78\x00", "xxxxxx"
+// "83 3D DC F1 78 00"
+
 "Application.exe"+7C93E4:
 db 90 90 90 90 90 90 90
+// Address of signature = Application.exe + 0x007C93E4
+// "\x83\x3D\x21\xF1\x78\x00", "xxxxxx"
+// "83 3D 21 F1 78 00"
+
 "Application.exe"+7C6BB4:
 db 90 90 90 90 90 90 90
+// Address of signature = Application.exe + 0x007C6BB4
+// "\x83\x3D\x51\x19\x79\x00", "xxxxxx"
+// "83 3D 51 19 79 00"
+
 "Application.exe"+4852BA:
 db 90 90 90
+// Address of signature = Application.exe + 0x004852BA
+// "\x39\x7B\x00\x0F\x4C", "xx?xx"
+// "39 7B ? 0F 4C"
+
 "Application.exe"+48530A:
 db 90 90 90
- 
+// Address of signature = Application.exe + 0x0048530A
+// "\x8B\x53\x00\x8B\x43\x00\x89\x41", "xx?xx?xx"
+// "8B 53 ? 8B 43 ? 89 41"
  
 [DISABLE]
 //code from here till the end of the code will be used to disable the cheat
@@ -595,7 +641,9 @@ jmp newmem
 nop
 returnhere:
 
-
+// Address of signature = Application.exe + 0x000E88FA
+//"\x8B\x80\x00\x00\x00\x00\x89\x44\x00\x00\x83\x7C\x24\x44\x00\x74\x00\x83\x7C\x24\x44", "xx????xx??xxxx?x?xxxx"
+//"8B 80 ? ? ? ? 89 44 ? ? 83 7C 24 44 ? 74 ? 83 7C 24 44"
  
  
 [DISABLE]
