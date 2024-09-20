@@ -25,6 +25,7 @@ SOFTWARE.
 #include "../Settings/PlayerSettings.h"
 #include "../Localization/Localization.h"
 #include "../Utilities/DXHelper.h"
+#include "../Utilities/DXEnums.h"
 #include "UIManager.h"
 // System Libraries
 //#include <comip.h>
@@ -123,22 +124,25 @@ bool vpResize(ID3D11DeviceContext* pContext)
             (vp.Width == 12.0f && vp.Height == 7.0f) ||
             //(vp.Width == 10.0f   && vp.Height == 6.0f)    ||
             (vp.Width == 6.0f && vp.Height == 4.0f)) {
-            std::shared_ptr<ID3D11RenderTargetView> rtView = std::dynamic_pointer_cast<ID3D11RenderTargetView>(rtView);
-            ID3D11RenderTargetView* rawRTView = rtView.get();
-            pContext->OMGetRenderTargets(1, &rawRTView, nullptr);
+            spdlog::info("Found viewport with size {}x{}.", vp.Width, vp.Height);
+            // TODO: Everything below here seemingly has problems running. Fix it.
+            ID3D11RenderTargetView *rtView = NULL;
+            pContext->OMGetRenderTargets(1, &rtView, nullptr);
             if (rtView) {
                 D3D11_RENDER_TARGET_VIEW_DESC desc;
                 rtView->GetDesc(&desc);
                 if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
+                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT ||
                     desc.Format == DXGI_FORMAT_R11G11B10_FLOAT ||
                     desc.Format == DXGI_FORMAT_R24G8_TYPELESS ||
                     desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM) {
-                    std::shared_ptr<ID3D11Resource> rt = std::dynamic_pointer_cast<ID3D11Resource>(rt);
-                    ID3D11Resource* rawRT = rt.get();
-                    rtView->GetResource(&rawRT);
+                    spdlog::info("Found viewport with type {}.", DXGIFormatToString(desc.Format));
+                    ID3D11Resource *rt = NULL;
+                    rtView->GetResource(&rt);
                     if (rt != nullptr) {
-                        auto rttex = std::dynamic_pointer_cast<ID3D11Texture2D>(rt);
-                        if (rttex) {
+                        ID3D11Texture2D *rttex = NULL;
+                        rt->QueryInterface<ID3D11Texture2D>(&rttex);
+                        if (rttex != nullptr) {
                             D3D11_TEXTURE2D_DESC texdesc = {};
                             rttex->GetDesc(&texdesc);
                             if (texdesc.Width != vp.Width) {
@@ -147,12 +151,16 @@ bool vpResize(ID3D11DeviceContext* pContext)
                                 vp.Width = static_cast<FLOAT>(texdesc.Width);
                                 vp.Height = static_cast<FLOAT>(texdesc.Height);
                                 pContext->RSSetViewports(1, &vp);
+                                spdlog::info("Set viewport to size {}x{}.", vp.Width, vp.Height);
                                 return true;
                             }
                         }
                     }
+                    else { spdlog::error("Viewport Resource returned null."); }
+                    rt->Release();
                 }
             }
+            rtView->Release();
         }
     }
     return false;
@@ -186,22 +194,24 @@ bool srResize(ID3D11DeviceContext* pContext)
             (rect.right ==   12 && rect.bottom ==    7) ||
             //(rect.right == 10.0f   && rect.bottom == 6.0f)    ||
             (rect.right ==    6 && rect.bottom ==    4)) {
-            std::shared_ptr<ID3D11RenderTargetView> rtView = std::dynamic_pointer_cast<ID3D11RenderTargetView>(rtView);
-            ID3D11RenderTargetView* rawRTView = rtView.get();
-            pContext->OMGetRenderTargets(1, &rawRTView, nullptr);
+            spdlog::info("Found scissor rect with size {}x{}.", rect.right, rect.bottom);
+            // TODO: Everything below here seemingly has problems running. Fix it.
+            ID3D11RenderTargetView *rtView = NULL;
+            pContext->OMGetRenderTargets(1, &rtView, nullptr);
             if (rtView) {
                 D3D11_RENDER_TARGET_VIEW_DESC desc;
                 rtView->GetDesc(&desc);
-                if (desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM ||
-                    desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
+                if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
+                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT ||
                     desc.Format == DXGI_FORMAT_R11G11B10_FLOAT ||
-                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS) {
-                    //_com_ptr_t <_com_IIID<ID3D11Resource, &__uuidof(ID3D11Resource)>> rt;
-                    std::shared_ptr<ID3D11Resource> rt = std::dynamic_pointer_cast<ID3D11Resource>(rt);
-                    ID3D11Resource* rawRT = rt.get();
-                    rtView->GetResource(&rawRT);
+                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS ||
+                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM) {
+                    spdlog::info("Found scissor rect with type {}.", DXGIFormatToString(desc.Format));
+                    ID3D11Resource *rt = NULL;
+                    rtView->GetResource(&rt);
                     if (rt != nullptr) {
-                        auto rttex = std::dynamic_pointer_cast<ID3D11Texture2D>(rt);
+                        ID3D11Texture2D *rttex = NULL;
+                        rt->QueryInterface<ID3D11Texture2D>(&rttex);
                         if (rttex != nullptr) {
                             D3D11_TEXTURE2D_DESC texdesc = {};
                             rttex->GetDesc(&texdesc);
@@ -211,12 +221,16 @@ bool srResize(ID3D11DeviceContext* pContext)
                                 rect.right = static_cast<LONG>(texdesc.Width);
                                 rect.bottom = static_cast<LONG>(texdesc.Height);
                                 pContext->RSSetScissorRects(1, &rect);
+                                spdlog::info("Set scissor rect to size {}x{}.", rect.right, rect.bottom);
                                 return true;
                             }
                         }
                     }
+                    else { spdlog::error("Scissor Rect Resource returned null."); }
+                    rt->Release();
                 }
             }
+            rtView->Release();
         }
     }
     return false;
@@ -329,35 +343,44 @@ namespace EnigmaFix {
         // Checks for the specific texture format for CopyDeferredColor_Hist, and checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
         // TODO: Figure out why our hook isn't fucking working. This should be working, yet it isn't doing anything.
         if (pDesc->Format == DXGI_FORMAT_R16G16B16A16_FLOAT && (pDesc->MipLevels == 11 || pDesc->MipLevels == 12)) { // Checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
-            InternalVerticalRes	  = pDesc->Height;
-            InternalHorizontalRes =  pDesc->Width;
+            if (pDesc->Width != InternalHorizontalRes || pDesc->Height != InternalVerticalRes){
+                InternalVerticalRes	  = pDesc->Height;
+                InternalHorizontalRes =  pDesc->Width;
+                spdlog::info("Internal Rendering Resolution Changed To: {}x{}", InternalHorizontalRes, InternalVerticalRes);
+            }
         }
 
         // Do our shadow, ambient occlusion, and SSR patches first.
         // TODO: Figure out a way of checking this based on the game, as DERQ2 and the other Mizuchi games probably are using a modified version of the engine, so it probably does this a little differently.
         switch (pDesc->Format) { // For some weird reason, this switch statement won't detect SSAO or Screen Space Reflections unless I prioritize them.
             case DXGI_FORMAT_R32_TYPELESS: { // This checks for the R32_TYPELESS format which is used for shadows
+                spdlog::info("Found Shadow Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, 2048, 2048, ShadowRes, ShadowRes);
                 break;
             }
             case DXGI_FORMAT_R16G16_FLOAT: { // ImageSpaceAO and ImageSpaceCrossBilateralH (SSAO and Horizontal SSAO Blurring) Render Targets
-            // Checks for render targets half the size of the current in-game resolution.
+                // Checks for render targets half the size of the current in-game resolution.
+                spdlog::info("Found ImageSpaceAO and ImageSpaceCrossBilateralH Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                 break;
             }
             case DXGI_FORMAT_R8_UNORM: { // ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2
+                spdlog::info("Found ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2 Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                 break;
             }
             case DXGI_FORMAT_R16G16B16A16_UNORM: { // DownsampleGBuffer0, which is used as an input for ImageSpaceReflection
+                spdlog::info("Found DownsampleGBuffer0 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                 break;
             }
             case DXGI_FORMAT_R32_FLOAT: { // CompositeDepthForRLR and ImageSpaceHiZ, which is used as an input for ImageSpaceReflection
+                spdlog::info("Found CompositeDepthForRLR and ImageSpaceHiZ Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                 break;
             }
             case DXGI_FORMAT_R11G11B10_FLOAT: { // ImageSpaceReflectionOutput1
+                    spdlog::info("Found ImageSpaceReflectionOutput1 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
                 resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                 break;
             }
@@ -365,6 +388,8 @@ namespace EnigmaFix {
 
         // TODO: Need to decouple this from the resolution setting. Ideally, the post-processing should be changed based on the internal rendering resolution rather than the user decided resolution.
         // As we do plan on patching the in-game resolution option separately from the reported internal resolution, and the reported internal resolution should change as a result.
+        // TODO: Figure out how to grab the yebismizuchi2 set of calls using the ID3DUserDefinedAnnotation system, so we can more accurately adjust these.
+        // TODO: We need to find a way to get this so it can work with resolutions lower than 1920x1080 too, because it will still glitch out with resolutions lower than that.
         if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
         {
             switch (pDesc->Format) {
@@ -403,8 +428,9 @@ namespace EnigmaFix {
     {
         bool preDraw = false;
 
-        if (IndexCount == 4 && StartIndexLocation == 0 && BaseVertexLocation == 0) {
-            preDraw = vpResize(pContext);
+        if (IndexCount == 3 && StartIndexLocation == 0 && BaseVertexLocation == 0) {
+            spdlog::info("Found draw call (DrawIndexed) with an index count of 3. Attempting to resize viewport and scissor rects...");
+            preDraw = vpResize(pContext) && srResize(pContext);
         }
         // Checks if both the viewports and scissor rects haven't been resized, and then return oDrawIndexed. I may need to find a better way of doing this to account for one not passing.
         if (!preDraw) {
@@ -417,8 +443,8 @@ namespace EnigmaFix {
     HRESULT __stdcall RenderManager::hkDraw(ID3D11DeviceContext *pContext, UINT VertexCount, UINT StartVertexLocation)
     {
         bool preDraw = false;
-
-        if (VertexCount == 4 && StartVertexLocation == 0) {
+        if (VertexCount == 3 && StartVertexLocation == 0) {
+            spdlog::info("Found draw call (DrawIndexed) with an index count of 3. Attempting to resize viewport and scissor rects...");
             preDraw = vpResize(pContext) && srResize(pContext);
         }
         if (!preDraw) {
@@ -431,6 +457,7 @@ namespace EnigmaFix {
         // Starts Hooking
         bool InitHook = false;
         do {
+            // TODO: Figure out how to fix the game's DPI scaling issues automatically.
             if (init(RenderType::D3D11) == Status::Success) {
                 // Binds the function we will be using to get imgui to draw on-screen.
                 kiero::bind( 8, reinterpret_cast<void**>(&oPresent),reinterpret_cast<void*>(this->hkPresent));

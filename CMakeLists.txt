@@ -198,6 +198,7 @@ add_library(EnigmaFix SHARED
         Source/Utilities/UITextureLoader.cpp
         Source/Utilities/UITextureLoader.h
         Source/Utilities/DXHelper.h
+        Source/Utilities/DXEnums.h
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
