@@ -47,6 +47,7 @@ namespace EnigmaFix {
         static void loopChecks();
         static void showExitPrompt();
         static void windowButtons();
+        static void LoadLogoTexture();
 
 
         struct UIProperties {

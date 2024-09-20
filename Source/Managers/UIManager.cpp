@@ -26,6 +26,7 @@ SOFTWARE.
 #include "PatchManager.h"
 #include "../Settings/PlayerSettings.h"
 #include "../Localization/Localization.h"
+#include "../Utilities/UITextureLoader.h"
 #include "../ThirdParty/ImGui/imgui.h"
 #include "ConfigManager.h"
 
@@ -101,6 +102,7 @@ namespace EnigmaFix {
     {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
+            ImGui::Image((void*)Logo, ImVec2(LogoWidth, LogoHeight));
             Text(LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
             Separator();
             Text("(C) 2021 Bryce Q.");
@@ -464,6 +466,12 @@ namespace EnigmaFix {
         }
     }
 
+    void UIManager::LoadLogoTexture() // TODO: Fix this not loading the texture properly.
+    {
+        bool ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, &LogoWidth, &LogoHeight);
+        IM_ASSERT(ret);
+    }
+
     void UIManager::BeginRender()
     {
         um_Instance.showMainMenu(SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
@@ -475,6 +483,8 @@ namespace EnigmaFix {
     {
         // Checks if the localization strings have been initialized.
         um_Instance.initLocalization();
+        // Loads the About screen's logo texture.
+        um_Instance.LoadLogoTexture();
         // Begins drawing the UI.
         um_Instance.BeginRender();
     }

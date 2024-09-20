@@ -165,6 +165,10 @@ FetchContent_Declare(
         SOURCE_DIR "${STB_SOURCE_DIR}"
 )
 FetchContent_MakeAvailable(STB)
+add_library(stb STATIC
+        ${STB_SOURCE_DIR}/stb_image.h
+)
+set_target_properties(stb PROPERTIES LINKER_LANGUAGE CXX)
 
 # Now finally export our library file.
 ## Setup the project and set a few variables
@@ -191,11 +195,14 @@ add_library(EnigmaFix SHARED
         Source/Settings/PlayerSettings.h
         Source/Plugins/Plugin_DERQ.cpp
         Source/Plugins/Plugin_DERQ.h
+        Source/Utilities/UITextureLoader.cpp
+        Source/Utilities/UITextureLoader.h
+        Source/Utilities/DXHelper.h
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
-add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog)
-target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog)
+add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog stb)
+target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog stb)
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
