@@ -26,10 +26,13 @@ SOFTWARE.
 // System Libraries
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <windows.h>
 // Third Party Libraries
 #include <inipp.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>    // support for basic file logging
+#include <spdlog/sinks/stdout_color_sinks.h> // For colored console logging
 // Variables
 
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();
@@ -104,6 +107,22 @@ namespace EnigmaFix {
     }
 
     void ConfigManager::ReadConfig() {
+        try {
+            // TODO: Fix the log sink so we can actually output to a log file.
+            // Check and remove existing log file to create a new one on each boot
+            if (std::filesystem::exists("EnigmaFix.log")) {
+                std::filesystem::remove("EnigmaFix.log");
+            }
+
+            // Create basic file logger that writes to a new log file each time
+            auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("EnigmaFix.log", true);
+
+            // Combine file sink and console sink (if enabled) in a multi-sink logger
+            std::vector<spdlog::sink_ptr> sinks { file_sink };
+        }
+        catch (const spdlog::spdlog_ex& ex) {
+            std::cout << "Log initialization failed: " << ex.what() << std::endl;
+        }
         spdlog::info("Reading Config...");
         cout.flush();
         cout.clear();
@@ -163,6 +182,23 @@ namespace EnigmaFix {
         if (PlayerSettingsConf.MS.EnableConsoleLog) {
             AllocConsole();
             freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
+
+            // Initialize spdlog with a colored console sink
+            auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+            console_sink->set_level(spdlog::level::debug);  // Set log level to debug
+            spdlog::set_default_logger(std::make_shared<spdlog::logger>("console", console_sink));
+
+            // Optional: Set a global log level and pattern
+            spdlog::set_level(spdlog::level::debug);  // Set global log level
+
+            // Optional: Customize the log pattern (timestamp, log level, message)
+            spdlog::set_pattern("[%m/%d/%Y - %I:%M:%S%p] [%^%l%$] [thread %t] %v");
+
+            // Log initial message
+            spdlog::info("Console logging initialized.");
+
+            // Log initial message indicating successful initialization
+            spdlog::info("Logger initialized successfully.");
         }
 
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
