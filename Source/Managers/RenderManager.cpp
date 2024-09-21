@@ -236,6 +236,12 @@ bool srResize(ID3D11DeviceContext* pContext)
     return false;
 }
 
+// Resizes constant buffers
+bool cbResize(ID3D11DeviceContext* pContext)
+{
+    
+}
+
 namespace EnigmaFix {
     // A hook that contains the needed logic to resize the framebuffer whenever the game resolution changes.
     HRESULT __stdcall RenderManager::hkResizeBuffers(IDXGISwapChain *pSwapChain, UINT BufferCount, UINT Width, UINT Height, DXGI_FORMAT NewFormat, UINT SwapChainFlags)
@@ -360,27 +366,27 @@ namespace EnigmaFix {
                 }
                 case DXGI_FORMAT_R16G16_FLOAT: { // ImageSpaceAO and ImageSpaceCrossBilateralH (SSAO and Horizontal SSAO Blurring) Render Targets
                     // Checks for render targets half the size of the current in-game resolution.
-                    spdlog::info("Found ImageSpaceAO and ImageSpaceCrossBilateralH Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    spdlog::info("Found ImageSpaceAO and ImageSpaceCrossBilateralH Render Targets. Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     break;
                 }
                 case DXGI_FORMAT_R8_UNORM: { // ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2
-                    spdlog::info("Found ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2 Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    spdlog::info("Found ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2 Render Targets. Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     break;
                 }
                 case DXGI_FORMAT_R16G16B16A16_UNORM: { // DownsampleGBuffer0, which is used as an input for ImageSpaceReflection
-                    spdlog::info("Found DownsampleGBuffer0 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    spdlog::info("Found DownsampleGBuffer0 Render Target. Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     break;
                 }
                 case DXGI_FORMAT_R32_FLOAT: { // CompositeDepthForRLR and ImageSpaceHiZ, which is used as an input for ImageSpaceReflection
-                    spdlog::info("Found CompositeDepthForRLR and ImageSpaceHiZ Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    spdlog::info("Found CompositeDepthForRLR and ImageSpaceHiZ Render Targets. Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     break;
                 }
                 case DXGI_FORMAT_R11G11B10_FLOAT: { // ImageSpaceReflectionOutput1
-                    spdlog::info("Found ImageSpaceReflectionOutput1 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    spdlog::info("Found ImageSpaceReflectionOutput1 Render Target. Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                     break;
                 }
@@ -391,7 +397,6 @@ namespace EnigmaFix {
             // TODO: Figure out how to grab the yebismizuchi2 set of calls using the ID3DUserDefinedAnnotation system, so we can more accurately adjust these.
             // TODO: We need to find a way to get this so it can work with resolutions lower than 1920x1080 too, because it will still glitch out with resolutions lower than that.
             if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) { // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
-                spdlog::info("Internal resolution higher than 1920x1080. Running checks for certain render targets");
                 switch (pDesc->Format) {
                     case DXGI_FORMAT_R16G16B16A16_TYPELESS: {
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
@@ -399,6 +404,7 @@ namespace EnigmaFix {
                         resizeRt(pDesc,  480,  270, (InternalHorizontalRes /  4), (InternalVerticalRes /  4));
                         resizeRt(pDesc,  240,  135, (InternalHorizontalRes /  8), (InternalVerticalRes /  8));
                         resizeRt(pDesc,  192,  108, (InternalHorizontalRes / 10), (InternalVerticalRes / 10));
+                        break;
                     }
                     case DXGI_FORMAT_R11G11B10_FLOAT: {
                         resizeRt(pDesc, 384, 216, (InternalHorizontalRes /   5), (InternalVerticalRes /   5));
@@ -411,17 +417,23 @@ namespace EnigmaFix {
                         resizeRt(pDesc,  12,   7, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
                         resizeRt(pDesc,  12,   8, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
                         resizeRt(pDesc,   6,   4, (InternalHorizontalRes / 320), (InternalVerticalRes / 320));
+                        break;
                     }
                     case DXGI_FORMAT_R24G8_TYPELESS: {
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                        break;
                     }
                     case DXGI_FORMAT_B8G8R8A8_UNORM: {
+                        // The pause menu background effect that occurs after the "mizuchi-copyback" tagged drawcall.
+                        spdlog::info("Found Pause Menu Background Render Target (After 'mizuchi-copyback'). Changing resolution from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, InternalHorizontalRes, InternalVerticalRes);
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                        break;
                     }
                     // TODO: Fix this. It's not running.
                     case DXGI_FORMAT_R8G8B8A8_UNORM: { // The pause menu background effect that occurs after "yebismizuchi" tagged drawcalls.
-                        spdlog::info("Found Pause Menu Background Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                        spdlog::info("Found Pause Menu Background Render Target (After 'yebismizuchi'). Changing resolution from from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, InternalHorizontalRes, InternalVerticalRes);
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                        break;
                     }
                 }
             }

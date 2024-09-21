@@ -19,7 +19,7 @@ This seemingly goes on for a while for some reason (It's into the thousands coun
 ![[RT_06.png]](../Assets/Rendering/RT_06.png)
 
 
-So there's a DrawIndexed call after the "yebismizuchi2" section (Where post-processing is ran), which has a CBV (IIRC, a command buffer) that contains a gWorld float 4x4 property that contains ``1920.0`` and ``1080.0`` float variables inside.
+So there's a DrawIndexed call after the "yebismizuchi2" section (Where post-processing is ran), which has a CBV (IIRC, a constant buffer) that contains a gWorld float 4x4 property that contains ``1920.0`` and ``1080.0`` float variables inside.
 
 So in the rasterizer desc, what is unique is that Multisampling is disabled, and depth clip is enabled.
 

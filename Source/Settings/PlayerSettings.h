@@ -86,8 +86,8 @@ namespace EnigmaFix {
             bool Tonemapping             = true;
             bool Vignette                = true;
             int  MotionBlurPreset        = 1;    // Ideally, I want a few different presets for exposure settings (short, medium, long) that can be chosen based on preference and the framerate target.
-            int  ScreenSpaceEffectsScale = 1;    // Gets divided by the SSAO and SSR logic to determine if SSAO and SSR should be full-res or not.
-            int  ShadowRes               = 8192; // Used for Render Target Resizing
+            int  ScreenSpaceEffectsScale = 2;    // Gets divided by the SSAO and SSR logic to determine if SSAO and SSR should be full-res or not.
+            int  ShadowRes               = 2048; // Used for Render Target Resizing
             int  SSAOScale               = 1;
             int  SSRScale                = 1;
         };
