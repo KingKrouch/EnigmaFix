@@ -132,10 +132,11 @@ bool vpResize(ID3D11DeviceContext* pContext)
                 D3D11_RENDER_TARGET_VIEW_DESC desc;
                 rtView->GetDesc(&desc);
                 if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT ||
-                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT ||
-                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM) {
+                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
+                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
+                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
+                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
+                    desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
                     spdlog::info("Found viewport with type {}.", DXGIFormatToString(desc.Format));
                     ID3D11Resource *rt = NULL;
                     rtView->GetResource(&rt);
@@ -202,10 +203,11 @@ bool srResize(ID3D11DeviceContext* pContext)
                 D3D11_RENDER_TARGET_VIEW_DESC desc;
                 rtView->GetDesc(&desc);
                 if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT ||
-                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT ||
-                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM) {
+                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
+                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
+                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
+                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
+                    desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
                     spdlog::info("Found scissor rect with type {}.", DXGIFormatToString(desc.Format));
                     ID3D11Resource *rt = NULL;
                     rtView->GetResource(&rt);
@@ -337,86 +339,92 @@ namespace EnigmaFix {
         int ShadowRes = PlayerSettingsRm.RS.ShadowRes;
         int ScreenSpaceEffectsScale = PlayerSettingsRm.RS.ScreenSpaceEffectsScale;
         int SSRScale = PlayerSettingsRm.RS.SSRScale;
-
         
-        // We are simply using this to update our current internal resolution for the rest of the logic.
-        // Checks for the specific texture format for CopyDeferredColor_Hist, and checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
-        // TODO: Figure out why our hook isn't fucking working. This should be working, yet it isn't doing anything.
-        if (pDesc->Format == DXGI_FORMAT_R16G16B16A16_FLOAT && (pDesc->MipLevels == 11 || pDesc->MipLevels == 12)) { // Checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
-            if (pDesc->Width != InternalHorizontalRes || pDesc->Height != InternalVerticalRes){
-                InternalVerticalRes	  = pDesc->Height;
-                InternalHorizontalRes =  pDesc->Width;
-                spdlog::info("Internal Rendering Resolution Changed To: {}x{}", InternalHorizontalRes, InternalVerticalRes);
+        // Checks to see if a render target is the current texture resource first before doing anything with it.
+        if (pDesc->BindFlags == (D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)) {
+            // We are simply using this to update our current internal resolution for the rest of the logic.
+            // Checks for the specific texture format for CopyDeferredColor_Hist, and checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
+            if (pDesc->Format == DXGI_FORMAT_R16G16B16A16_FLOAT && (pDesc->MipLevels == 11 || pDesc->MipLevels == 12)) { // Checks to see if it has twelve mipmaps, if so, we got our suspect render target. 11 only works with resolutions below 1440p, while 12 only works with anything higher than 1080p.
+                if (pDesc->Width != InternalHorizontalRes || pDesc->Height != InternalVerticalRes){
+                    InternalVerticalRes	  = pDesc->Height;
+                    InternalHorizontalRes =  pDesc->Width;
+                    spdlog::info("Internal Rendering Resolution Changed To: {}x{}", InternalHorizontalRes, InternalVerticalRes);
+                }
             }
-        }
-
-        // Do our shadow, ambient occlusion, and SSR patches first.
-        // TODO: Figure out a way of checking this based on the game, as DERQ2 and the other Mizuchi games probably are using a modified version of the engine, so it probably does this a little differently.
-        switch (pDesc->Format) { // For some weird reason, this switch statement won't detect SSAO or Screen Space Reflections unless I prioritize them.
-            case DXGI_FORMAT_R32_TYPELESS: { // This checks for the R32_TYPELESS format which is used for shadows
-                spdlog::info("Found Shadow Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, 2048, 2048, ShadowRes, ShadowRes);
-                break;
-            }
-            case DXGI_FORMAT_R16G16_FLOAT: { // ImageSpaceAO and ImageSpaceCrossBilateralH (SSAO and Horizontal SSAO Blurring) Render Targets
-                // Checks for render targets half the size of the current in-game resolution.
-                spdlog::info("Found ImageSpaceAO and ImageSpaceCrossBilateralH Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
-                break;
-            }
-            case DXGI_FORMAT_R8_UNORM: { // ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2
-                spdlog::info("Found ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2 Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
-                break;
-            }
-            case DXGI_FORMAT_R16G16B16A16_UNORM: { // DownsampleGBuffer0, which is used as an input for ImageSpaceReflection
-                spdlog::info("Found DownsampleGBuffer0 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
-                break;
-            }
-            case DXGI_FORMAT_R32_FLOAT: { // CompositeDepthForRLR and ImageSpaceHiZ, which is used as an input for ImageSpaceReflection
-                spdlog::info("Found CompositeDepthForRLR and ImageSpaceHiZ Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
-                break;
-            }
-            case DXGI_FORMAT_R11G11B10_FLOAT: { // ImageSpaceReflectionOutput1
+            
+            // Do our shadow, ambient occlusion, and SSR patches first.
+            // TODO: Figure out a way of checking this based on the game, as DERQ2 and the other Mizuchi games probably are using a modified version of the engine, so it probably does this a little differently.
+            switch (pDesc->Format) { // For some weird reason, this switch statement won't detect SSAO or Screen Space Reflections unless I prioritize them.
+                case DXGI_FORMAT_R32_TYPELESS: { // This checks for the R32_TYPELESS format which is used for shadows
+                    spdlog::info("Found Shadow Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    resizeRt(pDesc, 2048, 2048, ShadowRes, ShadowRes);
+                    break;
+                }
+                case DXGI_FORMAT_R16G16_FLOAT: { // ImageSpaceAO and ImageSpaceCrossBilateralH (SSAO and Horizontal SSAO Blurring) Render Targets
+                    // Checks for render targets half the size of the current in-game resolution.
+                    spdlog::info("Found ImageSpaceAO and ImageSpaceCrossBilateralH Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
+                    break;
+                }
+                case DXGI_FORMAT_R8_UNORM: { // ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2
+                    spdlog::info("Found ImageSpaceCrossBilateralV and ImageSpaceReflectionOutput2 Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
+                    break;
+                }
+                case DXGI_FORMAT_R16G16B16A16_UNORM: { // DownsampleGBuffer0, which is used as an input for ImageSpaceReflection
+                    spdlog::info("Found DownsampleGBuffer0 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
+                    break;
+                }
+                case DXGI_FORMAT_R32_FLOAT: { // CompositeDepthForRLR and ImageSpaceHiZ, which is used as an input for ImageSpaceReflection
+                    spdlog::info("Found CompositeDepthForRLR and ImageSpaceHiZ Render Targets. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                    resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
+                    break;
+                }
+                case DXGI_FORMAT_R11G11B10_FLOAT: { // ImageSpaceReflectionOutput1
                     spdlog::info("Found ImageSpaceReflectionOutput1 Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
-                resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
-                break;
+                    resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
+                    break;
+                }
             }
-        }
 
-        // TODO: Need to decouple this from the resolution setting. Ideally, the post-processing should be changed based on the internal rendering resolution rather than the user decided resolution.
-        // As we do plan on patching the in-game resolution option separately from the reported internal resolution, and the reported internal resolution should change as a result.
-        // TODO: Figure out how to grab the yebismizuchi2 set of calls using the ID3DUserDefinedAnnotation system, so we can more accurately adjust these.
-        // TODO: We need to find a way to get this so it can work with resolutions lower than 1920x1080 too, because it will still glitch out with resolutions lower than that.
-        if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
-        {
-            switch (pDesc->Format) {
-                case DXGI_FORMAT_R16G16B16A16_TYPELESS: {
-                    resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
-                    resizeRt(pDesc,  960,  540, (InternalHorizontalRes /  2), (InternalVerticalRes /  2));
-                    resizeRt(pDesc,  480,  270, (InternalHorizontalRes /  4), (InternalVerticalRes /  4));
-                    resizeRt(pDesc,  240,  135, (InternalHorizontalRes /  8), (InternalVerticalRes /  8));
-                    resizeRt(pDesc,  192,  108, (InternalHorizontalRes / 10), (InternalVerticalRes / 10));
-                }
-                case DXGI_FORMAT_R11G11B10_FLOAT: {
-                    resizeRt(pDesc, 384, 216, (InternalHorizontalRes /   5), (InternalVerticalRes /   5));
-                    resizeRt(pDesc, 320, 180, (InternalHorizontalRes /   6), (InternalVerticalRes /   6));
-                    resizeRt(pDesc, 192, 108, (InternalHorizontalRes /  10), (InternalVerticalRes /  10));
-                    resizeRt(pDesc,  96,  54, (InternalHorizontalRes /  20), (InternalVerticalRes /  20));
-                    resizeRt(pDesc,  48,  28, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
-                    resizeRt(pDesc,  48,  27, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
-                    resizeRt(pDesc,  24,  14, (InternalHorizontalRes /  80), (InternalVerticalRes /  80));
-                    resizeRt(pDesc,  12,   7, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
-                    resizeRt(pDesc,  12,   8, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
-                    resizeRt(pDesc,   6,   4, (InternalHorizontalRes / 320), (InternalVerticalRes / 320));
-                }
-                case DXGI_FORMAT_R24G8_TYPELESS: {
-                    resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
-                }
-                case DXGI_FORMAT_B8G8R8A8_UNORM: {
-                    resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+            // TODO: Need to decouple this from the resolution setting. Ideally, the post-processing should be changed based on the internal rendering resolution rather than the user decided resolution.
+            // As we do plan on patching the in-game resolution option separately from the reported internal resolution, and the reported internal resolution should change as a result.
+            // TODO: Figure out how to grab the yebismizuchi2 set of calls using the ID3DUserDefinedAnnotation system, so we can more accurately adjust these.
+            // TODO: We need to find a way to get this so it can work with resolutions lower than 1920x1080 too, because it will still glitch out with resolutions lower than that.
+            if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) { // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
+                spdlog::info("Internal resolution higher than 1920x1080. Running checks for certain render targets");
+                switch (pDesc->Format) {
+                    case DXGI_FORMAT_R16G16B16A16_TYPELESS: {
+                        resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                        resizeRt(pDesc,  960,  540, (InternalHorizontalRes /  2), (InternalVerticalRes /  2));
+                        resizeRt(pDesc,  480,  270, (InternalHorizontalRes /  4), (InternalVerticalRes /  4));
+                        resizeRt(pDesc,  240,  135, (InternalHorizontalRes /  8), (InternalVerticalRes /  8));
+                        resizeRt(pDesc,  192,  108, (InternalHorizontalRes / 10), (InternalVerticalRes / 10));
+                    }
+                    case DXGI_FORMAT_R11G11B10_FLOAT: {
+                        resizeRt(pDesc, 384, 216, (InternalHorizontalRes /   5), (InternalVerticalRes /   5));
+                        resizeRt(pDesc, 320, 180, (InternalHorizontalRes /   6), (InternalVerticalRes /   6));
+                        resizeRt(pDesc, 192, 108, (InternalHorizontalRes /  10), (InternalVerticalRes /  10));
+                        resizeRt(pDesc,  96,  54, (InternalHorizontalRes /  20), (InternalVerticalRes /  20));
+                        resizeRt(pDesc,  48,  28, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
+                        resizeRt(pDesc,  48,  27, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
+                        resizeRt(pDesc,  24,  14, (InternalHorizontalRes /  80), (InternalVerticalRes /  80));
+                        resizeRt(pDesc,  12,   7, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
+                        resizeRt(pDesc,  12,   8, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
+                        resizeRt(pDesc,   6,   4, (InternalHorizontalRes / 320), (InternalVerticalRes / 320));
+                    }
+                    case DXGI_FORMAT_R24G8_TYPELESS: {
+                        resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                    }
+                    case DXGI_FORMAT_B8G8R8A8_UNORM: {
+                        resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                    }
+                    // TODO: Fix this. It's not running.
+                    case DXGI_FORMAT_R8G8B8A8_UNORM: { // The pause menu background effect that occurs after "yebismizuchi" tagged drawcalls.
+                        spdlog::info("Found Pause Menu Background Render Target. Changing resolution from {} to {}.", pDesc->Width, ShadowRes);
+                        resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
+                    }
                 }
             }
         }
@@ -428,8 +436,7 @@ namespace EnigmaFix {
     {
         bool preDraw = false;
 
-        if (IndexCount == 3 && StartIndexLocation == 0 && BaseVertexLocation == 0) {
-            spdlog::info("Found draw call (DrawIndexed) with an index count of 3. Attempting to resize viewport and scissor rects...");
+        if ((IndexCount == 3 || IndexCount == 4) && StartIndexLocation == 0 && BaseVertexLocation == 0) { // NOTE: For some reason, some render targets have three indexes.
             preDraw = vpResize(pContext) && srResize(pContext);
         }
         // Checks if both the viewports and scissor rects haven't been resized, and then return oDrawIndexed. I may need to find a better way of doing this to account for one not passing.
@@ -443,8 +450,7 @@ namespace EnigmaFix {
     HRESULT __stdcall RenderManager::hkDraw(ID3D11DeviceContext *pContext, UINT VertexCount, UINT StartVertexLocation)
     {
         bool preDraw = false;
-        if (VertexCount == 3 && StartVertexLocation == 0) {
-            spdlog::info("Found draw call (DrawIndexed) with an index count of 3. Attempting to resize viewport and scissor rects...");
+        if ((VertexCount == 3 || VertexCount == 4) && StartVertexLocation == 0) { // NOTE: For some reason, some render targets have three vertices. Some have four.
             preDraw = vpResize(pContext) && srResize(pContext);
         }
         if (!preDraw) {
@@ -457,6 +463,7 @@ namespace EnigmaFix {
         // Starts Hooking
         bool InitHook = false;
         do {
+            SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2); // TODO: See if this works for fixing the DPI problem.
             // TODO: Figure out how to fix the game's DPI scaling issues automatically.
             if (init(RenderType::D3D11) == Status::Success) {
                 // Binds the function we will be using to get imgui to draw on-screen.
