@@ -33,9 +33,13 @@ set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CM
 set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
 
-# Set a definition for a debug build through CMake.
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+# Set a definition for a debug build through CMake. Also includes GDB debugging information.
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
+
+# Set compile flags for release builds, this should strip the debug symbols and optimizes it.
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -s")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -s")
 
 ## Setup Boost (Still need to sort out the error regarding "the target platform not supporting dynamic linking"
 #find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
@@ -207,6 +211,7 @@ target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
 set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode")
+# Renames our output to an ASI extension for use with Ultimate ASI Loader.
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
 ## Now we delete any miscellaneous .a static library files for release builds, as we don't need them.
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
