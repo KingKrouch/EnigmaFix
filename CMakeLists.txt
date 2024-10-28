@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.21)
 # Set the Project Name.
 set(PROJECT_NAME                EnigmaFix)
 # Set the name of the target operating system.
@@ -32,6 +32,7 @@ set(CMAKE_BUILD_FILES_DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/Intermediate/${CM
 # Set our compile method to Ninja.
 set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_C_STANDARD   23)
 
 # Set a definition for a debug build through CMake. Also includes GDB debugging information.
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
