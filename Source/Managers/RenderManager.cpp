@@ -239,7 +239,7 @@ bool srResize(ID3D11DeviceContext* pContext)
 // Resizes constant buffers
 bool cbResize(ID3D11DeviceContext* pContext)
 {
-    
+    return false;
 }
 
 namespace EnigmaFix {
