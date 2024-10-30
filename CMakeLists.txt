@@ -102,7 +102,7 @@ add_library(imguibackends STATIC
         ${IMGUI_SOURCE_DIR}/backends/imgui_impl_win32.h
 )
 ### Include the ImGui header files with the ImGuiBackends, as we don't want to manually modify the includes to add a "../".
-target_include_directories(imguibackends PRIVATE ${IMGUI_SOURCE_DIR})
+target_include_directories(imguibackends PUBLIC ${IMGUI_SOURCE_DIR})
 target_link_libraries(imguibackends d3dcompiler dwmapi)
 ### We then finally link together ImGui and ImGuiBackends, so they're dependent on each other.
 target_link_libraries(imgui imguibackends)
