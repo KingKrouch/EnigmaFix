@@ -5,22 +5,22 @@ set(PROJECT_NAME                EnigmaFix)
 set(CMAKE_SYSTEM_NAME           Windows)
 
 if (UNIX) # If compiling on Linux, manually configure MingW-64.
-    # Try to get DISTRO_ID by checking for NixOS in /etc/os-release
+    # Try to get NAME by checking for NixOS in /etc/os-release
     execute_process(
-            COMMAND sh -c "grep ^ID= /etc/os-release | cut -d '=' -f 2 | tr -d '\"'"
-            OUTPUT_VARIABLE DISTRO_ID
+            COMMAND sh -c "grep ^NAME= /etc/os-release | cut -d '=' -f 2 | tr -d '\"'"
+            OUTPUT_VARIABLE NAME
             ERROR_QUIET
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-    # Check if DISTRO_ID is "nixos"
-    if(DISTRO_ID STREQUAL "nixos")
+    # Check if NAME is "nixos"
+    if(NAME STREQUAL "NixOS")
         message(STATUS "This system is NixOS.")
         # TODO: Add the necessary root path and link directories for NixOS.
     else()
         # Set the Toolchain to MinGW on Linux.
         set(CMAKE_FIND_ROOT_PATH    /usr/x86_64-w64-mingw32)
         link_directories(${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/lib) # TODO: Fix to also work with MinGW on Windows.
-        message(STATUS "This system is not NixOS. It is: ${DISTRO_ID}")
+        message(STATUS "This system is not NixOS. It is: ${NAME}")
     endif()
     set(CMAKE_C_COMPILER        x86_64-w64-mingw32-gcc)
     set(CMAKE_CXX_COMPILER      x86_64-w64-mingw32-g++)
