@@ -62,9 +62,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -s")
 # Include Boost directories
 #include_directories(${Boost_INCLUDE_DIRS})
 
-# Set up our ThirdParty libraries
-include(FetchContent)
-
 ## SafetyHook (With Zydis)
 option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" ON)
 ### Pass the option to the compiler
@@ -72,36 +69,18 @@ if(SAFETYHOOK_FETCH_ZYDIS)
     add_definitions(-DSAFETYHOOK_FETCH_ZYDIS)
 endif()
 set(SAFETYHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SafetyHook")
-message(STATUS "Fetching SafetyHook...")
-FetchContent_Declare(
-        SafetyHook
-        GIT_REPOSITORY "https://github.com/cursey/safetyhook.git"
-        GIT_TAG "origin/main"
-        SOURCE_DIR "${SAFETYHOOK_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(SafetyHook)
+message(STATUS "Using SafetyHook from submodule...")
+add_subdirectory("${SAFETYHOOK_SOURCE_DIR}")
 
 ## SpdLog
 set(SPDLOG_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/SpdLog")
-message(STATUS "Fetching SpdLog...")
-FetchContent_Declare(
-        SpdLog
-        GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
-        GIT_TAG "origin/v1.x"
-        SOURCE_DIR "${SPDLOG_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(SpdLog)
+message(STATUS "Using SpdLog from submodule...")
+add_subdirectory("${SPDLOG_SOURCE_DIR}")
+target_include_directories(spdlog PRIVATE "${SPDLOG_SOURCE_DIR}/include")
 
 ## ImGui
 set(IMGUI_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/ImGui")
-message(STATUS "Fetching ImGui...")
-FetchContent_Declare(
-    ImGui
-    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
-    GIT_TAG "origin/master"
-    SOURCE_DIR "${IMGUI_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(ImGui)
+message(STATUS "Using ImGui from submodule...")
 add_library(imgui STATIC
         ${IMGUI_SOURCE_DIR}/imgui.cpp
         ${IMGUI_SOURCE_DIR}/imgui.h
@@ -123,68 +102,32 @@ target_link_libraries(imguibackends d3dcompiler dwmapi)
 target_link_libraries(imgui imguibackends)
 
 ## Kiero
-set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero")
-message(STATUS "Fetching Kiero...")
-FetchContent_Declare(
-        Kiero
-        GIT_REPOSITORY "https://github.com/KingKrouch/Kiero-EnigmaFix.git"
-        GIT_TAG "origin/master"
-        SOURCE_DIR "${KIERO_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(Kiero)
-add_library(kiero STATIC
-        ${KIERO_SOURCE_DIR}/kiero.cpp
-        ${KIERO_SOURCE_DIR}/kiero.h
-)
-# NOTE: This is just in case I plan on porting SafetyHook to Kiero, rather than using MinHook.
-#target_link_libraries(kiero safetyhook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
-#target_include_directories(kiero PRIVATE "${SAFETYHOOK_SOURCE_DIR}/include")
+set(kiero_backend "D3D11")
+set(kiero_minhook ON)
+set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero-CMake")
+message(STATUS "Using SafetyHook from submodule...")
+add_subdirectory("${KIERO_SOURCE_DIR}")
 
-## MinHook (We are simply gonna fork the latest version of MinHook with it's own CMakeLists.txt rather than using the one with Kiero).
-set(MINHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook")
-message(STATUS "Fetching MinHook...")
-FetchContent_Declare(
-        MinHook
-        GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
-        GIT_TAG "origin/master"
-        SOURCE_DIR "${MINHOOK_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(MinHook)
-target_link_libraries(kiero minhook) # Include MinHook with Kiero, so we can just have it use that version instead of it's own.
-target_include_directories(kiero PRIVATE "${MINHOOK_SOURCE_DIR}/include")
+## MinHook (Using a fork of MinHook)
+#set(MINHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook")
+#message(STATUS "Using MinHook from submodule...")
+#add_subdirectory("${MINHOOK_SOURCE_DIR}")
+#target_link_libraries(kiero minhook) # Link MinHook with Kiero
+#target_include_directories(kiero PRIVATE "${MINHOOK_SOURCE_DIR}/include")
 
 ## IniPP
 set(INIPP_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/IniPP")
-message(STATUS "Fetching IniPP...")
-FetchContent_Declare(
-        IniPP
-        GIT_REPOSITORY "https://github.com/mcmtroffaes/inipp.git"
-        GIT_TAG "origin/develop"
-        SOURCE_DIR "${INIPP_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(IniPP)
+message(STATUS "Using IniPP from submodule...")
+add_subdirectory("${INIPP_SOURCE_DIR}")
 
 ## JSON
 set(JSON_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/JSON")
-message(STATUS "Fetching JSON...")
-FetchContent_Declare(
-        JSON
-        GIT_REPOSITORY "https://github.com/nlohmann/json.git"
-        GIT_TAG "origin/develop"
-        SOURCE_DIR "${JSON_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(JSON)
+message(STATUS "Using JSON from submodule...")
+add_subdirectory("${JSON_SOURCE_DIR}")
 
 ## STB
 set(STB_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/STB")
-message(STATUS "Fetching STB...")
-FetchContent_Declare(
-        STB
-        GIT_REPOSITORY "https://github.com/nothings/stb.git"
-        GIT_TAG "origin/master"
-        SOURCE_DIR "${STB_SOURCE_DIR}"
-)
-FetchContent_MakeAvailable(STB)
+message(STATUS "Using STB from submodule...")
 add_library(stb STATIC
         ${STB_SOURCE_DIR}/stb_image.h
 )
