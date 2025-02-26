@@ -38,6 +38,8 @@ For Arch Linux, the process should be:
 
 **NOTE:** If you remove "sudo", the Arch Linux instructions should also apply to MSYS2.
 
+**NOTE:** For NixOS, you shouldn't need any extra dependencies. Follow the build instructions.
+
 ### Recommendations:
 * [JetBrains CLion](https://www.jetbrains.com/clion/) *(You can also use [Visual Studio](https://visualstudio.microsoft.com/vs/) to edit and compile the source code, assuming you install it with the C++ CMake tools for Windows component)*
 * [Windows Subsystem for Linux _(If using Windows)_](https://ubuntu.com/wsl)
@@ -50,6 +52,8 @@ Assuming you have the development environment set up, you can follow these steps
 1. `git clone https://github.com/KingKrouch/EnigmaFix --recursive`
 2. `cd ./EnigmaFix`
 3. Run either `./Build_Debug.sh` or `./Build_Release.sh` _(depending on what build type you want)_
+
+**NOTE:** If you are using NixOS, you can follow along with these instructions or run this command ``NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"Debug"'`` to build a debug release. If you want to compile a release build, just replace ``"Debug"`` with ``"Release"``.
 
 **NOTE:** *If you have trouble running the build scripts, running `sudo chmod +x ./Build_Debug.sh && sudo chmod +x ./Build_Release.sh` should fix the problem.*
 <br><br>**VS USERS:** If you are using Visual Studio:
