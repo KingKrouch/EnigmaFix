@@ -90,10 +90,10 @@ namespace EnigmaFix {
         }
         if (::Begin("Startup Overlay", &p_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove))
         {
-            Text(LocUI.Strings.startupWindowWelcome);
-            Text(LocUI.Strings.startupWindowInputPrompt);
+            Text("%s", LocUI.Strings.startupWindowWelcome);
+            Text("%s", LocUI.Strings.startupWindowInputPrompt);
             Separator();
-            Text(LocUI.Strings.startupWindowCrackWarning);
+            Text("%s", LocUI.Strings.startupWindowCrackWarning);
         }
         End();
     }
@@ -103,26 +103,26 @@ namespace EnigmaFix {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
             ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2(LogoWidth, LogoHeight));
-            Text(LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
+            Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
             Separator();
             Text("(C) 2021 Bryce Q.");
-            Text(LocUI.Strings.enigmaFixLicense);
-            Text(LocUI.Strings.donations);
+            Text("%s", LocUI.Strings.enigmaFixLicense);
+            Text("%s", LocUI.Strings.donations);
             Separator();
-            Text(LocUI.Strings.specialThanksTo);
-            Text(LocUI.Strings.specialThanksLine);
-            Text(LocUI.Strings.specialThanksLine2);
+            Text("%s", LocUI.Strings.specialThanksTo);
+            Text("%s", LocUI.Strings.specialThanksLine);
+            Text("%s", LocUI.Strings.specialThanksLine2);
             Separator();
-            Text(LocUI.Strings.thirdPartySoftware);
-            Text(LocUI.Strings.imguiLicense);
-            Text(LocUI.Strings.kieroHookLicense);
-            Text(LocUI.Strings.ghFearLicense);
-            Text(LocUI.Strings.thirteenAGIniLicense);
-            Text(LocUI.Strings.thirteenAGAsiLicense);
-            Text(LocUI.Strings.minHookLicense);
-            Text(LocUI.Strings.modUtilsLicense);
-            Text(LocUI.Strings.fontsLicense);
-            Text(LocUI.Strings.fontAwesomeLicense);
+            Text("%s", LocUI.Strings.thirdPartySoftware);
+            Text("%s", LocUI.Strings.imguiLicense);
+            Text("%s", LocUI.Strings.kieroHookLicense);
+            Text("%s", LocUI.Strings.ghFearLicense);
+            Text("%s", LocUI.Strings.thirteenAGIniLicense);
+            Text("%s", LocUI.Strings.thirteenAGAsiLicense);
+            Text("%s", LocUI.Strings.minHookLicense);
+            Text("%s", LocUI.Strings.modUtilsLicense);
+            Text("%s", LocUI.Strings.fontsLicense);
+            Text("%s", LocUI.Strings.fontAwesomeLicense);
             Separator();
             if (Button(LocUI.Strings.button_Close))
             {
@@ -301,13 +301,13 @@ namespace EnigmaFix {
             // Since I can't put this in a Switch/Case statement apparently, the YandereDev-tier "IF/ELSE" statement shenanigans will have to do for now.
             if (GetIO().Framerate >= 60.0f)
             {
-                Text(LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateGood, "%.3f ms", 1000.0f / GetIO().Framerate);
-                Text(LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateGood, "%.1f FPS", GetIO().Framerate);
+                Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateGood, "%.3f ms", 1000.0f / GetIO().Framerate);
+                Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateGood, "%.1f FPS", GetIO().Framerate);
             }
             else
             {
-                Text(LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateBad, "%.3f ms", 1000.0f / GetIO().Framerate);
-                Text(LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateBad, "%.1f FPS", GetIO().Framerate);
+                Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateBad, "%.3f ms", 1000.0f / GetIO().Framerate);
+                Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateBad, "%.1f FPS", GetIO().Framerate);
             }
         }
         if (CollapsingHeader(LocUI.Strings.collapsingHeader_Rendering), ImGuiTreeNodeFlags_Leaf)
@@ -384,7 +384,7 @@ namespace EnigmaFix {
 
     void UIManager::showExitPrompt()
     {
-        Text(LocUI.Strings.exitTextPrompt);
+        Text("%s", LocUI.Strings.exitTextPrompt);
         Separator();
 
         PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
