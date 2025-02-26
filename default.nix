@@ -2,7 +2,9 @@
 
 let
   # Import the cross compilation environment for mingw-w64 targeting 64-bit Windows
-  pkgsCross = import <nixpkgs> { crossSystem = { config = "x86_64-w64-mingw32"; }; };
+  pkgsCross = import <nixpkgs> {
+    crossSystem = { config = "x86_64-w64-mingw32"; };
+  };
   stdenvCross = pkgsCross.stdenv;  # Reference stdenv from pkgsCross
 in
 stdenvCross.mkDerivation rec {
@@ -11,20 +13,28 @@ stdenvCross.mkDerivation rec {
   src = ./.;  # Use the current directory as the source
 
   buildInputs = [
-    pkgs.git
-    pkgs.cmake
-    pkgs.ninja
-    pkgs.meson
-    pkgs.pkgsCross.mingwW64.gcc
+    pkgs.pkgsCross.mingwW64.buildPackages.gcc
     pkgs.boost
   ];
 
-  buildPhase = ''
+  nativeBuildInputs = with pkgs; [
+    cmake
+    ninja
+    git
+    meson
+  ];
+
+  configurePhase = "
+    rm -rf Intermediate Source/ThirdParty
     cmake -B Intermediate/${buildType} -G Ninja -DCMAKE_BUILD_TYPE=${buildType}
+  ";
+
+  buildPhase = ''
+    cd Intermediate/${buildType} && ninja
   '';
 
   installPhase = ''
-    cd Intermediate/${buildType} && ninja
+
   '';
 
   meta = with pkgsCross.lib; {  # Use pkgsCross.lib here

@@ -16,6 +16,7 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     if(NAME STREQUAL "NixOS")
         message(STATUS "This system is NixOS.")
         # TODO: Add the necessary root path and link directories for NixOS.
+        # NOTE: We might not even need to adjust the CMAKE_FIND_ROOT_PATH on NixOS, at least with development toolchains.
     else()
         # Set the Toolchain to MinGW on Linux.
         set(CMAKE_FIND_ROOT_PATH    /usr/x86_64-w64-mingw32)
