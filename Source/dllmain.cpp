@@ -22,8 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
-#include <windows.h>
+// Internal Functionality
 #include "Managers/HookManager.h"
+// System Libraries
+#include <windows.h>
 
 auto& hkMgr = EnigmaFix::HookManager::Get(); // Declares a pointer to the HookManager singleton used to initialize hooking.
 

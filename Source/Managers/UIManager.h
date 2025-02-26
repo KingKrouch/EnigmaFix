@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ SOFTWARE.
 #ifndef ENIGMAFIX_CLION_UIMANAGER_H
 #define ENIGMAFIX_CLION_UIMANAGER_H
 
+// System Libraries
 #include <vector>
 #include <string>
 #include <iostream>

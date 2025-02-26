@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 #include "Localization.h"
 #include "../Settings/PlayerSettings.h"
 #include "tchar.h"
-#include "../ThirdParty/ImGui/imgui.h"
+#include "imgui.h"
 // System Libraries
 #include <windows.h>
 // Variables

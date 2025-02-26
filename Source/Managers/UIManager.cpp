@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
-#include <d3d11.h>
+// Internal Functionality
 #include "UIManager.h"
 #include "PluginManager.h"
 #include "PatchManager.h"
+#include "ConfigManager.h"
 #include "../Settings/PlayerSettings.h"
 #include "../Localization/Localization.h"
 #include "../Utilities/UITextureLoader.h"
-#include "../ThirdParty/ImGui/imgui.h"
-#include "ConfigManager.h"
+// System Libraries
+#include <d3d11.h>
+// Third Party Libraries
+#include "imgui.h"
+
 
 using namespace ImGui;
 using namespace EnigmaFix;

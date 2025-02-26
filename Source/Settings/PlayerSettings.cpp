@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2024 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,5 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
+// Internal Functionality
 #include "PlayerSettings.h"
+
 EnigmaFix::PlayerSettings EnigmaFix::PlayerSettings::ps_Instance; // Seemingly need this declared in PlayerSettings.cpp so a bunch of linker errors don't happen.

@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2023 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ SOFTWARE.
 #include <spdlog/sinks/basic_file_sink.h>    // support for basic file logging
 #include <spdlog/sinks/stdout_color_sinks.h> // For colored console logging
 // Variables
-
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();
 // Namespaces
 using namespace std;

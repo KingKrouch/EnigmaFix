@@ -1,5 +1,5 @@
 /**
-EnigmaFix Copyright (c) 2023 Bryce Q.
+EnigmaFix Copyright (c) 2025 Bryce Q.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,10 @@ SOFTWARE.
 #include <memory>
 // Third Party Libraries
 #include <spdlog/spdlog.h>
-#include "../ThirdParty/Kiero/kiero.h"
-#include "../ThirdParty/ImGui/imgui.h"
-#include "../ThirdParty/ImGui/backends/imgui_impl_win32.h"
-#include "../ThirdParty/ImGui/backends/imgui_impl_dx11.h"
+#include "kiero.h"
+#include "imgui.h"
+#include "backends/imgui_impl_win32.h"
+#include "backends/imgui_impl_dx11.h"
 
 // Variables
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
