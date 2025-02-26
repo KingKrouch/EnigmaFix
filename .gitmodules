@@ -1,0 +1,28 @@
+[submodule "Source/ThirdParty/SafetyHook"]
+	path = Source/ThirdParty/SafetyHook
+	url = https://github.com/cursey/safetyhook.git
+	branch = main
+[submodule "Source/ThirdParty/SpdLog"]
+	path = Source/ThirdParty/SpdLog
+	url = https://github.com/gabime/spdlog.git
+	branch = v1.x
+[submodule "Source/ThirdParty/ImGui"]
+	path = Source/ThirdParty/ImGui
+	url = https://github.com/ocornut/imgui.git
+	branch = master
+[submodule "Source/ThirdParty/Kiero-CMake"]
+	path = Source/ThirdParty/Kiero-CMake
+	url = https://github.com/Curve/kiero-cmake
+	branch = master
+[submodule "Source/ThirdParty/IniPP"]
+	path = Source/ThirdParty/IniPP
+	url = https://github.com/mcmtroffaes/inipp.git
+	branch = develop
+[submodule "Source/ThirdParty/JSON"]
+	path = Source/ThirdParty/JSON
+	url = https://github.com/nlohmann/json.git
+	branch = develop
+[submodule "Source/ThirdParty/STB"]
+	path = Source/ThirdParty/STB
+	url = https://github.com/nothings/stb.git
+	branch = master
