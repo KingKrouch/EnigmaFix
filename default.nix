@@ -36,7 +36,7 @@ stdenvCross.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out
-    cp -r Binaries/Windows $out/
+    cp -r /build/EnigmaFix/Binaries/Windows $out/
   '';
 
   meta = with pkgsCross.lib; {  # Use pkgsCross.lib here
