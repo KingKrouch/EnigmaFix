@@ -63,7 +63,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -s")
 #include_directories(${Boost_INCLUDE_DIRS})
 
 ## SafetyHook (With Zydis)
-option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" ON)
+option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" OFF)
+option(SAFETYHOOK_BUILD_DOCS "Option to generate documentation" OFF)
 ### Pass the option to the compiler
 if(SAFETYHOOK_FETCH_ZYDIS)
     add_definitions(-DSAFETYHOOK_FETCH_ZYDIS)
