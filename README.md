@@ -84,7 +84,7 @@ Add ``WINEDLLOVERRIDES="dinput8=n,b" %command%`` to the Steam launch options aft
 
 ## Legal Stuff
 
-**EnigmaFix (c) 2024 Bryce Q.**
+**EnigmaFix (c) 2025 Bryce Q.**
 
 **Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
