@@ -17,7 +17,7 @@ jobs:
         nix_path: nixpkgs=channel:nixos-unstable
 
     - name: Initialize Submodules
-      run: git submodule init && git submodule update
+      run: git submodule update --init --recursive && cd Source/ThirdParty/Kiero-CMake && git submodule update --init --recursive && cd ../../..
 
     - name: Run Nix-Build
       run: NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"${{env.BUILD_TYPE}}"'
