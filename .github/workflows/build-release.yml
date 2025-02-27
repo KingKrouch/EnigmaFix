@@ -20,4 +20,15 @@ jobs:
       run: git submodule init && git submodule update
 
     - name: Run Nix-Build
-      run: NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"${{ env.BUILD_TYPE }}"'
+      run: NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"${{env.BUILD_TYPE}}"'
+
+    - name: Package Windows Binaries
+      run: |
+        mkdir -p artifacts
+        zip -r EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip result/Binaries/Windows/* -x "*.a"
+
+    - name: Upload Windows Binaries
+      uses: actions/upload-artifact@v4
+      with:
+        name: Enigmafix-Windows-Build-${{env.BUILD_TYPE}}
+        path: Enigmafix-Windows-${{env.BUILD_TYPE}}.zip
