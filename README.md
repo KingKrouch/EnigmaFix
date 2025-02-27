@@ -26,15 +26,15 @@
 
 If you are using Ubuntu WSL, you can install the required dependencies using:
 
-`sudo apt install git cmake ninja-build meson mingw-w64\* g++ gcc build-essential gdb libboost-all-dev -y`
+`sudo apt install git cmake ninja-build meson mingw-w64\* g++ gcc build-essential gdb libboost-all-dev libzydis-dev zydis-tools -y`
 
 For Fedora, the process would be:
 
-`sudo dnf install git cmake ninja-build meson mingw64-\* g++ gcc boost gdb -y`
+`sudo dnf install git cmake ninja-build meson mingw64-\* g++ gcc boost zydis zydis-devel zydis-doc zydis-tools gdb -y`
 
 For Arch Linux, the process should be:
 
-`sudo pacman -S ninja cmake meson gcc mingw-w64-toolchain boost gdb --noconfirm`
+`sudo pacman -S ninja cmake meson gcc mingw-w64-toolchain boost zydis gdb --noconfirm`
 
 **NOTE:** If you remove "sudo", the Arch Linux instructions should also apply to MSYS2.
 
@@ -46,6 +46,8 @@ For Arch Linux, the process should be:
 * [MSYS2 _(If using Windows)_](https://www.msys2.org)
 
 **NOTE:** If compiling through Visual Studio, you might need to [install the Boost C++ libraries separately](https://www.boost.org/doc/libs/1_73_0/more/getting_started/windows.html#install-boost-build).
+
+Also, you might need to run ``vcpkg install zydis`` to install the Zydis library.
 
 ### Setup Instructions:
 Assuming you have the development environment set up, you can follow these steps to compile the project:

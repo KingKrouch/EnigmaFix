@@ -102,7 +102,7 @@ target_link_libraries(imguibackends d3dcompiler dwmapi)
 target_link_libraries(imgui imguibackends)
 
 ## Kiero
-set(kiero_backend "D3D11")
+set(kiero_backend "D3D11" CACHE STRING "Set Kiero backend")
 set(kiero_minhook ON)
 set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero-CMake")
 message(STATUS "Using SafetyHook from submodule...")

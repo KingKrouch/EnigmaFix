@@ -15,6 +15,7 @@ stdenvCross.mkDerivation rec {
   buildInputs = [
     pkgs.pkgsCross.mingwW64.buildPackages.gcc
     pkgs.boost
+    pkgs.zydis
   ];
 
   nativeBuildInputs = with pkgs; [
@@ -25,7 +26,7 @@ stdenvCross.mkDerivation rec {
   ];
 
   configurePhase = "
-    rm -rf Intermediate Source/ThirdParty
+    rm -rf Intermediate
     cmake -B Intermediate/${buildType} -G Ninja -DCMAKE_BUILD_TYPE=${buildType}
   ";
 
