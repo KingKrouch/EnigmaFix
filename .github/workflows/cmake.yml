@@ -25,7 +25,7 @@ jobs:
     
     - name: Install Dependencies.
       # Installs the Dependencies needed before compiling.
-      run: sudo apt install git cmake ninja-build mingw-w64\* libboost-all-dev g++-13 gcc-13 build-essential gdb -y
+      run: sudo apt install git cmake ninja-build meson mingw-w64\* g++-13 gcc-13 build-essential libboost-all-dev libzydis-dev zydis-tools -y
 
     #- name: Build Boost (For MinGW).
       #id: boost
