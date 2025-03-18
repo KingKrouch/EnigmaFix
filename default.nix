@@ -15,6 +15,7 @@ stdenvCross.mkDerivation rec {
   buildInputs = [
     pkgs.pkgsCross.mingwW64.buildPackages.gcc
     pkgs.boost
+    pkgs.nasm
   ];
 
   nativeBuildInputs = with pkgs; [
