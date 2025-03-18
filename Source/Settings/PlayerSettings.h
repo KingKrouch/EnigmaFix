@@ -65,6 +65,7 @@ namespace EnigmaFix {
             bool VSync        = false;
             int  MaxFPS       = 0;
             int  SyncInterval = 1;
+            double TargetFrameTime = 1.0 / MaxFPS;
         };
 
         struct RenderingSettings {
