@@ -14,14 +14,14 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     )
     # Check if NAME is "nixos"
     if(NAME STREQUAL "NixOS")
-        message(STATUS "This system is NixOS.")
+        message(STATUS "This system is NixOS. Root Path declaration is unnecessary.")
         # TODO: Add the necessary root path and link directories for NixOS.
         # NOTE: We might not even need to adjust the CMAKE_FIND_ROOT_PATH on NixOS, at least with development toolchains.
     else()
         # Set the Toolchain to MinGW on Linux.
         set(CMAKE_FIND_ROOT_PATH    /usr/x86_64-w64-mingw32)
         link_directories(${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/lib) # TODO: Fix to also work with MinGW on Windows.
-        message(STATUS "This system is not NixOS. It is: ${NAME}")
+        message(STATUS "This system is not NixOS. It is: ${NAME}. Root Path declaration is necessary.")
     endif()
     set(CMAKE_C_COMPILER        x86_64-w64-mingw32-gcc)
     set(CMAKE_CXX_COMPILER      x86_64-w64-mingw32-g++)
@@ -170,7 +170,7 @@ add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog stb
 target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog stb)
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
-set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode -Wl,--file-alignment=4096")
+set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode -Wl,-Bdynamic,--file-alignment=4096")
 # Renames our output to an ASI extension for use with Ultimate ASI Loader.
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
 ## Now we delete any miscellaneous .a static library files for release builds, as we don't need them.
