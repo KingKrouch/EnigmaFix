@@ -26,3 +26,6 @@
 	path = Source/ThirdParty/STB
 	url = https://github.com/nothings/stb.git
 	branch = master
+[submodule "Source/ThirdParty/Zydis"]
+	path = Source/ThirdParty/Zydis
+	url = https://github.com/zyantific/zydis.git
