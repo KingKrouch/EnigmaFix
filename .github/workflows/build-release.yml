@@ -21,11 +21,13 @@ jobs:
     # Afterwards, we run Nix-Build with our build type, and making sure to allow unsupported systems, for cross-compilation.
     - name: Run Nix-Build
       run: NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"${{env.BUILD_TYPE}}"'
-    # Before we wrap up, we need to package the binaries into a .ZIP archive, so we can then later upload the artifact, so it can be downloaded.
+    # Before we wrap up, we need to remove any debug symbols from the directory.
     - name: Prepare Windows Binaries
       run: |
+      if [ "${{ env.BUILD_TYPE }}" == "Debug" ] || [ "${{ env.BUILD_TYPE }}" == "RelWithDebInfo" ]; then
         cd result/Windows
         rm *.a
+      fi
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
