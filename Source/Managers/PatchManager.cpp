@@ -77,7 +77,6 @@ namespace EnigmaFix {
     }
 
     void PatchManager::RunPatches() {
-        SetProcessDPIAware(); // Fix High DPI Scaling.
         switch (PlayerSettingsPm.GameMode) {
             // NOTE: For now, we are going to work on the DERQ plugin, and then make it a template to work from with the others.
             case PlayerSettingsPm.E_GameMode::DERQ: {
