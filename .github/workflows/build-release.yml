@@ -24,10 +24,10 @@ jobs:
     # Before we wrap up, we need to remove any debug symbols from the directory.
     - name: Prepare Windows Binaries
       run: |
-      if [ "${{ env.BUILD_TYPE }}" == "Debug" ] || [ "${{ env.BUILD_TYPE }}" == "RelWithDebInfo" ]; then
-        cd result/Windows
-        rm *.a
-      fi
+        if [ "${{ env.BUILD_TYPE }}" == "Debug" ] || [ "${{ env.BUILD_TYPE }}" == "RelWithDebInfo" ]; then
+          cd result/Windows
+          rm *.a
+        fi
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
