@@ -24,11 +24,15 @@ SOFTWARE.
 #include "PatchManager.h"
 #include "../Settings/PlayerSettings.h"
 
+// Plugins
+#include "../Plugins/Plugin_DERQ.h"
+
 // Third Party Libraries
 //#include "../ThirdParty/ModUtils/MemoryMgr.h"
 #include <spdlog/spdlog.h>
 
 auto& PlayerSettingsPm = EnigmaFix::PlayerSettings::Get();
+auto& PluginDERQPm     = EnigmaFix::Plugin_DERQ::Get();
 
 // Singleton Instance
 EnigmaFix::PatchManager EnigmaFix::PatchManager::pm_Instance;
@@ -74,7 +78,16 @@ namespace EnigmaFix {
 
     void PatchManager::RunPatches() {
         switch (PlayerSettingsPm.GameMode) {
+            // NOTE: For now, we are going to work on the DERQ plugin, and then make it a template to work from with the others.
             case PlayerSettingsPm.E_GameMode::DERQ: {
+                PluginDERQPm.ResolutionPatches(BaseModule);
+                PluginDERQPm.CameraPatches(BaseModule);
+                PluginDERQPm.AspectRatioPatches(BaseModule);
+                PluginDERQPm.GraphicsSettingsPatches(BaseModule);
+                PluginDERQPm.FOVPatches(BaseModule);
+                PluginDERQPm.PhotoModePatches(BaseModule);
+                PluginDERQPm.FrameratePatches(BaseModule);
+                PluginDERQPm.UIPatches(BaseModule);
             }
             case PlayerSettingsPm.E_GameMode::DERQ2: {
             }

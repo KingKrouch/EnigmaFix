@@ -30,9 +30,8 @@ EnigmaFix::Plugin_DERQ EnigmaFix::Plugin_DERQ::pq_Instance; // Seemingly need th
 
 namespace EnigmaFix
 {
-    void Plugin_DERQ::ResolutionPatches()
+    void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
     {
-
         //int* hResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858CC);
         //int* vResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858D3);
         //int* hRes4KPtr = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858A7);
@@ -48,7 +47,7 @@ namespace EnigmaFix
         //}
     }
 
-    void Plugin_DERQ::AspectRatioPatches()
+    void Plugin_DERQ::AspectRatioPatches(HMODULE baseModule)
     {
 
         //float* objectAspectRatioPtr = (float*)((intptr_t)PatchManagerRef.BaseModule + 0x01043B30 + 0xC90);
@@ -64,12 +63,12 @@ namespace EnigmaFix
         //spdlog::info("Patched Aspect Ratio to: {}", *objectAspectRatioPtr);
     }
 
-    void Plugin_DERQ::FOVPatches()
+    void Plugin_DERQ::FOVPatches(HMODULE baseModule)
     {
 
     }
 
-    void Plugin_DERQ::UIPatches()
+    void Plugin_DERQ::UIPatches(HMODULE baseModule)
     {
 
     }
@@ -81,7 +80,7 @@ namespace EnigmaFix
         //);
     //}
 
-    void Plugin_DERQ::FrameratePatches()
+    void Plugin_DERQ::FrameratePatches(HMODULE baseModule)
     {
         //auto framerateCapFunc = Memory::PatternScan(pchMgr.BaseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44");
         //safetyhook::create_inline()
@@ -89,17 +88,17 @@ namespace EnigmaFix
         // NOTE: 8B 80 ? ? ? ? 89 44 ? ? 83 7C 24 44 ? 74 ? 83 7C 24 44 is the pattern we want to create a codecave with
     }
 
-    void Plugin_DERQ::GraphicsSettingsPatches()
+    void Plugin_DERQ::GraphicsSettingsPatches(HMODULE baseModule)
     {
 
     }
 
-    void Plugin_DERQ::CameraPatches()
+    void Plugin_DERQ::CameraPatches(HMODULE baseModule)
     {
 
     }
 
-    void Plugin_DERQ::PhotoModePatches()
+    void Plugin_DERQ::PhotoModePatches(HMODULE baseModule)
     {
 
     }

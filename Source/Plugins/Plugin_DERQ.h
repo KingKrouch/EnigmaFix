@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
+#include <windows.h>
+
 #ifndef PLUGIN_DERQ_H
 #define PLUGIN_DERQ_H
 
@@ -29,14 +31,14 @@ class Plugin_DERQ {
         static Plugin_DERQ& Get() {
             return pq_Instance;
         }
-        static void ResolutionPatches();
-        static void AspectRatioPatches();
-        static void FOVPatches();
-        static void UIPatches();
-        static void FrameratePatches();
-        static void GraphicsSettingsPatches();
-        static void CameraPatches();
-        static void PhotoModePatches();
+        static void ResolutionPatches(HMODULE baseModule);
+        static void AspectRatioPatches(HMODULE baseModule);
+        static void FOVPatches(HMODULE baseModule);
+        static void UIPatches(HMODULE baseModule);
+        static void FrameratePatches(HMODULE baseModule);
+        static void GraphicsSettingsPatches(HMODULE baseModule);
+        static void CameraPatches(HMODULE baseModule);
+        static void PhotoModePatches(HMODULE baseModule);
     private:
         Plugin_DERQ() {}
         static Plugin_DERQ pq_Instance;
