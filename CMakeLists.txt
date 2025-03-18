@@ -62,7 +62,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -s")
 # Include Boost directories
 #include_directories(${Boost_INCLUDE_DIRS})
 
-## SafetyHook (With Zydis)
+## Zydis
+set(ZYDIS_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Zydis")
+message(STATUS "Using Zydis from submodule...")
+add_subdirectory("${ZYDIS_SOURCE_DIR}")
+
+## SafetyHook
 option(SAFETYHOOK_FETCH_ZYDIS "Option to fetch Zydis" OFF)
 option(SAFETYHOOK_BUILD_DOCS "Option to generate documentation" OFF)
 ### Pass the option to the compiler
