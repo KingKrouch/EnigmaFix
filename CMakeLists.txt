@@ -49,6 +49,9 @@ set(CMAKE_GENERATOR Ninja)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD   23)
 
+# Enable NASM support.
+enable_language(ASM_NASM)
+
 # Set a definition for a debug build through CMake. Also includes GDB debugging information.
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
@@ -168,6 +171,7 @@ add_library(EnigmaFix SHARED
         Source/Utilities/UITextureLoader.h
         Source/Utilities/DXHelper.h
         Source/Utilities/DXEnums.h
+        Source/Utilities/MemoryHelper.hpp
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.

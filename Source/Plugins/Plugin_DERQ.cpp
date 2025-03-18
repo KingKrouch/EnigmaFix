@@ -22,6 +22,7 @@ SOFTWARE.
 
 // Internal Functionality
 #include "Plugin_DERQ.h"
+#include "../Utilities/MemoryHelper.hpp"
 
 // Third Party Libraries
 #include "spdlog/spdlog.h"
@@ -32,6 +33,7 @@ namespace EnigmaFix
 {
     void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
     {
+
         //int* hResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858CC);
         //int* vResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858D3);
         //int* hRes4KPtr = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858A7);
@@ -82,10 +84,16 @@ namespace EnigmaFix
 
     void Plugin_DERQ::FrameratePatches(HMODULE baseModule)
     {
-        //auto framerateCapFunc = Memory::PatternScan(pchMgr.BaseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44");
+        auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44");
+        if (framerateCapFunc) {
+            spdlog::info("Found Framerate Limiter Signature");
+        }
         //safetyhook::create_inline()
 
         // NOTE: 8B 80 ? ? ? ? 89 44 ? ? 83 7C 24 44 ? 74 ? 83 7C 24 44 is the pattern we want to create a codecave with
+        //asm volatile (
+            //"nop"
+        //);
     }
 
     void Plugin_DERQ::GraphicsSettingsPatches(HMODULE baseModule)
