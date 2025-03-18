@@ -25,7 +25,7 @@ jobs:
     - name: Package Windows Binaries
       run: |
         mkdir -p artifacts
-        zip -r EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip result/Binaries/Windows/* -x "*.a"
+        zip -r EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip result/Windows/* -x "*.a"
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
