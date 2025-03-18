@@ -47,7 +47,7 @@ namespace EnigmaFix {
     // Simple Static Functions for calling our Managers easily in a thread.
     void HookManager::pmThread()  { PatchMgr.RunPatches(); }
     void HookManager::rmThread()  { RenderMgr.InitD3D11Hook(nullptr); } // Let's see if nullptr can fix the issue with lpReserved not being passed through.
-    void HookManager::frmThread() { framerateMgr.Update(); }
+    void HookManager::frmThread() { framerateMgr.Init(); framerateMgr.Update(); }
 
     void HookManager::BeginHook() {
         spdlog::info("Reading Config File...");
@@ -57,9 +57,9 @@ namespace EnigmaFix {
         spdlog::info("Creating PatchManager Thread...");
         PatchThread     = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))pmThread,  nullptr, 0, 0); // Calls InitPatch() in a new thread on start.
         spdlog::info("Creating RenderManager Thread...");
-        RenderThread    = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))rmThread,  nullptr, 0, 0); // Calls InitD3D11Hook() in a new thread after the initPatch() thread has started.
+        RenderThread    = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))rmThread,  nullptr, 0, 0);
         spdlog::info("Creating FramerateManager Thread...");
-        FRManagerThread = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))frmThread, nullptr, 0, 0); // Calls InitD3D11Hook() in a new thread after the initPatch() thread has started.
+        FRManagerThread = (HANDLE)_beginthreadex(nullptr, 0, (unsigned(__stdcall*)(void*))frmThread, nullptr, 0, 0);
     }
 
     void HookManager::EndHook() {
