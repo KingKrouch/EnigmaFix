@@ -30,15 +30,17 @@ namespace EnigmaFix {
             return frm_Instance;
         }
         void Update();
+        void Limit();
+        void Init();
         double deltaTime = 0;
-        float msTime = 0;
+        double msTime = 0;
         float fps = 0;
         float timeOffset = 0;
     private:
         FramerateManager() {}
         static FramerateManager frm_Instance;
 
-        float originalFrTarget = 1.0f / 60.0f;
+        double originalFrTarget = 1.0f / 60.0f;
     };
 }
 

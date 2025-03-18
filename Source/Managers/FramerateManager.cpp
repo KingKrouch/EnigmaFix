@@ -22,8 +22,11 @@ SOFTWARE.
 
 // Internal Functionality
 #include "FramerateManager.h"
+#include "../Settings/PlayerSettings.h"
 // System Libraries
 #include <windows.h>
+
+auto& PlayerSettingsFrm = EnigmaFix::PlayerSettings::Get();
 
 // Singleton Instance
 EnigmaFix::FramerateManager EnigmaFix::FramerateManager::frm_Instance;
@@ -34,12 +37,15 @@ namespace EnigmaFix {
     LONG lastTime;
     LARGE_INTEGER frequency; // Frequency of the performance counter
 
-    void FramerateManager::Update() {
+    double targetFrameTime;
+
+    void FramerateManager::Update()
+    {
         QueryPerformanceFrequency(&frequency); // Get the frequency of the performance counter
         while (loop) {
             QueryPerformanceCounter(&currentTime); // Grabs the current time.
             double deltaTimeSeconds = static_cast<double>(currentTime.QuadPart - lastTime) / frequency.QuadPart;
-            msTime = float(deltaTimeSeconds) * 1000;
+            msTime = deltaTimeSeconds * 1000.0;
 
             // Avoid division by zero by checking if deltaTimeSeconds is not too small.
             if (deltaTimeSeconds > 0.000001) {
@@ -48,5 +54,25 @@ namespace EnigmaFix {
             }
             lastTime = currentTime.QuadPart;
         }
+    }
+
+    void FramerateManager::Limit()
+    {
+        LARGE_INTEGER currentTime;
+        LARGE_INTEGER prevTime;
+        QueryPerformanceCounter(&currentTime);
+
+        double elapsedTime = static_cast<double>(currentTime.QuadPart - lastTime) / frequency.QuadPart;
+        double remainingTime = targetFrameTime - elapsedTime;
+
+        if (remainingTime > 0) {
+            Sleep(static_cast<DWORD>(remainingTime * 1000.0)); // Convert seconds to milliseconds
+        }
+        QueryPerformanceCounter(&prevTime);
+    }
+
+    void FramerateManager::Init()
+    {
+        PlayerSettingsFrm.SYNC.TargetFrameTime = 1.0 / PlayerSettingsFrm.SYNC.MaxFPS;
     }
 }
