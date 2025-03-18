@@ -170,7 +170,7 @@ add_dependencies(EnigmaFix imgui kiero safetyhook inipp nlohmann_json spdlog stb
 target_link_libraries(EnigmaFix PRIVATE d3dcompiler imgui kiero safetyhook inipp nlohmann_json spdlog stb)
 #target_link_libraries(EnigmaFix d3dcompiler imgui kiero inipp ${Boost_LIBRARIES})
 ## Set up our linker flags for compiling.
-set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -municode -Wl,-Bdynamic,--file-alignment=4096")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static -municode -Wl,--file-alignment=4096")
 # Renames our output to an ASI extension for use with Ultimate ASI Loader.
 set_target_properties(EnigmaFix PROPERTIES PREFIX "" OUTPUT_NAME EnigmaFix SUFFIX ".asi")
 ## Now we delete any miscellaneous .a static library files for release builds, as we don't need them.
