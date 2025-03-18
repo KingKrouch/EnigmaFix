@@ -22,14 +22,13 @@ jobs:
     - name: Run Nix-Build
       run: NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix-build --arg buildType '"${{env.BUILD_TYPE}}"'
     # Before we wrap up, we need to package the binaries into a .ZIP archive, so we can then later upload the artifact, so it can be downloaded.
-    - name: Package Windows Binaries
+    - name: Prepare Windows Binaries
       run: |
-        mkdir -p artifacts
         cd result/Windows
-        zip -r ../../artifacts/EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip * -x "*.a"
+        rm *.a
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
       with:
         name: Enigmafix-Windows-Build-${{env.BUILD_TYPE}}
-        path: artifacts/EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip
+        path: result/Windows
