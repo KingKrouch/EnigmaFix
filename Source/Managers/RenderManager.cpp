@@ -48,8 +48,11 @@ ID3D11RenderTargetView* mainRenderTargetView;
 //// Various PlayerSettings and Localization String Accessors
 auto& PlayerSettingsRm      = EnigmaFix::PlayerSettings::Get();
 auto& LocalizationRm        = EnigmaFix::Localization::Get();
+bool UseCustomRes           = PlayerSettingsRm.RES.UseCustomRes;
 int HorizontalRes           = PlayerSettingsRm.RES.HorizontalRes;
 int VerticalRes             = PlayerSettingsRm.RES.VerticalRes;
+bool UseResolutionScale     = PlayerSettingsRm.RES.UseCustomResScale;
+int ResolutionScale         = PlayerSettingsRm.RES.CustomResScale;
 int InternalHorizontalRes   = PlayerSettingsRm.INS.InternalHorizontalRes;
 int InternalVerticalRes     = PlayerSettingsRm.INS.InternalVerticalRes;
 int ScreenSpaceEffectsScale = PlayerSettingsRm.RS.ScreenSpaceEffectsScale;
@@ -473,8 +476,7 @@ namespace EnigmaFix {
         // Starts Hooking
         bool InitHook = false;
         do {
-            SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2); // TODO: See if this works for fixing the DPI problem.
-            // TODO: Figure out how to fix the game's DPI scaling issues automatically.
+            SetProcessDPIAware(); // Fix High DPI Scaling.
             if (init(RenderType::D3D11) == Status::Success) {
                 // Binds the function we will be using to get imgui to draw on-screen.
                 kiero::bind( 8, reinterpret_cast<void**>(&oPresent),reinterpret_cast<void*>(this->hkPresent));
