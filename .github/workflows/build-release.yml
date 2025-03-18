@@ -26,10 +26,10 @@ jobs:
       run: |
         mkdir -p artifacts
         zip -r EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip result/Windows/* -x "*.a"
-        ls -l .
+        mv EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip artifacts/
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
       with:
         name: Enigmafix-Windows-Build-${{env.BUILD_TYPE}}
-        path: Enigmafix-Windows-${{env.BUILD_TYPE}}.zip
+        path: artifacts/EnigmaFix-Windows-${{env.BUILD_TYPE}}.zip
