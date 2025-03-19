@@ -70,28 +70,28 @@ namespace EnigmaFix {
         };
 
         struct RenderingSettings {
-            bool Bloom                   = true;
-            bool CameraDistortion        = true;
-            bool ColorCorrection         = true;
-            bool DepthOfField            = true;
-            bool EdgeRendering           = true; // Toggle for character outline rendering (It's also called Edge Rendering by the engine)
-            bool Fog                     = true;
-            bool FoliageRendering        = true; // An eventual toggle for when I can find a way to toggle foliage rendering on/off.
-            bool IBL                     = true;
-            bool LensFlare               = true;
-            bool MotionBlur              = false;
-            bool RLRLighting             = true;
-            bool Shadows                 = true;
-            bool SSAO                    = true;
-            bool SSR                     = true;
-            bool TAA                     = true; // Eventually need to find a way to either do a velocity buffer, and/or redo the entire TAA pipeline from scratch (so something like DLSS, FSR, or TAAU can be implemented)
-            bool Tonemapping             = true;
-            bool Vignette                = true;
-            int  MotionBlurPreset        = 1;    // Ideally, I want a few different presets for exposure settings (short, medium, long) that can be chosen based on preference and the framerate target.
-            int  ScreenSpaceEffectsScale = 2;    // Gets divided by the SSAO and SSR logic to determine if SSAO and SSR should be full-res or not.
-            int  ShadowRes               = 2048; // Used for Render Target Resizing
-            int  SSAOScale               = 1;
-            int  SSRScale                = 1;
+            bool Bloom                     = true;
+            bool CameraDistortion          = true;
+            bool ColorCorrection           = true;
+            bool DepthOfField              = true;
+            bool EdgeRendering             = true; // Toggle for character outline rendering (It's also called Edge Rendering by the engine)
+            bool Fog                       = true;
+            bool FoliageRendering          = true; // An eventual toggle for when I can find a way to toggle foliage rendering on/off.
+            bool IBL                       = true;
+            bool LensFlare                 = true;
+            bool MotionBlur                = false;
+            bool RLRLighting               = true;
+            bool Shadows                   = true;
+            bool SSAO                      = true;
+            bool SSR                       = true;
+            bool TAA                       = true; // Eventually need to find a way to either do a velocity buffer, and/or redo the entire TAA pipeline from scratch (so something like DLSS, FSR, or TAAU can be implemented)
+            bool Tonemapping               = true;
+            bool Vignette                  = true;
+            int  MotionBlurPreset          = 1;    // Ideally, I want a few different presets for exposure settings (short, medium, long) that can be chosen based on preference and the framerate target.
+            int  ScreenSpaceEffectsDivider = 2;    // Gets divided by the SSAO and SSR logic to determine if SSAO and SSR should be full-res or not.
+            int  ShadowRes                 = 2048; // Used for Render Target Resizing
+            int  SSAOScaleDivider          = 2;
+            int  SSRScaleDivider           = 2;
         };
 
         struct InputSettings {
