@@ -366,6 +366,8 @@ namespace EnigmaFix {
                     spdlog::info("Internal Rendering Resolution Changed To: {}x{}", InternalHorizontalRes, InternalVerticalRes);
                 }
             }
+            // Updates our internal rendering aspect ratio, which we can reference with our aspect ratio fixes.
+            PlayerSettingsRm.RES.InternalAspectRatio = static_cast<float>(InternalHorizontalRes) / static_cast<float>(InternalVerticalRes);
             
             // Do our shadow, ambient occlusion, and SSR patches first.
             // TODO: Figure out a way of checking this based on the game, as DERQ2 and the other Mizuchi games probably are using a modified version of the engine, so it probably does this a little differently.
