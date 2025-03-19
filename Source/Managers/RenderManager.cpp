@@ -100,70 +100,72 @@ void resizeRt(D3D11_TEXTURE2D_DESC *pDesc, int Width, int Height, int DesiredWid
 
 bool vpResize(ID3D11DeviceContext* pContext)
 {
-    UINT numViewports = 0;
-    pContext->RSGetViewports(&numViewports, nullptr);
-    if (numViewports == 1) {
-        D3D11_VIEWPORT vp = {};
-        pContext->RSGetViewports(&numViewports, &vp);
-        // This is where we can call each viewport that needs to be resized.
-        // Since the post-process pipeline is hardcoded to 1080p, I think we can get away with murder when it comes to viewport resizing.
-        if ((vp.Width == 1920.0f && vp.Height == 1080.0f) ||
-            (vp.Width ==  960.0f && vp.Height ==  540.0f) ||
-            (vp.Width ==  640.0f && vp.Height ==  360.0f) || // Previously commented out
-            (vp.Width ==  480.0f && vp.Height ==  270.0f) ||
-            (vp.Width ==  384.0f && vp.Height ==  216.0f) ||
-            (vp.Width ==  320.0f && vp.Height ==  180.0f) ||
-            (vp.Width ==  240.0f && vp.Height ==  135.0f) ||
-            (vp.Width ==  192.0f && vp.Height ==  108.0f) ||
-            (vp.Width ==  160.0f && vp.Height ==   90.0f) || // Previously commented out
-            (vp.Width ==   96.0f && vp.Height ==   54.0f) ||
-            (vp.Width ==   80.0f && vp.Height ==   46.0f) || // Previously commented out
-            (vp.Width ==   48.0f && vp.Height ==   28.0f) ||
-            (vp.Width ==   48.0f && vp.Height ==   27.0f) ||
-            (vp.Width ==   40.0f && vp.Height ==   24.0f) || // Previously commented out
-            (vp.Width ==   24.0f && vp.Height ==   14.0f) ||
-            (vp.Width ==   20.0f && vp.Height ==   12.0f) || // Previously commented out
-            (vp.Width ==   12.0f && vp.Height ==    8.0f) ||
-            (vp.Width ==   12.0f && vp.Height ==    7.0f) ||
-            (vp.Width ==   10.0f && vp.Height ==    6.0f) || // Previously commented out
-            (vp.Width ==    6.0f && vp.Height ==    4.0f)) {
-            spdlog::info("Found viewport with size {}x{}.", vp.Width, vp.Height);
-            ID3D11RenderTargetView *rtView = nullptr;
-            pContext->OMGetRenderTargets(1, &rtView, nullptr);
-            if (rtView) {
-                D3D11_RENDER_TARGET_VIEW_DESC desc;
-                rtView->GetDesc(&desc);
-                if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
-                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
-                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
-                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
-                    desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
-                    spdlog::info("Found viewport with type {}.", DXGIFormatToString(desc.Format));
-                    ID3D11Resource *rt = nullptr;
-                    rtView->GetResource(&rt);
-                    if (rt != nullptr) {
-                        ID3D11Texture2D *rttex = nullptr;
-                        rt->QueryInterface<ID3D11Texture2D>(&rttex);
-                        if (rttex != nullptr) {
-                            D3D11_TEXTURE2D_DESC texdesc = {};
-                            rttex->GetDesc(&texdesc);
-                            if (texdesc.Width != vp.Width) {
-                                // Here we go!
-                                // Viewport is the easy part
-                                vp.Width = static_cast<FLOAT>(texdesc.Width);
-                                vp.Height = static_cast<FLOAT>(texdesc.Height);
-                                pContext->RSSetViewports(1, &vp);
-                                spdlog::info("Set viewport to size {}x{}.", vp.Width, vp.Height);
-                                return true;
+    if (PlayerSettingsRm.RES.UseCustomRes) {
+        UINT numViewports = 0;
+        pContext->RSGetViewports(&numViewports, nullptr);
+        if (numViewports == 1) {
+            D3D11_VIEWPORT vp = {};
+            pContext->RSGetViewports(&numViewports, &vp);
+            // This is where we can call each viewport that needs to be resized.
+            // Since the post-process pipeline is hardcoded to 1080p, I think we can get away with murder when it comes to viewport resizing.
+            if ((vp.Width == 1920.0f && vp.Height == 1080.0f) ||
+                (vp.Width ==  960.0f && vp.Height ==  540.0f) ||
+                (vp.Width ==  640.0f && vp.Height ==  360.0f) || // Previously commented out
+                (vp.Width ==  480.0f && vp.Height ==  270.0f) ||
+                (vp.Width ==  384.0f && vp.Height ==  216.0f) ||
+                (vp.Width ==  320.0f && vp.Height ==  180.0f) ||
+                (vp.Width ==  240.0f && vp.Height ==  135.0f) ||
+                (vp.Width ==  192.0f && vp.Height ==  108.0f) ||
+                (vp.Width ==  160.0f && vp.Height ==   90.0f) || // Previously commented out
+                (vp.Width ==   96.0f && vp.Height ==   54.0f) ||
+                (vp.Width ==   80.0f && vp.Height ==   46.0f) || // Previously commented out
+                (vp.Width ==   48.0f && vp.Height ==   28.0f) ||
+                (vp.Width ==   48.0f && vp.Height ==   27.0f) ||
+                (vp.Width ==   40.0f && vp.Height ==   24.0f) || // Previously commented out
+                (vp.Width ==   24.0f && vp.Height ==   14.0f) ||
+                (vp.Width ==   20.0f && vp.Height ==   12.0f) || // Previously commented out
+                (vp.Width ==   12.0f && vp.Height ==    8.0f) ||
+                (vp.Width ==   12.0f && vp.Height ==    7.0f) ||
+                (vp.Width ==   10.0f && vp.Height ==    6.0f) || // Previously commented out
+                (vp.Width ==    6.0f && vp.Height ==    4.0f)) {
+                spdlog::info("Found viewport with size {}x{}.", vp.Width, vp.Height);
+                ID3D11RenderTargetView *rtView = nullptr;
+                pContext->OMGetRenderTargets(1, &rtView, nullptr);
+                if (rtView) {
+                    D3D11_RENDER_TARGET_VIEW_DESC desc;
+                    rtView->GetDesc(&desc);
+                    if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
+                        desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
+                        desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
+                        desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
+                        desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
+                        desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
+                        spdlog::info("Found viewport with type {}.", DXGIFormatToString(desc.Format));
+                        ID3D11Resource *rt = nullptr;
+                        rtView->GetResource(&rt);
+                        if (rt != nullptr) {
+                            ID3D11Texture2D *rttex = nullptr;
+                            rt->QueryInterface<ID3D11Texture2D>(&rttex);
+                            if (rttex != nullptr) {
+                                D3D11_TEXTURE2D_DESC texdesc = {};
+                                rttex->GetDesc(&texdesc);
+                                if (texdesc.Width != vp.Width) {
+                                    // Here we go!
+                                    // Viewport is the easy part
+                                    vp.Width = static_cast<FLOAT>(texdesc.Width);
+                                    vp.Height = static_cast<FLOAT>(texdesc.Height);
+                                    pContext->RSSetViewports(1, &vp);
+                                    spdlog::info("Set viewport to size {}x{}.", vp.Width, vp.Height);
+                                    return true;
+                                }
                             }
                         }
+                        else { spdlog::error("Viewport Resource returned null."); }
+                        rt->Release();
                     }
-                    else { spdlog::error("Viewport Resource returned null."); }
-                    rt->Release();
                 }
+                rtView->Release();
             }
-            rtView->Release();
         }
     }
     return false;
@@ -171,69 +173,71 @@ bool vpResize(ID3D11DeviceContext* pContext)
 
 bool srResize(ID3D11DeviceContext* pContext)
 {
-    // This is where scissor rect resizing will occur.
-    UINT numRects = 0;
-    pContext->RSGetScissorRects(&numRects, nullptr);
-    if (numRects == 1) {
-        D3D11_RECT rect = {};
-        pContext->RSGetScissorRects(&numRects, &rect);
-        if ((rect.right ==   1920 && rect.bottom ==  1080)  ||
-            (rect.right ==    960 && rect.bottom ==   540)  ||
-            (rect.right ==    640 && rect.bottom ==   360)  || // Previously commented out
-            (rect.right ==    480 && rect.bottom ==   270)  ||
-            (rect.right ==    384 && rect.bottom ==   216)  ||
-            (rect.right ==    320 && rect.bottom ==   180)  ||
-            (rect.right ==    240 && rect.bottom ==   135)  ||
-            (rect.right ==    192 && rect.bottom ==   108)  ||
-            (rect.right ==    160 && rect.bottom ==    90)  || // Previously commented out
-            (rect.right ==     96 && rect.bottom ==    54)  ||
-            (rect.right ==     80 && rect.bottom ==    46)  || // Previously commented out
-            (rect.right ==     48 && rect.bottom ==    28)  ||
-            (rect.right ==     48 && rect.bottom ==    27)  ||
-            (rect.right ==     40 && rect.bottom ==    24)  || // Previously commented out
-            (rect.right ==     24 && rect.bottom ==    14)  ||
-            (rect.right ==     20 && rect.bottom ==    12)  || // Previously commented out
-            (rect.right ==     12 && rect.bottom ==     8)  ||
-            (rect.right ==     12 && rect.bottom ==     7)  ||
-            (rect.right ==     10 && rect.bottom ==     6)  || // Previously commented out
-            (rect.right ==      6 && rect.bottom ==     4)) {
-            spdlog::info("Found scissor rect with size {}x{}.", rect.right, rect.bottom);
-            ID3D11RenderTargetView *rtView = nullptr;
-            pContext->OMGetRenderTargets(1, &rtView, nullptr);
-            if (rtView) {
-                D3D11_RENDER_TARGET_VIEW_DESC desc;
-                rtView->GetDesc(&desc);
-                if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
-                    desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
-                    desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
-                    desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
-                    desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
-                    desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
-                    spdlog::info("Found scissor rect with type {}.", DXGIFormatToString(desc.Format));
-                    ID3D11Resource *rt = nullptr;
-                    rtView->GetResource(&rt);
-                    if (rt != nullptr) {
-                        ID3D11Texture2D *rttex = nullptr;
-                        rt->QueryInterface<ID3D11Texture2D>(&rttex);
-                        if (rttex != nullptr) {
-                            D3D11_TEXTURE2D_DESC texdesc = {};
-                            rttex->GetDesc(&texdesc);
-                            if (texdesc.Width != rect.right) {
-                                // Here we go!
-                                // Viewport is the easy part
-                                rect.right = static_cast<LONG>(texdesc.Width);
-                                rect.bottom = static_cast<LONG>(texdesc.Height);
-                                pContext->RSSetScissorRects(1, &rect);
-                                spdlog::info("Set scissor rect to size {}x{}.", rect.right, rect.bottom);
-                                return true;
+    if (PlayerSettingsRm.RES.UseCustomRes) {
+        // This is where scissor rect resizing will occur.
+        UINT numRects = 0;
+        pContext->RSGetScissorRects(&numRects, nullptr);
+        if (numRects == 1) {
+            D3D11_RECT rect = {};
+            pContext->RSGetScissorRects(&numRects, &rect);
+            if ((rect.right ==   1920 && rect.bottom ==  1080)  ||
+                (rect.right ==    960 && rect.bottom ==   540)  ||
+                (rect.right ==    640 && rect.bottom ==   360)  || // Previously commented out
+                (rect.right ==    480 && rect.bottom ==   270)  ||
+                (rect.right ==    384 && rect.bottom ==   216)  ||
+                (rect.right ==    320 && rect.bottom ==   180)  ||
+                (rect.right ==    240 && rect.bottom ==   135)  ||
+                (rect.right ==    192 && rect.bottom ==   108)  ||
+                (rect.right ==    160 && rect.bottom ==    90)  || // Previously commented out
+                (rect.right ==     96 && rect.bottom ==    54)  ||
+                (rect.right ==     80 && rect.bottom ==    46)  || // Previously commented out
+                (rect.right ==     48 && rect.bottom ==    28)  ||
+                (rect.right ==     48 && rect.bottom ==    27)  ||
+                (rect.right ==     40 && rect.bottom ==    24)  || // Previously commented out
+                (rect.right ==     24 && rect.bottom ==    14)  ||
+                (rect.right ==     20 && rect.bottom ==    12)  || // Previously commented out
+                (rect.right ==     12 && rect.bottom ==     8)  ||
+                (rect.right ==     12 && rect.bottom ==     7)  ||
+                (rect.right ==     10 && rect.bottom ==     6)  || // Previously commented out
+                (rect.right ==      6 && rect.bottom ==     4)) {
+                spdlog::info("Found scissor rect with size {}x{}.", rect.right, rect.bottom);
+                ID3D11RenderTargetView *rtView = nullptr;
+                pContext->OMGetRenderTargets(1, &rtView, nullptr);
+                if (rtView) {
+                    D3D11_RENDER_TARGET_VIEW_DESC desc;
+                    rtView->GetDesc(&desc);
+                    if (desc.Format == DXGI_FORMAT_R16G16B16A16_TYPELESS ||
+                        desc.Format == DXGI_FORMAT_R16G16B16A16_FLOAT    ||
+                        desc.Format == DXGI_FORMAT_R11G11B10_FLOAT       ||
+                        desc.Format == DXGI_FORMAT_R24G8_TYPELESS        ||
+                        desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM        ||
+                        desc.Format == DXGI_FORMAT_R8G8B8A8_UNORM) {
+                        spdlog::info("Found scissor rect with type {}.", DXGIFormatToString(desc.Format));
+                        ID3D11Resource *rt = nullptr;
+                        rtView->GetResource(&rt);
+                        if (rt != nullptr) {
+                            ID3D11Texture2D *rttex = nullptr;
+                            rt->QueryInterface<ID3D11Texture2D>(&rttex);
+                            if (rttex != nullptr) {
+                                D3D11_TEXTURE2D_DESC texdesc = {};
+                                rttex->GetDesc(&texdesc);
+                                if (texdesc.Width != rect.right) {
+                                    // Here we go!
+                                    // Viewport is the easy part
+                                    rect.right = static_cast<LONG>(texdesc.Width);
+                                    rect.bottom = static_cast<LONG>(texdesc.Height);
+                                    pContext->RSSetScissorRects(1, &rect);
+                                    spdlog::info("Set scissor rect to size {}x{}.", rect.right, rect.bottom);
+                                    return true;
+                                }
                             }
                         }
+                        else { spdlog::error("Scissor Rect Resource returned null."); }
+                        rt->Release();
                     }
-                    else { spdlog::error("Scissor Rect Resource returned null."); }
-                    rt->Release();
                 }
+                rtView->Release();
             }
-            rtView->Release();
         }
     }
     return false;
