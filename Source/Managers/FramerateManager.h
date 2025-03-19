@@ -23,6 +23,9 @@ SOFTWARE.
 #ifndef ENIGMAFIX_FRAMERATEMANAGER_H
 #define ENIGMAFIX_FRAMERATEMANAGER_H
 
+// System Libraries
+#include <windows.h>
+
 namespace EnigmaFix {
     class FramerateManager {
     public:
@@ -36,6 +39,13 @@ namespace EnigmaFix {
         double msTime = 0;
         float fps = 0;
         float timeOffset = 0;
+
+        bool loop = true;
+        LARGE_INTEGER currentTime;
+        LONG lastTime;
+        LARGE_INTEGER frequency; // Frequency of the performance counter
+
+        double targetFrameTime;
     private:
         FramerateManager() {}
         static FramerateManager frm_Instance;
@@ -43,7 +53,5 @@ namespace EnigmaFix {
         double originalFrTarget = 1.0f / 60.0f;
     };
 }
-
-
 
 #endif //ENIGMAFIX_FRAMERATEMANAGER_H

@@ -23,22 +23,14 @@ SOFTWARE.
 // Internal Functionality
 #include "FramerateManager.h"
 #include "../Settings/PlayerSettings.h"
-// System Libraries
-#include <windows.h>
 
 auto& PlayerSettingsFrm = EnigmaFix::PlayerSettings::Get();
 
 // Singleton Instance
 EnigmaFix::FramerateManager EnigmaFix::FramerateManager::frm_Instance;
 
-namespace EnigmaFix {
-    bool loop = true;
-    LARGE_INTEGER currentTime;
-    LONG lastTime;
-    LARGE_INTEGER frequency; // Frequency of the performance counter
-
-    double targetFrameTime;
-
+namespace EnigmaFix
+{
     void FramerateManager::Update()
     {
         QueryPerformanceFrequency(&frequency); // Get the frequency of the performance counter
