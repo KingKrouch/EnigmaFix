@@ -320,6 +320,7 @@ namespace EnigmaFix {
         PlayerSettingsRm.ShowUI = PlayerSettingsRm.ShowEFUI || PlayerSettingsRm.ShowDevConsole; // Checks if either EFUI or the dev console are enabled, and if so, enable the showUI flag.
 
         if (PlayerSettingsRm.ShowUI) { // Checks if the showUI flag is enabled, and if so, draws the ImGui interface.
+            // TODO: Figure out why the IMGUI UI crashes on Proton.
             // Creates a new ImGui frame.
             ImGui_ImplDX11_NewFrame();
             ImGui_ImplWin32_NewFrame();
@@ -399,8 +400,11 @@ namespace EnigmaFix {
             // As we do plan on patching the in-game resolution option separately from the reported internal resolution, and the reported internal resolution should change as a result.
             // TODO: Figure out how to grab the yebismizuchi2 set of calls using the ID3DUserDefinedAnnotation system, so we can more accurately adjust these.
             // TODO: We need to find a way to get this so it can work with resolutions lower than 1920x1080 too, because it will still glitch out with resolutions lower than that.
-            if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) { // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
-                switch (pDesc->Format) {
+            if (PlayerSettingsRm.RES.UseCustomRes)
+            {
+                if (InternalHorizontalRes > 1920 || InternalHorizontalRes > 1080) { // Unsure if the InternalHorizontalRes > 1080 will cause a problem.
+                switch (pDesc->Format)
+                {
                     case DXGI_FORMAT_R16G16B16A16_TYPELESS: {
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
                         resizeRt(pDesc,  960,  540, (InternalHorizontalRes /  2), (InternalVerticalRes /  2));
@@ -410,17 +414,17 @@ namespace EnigmaFix {
                         break;
                     }
                     case DXGI_FORMAT_R11G11B10_FLOAT: {
-                        resizeRt(pDesc, 384, 216, (InternalHorizontalRes /   5), (InternalVerticalRes /   5));
-                        resizeRt(pDesc, 320, 180, (InternalHorizontalRes /   6), (InternalVerticalRes /   6));
-                        resizeRt(pDesc, 192, 108, (InternalHorizontalRes /  10), (InternalVerticalRes /  10));
-                        resizeRt(pDesc,  96,  54, (InternalHorizontalRes /  20), (InternalVerticalRes /  20));
-                        resizeRt(pDesc,  48,  28, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
-                        resizeRt(pDesc,  48,  27, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
-                        resizeRt(pDesc,  24,  14, (InternalHorizontalRes /  80), (InternalVerticalRes /  80));
-                        resizeRt(pDesc,  12,   7, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
-                        resizeRt(pDesc,  12,   8, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
-                        resizeRt(pDesc,   6,   4, (InternalHorizontalRes / 320), (InternalVerticalRes / 320));
-                        break;
+                            resizeRt(pDesc, 384, 216, (InternalHorizontalRes /   5), (InternalVerticalRes /   5));
+                            resizeRt(pDesc, 320, 180, (InternalHorizontalRes /   6), (InternalVerticalRes /   6));
+                            resizeRt(pDesc, 192, 108, (InternalHorizontalRes /  10), (InternalVerticalRes /  10));
+                            resizeRt(pDesc,  96,  54, (InternalHorizontalRes /  20), (InternalVerticalRes /  20));
+                            resizeRt(pDesc,  48,  28, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
+                            resizeRt(pDesc,  48,  27, (InternalHorizontalRes /  40), (InternalVerticalRes /  40));
+                            resizeRt(pDesc,  24,  14, (InternalHorizontalRes /  80), (InternalVerticalRes /  80));
+                            resizeRt(pDesc,  12,   7, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
+                            resizeRt(pDesc,  12,   8, (InternalHorizontalRes / 160), (InternalVerticalRes / 160));
+                            resizeRt(pDesc,   6,   4, (InternalHorizontalRes / 320), (InternalVerticalRes / 320));
+                            break;
                     }
                     case DXGI_FORMAT_R24G8_TYPELESS: {
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
@@ -437,6 +441,7 @@ namespace EnigmaFix {
                         spdlog::info("Found Pause Menu Background Render Target (After 'yebismizuchi'). Changing resolution from from {}x{} to {}x{}.", pDesc->Width, pDesc->Height, InternalHorizontalRes, InternalVerticalRes);
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
                         break;
+                    }
                     }
                 }
             }
