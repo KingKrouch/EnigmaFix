@@ -48,7 +48,7 @@ namespace EnigmaFix {
 
         struct ResolutionSettings {
             // Resolution Related Settings
-            bool UseCustomRes      = true;
+            bool UseCustomRes      = false;
             bool UseCustomResScale = true;
             int  CustomResScale    = 100;  // Eventually will be used for upscaling/supersampling support.
             int  HorizontalRes     = 1920; // Used for Render Target/Viewport/Scissor Region Resizing
