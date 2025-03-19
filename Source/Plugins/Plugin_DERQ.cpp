@@ -156,14 +156,13 @@ namespace EnigmaFix
         if (PlayerSettingsPDQ.RS.MotionBlur == true)
         {
             // "Application.exe"+29CFF3 - 42 88 ?? ?? ?? 48 8D ?? ?? ?? 48 8D ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 41 8B - mov [rcx+r13+58],al (42 88 44 29 58)
-            switch (PlayerSettingsPDQ.RS.MotionBlurPreset)
-            {
-                case 0:  // Disabled, will probably keep this around for motion vectors
-                case 1:  // Short
-                case 2:  // Medium
-                case 3:  // Long
-                default: // Shutter Ratio (Application.exe+7735D8) and Max Blur Length (Application.exe+25EE50)
-            }
+            //switch (PlayerSettingsPDQ.RS.MotionBlurPreset) {
+                //case 0:  // Disabled, will probably keep this around for motion vectors
+                //case 1:  // Short
+                //case 2:  // Medium
+                //case 3:  // Long
+                //default: // Shutter Ratio (Application.exe+7735D8) and Max Blur Length (Application.exe+25EE50)
+            //}
         }
 
         if (PlayerSettingsPDQ.RS.DepthOfField) {
