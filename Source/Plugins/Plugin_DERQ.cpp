@@ -26,9 +26,13 @@ SOFTWARE.
 #include "../Utilities/MemoryHelper.hpp"
 
 // Third Party Libraries
+#include <safetyhook/easy.hpp>
+
+#include "../Managers/FramerateManager.h"
 #include "spdlog/spdlog.h"
 
 auto& PlayerSettingsPDQ = EnigmaFix::PlayerSettings::Get();
+auto& FramerateManagerPDQ = EnigmaFix::FramerateManager::Get();
 
 EnigmaFix::Plugin_DERQ EnigmaFix::Plugin_DERQ::pq_Instance; // Seemingly need this declared in Plugin_DERQ.cpp so a bunch of linker errors don't happen.
 
@@ -100,8 +104,17 @@ namespace EnigmaFix
 
     void Plugin_DERQ::FrameratePatches(HMODULE baseModule)
     {
+        safetyhook::InlineHook framerateHook;
+        using FramerateLimiterFunc = int(__stdcall*)(void* gameInstance);
+        FramerateLimiterFunc originalFramerateLimiter = nullptr;
+
         if (auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44")) {
-            spdlog::info("Found Framerate Limiter Signature");
+            //spdlog::info("Found Framerate Limiter Signature at: {}", reinterpret_cast<void*>(framerateCapFunc));
+
+            // Hook the function
+            //framerateHook = safetyhook::create_inline(framerateCapFunc, FramerateManagerPDQ.Limit());
+            //originalFramerateLimiter = framerateHook.original<FramerateLimiterFunc>();
+
             // TODO: Patch out the framerate limiter call, and replace it with our own framelimiter.
             // This seems to be the call: "8B 80 A0 00 00 00" ("Application.exe"+E88FA - mov eax,[rax+000000A0]) (8B 80 A0 00 00 00 are the bytes)
 
