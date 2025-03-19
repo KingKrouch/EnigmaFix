@@ -80,6 +80,7 @@ namespace EnigmaFix
 
         // Signature Scan Horizontal Res 4K Native: "00 0F 00 00 C7 45 C3"
         // Signature Scan Vertical Res 4K Native:   "70 ?? 00 00 E8 ?? ?? ?? ?? EB ?? E8"
+        // TODO: Figure out why writing to these doesn't work.
         int* hRes4KPtr = (int*)((intptr_t)baseModule + 0x4858A7);
         int* vRes4KPtr = (int*)((intptr_t)baseModule + 0x4858AE);
 
@@ -87,6 +88,12 @@ namespace EnigmaFix
         // Signature Scan Vertical Window Size 4K Native: "70 ? 00 00 C0 5D 00"
         int* hWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58780);
         int* vWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58784);
+
+        // For now, let's just set this, so we can see how the game reacts to it.
+        hRes4KPtr     = &PlayerSettingsPDQ.RES.HorizontalRes;
+        vRes4KPtr       = &PlayerSettingsPDQ.RES.VerticalRes;
+        hWinSize4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
+        vWinSize4KPtr = &PlayerSettingsPDQ.RES.VerticalRes;
 
         // TODO: Find a good place to put this check inside of the game code, just before the resolution change occurs.
         // Example for setting up our actual internal resolution to one of the available hardcoded ones.
