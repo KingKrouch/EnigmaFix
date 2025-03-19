@@ -331,9 +331,12 @@ namespace EnigmaFix {
             End();
             // Render the ImGui frame. We don't need to call EndFrame because that's already being done with Render.
             Render();
-            // Finally draws the ImGui overlay on screen.
-            pContext->OMSetRenderTargets(1, &mainRenderTargetView, nullptr);
-            ImGui_ImplDX11_RenderDrawData(GetDrawData());
+            // Finally draws the ImGui overlay on screen. Or at least tries to.
+            if (mainRenderTargetView) {
+                pContext->OMSetRenderTargets(1, &mainRenderTargetView, nullptr);
+                ImGui_ImplDX11_RenderDrawData(GetDrawData());
+            }
+            else { spdlog::error("Render Target View is NULL."); }
         }
 
         UINT syncInterval = PlayerSettingsRm.SYNC.VSync ? PlayerSettingsRm.SYNC.SyncInterval : 0; // Converts the vSync checks to a quick variable to clean up space.
