@@ -39,6 +39,7 @@ class Plugin_DERQ {
         static void GraphicsSettingsPatches(HMODULE baseModule);
         static void CameraPatches(HMODULE baseModule);
         static void PhotoModePatches(HMODULE baseModule);
+        static void LoggingPatches(HMODULE baseModule);
     private:
         Plugin_DERQ() {}
         static Plugin_DERQ pq_Instance;

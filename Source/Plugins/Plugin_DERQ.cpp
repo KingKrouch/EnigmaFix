@@ -51,18 +51,31 @@ namespace EnigmaFix
 
     void Plugin_DERQ::AspectRatioPatches(HMODULE baseModule)
     {
+        // Disable aspect ratio values from being overwritten
+        //"89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82"
+        //"F3 0F ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 75"
+        //"F3 0F ?? ?? ?? 48 8B ?? ?? ?? ?? ?? 66 0F"
+        //"8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82"
 
-        //float* objectAspectRatioPtr = (float*)((intptr_t)PatchManagerRef.BaseModule + 0x01043B30 + 0xC90);
-        //if (objectAspectRatioPtr == nullptr) {
+        //float* aspectRatioPtr1 = (float*)((intptr_t)baseModule + 0x25EFC6);
+        //float* aspectRatioPtr2 = (float*)((intptr_t)baseModule + 0x789B2C);
+        //float* aspectRatioPtr2 = (float*)((intptr_t)baseModule + 0xE32A30);
+
+        // Write to the object aspect ratio pointer
+        //float* objectAspectRatioPtr = (float*)((intptr_t)baseModule + 0x01043B30 + 0xC90);
+        //if (objectAspectRatioPtr != nullptr) {
+            //spdlog::info("Object Aspect Ratio: {}", *objectAspectRatioPtr);
+            // Patch aspect ratio value here.
+            // TODO: Find a way to change run resolution and aspect ratio checks every time the internal rendering resolution changes.
+            //float newAspectRatio = PlayerSettingsRef.INS.InternalHorizontalRes / PlayerSettingsRef.INS.InternalVerticalRes;
+            //*objectAspectRatioPtr = newAspectRatio;
+            //spdlog::info("Patched Aspect Ratio to: {}", *objectAspectRatioPtr);
+        //}
+        //else {
             //spdlog::error("Aspect ratio pointer is NULL");
             //return;
         //}
-        //spdlog::info("Object Aspect Ratio: {}", *objectAspectRatioPtr);
 
-        // TODO: Find a way to change run resolution and aspect ratio checks every time the internal rendering resolution changes.
-        //float newAspectRatio = PlayerSettingsRef.INS.InternalHorizontalRes / PlayerSettingsRef.INS.InternalVerticalRes;
-        //*objectAspectRatioPtr = newAspectRatio;
-        //spdlog::info("Patched Aspect Ratio to: {}", *objectAspectRatioPtr);
     }
 
     void Plugin_DERQ::FOVPatches(HMODULE baseModule)
@@ -84,13 +97,12 @@ namespace EnigmaFix
 
     void Plugin_DERQ::FrameratePatches(HMODULE baseModule)
     {
-        auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44");
-        if (framerateCapFunc) {
+        if (auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44")) {
             spdlog::info("Found Framerate Limiter Signature");
+            // TODO: Patch out the framerate limiter call, and replace it with our own framelimiter.
         }
         //safetyhook::create_inline()
 
-        // NOTE: 8B 80 ? ? ? ? 89 44 ? ? 83 7C 24 44 ? 74 ? 83 7C 24 44 is the pattern we want to create a codecave with
         //asm volatile (
             //"nop"
         //);
@@ -110,4 +122,16 @@ namespace EnigmaFix
     {
 
     }
+
+    void Plugin_DERQ::LoggingPatches(HMODULE baseModule)
+    {
+        if (auto loggingFunc = Memory::PatternScan(baseModule, "4c 89 44 24 ? 4c 89 4c 24 ? c3 cc cc cc cc cc 48 8b 01")) {
+            spdlog::info("Found Logging Function Signature");
+            // TODO: Print the logs to the console.
+        }
+    }
+
+    // ALT+F4 Window Signatures:
+    // FF 15 ? ? ? ? 83 F8 ? 0F 85
+    // 83 F8 ? 0F 85 ? ? ? ? 45 89 ? 33 C0
 } // EnigmaFix
