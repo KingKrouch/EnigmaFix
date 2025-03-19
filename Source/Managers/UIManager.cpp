@@ -106,7 +106,7 @@ namespace EnigmaFix {
     {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
-            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2(LogoWidth, LogoHeight));
+            //ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2(LogoWidth, LogoHeight));
             Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
             Separator();
             Text("(C) 2021 Bryce Q.");
@@ -472,6 +472,7 @@ namespace EnigmaFix {
 
     void UIManager::LoadLogoTexture() // TODO: Fix this not loading the texture properly.
     {
+        // TODO: Figure out why this crashes the game on Proton.
         bool ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, &LogoWidth, &LogoHeight);
         IM_ASSERT(ret);
     }
@@ -488,7 +489,7 @@ namespace EnigmaFix {
         // Checks if the localization strings have been initialized.
         um_Instance.initLocalization();
         // Loads the About screen's logo texture.
-        um_Instance.LoadLogoTexture();
+        //um_Instance.LoadLogoTexture();
         // Begins drawing the UI.
         um_Instance.BeginRender();
     }
