@@ -56,19 +56,36 @@ namespace EnigmaFix {
         }
     }
 
-    void FramerateManager::Limit()
+    int FramerateManager::Limit()
     {
         LARGE_INTEGER currentTime;
-        LARGE_INTEGER prevTime;
         QueryPerformanceCounter(&currentTime);
 
         double elapsedTime = static_cast<double>(currentTime.QuadPart - lastTime) / frequency.QuadPart;
         double remainingTime = targetFrameTime - elapsedTime;
 
-        if (remainingTime > 0) {
-            Sleep(static_cast<DWORD>(remainingTime * 1000.0)); // Convert seconds to milliseconds
+        int totalSleepTime = 0; // Store total sleep time in milliseconds
+
+        if (remainingTime > 0)
+        {
+            int sleepTime = static_cast<int>(remainingTime * 1000.0); // Convert to milliseconds
+            if (sleepTime > 0)
+            {
+                Sleep(sleepTime);
+                totalSleepTime = sleepTime;
+            }
+
+            // Fine-tune timing with a spin-wait
+            LARGE_INTEGER spinTime;
+            do {
+                QueryPerformanceCounter(&spinTime);
+            } while (static_cast<double>(spinTime.QuadPart - lastTime) / frequency.QuadPart < targetFrameTime);
         }
-        QueryPerformanceCounter(&prevTime);
+
+        // Update lastTime for the next frame
+        lastTime = currentTime.QuadPart;
+
+        return totalSleepTime;
     }
 
     void FramerateManager::Init()

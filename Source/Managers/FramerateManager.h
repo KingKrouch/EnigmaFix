@@ -30,7 +30,7 @@ namespace EnigmaFix {
             return frm_Instance;
         }
         void Update();
-        void Limit();
+        int Limit();
         void Init();
         double deltaTime = 0;
         double msTime = 0;
