@@ -488,100 +488,364 @@ mov rax,[rsp+48]
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>14</ID>
-                  <Description>"640x360 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58720</Address>
+                  <ID>5489</ID>
+                  <Description>"640x360"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5487</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58720</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5488</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58724</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>14</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58720</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>13</ID>
-                  <Description>"720x405 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58728</Address>
+                  <ID>5492</ID>
+                  <Description>"720x405"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5490</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58728</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5491</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5872C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>13</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58728</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12</ID>
-                  <Description>"800x450 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58730</Address>
+                  <ID>5495</ID>
+                  <Description>"800x450"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5493</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58730</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5494</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58734</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>12</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58730</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>11</ID>
-                  <Description>"1024x576 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58738</Address>
+                  <ID>5498</ID>
+                  <Description>"1024x576"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5496</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58738</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5497</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5873C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>11</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58738</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>10</ID>
-                  <Description>"1152x648 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58740</Address>
+                  <ID>5501</ID>
+                  <Description>"1152x648"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5499</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58740</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5500</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58744</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58740</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>9</ID>
-                  <Description>"1280x720 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58748</Address>
+                  <ID>5504</ID>
+                  <Description>"1280x720"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5502</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58748</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5503</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5874C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>9</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58748</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>8</ID>
-                  <Description>"1360x765 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58750</Address>
+                  <ID>5507</ID>
+                  <Description>"1360x765"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5505</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58750</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5506</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58754</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58750</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>7</ID>
-                  <Description>"1366x768 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58758</Address>
+                  <ID>5510</ID>
+                  <Description>"1366x768"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5508</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58758</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5509</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5875C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>7</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58758</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>5091</ID>
-                  <Description>"1600x900 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58760</Address>
+                  <ID>5513</ID>
+                  <Description>"1600x900"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5511</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58760</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5512</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58764</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5091</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58760</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>5092</ID>
-                  <Description>"1920x1080 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58768</Address>
+                  <ID>5516</ID>
+                  <Description>"1920x1080"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5514</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58768</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5515</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5876C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5092</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58768</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>6</ID>
-                  <Description>"2560x1440 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58770</Address>
+                  <ID>5519</ID>
+                  <Description>"2560x1440"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5517</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58770</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5518</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58774</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>6</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58770</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>5093</ID>
-                  <Description>"3840x2160 Windowed Mode Resolution"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>Array of byte</VariableType>
-                  <ByteLength>6</ByteLength>
-                  <Address>Application.exe+F58778</Address>
+                  <ID>5522</ID>
+                  <Description>"3840x2160"</Description>
+                  <Options moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>5520</ID>
+                      <Description>"Horizontal Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F58778</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5521</ID>
+                      <Description>"Vertical Res"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>140F5877C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>5093</ID>
+                      <Description>"Hex"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Array of byte</VariableType>
+                      <ByteLength>6</ByteLength>
+                      <Address>Application.exe+F58778</Address>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>5094</ID>
@@ -591,21 +855,21 @@ mov rax,[rsp+48]
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5095</ID>
-                      <Description>"Horizontal"</Description>
+                      <Description>"Horizontal Res"</Description>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+F58780</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>5088</ID>
-                      <Description>"Vertical"</Description>
+                      <Description>"Vertical Res"</Description>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+F58784</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>5096</ID>
-                      <Description>"4K Native Windowed Mode Resolution (Seems to have check related restrictions which restricts using it when lower than 3440x1440)"</Description>
+                      <Description>"Hex"</Description>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
