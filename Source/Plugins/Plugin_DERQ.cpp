@@ -24,15 +24,17 @@ SOFTWARE.
 #include "Plugin_DERQ.h"
 #include "../Settings/PlayerSettings.h"
 #include "../Utilities/MemoryHelper.hpp"
+#include "../Managers/PatchManager.h"
 
 // Third Party Libraries
-#include <safetyhook/easy.hpp>
+#include <safetyhook.hpp>
 
 #include "../Managers/FramerateManager.h"
 #include "../Managers/LogManager.h"
 #include "spdlog/spdlog.h"
 
 auto& PlayerSettingsPDQ = EnigmaFix::PlayerSettings::Get();
+auto& PatchManagerPDQ = EnigmaFix::PatchManager::Get();
 auto& LogManagerPDQ = EnigmaFix::LogManager::Get();
 auto& FramerateManagerPDQ = EnigmaFix::FramerateManager::Get();
 
@@ -40,13 +42,145 @@ EnigmaFix::Plugin_DERQ EnigmaFix::Plugin_DERQ::pq_Instance; // Seemingly need th
 
 namespace EnigmaFix
 {
+
+    struct ResolutionPtr {
+        int* X;
+        int* Y;
+
+        // Constructor that takes offsets and calculates addresses dynamically
+        ResolutionPtr(intptr_t xOffset, intptr_t yOffset) {
+            intptr_t baseModule = reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule);
+            X = reinterpret_cast<int*>(baseModule + xOffset);
+            Y = reinterpret_cast<int*>(baseModule + yOffset);
+        }
+    };
+
+    ResolutionPtr resolutionList[] = {
+        { 0x140F58720, 0x140F58724 },  // 640x360 (0)
+        { 0x140F58728, 0x140F5872C },  // 720x405 (1)
+        { 0x140F58730, 0x140F58734 },  // 800x450 (2)
+        { 0x140F58738, 0x140F5873C },  // 1024x576 (3)
+        { 0x140F58740, 0x140F58744 },  // 1152x648 (4)
+        { 0x140F58748, 0x140F5874C },  // 1280x720 (5)
+        { 0x140F58750, 0x140F58754 },  // 1360x765 (6)
+        { 0x140F58758, 0x140F5875C },  // 1366x768 (7)
+        { 0x140F58760, 0x140F58764 },  // 1600x900 (8)
+        { 0x140F58764, 0x140F5876C },  // 1920x1080 (9)
+        { 0x140F58770, 0x140F58774 },  // 2560x1440 (10)
+        { 0x140F58778, 0x140F5877C },  // 3840x2160 (11)
+        //{ 0xF58780, 0xF58784 },        // 4K Native (12)
+    };
+
     void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
     {
+        // Signature Scan Horizontal Res: "80 07 ?? 00 C7 45 ?? 38 04 ?? 00 E8"
+        // Signature Scan Vertical Res:   "38 04 ?? 00 E8 64 BF"
+        int* hResPtr   = (int*)((intptr_t)baseModule + 0x4858CC);
+        int* vResPtr   = (int*)((intptr_t)baseModule + 0x4858D3);
 
-        //int* hResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858CC);
-        //int* vResPtr   = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858D3);
-        //int* hRes4KPtr = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858A7);
-        //int* vRes4KPtr = (int*)((intptr_t)PatchManagerRef.BaseModule + 0x4858AE);
+        // Signature Scan Horizontal Res 4K Native: "00 0F 00 00 C7 45 C3"
+        // Signature Scan Vertical Res 4K Native:   "70 ?? 00 00 E8 ?? ?? ?? ?? EB ?? E8"
+        int* hRes4KPtr = (int*)((intptr_t)baseModule + 0x4858A7);
+        int* vRes4KPtr = (int*)((intptr_t)baseModule + 0x4858AE);
+
+        // Signature Scan Horizontal Window Size 4K Native: "00 0F 00 00 70 ? 00 00 C0 5D 00"
+        // Signature Scan Vertical Window Size 4K Native: "70 ? 00 00 C0 5D 00"
+        int* hWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58780);
+        int* vWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58784);
+
+        // TODO: Find a good place to put this check inside of the game code, just before the resolution change occurs.
+        // Example for setting up our actual internal resolution to one of the available hardcoded ones.
+        //int currentResolution;
+        //switch (currentResolution)
+        //{
+            //case 0: // 640x360
+                //hResPtr = resolutionList[0].X;
+                //vResPtr = resolutionList[0].Y;
+                //break;
+            //case 1: // 720x405
+                //hResPtr = resolutionList[1].X;
+                //vResPtr = resolutionList[1].Y;
+                //break;
+            //case 2: // 800x450
+                //hResPtr = resolutionList[2].X;
+                //vResPtr = resolutionList[2].Y;
+                //break;
+            //case 3: // 1024x576
+                //hResPtr = resolutionList[3].X;
+                //vResPtr = resolutionList[3].Y;
+            //case 4: // 1152x648
+                //hResPtr = resolutionList[4].X;
+                //vResPtr = resolutionList[4].Y;
+            //case 5: // 1280x720
+                //hResPtr = resolutionList[5].X;
+                //vResPtr = resolutionList[5].Y;
+            //case 6: // 1360x765
+                //hResPtr = resolutionList[6].X;
+                //vResPtr = resolutionList[6].Y;
+            //case 7: // 1366x768
+                //hResPtr = resolutionList[7].X;
+                //vResPtr = resolutionList[7].Y;
+            //case 8: // 1600x900
+                //hResPtr = resolutionList[8].X;
+                //vResPtr = resolutionList[8].Y;
+            //case 9: // 1920x1080
+                //hResPtr = resolutionList[9].X;
+                //vResPtr = resolutionList[9].Y;
+            //case 10: // 2560x1440
+                //hResPtr = resolutionList[10].X;
+                //vResPtr = resolutionList[10].Y;
+            //case 11: // 3840x2160
+                //hResPtr = resolutionList[11].X;
+                //vResPtr = resolutionList[11].Y;
+            //case 12: // 4K Native, in this case, we need to adjust both the window size and internal resolution
+                //hRes4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
+                //vResPtr   = &PlayerSettingsPDQ.RES.VerticalRes;
+                //hWinSize4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
+                //vWinSize4KPtr = &PlayerSettingsPDQ.RES.VerticalRes;
+        //}
+
+        // Signature for 4K Native text: "34 ?? 20 4E 61 74 69 76 65"
+        // TODO: Take into account the other parts of memory that will inevitably duplicate this during runtime. If at any point the in-game overlay changes the custom resolution, we need to run a loop that changes the memory values to reflect this in-game.
+        if (auto native4kText = Memory::PatternScan(baseModule, "34 ?? 20 4E 61 74 69 76 65")) {
+            spdlog::info("Aspect Ratio: Found First Block Function Signature at: {}", reinterpret_cast<void*>(native4kText));
+
+            // Generate resolution string (max 9 bytes including null terminator)
+            std::string replacement = std::to_string(PlayerSettingsPDQ.RES.HorizontalRes) + "x" + std::to_string(PlayerSettingsPDQ.RES.VerticalRes);
+
+            // Ensure we do not exceed 9 bytes
+            if (replacement.size() > 9) {
+                spdlog::error("Resolution string '{}' is too long! Defaulting to 'Custom'.", replacement);
+                std::string replacement = "Custom";
+                return;
+            }
+
+            DWORD oldProtect;
+            if (VirtualProtect(native4kText, 9, PAGE_EXECUTE_READWRITE, &oldProtect)) {
+                std::memcpy(native4kText, replacement.c_str(), replacement.size()); // Copy actual data
+                std::memset(native4kText + replacement.size(), 0, 9 - replacement.size()); // Null-pad remaining bytes
+
+                VirtualProtect(native4kText, 9, oldProtect, &oldProtect);
+                spdlog::info("Successfully patched '4K Native' -> '{}'.", replacement);
+            } else {
+                spdlog::error("Failed to modify memory protection.");
+            }
+        }
+
+        // Signatures for resolution checks to NOP out:
+        // "41 89 ?? ?? 48 83 C4 ?? 41 ?? 5F 5E C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC" ("Application.exe"+485576 - 41 89 7E 0C)
+        // "83 3D 73 F2 78 00"       ("Application.exe"+7C9292 - 83 3D 73 F2 78 00 0A)
+        // "83 3D DC F1 78 00"       ("Application.exe"+7C9329 - 83 3D DC F1 78 00 0B)
+        // "83 3D 21 F1 78 00"       ("Application.exe"+7C93E4 - 83 3D 21 F1 78 00 0B)
+        // "83 3D 51 19 79 00"       ("Application.exe"+7C6BB4 - 83 3D 51 19 79 00 0B)
+        // "39 7B ?? 0F 4C"          ("Application.exe"+4852BA - 39 7B 0C)
+        // "8B 53 ?? 8B 43 ?? 89 41" ("Application.exe"+48530A - 8B 53 0C)
+
+        // Signature for currently selected screen mode index:
+        // "00 00 00 00 00 00 00 00 FF 01 00 00 4C 00 ?? 00 01 00 02 00 04 ?? 05 ?? ?? ?? ?? 00 08 00 0E 00 0D ?? ?? ?? ?? 00 12 00 13 00 15 ?? ?? ?? ?? 00 19 00 1B 00 1C ?? 1F 00 21 00 23 00 25 ?? ?? ?? ?? 00 29 00 2A 00 2C ?? 2F 00 31 00 32 00 34 ?? 35 ?? ?? ?? ?? 00 3B 00 3C ?? 3D ?? ?? ?? ?? 00 42 ?? 43 00 ?? ?? 48 00 ?? ?? ?? 00 4A ?? 4B 00 ?? ?? 4E 00 ?? ?? 50 00 51 ?? 52 00 53 ?? 54 00 55 ?? 56 00 57 ?? 58 00 59 ?? 5A 00 5B ?? 5C 00 5D ?? 5E 00 5F ?? 60 00 14 ?? 2B 00 61 00 62 ?? 63 00 64 00 ?? 00 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 02 03 02 00 00 00 00 02 02 02 02 02 02 02 02 00 00 01 01 01 01 01 01 01 01 02 02 02 02 02 02 01 01 01 01 01 01 01 01 01 01 02 02 00 00 02 02 01 01 01 01 02 02 02 02 02 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01 01 01 00 00 00 00 00 00 00 00 00 00 01 01 03 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 3D ?? ?? ?? ?? 4E 01 ?? 34 ?? 01 00 2C ?? 01 00 2B 4E ?? 00 27 4E 01 ?? 24 ?? 01 00 23 4E ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
+        // Signature for currently selected resolution index:
+        // "09 00 00 00 00 00 00 00 00 00 00 00 FF 01 00 00 4C 00 ?? 00 01 00 02 00 04 ?? 05 ?? ?? ?? ?? 00 08 00 0E 00 0D ?? ?? ?? ?? 00 12 00 13 00 15 ?? ?? ?? ?? 00 19 00 1B 00 1C ?? 1F 00 21 00 23 00 25 ?? ?? ?? ?? 00 29 00 2A 00 2C ?? 2F 00 31 00 32 00 34 ?? 35 ?? ?? ?? ?? 00 3B 00 3C ?? 3D ?? ?? ?? ?? 00 42 ?? 43 00 ?? ?? 48 00 ?? ?? ?? 00 4A ?? 4B 00 ?? ?? 4E 00 ?? ?? 50 00 51 ?? 52 00 53 ?? 54 00 55 ?? 56 00 57 ?? 58 00 59 ?? 5A 00 5B ?? 5C 00 5D ?? 5E 00 5F ?? 60 00 14 ?? 2B 00 61 00 62 ?? 63 00 64 00 ?? 00 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 02 03 02 00 00 00 00 02 02 02 02 02 02 02 02 00 00 01 01 01 01 01 01 01 01 02 02 02 02 02 02 01 01 01 01 01 01 01 01 01 01 02 02 00 00 02 02 01 01 01 01 02 02 02 02 02 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01 01 01 00 00 00 00 00 00 00 00 00 00 01 01 03 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 3D ?? ?? ?? ?? 4E 01 ?? 34 ?? 01 00 2C ?? 01 00 2B 4E ?? 00 27 4E 01 ?? 24 ?? 01 00 23 4E ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
+        
+
 
         //spdlog::info("Internal Resolution : {}x{}", *hResPtr, *vResPtr);
         //spdlog::info("4K Option Internal Resolution : {}x{}", *hRes4KPtr, *vRes4KPtr);
@@ -61,10 +195,18 @@ namespace EnigmaFix
     void Plugin_DERQ::AspectRatioPatches(HMODULE baseModule)
     {
         // Disable aspect ratio values from being overwritten
-        //"89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82" (89 41 50 is the actual set of bytes)
-        //"F3 0F ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 75" (F3 0F 11 4F 50 is the set of bytes)
-        //"F3 0F ?? ?? ?? 48 8B ?? ?? ?? ?? ?? 66 0F" (F3 0F 11 4F 50 is the set of bytes)
-        //"8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82" (8B 42 50 is the set of bytes)
+        if (auto arBlockFunction1 = Memory::PatternScan(baseModule, "89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82")) { // (89 41 50)
+            spdlog::info("Aspect Ratio: Found First Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction1));
+        }
+        if (auto arBlockFunction2 = Memory::PatternScan(baseModule, "F3 0F ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 75")) { // (F3 0F 11 4F 50)
+            spdlog::info("Aspect Ratio: Found Second Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction2));
+        }
+        if (auto arBlockFunction3 = Memory::PatternScan(baseModule, "F3 0F ?? ?? ?? 48 8B ?? ?? ?? ?? ?? 66 0F")) { // (F3 0F 11 4F 50)
+            spdlog::info("Aspect Ratio: Found Third Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction3));
+        }
+        if (auto arBlockFunction4 = Memory::PatternScan(baseModule, "8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82")) { // (8B 42 50)
+            spdlog::info("Aspect Ratio: Found Fourth Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction4));
+        }
 
         // TODO: Figure out what opcodes access these memory pointers, and update them to use our own internal aspect ratio variable.
         // Set up the pointer addresses for our aspect ratio variables
@@ -149,6 +291,7 @@ namespace EnigmaFix
         if (PlayerSettingsPDQ.RS.Tonemapping) {
             if (auto tonemappingToggleFunc = Memory::PatternScan(baseModule, "42 88 ?? ?? ?? 48 8D ?? ?? ?? 48 8D ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 41 0F ?? ?? ?? ?? ?? ?? 49 69 CF ?? ?? ?? ?? 42 88 ?? ?? ?? 41 0F")) { // "Application.exe"+29C420: mov [rcx+r13+70],al (42 88 44 29 70)
                 spdlog::info("Post Processing: Found Color Correction Signature at: {}", reinterpret_cast<void*>(tonemappingToggleFunc));
+                static SafetyHookMid tonemappingToggleHook;
             }
         }
 
@@ -201,7 +344,7 @@ namespace EnigmaFix
                 //case 1:  // Short
                 //case 2:  // Medium
                 //case 3:  // Long
-                //default: // Shutter Ratio (Application.exe+7735D8) and Max Blur Length (Application.exe+25EE50)
+                //default: // Shutter Ratio (Application.exe+7735D8, default: 0.67542696) and Max Blur Length (Application.exe+25EE50, default: 0.1000000015)
             //}
         }
 
@@ -226,9 +369,15 @@ namespace EnigmaFix
             }
         }
 
-        if (PlayerSettingsPDQ.RS.Vignette) { // This one works a little bit differently, as you need to move a new float variable to the xmm1 register BEFORE the opcode is done, that way we can override the float variable used for the vignette intensity.
+        if (!PlayerSettingsPDQ.RS.Vignette) { // This one works a little bit differently, as you need to move a new float variable to the xmm1 register BEFORE the opcode is done, that way we can override the float variable used for the vignette intensity.
             if (auto vignetteFunc = Memory::PatternScan(baseModule, "F3 42 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D ?? ?? ?? 48 8D ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 41 0F ?? ?? ?? ?? ?? ?? 49 69 CF ?? ?? ?? ?? 42 88 ?? ?? ?? 48 8D ?? ?? ?? 48 8D ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 41 0F")) { // "Application.exe"+29CF36: movss [rax+r13+00000164],xmm1 (F3 42 0F 11 8C 28 64 01 00 00)
                 spdlog::info("Post Processing: Found Vignette Signature at: {}", reinterpret_cast<void*>(vignetteFunc));
+                static SafetyHookMid vignetteFuncMidHook{};
+                vignetteFuncMidHook = safetyhook::create_mid(vignetteFunc,
+                    [](SafetyHookContext& ctx)
+                    {
+                        ctx.xmm1.f32[0] = 1.0f; // The default is "0.200000003"
+                    });
             }
         }
     }
