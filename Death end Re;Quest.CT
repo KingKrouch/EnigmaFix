@@ -1615,10 +1615,16 @@ mov [rcx+r13+58],al
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>3146</ID>
-              <Description>"Skip Opening Videos (Doesn't skip notice screens)"</Description>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : Death end re;Quest
+              <ID>5483</ID>
+              <Description>"Video Playback"</Description>
+              <Options moManualExpandCollapse="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3146</ID>
+                  <Description>"Skip Opening Videos (Doesn't skip notice screens)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : Death end re;Quest
   Version:
   Date   : 2020-12-16
   Author : KingKrouch
@@ -1634,6 +1640,40 @@ mov [rcx+r13+58],al
 "Application.exe"+BF4B80:
   db 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 69 66 2E 75 73 6D 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 63 68 2E 75 73 6D 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 73 69 6C 69 63 6F 6E 2E 75 73 6D 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 64 69 73 63 6C 61 69 6D 65 72 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 63 6F 70 79 00 00 00 00 00 00 00 00 53 59 53 54 45 4D 2F 57 41 52 4E 2F 76 69 6F 6C 65 6E 63 65 00 00 00 00 53 59 53 54 45 4D 2F 41 55 54 4F 53 41 56 45 2F 61 75 74 6F 73 61 76 65 00 00 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 73 69 6C 69 63 6F 6E 5F 65 6E 2E 75 73 6D 00 2F 4D 4F 56 49 45 2F 54 48 55 4D 2F 25 30 34 75 2E 75 73 6D 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 5F 6A 70 2E 75 73 6D 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 5F 63 68 2E 75 73 6D 00 00 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 5F 25 30 33 75 2E 75 73 6D 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 65 64 5F 25 30 33 75 2E 75 73 6D 00 00 00 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 65 64 5F 63 68 5F 25 30 33 75 2E 75 73 6D 00 2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 65 64 5F 6E 61 5F 25 30 33 75 2E 75 73 6D 00 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 65 76 5F 25 30 33 75 2E 75 73 6D 00 2F 4D 4F 56 49 45 2F 65 6E 2F 67 61 6D 65 5F 65 76 5F 25 30 33 75 2E 75 73 6D
 </AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>5482</ID>
+                  <Description>"Game OP"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>47</ByteLength>
+                  <Address>Application.exe+BF4B80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>5484</ID>
+                  <Description>"Logo IF"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>47</ByteLength>
+                  <Address>Application.exe+BF4BB0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>5485</ID>
+                  <Description>"Logo CH"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>47</ByteLength>
+                  <Address>Application.exe+BF4BE0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>5486</ID>
+                  <Description>"Logo Silicon Studio"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>52</ByteLength>
+                  <Address>Application.exe+BF4C10</Address>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
             <CheatEntry>
               <ID>691</ID>
