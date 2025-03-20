@@ -98,12 +98,11 @@ namespace EnigmaFix
 
         // Signature Scan Horizontal Res 4K Native: "00 0F 00 00 C7 45 C3"
         // Signature Scan Vertical Res 4K Native:   "70 ?? 00 00 E8 ?? ?? ?? ?? EB ?? E8"
-        // TODO: Figure out why writing to these doesn't work.
-        auto hRes4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858A7);
-        auto vRes4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858AE);
-
         // Signature Scan Horizontal Window Size 4K Native: "00 0F 00 00 70 ?? 00 00 C0 5D 00"
         // Signature Scan Vertical Window Size 4K Native: "70 ?? 00 00 C0 5D 00"
+        // TODO: Figure out why writing to these doesn't work.
+        auto hRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858A7);
+        auto vRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858AE);
         auto hWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58780));
         auto vWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58784));
 
@@ -211,28 +210,39 @@ namespace EnigmaFix
 
         // TODO: Figure out what opcodes access these memory pointers, and update them to use our own internal aspect ratio variable.
         // Set up the pointer addresses for our aspect ratio variables
-        //float* aspectRatioPtr1 = (float*)((intptr_t)baseModule + 0x25EFC6);
-        //float* aspectRatioPtr2 = (float*)((intptr_t)baseModule + 0x789B2C);
-        //float* aspectRatioPtr3 = (float*)((intptr_t)baseModule + 0xE32A30);
+        auto* aspectRatioPtr1 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x25EFC6);
+        auto* aspectRatioPtr2 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x789B2C);
+        auto* aspectRatioPtr3 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0xE32A30);
         // Overwrite the aspect ratio values with our own.
-        //aspectRatioPtr1 = &PlayerSettingsPDQ.RES.InternalAspectRatio;
-        //aspectRatioPtr2 = &PlayerSettingsPDQ.RES.InternalAspectRatio;
-        //aspectRatioPtr3 = &PlayerSettingsPDQ.RES.InternalAspectRatio;
+        if (aspectRatioPtr1 != nullptr) {
+            //Memory::Write(reinterpret_cast<uintptr_t>(aspectRatioPtr1), PlayerSettingsPDQ.RES.InternalAspectRatio);
+            //spdlog::info("Aspect Ratio: Patched Aspect Ratio Pointer 1 to: {}", *aspectRatioPtr1);
+        }
+        else {spdlog::error("Aspect Ratio: Aspect Ratio Pointer 1 is NULL"); }
+
+        if (aspectRatioPtr2 != nullptr) {
+            //Memory::Write(reinterpret_cast<uintptr_t>(aspectRatioPtr2), PlayerSettingsPDQ.RES.InternalAspectRatio);
+            //spdlog::info("Aspect Ratio: Patched Aspect Ratio Pointer 1 to: {}", *aspectRatioPtr2);
+        }
+        else {spdlog::error("Aspect Ratio: Aspect Ratio Pointer 2 is NULL"); }
+
+        if (aspectRatioPtr3 != nullptr) {
+            //Memory::Write(reinterpret_cast<uintptr_t>(aspectRatioPtr3), PlayerSettingsPDQ.RES.InternalAspectRatio);
+            //spdlog::info("Aspect Ratio: Patched Aspect Ratio Pointer 3 to: {}", *aspectRatioPtr3);
+        }
+        else {spdlog::error("Aspect Ratio: Aspect Ratio Pointer 3 is NULL"); }
 
         // Write to the object aspect ratio pointer
-        //float* objectAspectRatioPtr = (float*)((intptr_t)baseModule + 0x01043B30 + 0xC90);
-        //if (objectAspectRatioPtr != nullptr) {
-            //spdlog::info("Object Aspect Ratio: {}", *objectAspectRatioPtr);
-            // Patch aspect ratio value here.
+        auto* objectAspectRatioPtr = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x01043B30 + 0xC90);
+        if (objectAspectRatioPtr != nullptr) {
+            spdlog::info("Object Aspect Ratio: {}", *objectAspectRatioPtr);
             // TODO: Find a way to change run resolution and aspect ratio checks every time the internal rendering resolution changes.
-            //float newAspectRatio = PlayerSettingsRef.INS.InternalHorizontalRes / PlayerSettingsRef.INS.InternalVerticalRes;
-            //*objectAspectRatioPtr = newAspectRatio;
-            //spdlog::info("Patched Aspect Ratio to: {}", *objectAspectRatioPtr);
-        //}
-        //else {
-            //spdlog::error("Aspect ratio pointer is NULL");
-            //return;
-        //}
+            //Memory::Write(reinterpret_cast<uintptr_t>(objectAspectRatioPtr), PlayerSettingsPDQ.RES.InternalAspectRatio);
+            //spdlog::info("Aspect Ratio: Patched Aspect Ratio to: {}", *objectAspectRatioPtr);
+        }
+        else {
+            spdlog::error("Aspect Ratio: Object Aspect Ratio pointer is NULL");
+        }
     }
 
     void Plugin_DERQ::FOVPatches(HMODULE baseModule)
@@ -418,8 +428,7 @@ namespace EnigmaFix
                 spdlog::info("Post Processing: Found Vignette Signature at: {}", reinterpret_cast<void*>(vignetteFunc));
                 static SafetyHookMid vignetteFuncMidHook{};
                 vignetteFuncMidHook = safetyhook::create_mid(vignetteFunc,
-                    [](SafetyHookContext& ctx)
-                    {
+                    [](SafetyHookContext& ctx) {
                         ctx.xmm1.f32[0] = 0.0f; // The default is "0.200000003"
                     });
             }
