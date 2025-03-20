@@ -295,21 +295,50 @@ namespace EnigmaFix
         // For now, disable the framelimiter.
         NOPPattern(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44", 6, "Framerate Limiter");
 
-        // TODO: Figure if there's any performance improvement or rammifications from this. If there's an improvement, keep it. If some notice it's better on their setup while others have issues with it, just make it a config option.
-        // Use Intel CPU scheduling instead of AMD (I'm morbidly curious since apparently Cyberpunk 2077 had some issue at launch revolving around it).
-        if (auto affinityPatch = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? EB ?? C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
-            spdlog::info("{} found at: {}", "CPU Affinity for AMD", reinterpret_cast<void*>(affinityPatch));
-            // NOP out the specified number of bytes (replace with "90")
-            for (size_t i = 0; i < 5; ++i) {
-                Memory::Write(reinterpret_cast<uintptr_t>(affinityPatch + i), static_cast<uint8_t>(0x01));
-            }
-        }
 
         //safetyhook::create_inline()
 
         //asm volatile (
             //"nop"
         //);
+    }
+
+    void Plugin_DERQ::AffinityPatches(HMODULE baseModule)
+    {
+        int cpuAffinityMode = 0; // 0 : Original, 1: AMD, 2: Intel
+        uint8_t cpuAffinityModeByte;
+        switch (cpuAffinityMode) {
+            case 0: break; // Original, do nothing
+            case 1: { // AMD CPU Scheduling
+                cpuAffinityModeByte = 0x00;
+                break;
+            }
+            case 2: { // Intel CPU Scheduling
+                cpuAffinityModeByte = 0x01;
+                break;
+            }
+            default: break;  // Original, do nothing
+        }
+        if (cpuAffinityMode != 0 && cpuAffinityModeByte)
+        {
+            // TODO: Figure if there's any performance improvement or rammifications from this. If there's an improvement, keep it. If some notice it's better on their setup while others have issues with it, just make it a config option.
+            // Use Intel CPU scheduling instead of AMD on AMD CPU (I'm morbidly curious since apparently Cyberpunk 2077 had some issue at launch revolving around it).
+            if (auto affinityPatchAMD = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? EB ?? C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
+                spdlog::info("{} found at: {}", "CPU Affinity for AMD", reinterpret_cast<void*>(affinityPatchAMD));
+                // NOP out the specified number of bytes (replace with "01")
+                for (size_t i = 0; i < 5; ++i) {
+                    Memory::Write(reinterpret_cast<uintptr_t>(affinityPatchAMD + i), static_cast<uint8_t>(cpuAffinityModeByte));
+                }
+            }
+            // Use AMD CPU scheduling instead of Intel on Intel CPU.
+            if (auto affinityPatchIntel = Memory::PatternScan(baseModule, "C7 44 24 24 ? ? ? ? 8B 44 ? ? 89 44 ? ? 83 7C 24 20")) {
+                spdlog::info("{} found at: {}", "CPU Affinity for Intel", reinterpret_cast<void*>(affinityPatchIntel));
+                // NOP out the specified number of bytes (replace with "00")
+                for (size_t i = 0; i < 5; ++i) {
+                    Memory::Write(reinterpret_cast<uintptr_t>(affinityPatchIntel + i), static_cast<uint8_t>(cpuAffinityModeByte));
+                }
+            }
+        }
     }
 
     void Plugin_DERQ::GraphicsSettingsPatches(HMODULE baseModule)

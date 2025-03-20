@@ -89,6 +89,7 @@ namespace EnigmaFix {
                 PluginDERQPm.FrameratePatches(BaseModule);
                 PluginDERQPm.UIPatches(BaseModule);
                 PluginDERQPm.LoggingPatches(BaseModule);
+                PluginDERQPm.AffinityPatches(BaseModule);
             }
             case PlayerSettingsPm.E_GameMode::DERQ2: {
             }
