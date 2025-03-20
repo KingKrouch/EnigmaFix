@@ -33,6 +33,9 @@ SOFTWARE.
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>    // support for basic file logging
 #include <spdlog/sinks/stdout_color_sinks.h> // For colored console logging
+
+#include "spdlog/async.h"
+#include "spdlog/async_logger.h"
 // Variables
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();
 // Namespaces
@@ -182,16 +185,34 @@ namespace EnigmaFix {
             AllocConsole();
             freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
 
+            // Initialize async logging thread pool (if not already initialized)
+            spdlog::init_thread_pool(8192, 1);  // Queue size: 8192, Threads: 1
+
             // Initialize spdlog with a colored console sink
             auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+            auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("EnigmaFix.log", true);
+
             console_sink->set_level(spdlog::level::debug);  // Set log level to debug
-            spdlog::set_default_logger(std::make_shared<spdlog::logger>("console", console_sink));
+            file_sink->set_level(spdlog::level::debug);
+
+            //spdlog::set_default_logger(std::make_shared<spdlog::logger>("console", console_sink));
+
+            // Combine sinks into an async logger
+            auto async_logger = std::make_shared<spdlog::async_logger>(
+                "console",
+                spdlog::sinks_init_list{console_sink, file_sink},
+                spdlog::thread_pool(),
+                spdlog::async_overflow_policy::block
+            );
+
+            // Set the global logger
+            spdlog::set_default_logger(async_logger);
 
             // Optional: Set a global log level and pattern
             spdlog::set_level(spdlog::level::debug);  // Set global log level
 
             // Optional: Customize the log pattern (timestamp, log level, message)
-            spdlog::set_pattern("[%m/%d/%Y - %I:%M:%S%p] [%^%l%$] [thread %t] %v");
+            spdlog::set_pattern("[%m/%d/%Y - %I:%M:%S%p] [%^%l%$] %v");
 
             // Log initial message
             spdlog::info("Console logging initialized.");
