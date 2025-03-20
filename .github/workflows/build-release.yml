@@ -40,8 +40,12 @@ jobs:
         # Unzip the downloaded file into a temporary directory
         unzip Ultimate-ASI-Loader_x64.zip -d /tmp/asi-loader
 
-        # Move dinput8.dll to the desired result folder
-        mv /tmp/asi-loader/Ultimate-ASI-Loader_x64/dinput8.dll result/Windows/
+        # List the contents of the unzipped folder to ensure correct path
+        echo "Listing extracted files:"
+        ls -R /tmp/asi-loader
+
+        # Move dinput8.dll to the desired result folder, adjust path if necessary
+        mv /tmp/asi-loader/*/dinput8.dll result/Windows/
 
         # Clean up the downloaded zip and extracted files
         rm -rf /tmp/asi-loader Ultimate-ASI-Loader_x64.zip
