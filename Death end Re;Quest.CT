@@ -357,81 +357,6 @@ db 8B 53 0C
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>5411</ID>
-              <Description>"UI adjustment"</Description>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>[ENABLE]
-//code from here to '[DISABLE]' will be used to enable the cheat
-alloc(newmem2,2048,"Application.exe"+236BA5) 
-label(returnhere2)
-label(originalcode2)
-label(exit2)
-
-newmem2: //this is allocated memory, you have read,write,execute access
-//place your code here
-mov eax,[Application.exe+28B524]
-
-originalcode2:
-//mov eax,[rax]
-mov [rsp+000000F0],eax
-
-// Address of Horizontal UI scaling signature = Application.exe + 0x00236BA5
-// "\x8B\x00\x89\x84\x00\x00\x00\x00\x00\x48\x8B\x00\x00\x00\x00\x00\x00\x8B\x40\x00\x89\x84\x00\x00\x00\x00\x00\xEB", "xxxx?????xx??????xx?xx?????x"
-// "8B 00 89 84 ? ? ? ? ? 48 8B ? ? ? ? ? ? 8B 40 ? 89 84 ? ? ? ? ? EB"
-
-exit2:
-jmp returnhere2
-
-"Application.exe"+236BA5:
-jmp newmem2
-nop 4
-returnhere2:
-
-alloc(newmem,2048,"Application.exe"+CC3D0) 
-label(returnhere)
-label(originalcode)
-label(exit)
-
-newmem: //this is allocated memory, you have read,write,execute access
-//place your code here
-mov ecx,[Application.exe+28B524]
-
-originalcode:
-//mov ecx,[rcx]
-mov [rax],ecx
-mov rax,[rsp+48]
-
-// Address of signature = Application.exe + 0x000CC3D0
-// "\x8B\x09\x89\x08\x48\x8B\x00\x00\x00\x48\x8B\x00\x00\x00\x8B\x49\x00\x89\x48\x00\x48\x8B\x00\x00\x00\x48\x83\xC4", "xxxxxx???xx???xx?xx?xx???xxx"
-// "8B 09 89 08 48 8B ? ? ? 48 8B ? ? ? 8B 49 ? 89 48 ? 48 8B ? ? ? 48 83 C4"
-
-exit:
-jmp returnhere
-
-"Application.exe"+CC3D0:
-jmp newmem
-nop 4
-returnhere:
-
-
- 
- 
-[DISABLE]
-//code from here till the end of the code will be used to disable the cheat
-dealloc(newmem2)
-"Application.exe"+236BA5:
-mov eax,[rax]
-mov [rsp+000000F0],eax
-//Alt: db 8B 00 89 84 24 F0 00 00 00
-dealloc(newmem)
-"Application.exe"+CC3D0:
-mov ecx,[rcx]
-mov [rax],ecx
-mov rax,[rsp+48]
-//Alt: db 8B 09 89 08 48 8B 44 24 48
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
               <ID>5056</ID>
               <Description>"Settings (Use for calculating aspect ratio, and determining the proper internal resolution to use)"</Description>
               <Options moManualExpandCollapse="1"/>
@@ -478,6 +403,97 @@ mov rax,[rsp+48]
                   <Offsets>
                     <Offset>C8</Offset>
                   </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>5524</ID>
+              <Description>"UI Adjustment"</Description>
+              <Options moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>5523</ID>
+                  <Description>"UI Adjustment 1"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"Application.exe"+CC3D0)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov ecx,[Application.exe+28B524]
+
+originalcode:
+//mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+48]
+
+// Address of signature = Application.exe + 0x000CC3D0
+// "\x8B\x09\x89\x08\x48\x8B\x00\x00\x00\x48\x8B\x00\x00\x00\x8B\x49\x00\x89\x48\x00\x48\x8B\x00\x00\x00\x48\x83\xC4", "xxxxxx???xx???xx?xx?xx???xxx"
+// "8B 09 89 08 48 8B ? ? ? 48 8B ? ? ? 8B 49 ? 89 48 ? 48 8B ? ? ? 48 83 C4"
+
+exit:
+jmp returnhere
+
+"Application.exe"+CC3D0:
+jmp newmem
+nop 4
+returnhere:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Application.exe"+CC3D0:
+mov ecx,[rcx]
+mov [rax],ecx
+mov rax,[rsp+48]
+//Alt: db 8B 09 89 08 48 8B 44 24 48
+
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>5411</ID>
+                  <Description>"UI Adjustment 2"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem2,2048,"Application.exe"+236BA5) 
+label(returnhere2)
+label(originalcode2)
+label(exit2)
+
+newmem2: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov eax,[Application.exe+28B524]
+
+originalcode2:
+//mov eax,[rax]
+mov [rsp+000000F0],eax
+
+// Address of Horizontal UI scaling signature = Application.exe + 0x00236BA5
+// "\x8B\x00\x89\x84\x00\x00\x00\x00\x00\x48\x8B\x00\x00\x00\x00\x00\x00\x8B\x40\x00\x89\x84\x00\x00\x00\x00\x00\xEB", "xxxx?????xx??????xx?xx?????x"
+// "8B 00 89 84 ? ? ? ? ? 48 8B ? ? ? ? ? ? 8B 40 ? 89 84 ? ? ? ? ? EB"
+
+exit2:
+jmp returnhere2
+
+"Application.exe"+236BA5:
+jmp newmem2
+nop 4
+returnhere2:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem2)
+"Application.exe"+236BA5:
+mov eax,[rax]
+mov [rsp+000000F0],eax
+//Alt: db 8B 00 89 84 24 F0 00 00 00
+</AssemblerScript>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
