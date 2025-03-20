@@ -66,7 +66,7 @@ namespace EnigmaFix
         { 0x140F58750, 0x140F58754 },  // 1360x765 (6)
         { 0x140F58758, 0x140F5875C },  // 1366x768 (7)
         { 0x140F58760, 0x140F58764 },  // 1600x900 (8)
-        { 0x140F58764, 0x140F5876C },  // 1920x1080 (9)
+        { 0x140F58768, 0x140F5876C },  // 1920x1080 (9)
         { 0x140F58770, 0x140F58774 },  // 2560x1440 (10)
         { 0x140F58778, 0x140F5877C },  // 3840x2160 (11)
         //{ 0xF58780, 0xF58784 },        // 4K Native (12) (This one won't be used because we are overriding that with our custom resolution).
@@ -85,84 +85,64 @@ namespace EnigmaFix
         }
     }
 
-    void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
+    using ResCheckFunctionType = void(*)(char*, int, int);
+    ResCheckFunctionType OriginalResCheckFunction = nullptr;
+    safetyhook::InlineHook ResolutionPatchHook{};
+
+    void ResCheckFunctionHook(char* param_1, int param_2, int param_3)
     {
         // Signature Scan Horizontal Res: "80 07 ?? 00 C7 45 ?? 38 04 ?? 00 E8"
         // Signature Scan Vertical Res:   "38 04 ?? 00 E8 64 BF"
-        int* hResPtr   = (int*)((intptr_t)baseModule + 0x4858CC);
-        int* vResPtr   = (int*)((intptr_t)baseModule + 0x4858D3);
+        auto hResPtr   = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858CC);
+        auto vResPtr   = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858D3);
 
         // Signature Scan Horizontal Res 4K Native: "00 0F 00 00 C7 45 C3"
         // Signature Scan Vertical Res 4K Native:   "70 ?? 00 00 E8 ?? ?? ?? ?? EB ?? E8"
         // TODO: Figure out why writing to these doesn't work.
-        int* hRes4KPtr = (int*)((intptr_t)baseModule + 0x4858A7);
-        int* vRes4KPtr = (int*)((intptr_t)baseModule + 0x4858AE);
+        auto hRes4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858A7);
+        auto vRes4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858AE);
 
-        // Signature Scan Horizontal Window Size 4K Native: "00 0F 00 00 70 ? 00 00 C0 5D 00"
-        // Signature Scan Vertical Window Size 4K Native: "70 ? 00 00 C0 5D 00"
-        int* hWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58780);
-        int* vWinSize4KPtr = (int*)((intptr_t)baseModule + 0xF58784);
+        // Signature Scan Horizontal Window Size 4K Native: "00 0F 00 00 70 ?? 00 00 C0 5D 00"
+        // Signature Scan Vertical Window Size 4K Native: "70 ?? 00 00 C0 5D 00"
+        auto hWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58780));
+        auto vWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58784));
 
         // Print out our default internal resolution values, for debugging purposes.
         spdlog::info("Default Internal Resolution : {}x{}", *hResPtr, *vResPtr);
         spdlog::info("4K Native Default Internal Resolution : {}x{}", *hRes4KPtr, *vRes4KPtr);
 
-        // For now, let's just set this, so we can see how the game reacts to it.
-        hRes4KPtr     = &PlayerSettingsPDQ.RES.HorizontalRes;
-        vRes4KPtr       = &PlayerSettingsPDQ.RES.VerticalRes;
-        hWinSize4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
-        vWinSize4KPtr = &PlayerSettingsPDQ.RES.VerticalRes;
+        // Grab the current resolution index, so we can adjust the memory value for the internal resolution below the 4K Native mode to their proper resolutions.
+        auto currentResolutionIndexPtr = reinterpret_cast<int*>(*reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x01017E18) + 0xC4);
+        if (int currentResolutionIndex = *currentResolutionIndexPtr; currentResolutionIndex >= 0 && currentResolutionIndex <= 11) {
+            Memory::Write(reinterpret_cast<uintptr_t>(hResPtr), *resolutionList[currentResolutionIndex].X);
+            Memory::Write(reinterpret_cast<uintptr_t>(vResPtr), *resolutionList[currentResolutionIndex].Y);
+            spdlog::info("Resolution: Patched Internal 1080p Resolution to {}x{}.", *hResPtr, *vResPtr);
+        }
+        else {
+            // TODO: Figure out why writing to the internal resolution and window size causes crashing.
+            Memory::Write(reinterpret_cast<uintptr_t>(hRes4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
+            Memory::Write(reinterpret_cast<uintptr_t>(vRes4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
 
+            Memory::Write(reinterpret_cast<uintptr_t>(hWinSize4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
+            Memory::Write(reinterpret_cast<uintptr_t>(vWinSize4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
+            spdlog::info("Resolution: Patched Internal 4K Native Resolution to {}x{}.", *hRes4KPtr, *vRes4KPtr);
+            spdlog::info("Resolution: Patched Internal 4K Native Window Size to {}x{}.", *hWinSize4KPtr, *vWinSize4KPtr);
+        }
+
+        // TODO: Add return function here.
+        return ResolutionPatchHook.call<void>(param_1, param_2, param_3);
+    }
+
+    void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
+    {
         // TODO: Find a good place to put this check inside of the game code, just before the resolution change occurs.
-        // Example for setting up our actual internal resolution to one of the available hardcoded ones.
-        //int currentResolution;
-        //switch (currentResolution)
-        //{
-            //case 0: // 640x360
-                //hResPtr = resolutionList[0].X;
-                //vResPtr = resolutionList[0].Y;
-                //break;
-            //case 1: // 720x405
-                //hResPtr = resolutionList[1].X;
-                //vResPtr = resolutionList[1].Y;
-                //break;
-            //case 2: // 800x450
-                //hResPtr = resolutionList[2].X;
-                //vResPtr = resolutionList[2].Y;
-                //break;
-            //case 3: // 1024x576
-                //hResPtr = resolutionList[3].X;
-                //vResPtr = resolutionList[3].Y;
-            //case 4: // 1152x648
-                //hResPtr = resolutionList[4].X;
-                //vResPtr = resolutionList[4].Y;
-            //case 5: // 1280x720
-                //hResPtr = resolutionList[5].X;
-                //vResPtr = resolutionList[5].Y;
-            //case 6: // 1360x765
-                //hResPtr = resolutionList[6].X;
-                //vResPtr = resolutionList[6].Y;
-            //case 7: // 1366x768
-                //hResPtr = resolutionList[7].X;
-                //vResPtr = resolutionList[7].Y;
-            //case 8: // 1600x900
-                //hResPtr = resolutionList[8].X;
-                //vResPtr = resolutionList[8].Y;
-            //case 9: // 1920x1080
-                //hResPtr = resolutionList[9].X;
-                //vResPtr = resolutionList[9].Y;
-            //case 10: // 2560x1440
-                //hResPtr = resolutionList[10].X;
-                //vResPtr = resolutionList[10].Y;
-            //case 11: // 3840x2160
-                //hResPtr = resolutionList[11].X;
-                //vResPtr = resolutionList[11].Y;
-            //case 12: // 4K Native, in this case, we need to adjust both the window size and internal resolution
-                //hRes4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
-                //vResPtr   = &PlayerSettingsPDQ.RES.VerticalRes;
-                //hWinSize4KPtr = &PlayerSettingsPDQ.RES.HorizontalRes;
-                //vWinSize4KPtr = &PlayerSettingsPDQ.RES.VerticalRes;
-        //}
+        if (auto resolutionCheckFunc = Memory::PatternScan(baseModule, "48 89 ?? ?? ?? 48 89 ?? ?? ?? 57 48 83 EC ?? 48 8B ?? ?? ?? ?? ?? 48 33 ?? 48 89 ?? ?? ?? 41 8B ?? 8B EA")) {
+            spdlog::info("Resolution: Found Resolution Check Signature at: {}", reinterpret_cast<void*>(resolutionCheckFunc));
+
+            // Store original function pointer
+            OriginalResCheckFunction = reinterpret_cast<ResCheckFunctionType>(resolutionCheckFunc);
+            ResolutionPatchHook = safetyhook::create_inline(OriginalResCheckFunction, ResCheckFunctionHook);
+        }
 
         // Signature for 4K Native text: "34 ?? 20 4E 61 74 69 76 65"
         // TODO: Take into account the other parts of memory that will inevitably duplicate this during runtime. If at any point the in-game overlay changes the custom resolution, we need to run a loop that changes the memory values to reflect this in-game.
@@ -278,7 +258,7 @@ namespace EnigmaFix
         using FramerateLimiterFunc = int(__stdcall*)(void* gameInstance);
         FramerateLimiterFunc originalFramerateLimiter = nullptr;
 
-        // Delta Time Address Signature: "89 88 ? ? ? ? 80 3F"
+        // Delta Time Address Signature: "89 88 ?? ?? ?? ?? 80 3F"
 
         if (auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44")) {
             spdlog::info("Found Framerate Limiter Signature at: {}", reinterpret_cast<void*>(framerateCapFunc));
@@ -333,7 +313,7 @@ namespace EnigmaFix
                 }
             }
             // Use AMD CPU scheduling instead of Intel on Intel CPU.
-            if (auto affinityPatchIntel = Memory::PatternScan(baseModule, "C7 44 24 24 ? ? ? ? 8B 44 ? ? 89 44 ? ? 83 7C 24 20")) {
+            if (auto affinityPatchIntel = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
                 spdlog::info("{} found at: {}", "CPU Affinity for Intel", reinterpret_cast<void*>(affinityPatchIntel));
                 // NOP out the specified number of bytes (replace with "00")
                 for (size_t i = 0; i < 5; ++i) {
@@ -477,11 +457,7 @@ namespace EnigmaFix
         return utf8_str;
     }
 
-    using LoggingFunctionType = void(*)(int, const char*, ...);
-    LoggingFunctionType OriginalLoggingFunction = nullptr;
-
     void HookedLoggingFunction(int code, const char* format, ...) {
-
         if (!format) return;  // Avoid null format strings
 
         // Allocate a buffer for the formatted message
@@ -511,18 +487,18 @@ namespace EnigmaFix
 
     void Plugin_DERQ::LoggingPatches(HMODULE baseModule)
     {
+
+
         if (auto loggingFunc = Memory::PatternScan(baseModule, "4C 89 44 24 ?? 4C 89 4C 24 ?? C3 CC CC CC CC CC 48 8b 01")) {
-            spdlog::info("Found Logging Function Signature");
+            spdlog::info("Logging: Found Engine Logging Function Signature at: {}", reinterpret_cast<void*>(loggingFunc));
+            using LoggingFunctionType = void(*)(int, const char*, ...);
+            LoggingFunctionType OriginalLoggingFunction = nullptr;
 
             // Store original function pointer
             OriginalLoggingFunction = reinterpret_cast<LoggingFunctionType>(loggingFunc);
             static auto hook = safetyhook::create_inline(OriginalLoggingFunction, HookedLoggingFunction);
             // TODO: Print the logs to the console.
         }
-
-        //spdlog::info();
-        //spdlog::warn();
-        //spdlog::error();
     }
 
     // ALT+F4 Window Signatures:
