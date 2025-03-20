@@ -41,7 +41,7 @@ jobs:
         unzip Ultimate-ASI-Loader_x64.zip -d /tmp/asi-loader
 
         # Move dinput8.dll to the desired result folder, no subfolder needed
-        mv /tmp/asi-loader/dinput8.dll result/Windows/
+        sudo mv /tmp/asi-loader/dinput8.dll result/Windows/
 
         # Clean up the downloaded zip and extracted files
         rm -rf /tmp/asi-loader Ultimate-ASI-Loader_x64.zip
