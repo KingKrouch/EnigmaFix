@@ -68,7 +68,7 @@ namespace EnigmaFix
         { 0x140F58764, 0x140F5876C },  // 1920x1080 (9)
         { 0x140F58770, 0x140F58774 },  // 2560x1440 (10)
         { 0x140F58778, 0x140F5877C },  // 3840x2160 (11)
-        //{ 0xF58780, 0xF58784 },        // 4K Native (12)
+        //{ 0xF58780, 0xF58784 },        // 4K Native (12) (This one won't be used because we are overriding that with our custom resolution).
     };
 
     void Plugin_DERQ::ResolutionPatches(HMODULE baseModule)
@@ -161,16 +161,16 @@ namespace EnigmaFix
                 return;
             }
 
-            DWORD oldProtect;
-            if (VirtualProtect(native4kText, 9, PAGE_EXECUTE_READWRITE, &oldProtect)) {
-                std::memcpy(native4kText, replacement.c_str(), replacement.size()); // Copy actual data
-                std::memset(native4kText + replacement.size(), 0, 9 - replacement.size()); // Null-pad remaining bytes
-
-                VirtualProtect(native4kText, 9, oldProtect, &oldProtect);
-                spdlog::info("Successfully patched '4K Native' -> '{}'.", replacement);
-            } else {
-                spdlog::error("Failed to modify memory protection.");
+            // Write the replacement string directly to the memory address
+            for (size_t i = 0; i < replacement.size(); ++i) {
+                Memory::Write(reinterpret_cast<uintptr_t>(native4kText + i), replacement[i]);
             }
+
+            // Null-pad remaining bytes if the replacement string is less than 9 bytes
+            for (size_t i = replacement.size(); i < 9; ++i) {
+                Memory::Write(reinterpret_cast<uintptr_t>(native4kText + i), '\0');
+            }
+            spdlog::info("Successfully patched '4K Native' -> '{}'.", replacement);
         }
 
         // Signatures for resolution checks to NOP out:
@@ -213,6 +213,7 @@ namespace EnigmaFix
         }
         if (auto arBlockFunction4 = Memory::PatternScan(baseModule, "8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82")) { // (8B 42 50)
             spdlog::info("Aspect Ratio: Found Fourth Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction4));
+
         }
 
         // TODO: Figure out what opcodes access these memory pointers, and update them to use our own internal aspect ratio variable.
