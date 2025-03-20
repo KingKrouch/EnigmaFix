@@ -22,6 +22,9 @@ SOFTWARE.
 
 // Internal Functionality
 #include "LogManager.h"
+
+#include <stdarg.h>
+
 #include "spdlog/spdlog.h"
 // System Libraries
 
@@ -31,10 +34,5 @@ EnigmaFix::LogManager EnigmaFix::LogManager::lm_Instance;
 
 namespace EnigmaFix
 {
-    // TODO: Add custom formatting as shown here: https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-    // TODO: Prevent rendering logs and game's own logging info from being logged to text files unless a "verbose logging" option is set to include that information.
-    void LogManager::Log()
-    {
-        return;
-    }
+
 }

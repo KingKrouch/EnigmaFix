@@ -27,6 +27,7 @@ SOFTWARE.
 #include "../Managers/PatchManager.h"
 
 // Third Party Libraries
+#include <codecvt>
 #include <safetyhook.hpp>
 
 #include "../Managers/FramerateManager.h"
@@ -294,6 +295,16 @@ namespace EnigmaFix
         // For now, disable the framelimiter.
         NOPPattern(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44", 6, "Framerate Limiter");
 
+        // TODO: Figure if there's any performance improvement or rammifications from this. If there's an improvement, keep it. If some notice it's better on their setup while others have issues with it, just make it a config option.
+        // Use Intel CPU scheduling instead of AMD (I'm morbidly curious since apparently Cyberpunk 2077 had some issue at launch revolving around it).
+        if (auto affinityPatch = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? EB ?? C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
+            spdlog::info("{} found at: {}", "CPU Affinity for AMD", reinterpret_cast<void*>(affinityPatch));
+            // NOP out the specified number of bytes (replace with "90")
+            for (size_t i = 0; i < 5; ++i) {
+                Memory::Write(reinterpret_cast<uintptr_t>(affinityPatch + i), static_cast<uint8_t>(0x01));
+            }
+        }
+
         //safetyhook::create_inline()
 
         //asm volatile (
@@ -414,10 +425,68 @@ namespace EnigmaFix
 
     }
 
+    std::string ConvertUTF16toUTF8(const wchar_t* wstr) {
+        std::string utf8_str;
+        const wchar_t* ptr = wstr;
+
+        while (*ptr) {
+            // Assuming UTF-16 with most characters fitting into 3 bytes in UTF-8
+            if (*ptr < 0x80) {
+                utf8_str.push_back(static_cast<char>(*ptr));  // ASCII range
+            } else if (*ptr < 0x800) {
+                utf8_str.push_back(static_cast<char>(0xC0 | (*ptr >> 6)));
+                utf8_str.push_back(static_cast<char>(0x80 | (*ptr & 0x3F)));
+            } else {
+                utf8_str.push_back(static_cast<char>(0xE0 | (*ptr >> 12)));
+                utf8_str.push_back(static_cast<char>(0x80 | ((*ptr >> 6) & 0x3F)));
+                utf8_str.push_back(static_cast<char>(0x80 | (*ptr & 0x3F)));
+            }
+            ++ptr;
+        }
+        return utf8_str;
+    }
+
+    using LoggingFunctionType = void(*)(int, const char*, ...);
+    LoggingFunctionType OriginalLoggingFunction = nullptr;
+
+    void HookedLoggingFunction(int code, const char* format, ...) {
+
+        if (!format) return;  // Avoid null format strings
+
+        // Allocate a buffer for the formatted message
+        char buffer[1024];
+
+        // Process variable arguments correctly
+        va_list args;
+        va_start(args, format);
+        vsnprintf(buffer, sizeof(buffer), format, args);
+        va_end(args);
+
+        // Check for Japanese characters (heuristic: if `format` contains wide chars)
+        std::string message = buffer;
+        if (strstr(format, "%ls")) {  // If the format string expects wide strings
+            const wchar_t* wideStr = reinterpret_cast<const wchar_t*>(buffer);
+            message = ConvertUTF16toUTF8(wideStr);
+        }
+
+        spdlog::info("[Game Log] Received code: {}", code);
+
+        switch (code) {
+            case 0:  spdlog::info("[Game Log] {}", message);  break;
+            case 1:  spdlog::warn("[Game Log] {}", message);  break;
+            case 2:  spdlog::error("[Game Log] {}", message); break;
+            default: spdlog::info("[Game Log] [Unknown Code {}] {}", code, message); break;
+        }
+    }
+
     void Plugin_DERQ::LoggingPatches(HMODULE baseModule)
     {
-        if (auto loggingFunc = Memory::PatternScan(baseModule, "4c 89 44 24 ?? 4c 89 4c 24 ?? c3 cc cc cc cc cc 48 8b 01")) {
+        if (auto loggingFunc = Memory::PatternScan(baseModule, "4C 89 44 24 ?? 4C 89 4C 24 ?? C3 CC CC CC CC CC 48 8b 01")) {
             spdlog::info("Found Logging Function Signature");
+
+            // Store original function pointer
+            OriginalLoggingFunction = reinterpret_cast<LoggingFunctionType>(loggingFunc);
+            static auto hook = safetyhook::create_inline(OriginalLoggingFunction, HookedLoggingFunction);
             // TODO: Print the logs to the console.
         }
 

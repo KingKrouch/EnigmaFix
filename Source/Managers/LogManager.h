@@ -22,6 +22,7 @@ SOFTWARE.
 
 #ifndef ENIGMAFIX_LOGMANAGER_H
 #define ENIGMAFIX_LOGMANAGER_H
+#include <string>
 
 namespace EnigmaFix {
     class LogManager {
@@ -29,7 +30,6 @@ namespace EnigmaFix {
         static LogManager& Get() {
             return lm_Instance;
         }
-        void Log();
     private:
         LogManager() {}
         static LogManager lm_Instance;
