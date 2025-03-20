@@ -41,6 +41,8 @@ auto& PlayerSettingsLM = EnigmaFix::PlayerSettings::Get();
 // Singleton Instance
 EnigmaFix::LogManager EnigmaFix::LogManager::lm_Instance;
 
+
+// TODO: Figure out how to close up everything when the game exits. For some reason, the console window stays, and it doesn't save the full log files.
 namespace EnigmaFix
 {
     void LogManager::Init()
