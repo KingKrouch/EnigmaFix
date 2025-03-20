@@ -38,17 +38,18 @@ namespace EnigmaFix {
     private:
         static UIManager um_Instance;
         static void BeginRender();
-        static void showMainMenu(bool p_open);
-        static void showStartupOverlay(bool p_open);
-        static void showAboutWindow(bool p_open);
+        static void ShowMainMenu(bool p_open);
+        static void ShowStartupOverlay(bool p_open);
+        static void ShowAboutWindow(bool p_open);
         static void HelpMarker(const char* desc);
-        static void initLocalization();
-        void activateTheme();
-        static void mainMenuOptions();
-        static void loopChecks();
-        static void showExitPrompt();
-        static void windowButtons();
+        static void InitLocalization();
+        void ActivateTheme();
+        static void MainMenuOptions();
+        static void LoopChecks();
+        static void ShowExitPrompt();
+        static void WindowButtons();
         static void LoadLogoTexture();
+        static void ResolutionOptions();
 
 
         struct UIProperties {

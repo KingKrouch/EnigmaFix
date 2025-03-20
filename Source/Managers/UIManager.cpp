@@ -76,7 +76,7 @@ EnigmaFix::UIManager EnigmaFix::UIManager::um_Instance;
 
 namespace EnigmaFix {
 
-    void UIManager::showStartupOverlay(bool p_open)
+    void UIManager::ShowStartupOverlay(bool p_open)
     {
         const float PAD = 10.0f;
         static int corner = 0;
@@ -102,7 +102,7 @@ namespace EnigmaFix {
         End();
     }
 
-    void UIManager::showAboutWindow(bool p_open)
+    void UIManager::ShowAboutWindow(bool p_open)
     {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
@@ -149,7 +149,7 @@ namespace EnigmaFix {
         }
     }
 
-    void UIManager::initLocalization()
+    void UIManager::InitLocalization()
     {
         while (!initLoc) {
             // Initialize localization strings. I still need to find a way to get Japanese and Traditional Chinese strings to appear without "????"s.
@@ -164,7 +164,7 @@ namespace EnigmaFix {
         return ImVec4(Vec[0], Vec[1], Vec[2], Vec[3]);
     }
 
-    void UIManager::activateTheme()
+    void UIManager::ActivateTheme()
     {
         // Window and Border theming
         ImGuiStyle* style        = &GetStyle();
@@ -252,14 +252,75 @@ namespace EnigmaFix {
         colors[ImGuiCol_ModalWindowDimBg]      = VectorToVec4(Color.ImGuiCol_ModalWindowDimBg);
     }
 
-    void UIManager::mainMenuOptions()
+    struct DesktopResolution {
+        int x;
+        int y;
+
+        // Define operator== to allow comparison
+        bool operator==(const DesktopResolution& other) const {
+            return x == other.x && y == other.y;
+        }
+    };
+
+    std::vector<DesktopResolution> GetAvailableResolutions() {
+        std::vector<DesktopResolution> resolutions;
+
+        // Retrieve primary display name
+        DISPLAY_DEVICE displayDevice;
+        displayDevice.cb = sizeof(DISPLAY_DEVICE);
+        if (!EnumDisplayDevices(nullptr, 0, &displayDevice, 0)) {
+            return resolutions; // Return empty if failed to get display device
+        }
+
+        std::string primaryMonitorName = displayDevice.DeviceName; // Example: "\\.\DISPLAY1"
+
+        // Enumerate display settings for the primary display
+        DEVMODE devMode{};
+        devMode.dmSize = sizeof(DEVMODE);
+        int i = 0;
+
+        while (EnumDisplaySettings(primaryMonitorName.c_str(), i++, &devMode)) {
+            DesktopResolution res = {
+                static_cast<int>(devMode.dmPelsWidth),
+                static_cast<int>(devMode.dmPelsHeight)
+            };
+
+            // Avoid duplicate resolutions
+            if (std::find(resolutions.begin(), resolutions.end(), res) == resolutions.end()) {
+                resolutions.push_back(res);
+            }
+        }
+
+        return resolutions;
+    }
+
+    void UIManager::ResolutionOptions()
+    {
+        std::vector<DesktopResolution> resolutions = GetAvailableResolutions();
+
+        // Convert resolution list to ImGui-friendly format
+        std::vector<std::string> resolutionStrings;
+        for (const auto& res : resolutions) {
+            resolutionStrings.push_back(std::to_string(res.x) + "x" + std::to_string(res.y));
+        }
+
+        // Convert to a format ImGui::Combo can use
+        std::vector<const char*> resolutionCStrs;
+        for (const auto& str : resolutionStrings) {
+            resolutionCStrs.push_back(str.c_str());
+        }
+
+        ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), resolutionCStrs.size());
+    }
+
+    void UIManager::MainMenuOptions()
     {
         if (CollapsingHeader(LocUI.Strings.collapsingHeader_Resolution), ImGuiTreeNodeFlags_Leaf)
         {
             ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomRes, &SettingsUI.RES.UseCustomRes);
             if (SettingsUI.RES.UseCustomRes)
             {
-                Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionOptions, IM_ARRAYSIZE(resolutionOptions));
+                ResolutionOptions();
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResolution);
             }
             ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomResScale, &SettingsUI.RES.UseCustomResScale);
@@ -362,7 +423,7 @@ namespace EnigmaFix {
         }
     }
 
-    void UIManager::windowButtons()
+    void UIManager::WindowButtons()
     {
         if (Button(LocUI.Strings.button_Save))
         {
@@ -386,7 +447,7 @@ namespace EnigmaFix {
         }
     }
 
-    void UIManager::showExitPrompt()
+    void UIManager::ShowExitPrompt()
     {
         Text("%s", LocUI.Strings.exitTextPrompt);
         Separator();
@@ -407,19 +468,19 @@ namespace EnigmaFix {
         EndPopup();
     }
 
-    void UIManager::loopChecks()
+    void UIManager::LoopChecks()
     {
         if (startupNotice)
         {
-            showStartupOverlay(&startupNotice);
+            ShowStartupOverlay(&startupNotice);
         }
         if (aboutPage)
         {
-            showAboutWindow(&aboutPage);
+            ShowAboutWindow(&aboutPage);
         }
         if (BeginPopupModal(LocUI.Strings.gameExit, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
-            showExitPrompt();
+            ShowExitPrompt();
         }
 
         switch (SelectedShadowOption)
@@ -457,16 +518,16 @@ namespace EnigmaFix {
         }
     }
 
-    void UIManager::showMainMenu(bool p_open)
+    void UIManager::ShowMainMenu(bool p_open)
     {
         if (ImGui::Begin(LocUI.Strings.gameName, &p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse))
         {
             // Creates the main menu UI and enables our custom theming.
-            um_Instance.activateTheme();
+            um_Instance.ActivateTheme();
             // Spawns the main menu logic.
-            um_Instance.mainMenuOptions();
+            um_Instance.MainMenuOptions();
             Separator();
-            um_Instance.windowButtons();
+            um_Instance.WindowButtons();
         }
     }
 
@@ -479,15 +540,15 @@ namespace EnigmaFix {
 
     void UIManager::BeginRender()
     {
-        um_Instance.showMainMenu(SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
+        um_Instance.ShowMainMenu(SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
         // Runs some menu checks per-frame, since I seemingly can't get it so these checks don't happen per-frame.
-        um_Instance.loopChecks();
+        um_Instance.LoopChecks();
     }
 
     void UIManager::Begin()
     {
         // Checks if the localization strings have been initialized.
-        um_Instance.initLocalization();
+        um_Instance.InitLocalization();
         // Loads the About screen's logo texture.
         //um_Instance.LoadLogoTexture();
         // Begins drawing the UI.
