@@ -27,15 +27,9 @@ SOFTWARE.
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <windows.h>
 // Third Party Libraries
 #include <inipp.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/basic_file_sink.h>    // support for basic file logging
-#include <spdlog/sinks/stdout_color_sinks.h> // For colored console logging
-
-#include "spdlog/async.h"
-#include "spdlog/async_logger.h"
 // Variables
 auto& PlayerSettingsConf = EnigmaFix::PlayerSettings::Get();
 // Namespaces
@@ -109,22 +103,6 @@ namespace EnigmaFix {
     }
 
     void ConfigManager::ReadConfig() {
-        try {
-            // TODO: Fix the log sink so we can actually output to a log file.
-            // Check and remove existing log file to create a new one on each boot
-            if (std::filesystem::exists("EnigmaFix.log")) {
-                std::filesystem::remove("EnigmaFix.log");
-            }
-
-            // Create basic file logger that writes to a new log file each time
-            auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("EnigmaFix.log", true);
-
-            // Combine file sink and console sink (if enabled) in a multi-sink logger
-            std::vector<spdlog::sink_ptr> sinks { file_sink };
-        }
-        catch (const spdlog::spdlog_ex& ex) {
-            std::cout << "Log initialization failed: " << ex.what() << std::endl;
-        }
         spdlog::info("Reading Config...");
         cout.flush();
         cout.clear();
@@ -179,47 +157,6 @@ namespace EnigmaFix {
         inipp::extract(config.sections["Misc"]["EnableConsoleLog"], PlayerSettingsConf.MS.EnableConsoleLog);
         // Launcher Settings
         inipp::extract(config.sections["Launcher"]["IgnoreUpdates"], PlayerSettingsConf.LS.IgnoreUpdates);
-
-        // Show console window if EnableConsoleLog is enabled.
-        if (PlayerSettingsConf.MS.EnableConsoleLog) {
-            AllocConsole();
-            freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); // Allows us to add outputs to the ASI Loader Console Window.
-
-            // Initialize async logging thread pool (if not already initialized)
-            spdlog::init_thread_pool(8192, 1);  // Queue size: 8192, Threads: 1
-
-            // Initialize spdlog with a colored console sink
-            auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-            auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("EnigmaFix.log", true);
-
-            console_sink->set_level(spdlog::level::debug);  // Set log level to debug
-            file_sink->set_level(spdlog::level::debug);
-
-            //spdlog::set_default_logger(std::make_shared<spdlog::logger>("console", console_sink));
-
-            // Combine sinks into an async logger
-            auto async_logger = std::make_shared<spdlog::async_logger>(
-                "console",
-                spdlog::sinks_init_list{console_sink, file_sink},
-                spdlog::thread_pool(),
-                spdlog::async_overflow_policy::block
-            );
-
-            // Set the global logger
-            spdlog::set_default_logger(async_logger);
-
-            // Optional: Set a global log level and pattern
-            spdlog::set_level(spdlog::level::debug);  // Set global log level
-
-            // Optional: Customize the log pattern (timestamp, log level, message)
-            spdlog::set_pattern("[%m/%d/%Y - %I:%M:%S%p] [%^%l%$] %v");
-
-            // Log initial message
-            spdlog::info("Console logging initialized.");
-
-            // Log initial message indicating successful initialization
-            spdlog::info("Logger initialized successfully.");
-        }
 
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }

@@ -23,6 +23,7 @@ SOFTWARE.
 // Internal Functionality
 #include "HookManager.h"
 #include "ConfigManager.h"
+#include "LogManager.h"
 #include "PatchManager.h"
 #include "RenderManager.h"
 #include "FramerateManager.h"
@@ -37,6 +38,7 @@ HANDLE PatchThread; // Creates a handle to the patch thread, so it can be closed
 HANDLE RenderThread; // Creates a handle to the D3D11 hooking thread, so it can be closed easier.
 HANDLE FRManagerThread; // Creates a handle to the framerate manager thread.
 auto& ConMan = EnigmaFix::ConfigManager::Get();
+auto& LogMan = EnigmaFix::LogManager::Get();
 auto& PatchMgr = EnigmaFix::PatchManager::Get();
 auto& RenderMgr = EnigmaFix::RenderManager::Get();
 auto& framerateMgr = EnigmaFix::FramerateManager::Get();
@@ -52,6 +54,7 @@ namespace EnigmaFix {
     void HookManager::BeginHook() {
         spdlog::info("Reading Config File...");
         ConMan.ReadConfig();
+        LogMan.Init();
         spdlog::info("Initializing Patching (Checking what game is being ran)...");
         PatchMgr.InitPatch(); // Run InitPatch() first before we do RunPatches() in it's own thread. Reason being that we want to check for the game mode before we have stuff in their own specific threads checking for it.
         spdlog::info("Creating PatchManager Thread...");

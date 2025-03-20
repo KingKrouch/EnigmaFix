@@ -30,6 +30,7 @@ namespace EnigmaFix {
         static LogManager& Get() {
             return lm_Instance;
         }
+        void Init();
     private:
         LogManager() {}
         static LogManager lm_Instance;
