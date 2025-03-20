@@ -27,6 +27,7 @@ stdenvCross.mkDerivation rec {
 
   configurePhase = "
     rm -rf Intermediate
+    export ASM_NASM=${pkgs.nasm}/bin/nasm
     cmake -B Intermediate/${buildType} -G Ninja -DCMAKE_BUILD_TYPE=${buildType}
   ";
 
