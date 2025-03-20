@@ -28,6 +28,23 @@ jobs:
           cd result/Windows
           rm *.a
         fi
+    # Fetch the latest release URL dynamically using GitHub API
+    - name: Download and Extract Latest dinput8.dll from Ultimate ASI Loader
+      run: |
+        # Fetch the latest release tag info from GitHub API
+        LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/ThirteenAG/Ultimate-ASI-Loader/releases/latest | jq -r '.assets[] | select(.name | test("Ultimate-ASI-Loader_x64.zip")) | .browser_download_url')
+
+        # Download the zip file of the latest release
+        curl -L $LATEST_RELEASE_URL -o Ultimate-ASI-Loader_x64.zip
+
+        # Unzip the downloaded file into a temporary directory
+        unzip Ultimate-ASI-Loader_x64.zip -d /tmp/asi-loader
+
+        # Move dinput8.dll to the desired result folder
+        mv /tmp/asi-loader/Ultimate-ASI-Loader_x64/dinput8.dll result/Windows/
+
+        # Clean up the downloaded zip and extracted files
+        rm -rf /tmp/asi-loader Ultimate-ASI-Loader_x64.zip
     # Finally, upload the artifact.
     - name: Upload Windows Binaries
       uses: actions/upload-artifact@v4
