@@ -221,20 +221,12 @@ namespace EnigmaFix
 
     void Plugin_DERQ::AspectRatioPatches(HMODULE baseModule)
     {
+        // TODO: Fix these
         // Disable aspect ratio values from being overwritten
-        if (auto arBlockFunction1 = Memory::PatternScan(baseModule, "89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82")) { // (89 41 50)
-            spdlog::info("Aspect Ratio: Found First Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction1));
-        }
-        if (auto arBlockFunction2 = Memory::PatternScan(baseModule, "F3 0F ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 75")) { // (F3 0F 11 4F 50)
-            spdlog::info("Aspect Ratio: Found Second Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction2));
-        }
-        if (auto arBlockFunction3 = Memory::PatternScan(baseModule, "F3 0F ?? ?? ?? 48 8B ?? ?? ?? ?? ?? 66 0F")) { // (F3 0F 11 4F 50)
-            spdlog::info("Aspect Ratio: Found Third Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction3));
-        }
-        if (auto arBlockFunction4 = Memory::PatternScan(baseModule, "8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82")) { // (8B 42 50)
-            spdlog::info("Aspect Ratio: Found Fourth Block Function Signature at: {}", reinterpret_cast<void*>(arBlockFunction4));
-
-        }
+        //NOPPattern(baseModule, "89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82", 3, "Aspect Ratio Change Blocker Opcode 1"); // (89 41 50)
+        //NOPPattern(baseModule, "F3 0F ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 75", 5, "Aspect Ratio Change Blocker Opcode 2"); // (F3 0F 11 4F 50)
+        //NOPPattern(baseModule, "F3 0F ?? ?? ?? 48 8B ?? ?? ?? ?? ?? 66 0F", 3, "Aspect Ratio Change Blocker Opcode 3"); // (F3 0F 11 4F 50)
+        //NOPPattern(baseModule, "8B 42 ?? 89 41 ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 0F 10 ?? ?? 0F 11 ?? ?? 8B 82", 3, "Aspect Ratio Change Blocker Opcode 4");// (8B 42 50)
 
         // TODO: Figure out what opcodes access these memory pointers, and update them to use our own internal aspect ratio variable.
         // Set up the pointer addresses for our aspect ratio variables
@@ -260,7 +252,6 @@ namespace EnigmaFix
             //spdlog::error("Aspect ratio pointer is NULL");
             //return;
         //}
-
     }
 
     void Plugin_DERQ::FOVPatches(HMODULE baseModule)
@@ -288,7 +279,6 @@ namespace EnigmaFix
 
         if (auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44")) {
             spdlog::info("Found Framerate Limiter Signature at: {}", reinterpret_cast<void*>(framerateCapFunc));
-
             // Hook the function
             //framerateHook = safetyhook::create_inline(framerateCapFunc, FramerateManagerPDQ.Limit());
             //originalFramerateLimiter = framerateHook.original<FramerateLimiterFunc>();
@@ -300,6 +290,10 @@ namespace EnigmaFix
             // The modification after the framelimiter is called should jump to "F3 0F ?? ?? ?? ?? F3 0F ?? ?? ?? ?? F3 0F ?? ?? ?? ?? 48 8B ?? ?? ?? ?? ?? ?? 83 B8 A4 00 00 00" (Application.exe+E8962 - movss xmm0,[rsp+40])
             // The actual bytes of the jmp location should be "Application.exe+E8962 - F3 0F 10 44 24 40"
         }
+
+        // For now, disable the framelimiter.
+        NOPPattern(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44", 6, "Framerate Limiter");
+
         //safetyhook::create_inline()
 
         //asm volatile (
@@ -404,7 +398,7 @@ namespace EnigmaFix
                 vignetteFuncMidHook = safetyhook::create_mid(vignetteFunc,
                     [](SafetyHookContext& ctx)
                     {
-                        ctx.xmm1.f32[0] = 1.0f; // The default is "0.200000003"
+                        ctx.xmm1.f32[0] = 0.0f; // The default is "0.200000003"
                     });
             }
         }
