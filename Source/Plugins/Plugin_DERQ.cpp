@@ -278,6 +278,8 @@ namespace EnigmaFix
         using FramerateLimiterFunc = int(__stdcall*)(void* gameInstance);
         FramerateLimiterFunc originalFramerateLimiter = nullptr;
 
+        // Delta Time Address Signature: "89 88 ? ? ? ? 80 3F"
+
         if (auto framerateCapFunc = Memory::PatternScan(baseModule, "8B 80 ?? ?? ?? ?? 89 44 ?? ?? 83 7C 24 44 ?? 74 ?? 83 7C 24 44")) {
             spdlog::info("Found Framerate Limiter Signature at: {}", reinterpret_cast<void*>(framerateCapFunc));
             // Hook the function
@@ -498,8 +500,7 @@ namespace EnigmaFix
             message = ConvertUTF16toUTF8(wideStr);
         }
 
-        spdlog::info("[Game Log] Received code: {}", code);
-
+        // Switches the log type based on the output.
         switch (code) {
             case 0:  spdlog::info("[Game Log] {}", message);  break;
             case 1:  spdlog::warn("[Game Log] {}", message);  break;
