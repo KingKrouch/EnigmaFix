@@ -164,9 +164,9 @@ namespace EnigmaFix {
 
         // Check if the Horizontal or Vertical Res is 0. If so, default the custom resolution to the current display resolution.
         if (PlayerSettingsConf.RES.HorizontalRes == 0 || PlayerSettingsConf.RES.VerticalRes == 0) {
-            auto CurrentResolution    = Util::GetPhysicalDesktopDimensions();
-            PlayerSettingsConf.RES.HorizontalRes = CurrentResolution.first;
-            PlayerSettingsConf.RES.VerticalRes   = CurrentResolution.second;
+            auto CurrentResolution    = Util::GetCurrentDisplayResolution();
+            PlayerSettingsConf.RES.HorizontalRes = CurrentResolution.x;
+            PlayerSettingsConf.RES.VerticalRes   = CurrentResolution.y;
         }
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }

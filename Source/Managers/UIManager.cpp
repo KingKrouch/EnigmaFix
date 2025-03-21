@@ -255,7 +255,8 @@ namespace EnigmaFix {
 
     void UIManager::ResolutionOptions()
     {
-        std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableResolutions();
+        std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableDisplayResolutions();
+        auto currentResolution = Util::GetCurrentDisplayResolution();
 
         // Convert resolution list to ImGui-friendly format
         std::vector<std::string> resolutionStrings;

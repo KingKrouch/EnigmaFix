@@ -23,8 +23,8 @@ namespace Util
     };
 
     // Function declarations (only signatures)
-    std::vector<DesktopResolution> GetAvailableResolutions();
-    std::pair<int, int> GetPhysicalDesktopDimensions();
+    std::vector<DesktopResolution> GetAvailableDisplayResolutions(int displayIndex = 1);
+    DesktopResolution GetCurrentDisplayResolution(int displayIndex = 1);
 }
 
 #endif // DISPLAY_HELPER_HPP

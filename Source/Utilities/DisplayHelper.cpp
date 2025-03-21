@@ -12,12 +12,12 @@ There's some things that I modified or added, such as getting a list of availabl
 
 namespace Util
 {
-    std::vector<DesktopResolution> GetAvailableResolutions() {
+    std::vector<DesktopResolution> GetAvailableDisplayResolutions(int displayIndex) {
         std::vector<DesktopResolution> resolutions;
 
         DISPLAY_DEVICE displayDevice;
         displayDevice.cb = sizeof(DISPLAY_DEVICE);
-        if (!EnumDisplayDevices(nullptr, 0, &displayDevice, 0)) {
+        if (!EnumDisplayDevices(nullptr, displayIndex - 1, &displayDevice, 0)) {
             return resolutions;
         }
 
@@ -37,14 +37,20 @@ namespace Util
                 resolutions.push_back(res);
             }
         }
-
         return resolutions;
     }
 
-    std::pair<int, int> GetPhysicalDesktopDimensions() {
-        if (DEVMODE devMode{ .dmSize = sizeof(DEVMODE) }; EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &devMode))
-            return { devMode.dmPelsWidth, devMode.dmPelsHeight };
+    DesktopResolution GetCurrentDisplayResolution(int displayIndex) {
+        DISPLAY_DEVICE displayDevice = { .cb = sizeof(DISPLAY_DEVICE) };
 
-        return {};
+        if (EnumDisplayDevices(nullptr, displayIndex - 1, &displayDevice, 0)) {
+            DEVMODE devMode = { .dmSize = sizeof(DEVMODE) };
+
+            if (EnumDisplaySettings(displayDevice.DeviceName, ENUM_CURRENT_SETTINGS, &devMode))
+                return { static_cast<int>(devMode.dmPelsWidth), static_cast<int>(devMode.dmPelsHeight) };
+        }
+        //if (DEVMODE devMode{ .dmSize = sizeof(DEVMODE) }; EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &devMode))
+            //return { static_cast<int>(devMode.dmPelsWidth), static_cast<int>(devMode.dmPelsHeight) };
+        return {}; // Returns {0, 0} by default
     }
 }
