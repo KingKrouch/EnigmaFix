@@ -39,9 +39,9 @@ namespace EnigmaFix {
     private:
         static UIManager um_Instance;
         static void BeginRender();
-        static void ShowMainMenu(bool p_open);
-        static void ShowStartupOverlay(bool p_open);
-        static void ShowAboutWindow(bool p_open);
+        static void ShowMainMenu(bool* p_open);
+        static void ShowStartupOverlay(bool* p_open);
+        static void ShowAboutWindow(bool* p_open);
         static void HelpMarker(const char* desc);
         static void InitLocalization();
         void ActivateTheme();

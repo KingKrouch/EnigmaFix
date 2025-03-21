@@ -46,7 +46,7 @@ bool exitPrompt = false;
 bool aboutPage = false;
 
 // ImGui Style
-ImGuiStyle* style = &GetStyle();
+ImGuiStyle* style;
 
 // Test Variables
 bool PressedSave = false;
@@ -80,9 +80,9 @@ EnigmaFix::UIManager EnigmaFix::UIManager::um_Instance;
 
 namespace EnigmaFix {
 
-    void UIManager::ShowStartupOverlay(bool p_open)
+    void UIManager::ShowStartupOverlay(bool* p_open)
     {
-        const float PAD = 10.0f;
+        const float PAD = 10.0f / (SettingsUI.INS.dpiScale * SettingsUI.INS.dpiScaleMultiplier);
         static int corner = 0;
         if (corner != -1)
         {
@@ -96,7 +96,7 @@ namespace EnigmaFix {
             window_pos_pivot.y = (corner & 2) ? 1.0f : 0.0f;
             SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
         }
-        if (::Begin("Startup Overlay", &p_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove))
+        if (::Begin("Startup Overlay", p_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove))
         {
             Text("%s", LocUI.Strings.startupWindowWelcome);
             Text("%s", LocUI.Strings.startupWindowInputPrompt);
@@ -106,9 +106,9 @@ namespace EnigmaFix {
         End();
     }
 
-    void UIManager::ShowAboutWindow(bool p_open)
+    void UIManager::ShowAboutWindow(bool* p_open)
     {
-        if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
+        if (::Begin(LocUI.Strings.aboutEnigmaFix, p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
             float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
             ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / 4) * dpiScaleLogo, (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo));
@@ -133,8 +133,7 @@ namespace EnigmaFix {
             Text("%s", LocUI.Strings.fontsLicense);
             Text("%s", LocUI.Strings.fontAwesomeLicense);
             Separator();
-            if (Button(LocUI.Strings.button_Close))
-            {
+            if (Button(LocUI.Strings.button_Close)) {
                 aboutPage = false;
             }
         }
@@ -144,8 +143,7 @@ namespace EnigmaFix {
     void UIManager::HelpMarker(const char* desc)
     {
         TextDisabled("(?)");
-        if (IsItemHovered())
-        {
+        if (IsItemHovered()) {
             BeginTooltip();
             PushTextWrapPos(GetFontSize() * 35.0f);
             TextUnformatted(desc);
@@ -173,6 +171,7 @@ namespace EnigmaFix {
     {
         // Window and Border theming
         ImVec4* colors           = style->Colors;
+        // TODO: Move this style (not the color stuff) to the DPI Scaling settings. That way we can ensure consistency.
         style->FrameRounding     = 2.0f;
         style->FrameBorderSize   = 1.0f;
         style->PopupBorderSize   = 2.0f;
@@ -183,20 +182,16 @@ namespace EnigmaFix {
         UIProperties Color;
 
         // Color Scheme
-        switch (SettingsUI.GameMode) // I should find out how to put this in a struct instead and just have it access a pointer that switches the reference based on the game mode.
-        {
-            case PlayerSettings::DERQ: // Death end re;Quest
-            {
+        switch (SettingsUI.GameMode) { // I should find out how to put this in a struct instead and just have it access a pointer that switches the reference based on the game mode.
+            case PlayerSettings::DERQ: { // Death end re;Quest
                 Color = ColorSchemeDERQ;
                 break;
             }
-            case PlayerSettings::DERQ2: // Death end re;Quest 2
-            {
+            case PlayerSettings::DERQ2: { // Death end re;Quest 2
                 Color = ColorSchemeDERQ2;
                 break;
             }
-            default: // Misc
-            {
+            default: { // Misc
                 Color = ColorSchemeMISC;
                 break;
             }
@@ -258,31 +253,27 @@ namespace EnigmaFix {
 
     void UIManager::ResolutionOptions()
     {
+        // Grab the available display resolutions, and then the current resolution used by the PlayerSettings.
         std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableDisplayResolutions();
         auto currentResolution = SettingsUI.RES.Resolution;
-
         // Check if currentResolution is in the list
         if (std::find(resolutions.begin(), resolutions.end(), currentResolution) == resolutions.end()) {
             resolutions.push_back(currentResolution); // Add it if it's not in the list
         }
-
         // Sort the resolutions from smallest to largest based on area (width * height)
         std::sort(resolutions.begin(), resolutions.end(), [](const Util::DesktopResolution& a, const Util::DesktopResolution& b) {
             return (a.x * a.y) < (b.x * b.y);  // Compare by resolution area
         });
-
         // Convert resolution list to ImGui-friendly format
         std::vector<std::string> resolutionStrings;
         for (const auto& res : resolutions) {
             resolutionStrings.push_back(std::to_string(res.x) + "x" + std::to_string(res.y));
         }
-
         // Convert to a format ImGui::Combo can use
         std::vector<const char*> resolutionCStrs;
         for (const auto& str : resolutionStrings) {
             resolutionCStrs.push_back(str.c_str());
         }
-
         // Set the selected resolution index based on current resolution
         int selectedResolutionOption = -1;  // Default to an invalid index
         for (int i = 0; i < resolutionStrings.size(); ++i) {
@@ -291,14 +282,12 @@ namespace EnigmaFix {
                 break;
             }
         }
-
         ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), resolutionCStrs.size());
     }
 
     void UIManager::MainMenuOptions()
     {
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Resolution), ImGuiTreeNodeFlags_Leaf)
-        {
+        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Resolution), ImGuiTreeNodeFlags_Leaf) {
             ResolutionOptions();
             SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResolution);
             // NOTE: Planning on phasing out the custom resolution checkbox. It's only here currently for debugging issues with crashing on startup.
@@ -307,25 +296,21 @@ namespace EnigmaFix {
             //{
             //}
             ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomResScale, &SettingsUI.RES.UseCustomResScale);
-            if (SettingsUI.RES.UseCustomResScale)
-            {
+            if (SettingsUI.RES.UseCustomResScale) {
                 // TODO: Figure out why this doesn't work.
                 ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale, &SettingsUI.RES.CustomResScale, 25, 100);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale);
             }
             ImGui::Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Fov), ImGuiTreeNodeFlags_Leaf)
-        {
+        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Fov), ImGuiTreeNodeFlags_Leaf) {
             ImGui::Checkbox(LocUI.Strings.checkbox_customFOV, &SettingsUI.FOV.UseCustomFOV);
-            if (SettingsUI.FOV.UseCustomFOV)
-            {
+            if (SettingsUI.FOV.UseCustomFOV) {
                 ImGui::SliderInt(LocUI.Strings.sliderInt_customFOV, &SettingsUI.FOV.FieldOfView, 44, 90);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_customFOV);
                 //fovPatch(SettingsUI.FOV.FieldOfView);
             }
-            else
-            {
+            else {
 
             }
         }
@@ -335,26 +320,20 @@ namespace EnigmaFix {
             ImVec4 framerateGood = ImVec4(0.7f, 1.0f, 0.7f, 1.0f);
             ImGui::Checkbox(LocUI.Strings.checkbox_VSync, &SettingsUI.SYNC.VSync);
             SameLine(); HelpMarker(LocUI.Strings.helpmarker_VSync);
-            if (SettingsUI.SYNC.VSync)
-            {
+            if (SettingsUI.SYNC.VSync) {
                 ImGui::SliderInt(LocUI.Strings.sliderInt_syncInterval, &SettingsUI.SYNC.SyncInterval, 1, 4);
                 SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_syncInterval);
             }
-            else
-            {
-                SettingsUI.SYNC.SyncInterval = 0;
-            }
+            else { SettingsUI.SYNC.SyncInterval = 0; }
             ImGui::InputInt(LocUI.Strings.sliderInt_FramerateCap, &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
             SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_FramerateCap);
             // Adds the Framerate and Frametime counter and changes the color of the text based on if the framerate is < 60FPS (red), or >= 60FPS (green).
             // Since I can't put this in a Switch/Case statement apparently, the YandereDev-tier "IF/ELSE" statement shenanigans will have to do for now.
-            if (GetIO().Framerate >= 60.0f)
-            {
+            if (GetIO().Framerate >= 60.0f) {
                 Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateGood, "%.3f ms", 1000.0f / GetIO().Framerate);
                 Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateGood, "%.1f FPS", GetIO().Framerate);
             }
-            else
-            {
+            else {
                 Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateBad, "%.3f ms", 1000.0f / GetIO().Framerate);
                 Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateBad, "%.1f FPS", GetIO().Framerate);
             }
@@ -362,8 +341,7 @@ namespace EnigmaFix {
         if (CollapsingHeader(LocUI.Strings.collapsingHeader_Rendering), ImGuiTreeNodeFlags_Leaf)
         {
             ImGui::Checkbox(LocUI.Strings.checkbox_ShadowRendering, &SettingsUI.RS.Shadows);
-            if (SettingsUI.RS.Shadows)
-            {
+            if (SettingsUI.RS.Shadows) {
                 Combo(LocUI.Strings.combobox_ShadowQuality, &SelectedShadowOption, ShadowOptions, IM_ARRAYSIZE(ShadowOptions));
                 SameLine();
                 HelpMarker(LocUI.Strings.helpmarker_ShadowQuality);
@@ -387,43 +365,34 @@ namespace EnigmaFix {
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_Foliage);
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Input), ImGuiTreeNodeFlags_Leaf)
-        {
+        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Input), ImGuiTreeNodeFlags_Leaf) {
             ImGui::Combo(LocUI.Strings.combobox_ControlType, &SettingsUI.IS.InputDeviceType, InputOptions, IM_ARRAYSIZE(InputOptions));
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_ControlType);
             // Add something here for KB/M prompts if that ever becomes a thing, due to the complexities of remapping, and other circumstances.
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Misc), ImGuiTreeNodeFlags_Leaf)
-        {
+        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Misc), ImGuiTreeNodeFlags_Leaf) {
             ImGui::Checkbox(LocUI.Strings.checkbox_SkipOP, &SettingsUI.MS.SkipOpeningVideos);
             ImGui::Checkbox(LocUI.Strings.checkbox_CameraTweaks, &SettingsUI.MS.CameraTweaks);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_CameraTweaks);
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Launcher), ImGuiTreeNodeFlags_Leaf)
-        {
+        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Launcher), ImGuiTreeNodeFlags_Leaf) {
             ImGui::Checkbox(LocUI.Strings.checkbox_IgnoreUpdates, &SettingsUI.LS.IgnoreUpdates);
         }
     }
 
     void UIManager::WindowButtons()
     {
-        if (Button(LocUI.Strings.button_Save))
-        {
+        if (Button(LocUI.Strings.button_Save)) {
             ConManUI.SaveConfig();
             startupNotice = true; // For now, this is tied to the save function for quick testing.
         }
         SameLine();
-        if (Button(LocUI.Strings.button_About))
-        {
-            aboutPage = true;
-        }
+        if (Button(LocUI.Strings.button_About)) { aboutPage = true; }
         SameLine();
-        if (Button(LocUI.Strings.button_Close))
-        {
+        if (Button(LocUI.Strings.button_Close)) {
             //showUI = false;
-
             // Always center this window when appearing
             ImVec2 center = GetMainViewport()->GetCenter();
             SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
@@ -435,18 +404,14 @@ namespace EnigmaFix {
     {
         Text("%s", LocUI.Strings.exitTextPrompt);
         Separator();
-
         PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
         PopStyleVar();
-
-        if (Button(LocUI.Strings.exitOK, ImVec2(120, 0)))
-        {
+        if (Button(LocUI.Strings.exitOK, ImVec2(120, 0))) {
             exit(0);
         }
         SetItemDefaultFocus();
         SameLine();
-        if (Button(LocUI.Strings.exitCancel, ImVec2(120, 0)))
-        {
+        if (Button(LocUI.Strings.exitCancel, ImVec2(120, 0))) {
             CloseCurrentPopup();
         }
         EndPopup();
@@ -454,52 +419,12 @@ namespace EnigmaFix {
 
     void UIManager::LoopChecks()
     {
-        if (startupNotice)
-        {
-            ShowStartupOverlay(&startupNotice);
-        }
-        if (aboutPage)
-        {
-            ShowAboutWindow(&aboutPage);
-        }
-        if (BeginPopupModal(LocUI.Strings.gameExit, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
-        {
+        if (startupNotice) { ShowStartupOverlay(&startupNotice); }
+        if (aboutPage) { ShowAboutWindow(&aboutPage); }
+        if (BeginPopupModal(LocUI.Strings.gameExit, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             ShowExitPrompt();
         }
-
-        switch (SelectedShadowOption)
-        {
-            case 0:
-            {
-                ShadowResolution = ShadowOptionResolution[0];
-                break;
-            }
-            case 1:
-            {
-                ShadowResolution = ShadowOptionResolution[1];
-                break;
-            }
-            case 2:
-            {
-                ShadowResolution = ShadowOptionResolution[2];
-                break;
-            }
-            case 3:
-            {
-                ShadowResolution = ShadowOptionResolution[3];
-                break;
-            }
-            case 4:
-            {
-                ShadowResolution = ShadowOptionResolution[4];
-                break;
-            }
-            case 5:
-            {
-                ShadowResolution = ShadowOptionResolution[5];
-                break;
-            }
-        }
+        ShadowResolution = ShadowOptionResolution[SelectedShadowOption];
     }
 
     void UIManager::AdjustDPIScaling(float scale_factor = 1.0f)
@@ -541,10 +466,9 @@ namespace EnigmaFix {
         style->MouseCursorScale                 = ImTrunc(style->MouseCursorScale * scale_factor);
     }
 
-    void UIManager::ShowMainMenu(bool p_open)
+    void UIManager::ShowMainMenu(bool* p_open)
     {
-        if (ImGui::Begin(LocUI.Strings.gameName, &p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse))
-        {
+        if (ImGui::Begin(LocUI.Strings.gameName, p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
             // Creates the main menu UI and enables our custom theming.
             um_Instance.ActivateTheme();
             // Spawns the main menu logic.
@@ -565,15 +489,16 @@ namespace EnigmaFix {
 
     void UIManager::BeginRender()
     {
-        um_Instance.ShowMainMenu(SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
+        um_Instance.ShowMainMenu(&SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
         // Runs some menu checks per-frame, since I seemingly can't get it so these checks don't happen per-frame.
         um_Instance.LoopChecks();
     }
 
     void UIManager::Begin(ID3D11Device* pDevice)
     {
+        // First, get our ImGui style before we do anything else.
+        style = &GetStyle();
         // TODO: Figure out how to adjust the style settings only when necessary. Right now it keeps writing to them and causes problems.
-
         //um_Instance.AdjustDPIScaling(SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier);
         // Checks if the localization strings have been initialized.
         um_Instance.InitLocalization();
