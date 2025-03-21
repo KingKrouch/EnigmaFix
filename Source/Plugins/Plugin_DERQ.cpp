@@ -103,29 +103,37 @@ namespace EnigmaFix
         // TODO: Figure out why writing to these doesn't work.
         auto hRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858A7);
         auto vRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858AE);
-        auto hWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58780));
-        auto vWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule + 0xF58784));
+        auto hWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0xF58780);
+        auto vWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0xF58784);
 
         // Print out our default internal resolution values, for debugging purposes.
-        spdlog::info("Default Internal Resolution : {}x{}", *hResPtr, *vResPtr);
-        spdlog::info("4K Native Default Internal Resolution : {}x{}", *hRes4KPtr, *vRes4KPtr);
+        spdlog::info("Resolution: Default Internal Resolution : {}x{}", *hResPtr, *vResPtr);
+        spdlog::info("Resolution: 4K Native Default Internal Resolution : {}x{}", *hRes4KPtr, *vRes4KPtr);
 
         // Grab the current resolution index, so we can adjust the memory value for the internal resolution below the 4K Native mode to their proper resolutions.
         auto currentResolutionIndexPtr = reinterpret_cast<int*>(*reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x01017E18) + 0xC4);
         if (int currentResolutionIndex = *currentResolutionIndexPtr; currentResolutionIndex >= 0 && currentResolutionIndex <= 11) {
-            Memory::Write(reinterpret_cast<uintptr_t>(hResPtr), *resolutionList[currentResolutionIndex].X);
-            Memory::Write(reinterpret_cast<uintptr_t>(vResPtr), *resolutionList[currentResolutionIndex].Y);
-            spdlog::info("Resolution: Patched Internal 1080p Resolution to {}x{}.", *hResPtr, *vResPtr);
+            if (hResPtr != nullptr && vResPtr != nullptr) {
+                Memory::Write(reinterpret_cast<uintptr_t>(hResPtr), *resolutionList[currentResolutionIndex].X);
+                Memory::Write(reinterpret_cast<uintptr_t>(vResPtr), *resolutionList[currentResolutionIndex].Y);
+                spdlog::info("Resolution: Patched Internal 1080p Resolution to {}x{}.", *hResPtr, *vResPtr);
+            }
+            else { spdlog::error("Resolution: Horizontal and Vertical Res Pointers came back as null pointers."); }
         }
         else {
             // TODO: Figure out why writing to the internal resolution and window size causes crashing.
-            Memory::Write(reinterpret_cast<uintptr_t>(hRes4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
-            Memory::Write(reinterpret_cast<uintptr_t>(vRes4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
-
-            Memory::Write(reinterpret_cast<uintptr_t>(hWinSize4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
-            Memory::Write(reinterpret_cast<uintptr_t>(vWinSize4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
-            spdlog::info("Resolution: Patched Internal 4K Native Resolution to {}x{}.", *hRes4KPtr, *vRes4KPtr);
-            spdlog::info("Resolution: Patched Internal 4K Native Window Size to {}x{}.", *hWinSize4KPtr, *vWinSize4KPtr);
+            if (hRes4KPtr != nullptr && vRes4KPtr != nullptr) {
+                Memory::Write(reinterpret_cast<uintptr_t>(hRes4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
+                Memory::Write(reinterpret_cast<uintptr_t>(vRes4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
+                spdlog::info("Resolution: Patched Internal 4K Native Resolution to {}x{}.", *hRes4KPtr, *vRes4KPtr);
+            }
+            else { spdlog::error("Resolution: 4K Native Horizontal and Vertical Res Pointers came back as null pointers."); }
+            if (hWinSize4KPtr != nullptr && vWinSize4KPtr != nullptr) {
+                Memory::Write(reinterpret_cast<uintptr_t>(hWinSize4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
+                Memory::Write(reinterpret_cast<uintptr_t>(vWinSize4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
+                spdlog::info("Resolution: Patched Internal 4K Native Window Size to {}x{}.", *hWinSize4KPtr, *vWinSize4KPtr);
+            }
+            else { spdlog::error("Resolution: 4K Native Horizontal and Vertical Window Size Pointers came back as null pointers."); }
         }
 
         // TODO: Add return function here.
@@ -210,9 +218,11 @@ namespace EnigmaFix
 
         // TODO: Figure out what opcodes access these memory pointers, and update them to use our own internal aspect ratio variable.
         // Set up the pointer addresses for our aspect ratio variables
-        auto* aspectRatioPtr1 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x25EFC6);
-        auto* aspectRatioPtr2 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x789B2C);
-        auto* aspectRatioPtr3 = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0xE32A30);
+
+        auto aspectRatioPtr1     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x25EFC6);
+        auto aspectRatioPtr2     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x789B2C);
+        auto aspectRatioPtr3     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0xE32A30);
+
         // Overwrite the aspect ratio values with our own.
         if (aspectRatioPtr1 != nullptr) {
             //Memory::Write(reinterpret_cast<uintptr_t>(aspectRatioPtr1), PlayerSettingsPDQ.RES.InternalAspectRatio);
@@ -226,11 +236,14 @@ namespace EnigmaFix
         }
         else {spdlog::error("Aspect Ratio: Aspect Ratio Pointer 2 is NULL"); }
 
+        // Address that accesses aspect ratio ptr 3: "F3 0F ? ? ? ? ? ? F3 0F ? ? ? ? ? ? F3 0F ? ? ? ? F3 0F ? ? ? ? ? ? F3 0F ? ? ? F3 0F ? ? ? F3 0F ? ? ? ? 0F 57" - Application.exe + 0x007951F9 (movss xmm0,[140E32A30])
         if (aspectRatioPtr3 != nullptr) {
             //Memory::Write(reinterpret_cast<uintptr_t>(aspectRatioPtr3), PlayerSettingsPDQ.RES.InternalAspectRatio);
             //spdlog::info("Aspect Ratio: Patched Aspect Ratio Pointer 3 to: {}", *aspectRatioPtr3);
         }
         else {spdlog::error("Aspect Ratio: Aspect Ratio Pointer 3 is NULL"); }
+
+        // Address that accesses object aspect ratio ptr: "8B 87 ? ? ? ? 89 87 ? ? ? ? 8B 87 ? ? ? ? 89 87 ? ? ? ? 8B 87 ? ? ? ? 89 87 ? ? ? ? E8" - Application.exe + 0x006E069B (mov eax,[rdi+000004D0])
 
         // Write to the object aspect ratio pointer
         auto* objectAspectRatioPtr = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x01043B30 + 0xC90);
