@@ -256,7 +256,17 @@ namespace EnigmaFix {
     void UIManager::ResolutionOptions()
     {
         std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableDisplayResolutions();
-        auto currentResolution = Util::GetCurrentDisplayResolution();
+        auto currentResolution = SettingsUI.RES.Resolution;
+
+        // Check if currentResolution is in the list
+        if (std::find(resolutions.begin(), resolutions.end(), currentResolution) == resolutions.end()) {
+            resolutions.push_back(currentResolution); // Add it if it's not in the list
+        }
+
+        // Sort the resolutions from smallest to largest based on area (width * height)
+        std::sort(resolutions.begin(), resolutions.end(), [](const Util::DesktopResolution& a, const Util::DesktopResolution& b) {
+            return (a.x * a.y) < (b.x * b.y);  // Compare by resolution area
+        });
 
         // Convert resolution list to ImGui-friendly format
         std::vector<std::string> resolutionStrings;
