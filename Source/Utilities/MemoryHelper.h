@@ -1,6 +1,7 @@
-//
-// Created by bryce on 3/21/25.
-//
+/**
+Display Utilities code that is from Lyall's C++ mods (https://github.com/Lyall/). Simply borrowing them here.
+At least on the MGSHDFix repo, it's licensed under MIT. So I figured I'd mention that here.
+**/
 
 #ifndef MEMORY_HELPER_HPP
 #define MEMORY_HELPER_HPP
