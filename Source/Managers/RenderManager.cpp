@@ -400,7 +400,7 @@ namespace EnigmaFix {
             ImGui_ImplWin32_NewFrame();
             NewFrame();
             // Start up the ImGui UI for EnigmaFix.
-            UIManagerRenMan.Begin();
+            UIManagerRenMan.Begin(pDevice);
             // Ends drawing the ImGui frame.
             End();
             // Render the ImGui frame. We don't need to call EndFrame because that's already being done with Render.

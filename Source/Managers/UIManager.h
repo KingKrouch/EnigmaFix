@@ -24,6 +24,7 @@ SOFTWARE.
 #define ENIGMAFIX_CLION_UIMANAGER_H
 
 // System Libraries
+#include <d3d11.h>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -34,7 +35,7 @@ namespace EnigmaFix {
         static UIManager &Get() {
             return um_Instance;
         };
-        static void Begin();
+        static void Begin(ID3D11Device* pDevice);
     private:
         static UIManager um_Instance;
         static void BeginRender();
@@ -48,7 +49,7 @@ namespace EnigmaFix {
         static void LoopChecks();
         static void ShowExitPrompt();
         static void WindowButtons();
-        static void LoadLogoTexture();
+        static void LoadLogoTexture(ID3D11Device* pDevice);
         static void ResolutionOptions();
 
 

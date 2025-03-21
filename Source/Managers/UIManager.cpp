@@ -61,7 +61,7 @@ int SelectedSSROption = 2;
 int SelectedShadowOption = 2;
 static const char* InputOptions[]{ "Auto", "Xbox", "PlayStation", "Switch" };
 
-int LogoWidth = 0;
+int LogoWidth  = 0;
 int LogoHeight = 0;
 ID3D11ShaderResourceView* Logo = nullptr;
 
@@ -507,11 +507,13 @@ namespace EnigmaFix {
         }
     }
 
-    void UIManager::LoadLogoTexture() // TODO: Fix this not loading the texture properly.
+    void UIManager::LoadLogoTexture(ID3D11Device* pDevice) // TODO: Fix this not loading the texture properly.
     {
-        // TODO: Figure out why this crashes the game on Proton.
-        bool ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, &LogoWidth, &LogoHeight);
-        IM_ASSERT(ret);
+        if (!Logo) { // Prevent reloading each frame.
+            // TODO: Figure out why the texture is missing.
+            bool ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, pDevice, &LogoWidth, &LogoHeight);
+            IM_ASSERT(ret);
+        }
     }
 
     void UIManager::BeginRender()
@@ -521,12 +523,12 @@ namespace EnigmaFix {
         um_Instance.LoopChecks();
     }
 
-    void UIManager::Begin()
+    void UIManager::Begin(ID3D11Device* pDevice)
     {
         // Checks if the localization strings have been initialized.
         um_Instance.InitLocalization();
         // Loads the About screen's logo texture.
-        //um_Instance.LoadLogoTexture();
+        um_Instance.LoadLogoTexture(pDevice);
         // Begins drawing the UI.
         um_Instance.BeginRender();
     }
