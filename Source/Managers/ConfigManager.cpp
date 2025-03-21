@@ -167,8 +167,6 @@ namespace EnigmaFix {
             auto CurrentResolution                = Util::GetCurrentDisplayResolution();
             PlayerSettingsConf.RES.Resolution.x   = CurrentResolution.x;
             PlayerSettingsConf.RES.Resolution.y   = CurrentResolution.y;
-
-
         }
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }

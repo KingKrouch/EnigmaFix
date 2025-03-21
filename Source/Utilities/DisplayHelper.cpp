@@ -6,9 +6,6 @@ There's some things that I modified or added, such as getting a list of availabl
 **/
 
 #include "DisplayHelper.h"
-#include <windows.h>
-#include <algorithm>
-#include <string>
 
 namespace Util
 {
@@ -52,5 +49,13 @@ namespace Util
         //if (DEVMODE devMode{ .dmSize = sizeof(DEVMODE) }; EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &devMode))
             //return { static_cast<int>(devMode.dmPelsWidth), static_cast<int>(devMode.dmPelsHeight) };
         return {}; // Returns {0, 0} by default
+    }
+
+    float GetDPIScaleForWindow(HWND hwnd) {
+        if (!hwnd)
+            return 1.0f; // Default DPI scale
+
+        const auto dpi = static_cast<float>(GetDpiForWindow(hwnd));
+        return dpi / 96.0f; // 96 DPI is the default scale (1.0)
     }
 }

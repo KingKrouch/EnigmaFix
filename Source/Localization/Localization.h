@@ -31,7 +31,7 @@ namespace EnigmaFix {
         }
         // Localization Functionality
         void InitLoc();
-        void InitFont();
+        void InitFont(float scale_factor = 1.0f);
         // Variables
         float fontSize = 18.0;
         int language;

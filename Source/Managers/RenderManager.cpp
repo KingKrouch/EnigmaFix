@@ -75,7 +75,7 @@ void InitImGui() // Initializes ImGui, alongside the needed fonts.
     CreateContext();
     ImGuiIO& io = GetIO();
     io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange | ImGuiConfigFlags_NavEnableGamepad | ImGuiConfigFlags_NavEnableKeyboard;
-    LocalizationRm.InitFont();
+    LocalizationRm.InitFont(PlayerSettingsRm.INS.dpiScale / 100.0f * PlayerSettingsRm.INS.dpiScaleMultiplier);
 
     ImGui_ImplWin32_Init(window);
     ImGui_ImplDX11_Init(pDevice, pContext);
@@ -368,6 +368,8 @@ namespace EnigmaFix {
                 DXGI_SWAP_CHAIN_DESC sd;
                 pSwapChain->GetDesc(&sd);
                 window = sd.OutputWindow;
+                PlayerSettingsRm.INS.dpiScale = Util::GetDPIScaleForWindow(window) * 100.0f;
+                spdlog::info("RenderManager: Current DPI Scale is {}%.", PlayerSettingsRm.INS.dpiScale);
                 ID3D11Texture2D* pBackBuffer;
                 hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
                 if (SUCCEEDED(hr)) {

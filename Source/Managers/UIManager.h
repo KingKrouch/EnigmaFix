@@ -51,6 +51,7 @@ namespace EnigmaFix {
         static void WindowButtons();
         static void LoadLogoTexture(ID3D11Device* pDevice);
         static void ResolutionOptions();
+        static void AdjustDPIScaling(float scale_factor);
 
 
         struct UIProperties {

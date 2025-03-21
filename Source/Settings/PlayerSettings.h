@@ -116,6 +116,8 @@ namespace EnigmaFix {
 
         struct InternalSettings {
             Util::DesktopResolution InternalResolution = {1920, 1080 };
+            float dpiScale = 100.0f;
+            float dpiScaleMultiplier = 1.0f; // This is just for debugging DPI scaling.
             //int  InternalHorizontalRes = 1920; // Used for Render Target/Viewport/Scissor Region Resizing
             //int  InternalVerticalRes   = 1080; // Used for Render Target/Viewport/Scissor Region Resizing
         };

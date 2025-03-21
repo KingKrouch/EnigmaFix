@@ -8,6 +8,9 @@ There's some things that I modified or added, such as getting a list of availabl
 #ifndef DISPLAY_HELPER_HPP
 #define DISPLAY_HELPER_HPP
 
+#include <windows.h>
+#include <algorithm>
+#include <string>
 #include <vector>
 #include <utility>
 
@@ -22,9 +25,10 @@ namespace Util
         }
     };
 
-    // Function declarations (only signatures)
+    // Function declarations
     std::vector<DesktopResolution> GetAvailableDisplayResolutions(int displayIndex = 1);
     DesktopResolution GetCurrentDisplayResolution(int displayIndex = 1);
+    float GetDPIScaleForWindow(HWND hwnd);
 }
 
 #endif // DISPLAY_HELPER_HPP

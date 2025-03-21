@@ -33,21 +33,21 @@ auto& PlayerSettingsLoc = EnigmaFix::PlayerSettings::Get();
 EnigmaFix::Localization EnigmaFix::Localization::loc_Instance;
 
 namespace EnigmaFix {
-    void Localization::InitFont() {
+    void Localization::InitFont(float scale_factor) {
         language = 0; // Dummy Variable for testing language support.
         ImGuiIO& io = ImGui::GetIO();
         // Makes an ImFontConfig for our main fonts.
         ImFontConfig font_Config;
         // Loads some Windows English, Japanese, and Traditional Chinese fonts. Note that these locales need to be installed in order to use these.
-        io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSans-Regular.ttf", fontSize, &font_Config, io.Fonts->GetGlyphRangesDefault()); // Loads the font for English strings first.
+        io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSans-Regular.ttf", fontSize * scale_factor, &font_Config, io.Fonts->GetGlyphRangesDefault()); // Loads the font for English strings first.
         // Uses a switch statement instead of loading all of these at once, to prevent even worse massive hitching from happening. It's already bad enough with just JP and CN fonts.
         switch (language) {
             case 1: { // Japanese
-                io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSansJP-Regular.otf", fontSize, &font_Config, io.Fonts->GetGlyphRangesJapanese());
+                io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSansJP-Regular.otf", fontSize * scale_factor, &font_Config, io.Fonts->GetGlyphRangesJapanese());
                 break;
             }
             case 2: { // Traditional Chinese
-                io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSansTC-Regular.otf", fontSize, &font_Config, io.Fonts->GetGlyphRangesChineseFull());
+                io.Fonts->AddFontFromFileTTF("resources\\fonts\\NotoSansTC-Regular.otf", fontSize * scale_factor, &font_Config, io.Fonts->GetGlyphRangesChineseFull());
                 break;
             }
         }
@@ -58,7 +58,7 @@ namespace EnigmaFix {
         icons_config.GlyphMinAdvanceX = fontSize;
         static const ImWchar icon_ranges[] = { 0xe005, 0xf8ff, 0 };
         // Finally adds the FontAwesome fonts to the available fonts for ImGui to pick from.
-        io.Fonts->AddFontFromFileTTF("resources\\fonts\\fa-solid-900.ttf", fontSize, &icons_config, icon_ranges);
+        io.Fonts->AddFontFromFileTTF("resources\\fonts\\fa-solid-900.ttf", fontSize * scale_factor, &icons_config, icon_ranges);
         io.Fonts->Build(); // Build the font atlas, which seemingly fixes our hitching issue from earlier when using Japanese or Chinese fonts.
     }
     void Localization::InitLoc() {
