@@ -23,7 +23,7 @@ SOFTWARE.
 // Internal Functionality
 #include "Plugin_DERQ.h"
 #include "../Settings/PlayerSettings.h"
-#include "../Utilities/MemoryHelper.hpp"
+#include "../Utilities/MemoryHelper.h"
 #include "../Managers/PatchManager.h"
 
 // Third Party Libraries
@@ -100,7 +100,7 @@ namespace EnigmaFix
         // Signature Scan Vertical Res 4K Native:   "70 ?? 00 00 E8 ?? ?? ?? ?? EB ?? E8"
         // Signature Scan Horizontal Window Size 4K Native: "00 0F 00 00 70 ?? 00 00 C0 5D 00"
         // Signature Scan Vertical Window Size 4K Native: "70 ?? 00 00 C0 5D 00"
-        // TODO: Figure out why writing to these doesn't work.
+        // TODO: Set default custom resolution value to "0" in config, check on startup if it's "0", and if so, use the current desktop resolution for the 4K Native mode. Then adjust the resolution dropdown box in the imgui ui to choose the resolution closest to the one in the config (or to simply make it a temporary option if it doesn't exist). That way there's one less thing for the user to customize.
         auto hRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858A7);
         auto vRes4KPtr     = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0x4858AE);
         auto hWinSize4KPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(PatchManagerPDQ.BaseModule) + 0xF58780);
@@ -308,39 +308,39 @@ namespace EnigmaFix
         //);
     }
 
-    void Plugin_DERQ::AffinityPatches(HMODULE baseModule)
+    void Plugin_DERQ::SchedulerPatches(HMODULE baseModule)
     {
-        int cpuAffinityMode = 0; // 0 : Original, 1: AMD, 2: Intel
-        uint8_t cpuAffinityModeByte;
-        switch (cpuAffinityMode) {
+        int cpuSchedulerMode = 0; // 0 : Original, 1: AMD, 2: Intel
+        uint8_t cpuSchedulerModeByte;
+        switch (cpuSchedulerMode) {
             case 0: break; // Original, do nothing
             case 1: { // AMD CPU Scheduling
-                cpuAffinityModeByte = 0x00;
+                cpuSchedulerModeByte = 0x00;
                 break;
             }
             case 2: { // Intel CPU Scheduling
-                cpuAffinityModeByte = 0x01;
+                cpuSchedulerModeByte = 0x01;
                 break;
             }
             default: break;  // Original, do nothing
         }
-        if (cpuAffinityMode != 0 && cpuAffinityModeByte)
+        if (cpuSchedulerMode != 0 && cpuSchedulerModeByte)
         {
             // TODO: Figure if there's any performance improvement or rammifications from this. If there's an improvement, keep it. If some notice it's better on their setup while others have issues with it, just make it a config option.
             // Use Intel CPU scheduling instead of AMD on AMD CPU (I'm morbidly curious since apparently Cyberpunk 2077 had some issue at launch revolving around it).
-            if (auto affinityPatchAMD = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? EB ?? C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
-                spdlog::info("{} found at: {}", "CPU Affinity for AMD", reinterpret_cast<void*>(affinityPatchAMD));
+            if (auto cpuSchedulerPatchAMD = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? EB ?? C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
+                spdlog::info("{} found at: {}", "CPU Scheduler for AMD", reinterpret_cast<void*>(cpuSchedulerPatchAMD));
                 // NOP out the specified number of bytes (replace with "01")
                 for (size_t i = 0; i < 5; ++i) {
-                    Memory::Write(reinterpret_cast<uintptr_t>(affinityPatchAMD + i), static_cast<uint8_t>(cpuAffinityModeByte));
+                    Memory::Write(reinterpret_cast<uintptr_t>(cpuSchedulerPatchAMD + i), static_cast<uint8_t>(cpuSchedulerModeByte));
                 }
             }
             // Use AMD CPU scheduling instead of Intel on Intel CPU.
-            if (auto affinityPatchIntel = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
-                spdlog::info("{} found at: {}", "CPU Affinity for Intel", reinterpret_cast<void*>(affinityPatchIntel));
+            if (auto cpuSchedulerPatchIntel = Memory::PatternScan(baseModule, "C7 44 24 24 ?? ?? ?? ?? 8B 44 ?? ?? 89 44 ?? ?? 83 7C 24 20")) {
+                spdlog::info("{} found at: {}", "CPU Scheduler for Intel", reinterpret_cast<void*>(cpuSchedulerPatchIntel));
                 // NOP out the specified number of bytes (replace with "00")
                 for (size_t i = 0; i < 5; ++i) {
-                    Memory::Write(reinterpret_cast<uintptr_t>(affinityPatchIntel + i), static_cast<uint8_t>(cpuAffinityModeByte));
+                    Memory::Write(reinterpret_cast<uintptr_t>(cpuSchedulerPatchIntel + i), static_cast<uint8_t>(cpuSchedulerModeByte));
                 }
             }
         }

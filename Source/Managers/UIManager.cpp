@@ -28,6 +28,7 @@ SOFTWARE.
 #include "../Settings/PlayerSettings.h"
 #include "../Localization/Localization.h"
 #include "../Utilities/UITextureLoader.h"
+#include "../Utilities/DisplayHelper.h"
 // System Libraries
 #include <d3d11.h>
 // Third Party Libraries
@@ -252,51 +253,9 @@ namespace EnigmaFix {
         colors[ImGuiCol_ModalWindowDimBg]      = VectorToVec4(Color.ImGuiCol_ModalWindowDimBg);
     }
 
-    struct DesktopResolution {
-        int x;
-        int y;
-
-        // Define operator== to allow comparison
-        bool operator==(const DesktopResolution& other) const {
-            return x == other.x && y == other.y;
-        }
-    };
-
-    std::vector<DesktopResolution> GetAvailableResolutions() {
-        std::vector<DesktopResolution> resolutions;
-
-        // Retrieve primary display name
-        DISPLAY_DEVICE displayDevice;
-        displayDevice.cb = sizeof(DISPLAY_DEVICE);
-        if (!EnumDisplayDevices(nullptr, 0, &displayDevice, 0)) {
-            return resolutions; // Return empty if failed to get display device
-        }
-
-        std::string primaryMonitorName = displayDevice.DeviceName; // Example: "\\.\DISPLAY1"
-
-        // Enumerate display settings for the primary display
-        DEVMODE devMode{};
-        devMode.dmSize = sizeof(DEVMODE);
-        int i = 0;
-
-        while (EnumDisplaySettings(primaryMonitorName.c_str(), i++, &devMode)) {
-            DesktopResolution res = {
-                static_cast<int>(devMode.dmPelsWidth),
-                static_cast<int>(devMode.dmPelsHeight)
-            };
-
-            // Avoid duplicate resolutions
-            if (std::find(resolutions.begin(), resolutions.end(), res) == resolutions.end()) {
-                resolutions.push_back(res);
-            }
-        }
-
-        return resolutions;
-    }
-
     void UIManager::ResolutionOptions()
     {
-        std::vector<DesktopResolution> resolutions = GetAvailableResolutions();
+        std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableResolutions();
 
         // Convert resolution list to ImGui-friendly format
         std::vector<std::string> resolutionStrings;
