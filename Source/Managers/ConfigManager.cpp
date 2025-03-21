@@ -23,6 +23,7 @@ SOFTWARE.
 // Internal Functionality
 #include "ConfigManager.h"
 #include "../Settings/PlayerSettings.h"
+#include "../Utilities/DisplayHelper.h"
 // System Libraries
 #include <iostream>
 #include <fstream>
@@ -150,14 +151,23 @@ namespace EnigmaFix {
         // Input Settings
         inipp::extract(config.sections["Input"]["KBMPrompts"], PlayerSettingsConf.IS.KBMPrompts);
         inipp::extract(config.sections["Input"]["DisableSteamInput"], PlayerSettingsConf.IS.DisableSteamInput);
-        inipp::extract(config.sections["Input"]["InputType"], PlayerSettingsConf.IS.InputDeviceType);
+        string inputDeviceType;
+        inipp::extract(config.sections["Input"]["InputType"], inputDeviceType);
         // Misc Settings
         inipp::extract(config.sections["Misc"]["SkipOpeningVideos"], PlayerSettingsConf.MS.SkipOpeningVideos);
         inipp::extract(config.sections["Misc"]["CameraTweaks"], PlayerSettingsConf.MS.CameraTweaks);
         inipp::extract(config.sections["Misc"]["EnableConsoleLog"], PlayerSettingsConf.MS.EnableConsoleLog);
+        string cpuSchedulerMode;
+        inipp::extract(config.sections["Misc"]["CPUSchedulerMode"], cpuSchedulerMode);
         // Launcher Settings
         inipp::extract(config.sections["Launcher"]["IgnoreUpdates"], PlayerSettingsConf.LS.IgnoreUpdates);
 
+        // Check if the Horizontal or Vertical Res is 0. If so, default the custom resolution to the current display resolution.
+        if (PlayerSettingsConf.RES.HorizontalRes == 0 || PlayerSettingsConf.RES.VerticalRes == 0) {
+            auto CurrentResolution    = Util::GetPhysicalDesktopDimensions();
+            PlayerSettingsConf.RES.HorizontalRes = CurrentResolution.first;
+            PlayerSettingsConf.RES.VerticalRes   = CurrentResolution.second;
+        }
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }
 }
