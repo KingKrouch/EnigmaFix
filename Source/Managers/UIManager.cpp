@@ -43,9 +43,6 @@ bool startupNotice = false;
 bool exitPrompt = false;
 bool aboutPage = false;
 
-static const char* resolutionOptions[]{ "2560x1080", "3440x1440", "3840x1080", "5120x1440" };
-static int selectedResolutionOption = 0;
-
 // Test Variables
 bool PressedSave = false;
 bool TestFullResPP = false;
@@ -278,6 +275,15 @@ namespace EnigmaFix {
         std::vector<const char*> resolutionCStrs;
         for (const auto& str : resolutionStrings) {
             resolutionCStrs.push_back(str.c_str());
+        }
+
+        // Set the selected resolution index based on current resolution
+        int selectedResolutionOption = -1;  // Default to an invalid index
+        for (int i = 0; i < resolutionStrings.size(); ++i) {
+            if (resolutionStrings[i] == std::to_string(currentResolution.x) + "x" + std::to_string(currentResolution.y)) {
+                selectedResolutionOption = i;  // Set the selected resolution index
+                break;
+            }
         }
 
         ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), resolutionCStrs.size());
