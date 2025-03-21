@@ -45,6 +45,9 @@ bool startupNotice = false;
 bool exitPrompt = false;
 bool aboutPage = false;
 
+// ImGui Style
+ImGuiStyle* style = &GetStyle();
+
 // Test Variables
 bool PressedSave = false;
 bool TestFullResPP = false;
@@ -66,6 +69,7 @@ static const char* InputOptions[]{ "Auto", "Xbox", "PlayStation", "Switch" };
 int LogoWidth  = 0;
 int LogoHeight = 0;
 ID3D11ShaderResourceView* Logo = nullptr;
+
 
 // Singleton References
 auto& LocUI = EnigmaFix::Localization::Get();
@@ -168,7 +172,6 @@ namespace EnigmaFix {
     void UIManager::ActivateTheme()
     {
         // Window and Border theming
-        ImGuiStyle* style        = &GetStyle();
         ImVec4* colors           = style->Colors;
         style->FrameRounding     = 2.0f;
         style->FrameBorderSize   = 1.0f;
@@ -501,43 +504,41 @@ namespace EnigmaFix {
 
     void UIManager::AdjustDPIScaling(float scale_factor = 1.0f)
     {
-        ImGuiStyle* style         = &GetStyle();
-
-        style->WindowPadding.x    = ImTrunc(style->WindowPadding.x * scale_factor);
-        style->WindowPadding.y    = ImTrunc(style->WindowPadding.y * scale_factor);
-        style->WindowRounding     = ImTrunc(style->WindowRounding * scale_factor);
-        style->WindowMinSize.x    = ImTrunc(style->WindowMinSize.x * scale_factor);
-        style->WindowMinSize.y    = ImTrunc(style->WindowMinSize.y * scale_factor);
-        style->ChildRounding      = ImTrunc(style->ChildRounding * scale_factor);
-        style->PopupRounding      = ImTrunc(style->PopupRounding * scale_factor);
-        style->FramePadding.x     = ImTrunc(style->FramePadding.x * scale_factor);
-        style->FramePadding.y     = ImTrunc(style->FramePadding.y * scale_factor);
-        style->FrameRounding      = ImTrunc(style->FrameRounding * scale_factor);
-        style->ItemSpacing.x      = ImTrunc(style->ItemSpacing.x * scale_factor);
-        style->ItemSpacing.y      = ImTrunc(style->ItemSpacing.x * scale_factor);
-        style->ItemInnerSpacing.x = ImTrunc(style->ItemInnerSpacing.x * scale_factor);
-        style->ItemInnerSpacing.y = ImTrunc(style->ItemInnerSpacing.y * scale_factor);
-        style->CellPadding.x      = ImTrunc(style->CellPadding.x * scale_factor);
-        style->CellPadding.y      = ImTrunc(style->CellPadding.y * scale_factor);
-        style->TouchExtraPadding.x = ImTrunc(style->TouchExtraPadding.x * scale_factor);
-        style->TouchExtraPadding.y = ImTrunc(style->TouchExtraPadding.y * scale_factor);
-        style->IndentSpacing = ImTrunc(style->IndentSpacing * scale_factor);
-        style->ColumnsMinSpacing = ImTrunc(style->ColumnsMinSpacing * scale_factor);
-        style->ScrollbarSize = ImTrunc(style->ScrollbarSize * scale_factor);
-        style->ScrollbarRounding = ImTrunc(style->ScrollbarRounding * scale_factor);
-        style->GrabMinSize = ImTrunc(style->GrabMinSize * scale_factor);
-        style->GrabRounding = ImTrunc(style->GrabRounding * scale_factor);
-        style->LogSliderDeadzone = ImTrunc(style->LogSliderDeadzone * scale_factor);
-        style->TabRounding = ImTrunc(style->TabRounding * scale_factor);
-        style->TabCloseButtonMinWidthSelected = ImTrunc(style->TabCloseButtonMinWidthSelected * scale_factor);
+        style->WindowPadding.x                  = ImTrunc(style->WindowPadding.x * scale_factor);
+        style->WindowPadding.y                  = ImTrunc(style->WindowPadding.y * scale_factor);
+        style->WindowRounding                   = ImTrunc(style->WindowRounding * scale_factor);
+        style->WindowMinSize.x                  = ImTrunc(style->WindowMinSize.x * scale_factor);
+        style->WindowMinSize.y                  = ImTrunc(style->WindowMinSize.y * scale_factor);
+        style->ChildRounding                    = ImTrunc(style->ChildRounding * scale_factor);
+        style->PopupRounding                    = ImTrunc(style->PopupRounding * scale_factor);
+        style->FramePadding.x                   = ImTrunc(style->FramePadding.x * scale_factor);
+        style->FramePadding.y                   = ImTrunc(style->FramePadding.y * scale_factor);
+        style->FrameRounding                    = ImTrunc(style->FrameRounding * scale_factor);
+        style->ItemSpacing.x                    = ImTrunc(style->ItemSpacing.x * scale_factor);
+        style->ItemSpacing.y                    = ImTrunc(style->ItemSpacing.x * scale_factor);
+        style->ItemInnerSpacing.x               = ImTrunc(style->ItemInnerSpacing.x * scale_factor);
+        style->ItemInnerSpacing.y               = ImTrunc(style->ItemInnerSpacing.y * scale_factor);
+        style->CellPadding.x                    = ImTrunc(style->CellPadding.x * scale_factor);
+        style->CellPadding.y                    = ImTrunc(style->CellPadding.y * scale_factor);
+        style->TouchExtraPadding.x              = ImTrunc(style->TouchExtraPadding.x * scale_factor);
+        style->TouchExtraPadding.y              = ImTrunc(style->TouchExtraPadding.y * scale_factor);
+        style->IndentSpacing                    = ImTrunc(style->IndentSpacing * scale_factor);
+        style->ColumnsMinSpacing                = ImTrunc(style->ColumnsMinSpacing * scale_factor);
+        style->ScrollbarSize                    = ImTrunc(style->ScrollbarSize * scale_factor);
+        style->ScrollbarRounding                = ImTrunc(style->ScrollbarRounding * scale_factor);
+        style->GrabMinSize                      = ImTrunc(style->GrabMinSize * scale_factor);
+        style->GrabRounding                     = ImTrunc(style->GrabRounding * scale_factor);
+        style->LogSliderDeadzone                = ImTrunc(style->LogSliderDeadzone * scale_factor);
+        style->TabRounding                      = ImTrunc(style->TabRounding * scale_factor);
+        style->TabCloseButtonMinWidthSelected   = ImTrunc(style->TabCloseButtonMinWidthSelected * scale_factor);
         style->TabCloseButtonMinWidthUnselected = ImTrunc(style->TabCloseButtonMinWidthUnselected * scale_factor);
-        style->SeparatorTextPadding.x = ImTrunc(style->SeparatorTextPadding.x * scale_factor);
-        style->SeparatorTextPadding.y = ImTrunc(style->SeparatorTextPadding.y * scale_factor);
-        style->DisplayWindowPadding.x = ImTrunc(style->DisplayWindowPadding.x * scale_factor);
-        style->DisplayWindowPadding.y = ImTrunc(style->DisplayWindowPadding.y * scale_factor);
-        style->DisplaySafeAreaPadding.x = ImTrunc(style->DisplaySafeAreaPadding.x * scale_factor);
-        style->DisplaySafeAreaPadding.y = ImTrunc(style->DisplaySafeAreaPadding.y * scale_factor);
-        style->MouseCursorScale = ImTrunc(style->MouseCursorScale * scale_factor);
+        style->SeparatorTextPadding.x           = ImTrunc(style->SeparatorTextPadding.x * scale_factor);
+        style->SeparatorTextPadding.y           = ImTrunc(style->SeparatorTextPadding.y * scale_factor);
+        style->DisplayWindowPadding.x           = ImTrunc(style->DisplayWindowPadding.x * scale_factor);
+        style->DisplayWindowPadding.y           = ImTrunc(style->DisplayWindowPadding.y * scale_factor);
+        style->DisplaySafeAreaPadding.x         = ImTrunc(style->DisplaySafeAreaPadding.x * scale_factor);
+        style->DisplaySafeAreaPadding.y         = ImTrunc(style->DisplaySafeAreaPadding.y * scale_factor);
+        style->MouseCursorScale                 = ImTrunc(style->MouseCursorScale * scale_factor);
     }
 
     void UIManager::ShowMainMenu(bool p_open)
@@ -572,6 +573,7 @@ namespace EnigmaFix {
     void UIManager::Begin(ID3D11Device* pDevice)
     {
         // TODO: Figure out how to adjust the style settings only when necessary. Right now it keeps writing to them and causes problems.
+
         //um_Instance.AdjustDPIScaling(SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier);
         // Checks if the localization strings have been initialized.
         um_Instance.InitLocalization();
