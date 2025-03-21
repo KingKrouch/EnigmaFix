@@ -106,7 +106,8 @@ namespace EnigmaFix {
     {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, &p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
-            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2(LogoWidth / 4, LogoHeight / 4));
+            float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
+            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / 4) * dpiScaleLogo, (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo));
             Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
             Separator();
             Text("(C) 2021 Bryce Q.");
