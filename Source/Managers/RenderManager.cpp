@@ -31,6 +31,7 @@ SOFTWARE.
 //#include <comip.h>
 #include <memory>
 // Third Party Libraries
+#include <map>
 #include <spdlog/spdlog.h>
 #include "kiero.h"
 #include "imgui.h"
@@ -98,6 +99,80 @@ void resizeRt(D3D11_TEXTURE2D_DESC *pDesc, int Width, int Height, int DesiredWid
     }
 }
 
+// Resizes constant buffers
+bool cbResize(ID3D11DeviceContext* pContext, D3D11_RENDER_TARGET_VIEW_DESC pDesc, D3D11_TEXTURE2D_DESC texdesc, D3D11_VIEWPORT vp)
+{
+    // TODO: Investigate the pixel shader constant buffer responsible for the YebisMizuchi draw calls. There's a few interesting parameters that might need to be investigated.
+    // 1. fParam_ScreenSpaceScale - This is located at offset 80 with a value of "1.00, -1.00" This might be able to adjust the scaling of the post process effects.
+    // 2. afUVWQ_TexCoordScaleOffset
+    // 3. afParam_TexCoordScaler8
+    // 4. am44_TransformMatrix
+
+    // Define the structure for pixel shader constants.
+    struct CustomPixelShaderConstants {
+        DirectX::XMFLOAT2 fParam_ScreenSpaceScale;  // Screen space scale
+    };
+
+    static std::map<UINT, ID3D11Buffer*> buffers;
+
+    // If we are not rendering to a mip map for hierarchical Z, the format is
+    // [ 0.5f / W, 0.5f / H, W, H ] (half-pixel size and total dimensions)
+    if(pDesc.Texture2D.MipSlice == 0) {
+        spdlog::info("Found Texture2D with a MipSlice of 0.");
+        auto iter = buffers.find(texdesc.Width);
+        ID3D11Buffer* replacementBuffer = nullptr;
+        ID3D11Device* dev = nullptr;
+
+        if(iter == buffers.cend()) {
+            // Create a new constant buffer if it doesn't exist
+            CustomPixelShaderConstants constants;
+            constants.fParam_ScreenSpaceScale = DirectX::XMFLOAT2(1.0f / vp.Width, -1.0f / vp.Height);
+
+            D3D11_SUBRESOURCE_DATA initialData;
+            initialData.pSysMem = &constants;
+
+            pContext->GetDevice(&dev);
+
+            // Buffer descriptor for the constant buffer
+            D3D11_BUFFER_DESC bufferDesc;
+            bufferDesc.ByteWidth = sizeof(CustomPixelShaderConstants);  // Size of your constant buffer struct
+            bufferDesc.Usage = D3D11_USAGE_DYNAMIC;  // DYNAMIC to allow mapping
+            bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+            bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;  // Allow modification
+            bufferDesc.MiscFlags = 0;
+            bufferDesc.StructureByteStride = 0;
+
+            // Create the constant buffer
+            dev->CreateBuffer(&bufferDesc, &initialData, &replacementBuffer);
+            buffers[texdesc.Width] = replacementBuffer;
+        } else {
+            replacementBuffer = iter->second;
+        }
+
+        // Now modify only the fParam_ScreenSpaceScale if necessary
+        if (replacementBuffer) {
+            CustomPixelShaderConstants* mappedData = nullptr;
+            D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+            // Map the buffer to modify it
+            pContext->Map(replacementBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+            mappedData = static_cast<CustomPixelShaderConstants*>(mappedResource.pData);
+
+            // Update only the fParam_ScreenSpaceScale parameter
+            mappedData->fParam_ScreenSpaceScale = DirectX::XMFLOAT2(1.0f / vp.Width, -1.0f / vp.Height);
+
+            // Unmap the buffer after modification
+            pContext->Unmap(replacementBuffer, 0);
+
+            // Set the modified buffer for the pixel shader
+            pContext->PSSetConstantBuffers(5, 1, &replacementBuffer);
+            spdlog::info("Set Pixel Shader's Constant Buffer");
+            return true;
+        }
+    }
+    return false;
+}
+
 bool vpResize(ID3D11DeviceContext* pContext)
 {
     if (PlayerSettingsRm.RES.UseCustomRes) {
@@ -156,6 +231,7 @@ bool vpResize(ID3D11DeviceContext* pContext)
                                     vp.Height = static_cast<FLOAT>(texdesc.Height);
                                     pContext->RSSetViewports(1, &vp);
                                     spdlog::info("Set viewport to size {}x{}.", vp.Width, vp.Height);
+                                    cbResize(pContext, desc, texdesc, vp); // We should run the constant buffer modification right after viewport resizing.
                                     return true;
                                 }
                             }
@@ -240,12 +316,6 @@ bool srResize(ID3D11DeviceContext* pContext)
             }
         }
     }
-    return false;
-}
-
-// Resizes constant buffers
-bool cbResize(ID3D11DeviceContext* pContext)
-{
     return false;
 }
 
