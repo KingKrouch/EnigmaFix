@@ -171,9 +171,12 @@ add_library(EnigmaFix SHARED
         Source/Utilities/UITextureLoader.h
         Source/Utilities/DXHelper.h
         Source/Utilities/DXEnums.h
-        Source/Utilities/MemoryHelper.hpp
+        Source/Utilities/MemoryHelper.cpp
         Source/Managers/LogManager.cpp
         Source/Managers/LogManager.h
+        Source/Utilities/DisplayHelper.h
+        Source/Utilities/DisplayHelper.cpp
+        Source/Utilities/MemoryHelper.h
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
