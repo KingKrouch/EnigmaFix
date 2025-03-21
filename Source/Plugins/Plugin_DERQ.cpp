@@ -123,14 +123,14 @@ namespace EnigmaFix
         else {
             // TODO: Figure out why writing to the internal resolution and window size causes crashing.
             if (hRes4KPtr != nullptr && vRes4KPtr != nullptr) {
-                Memory::Write(reinterpret_cast<uintptr_t>(hRes4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
-                Memory::Write(reinterpret_cast<uintptr_t>(vRes4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
+                Memory::Write(reinterpret_cast<uintptr_t>(hRes4KPtr), PlayerSettingsPDQ.RES.Resolution.x);
+                Memory::Write(reinterpret_cast<uintptr_t>(vRes4KPtr), PlayerSettingsPDQ.RES.Resolution.y);
                 spdlog::info("Resolution: Patched Internal 4K Native Resolution to {}x{}.", *hRes4KPtr, *vRes4KPtr);
             }
             else { spdlog::error("Resolution: 4K Native Horizontal and Vertical Res Pointers came back as null pointers."); }
             if (hWinSize4KPtr != nullptr && vWinSize4KPtr != nullptr) {
-                Memory::Write(reinterpret_cast<uintptr_t>(hWinSize4KPtr), PlayerSettingsPDQ.RES.HorizontalRes);
-                Memory::Write(reinterpret_cast<uintptr_t>(vWinSize4KPtr), PlayerSettingsPDQ.RES.VerticalRes);
+                Memory::Write(reinterpret_cast<uintptr_t>(hWinSize4KPtr), PlayerSettingsPDQ.RES.Resolution.x);
+                Memory::Write(reinterpret_cast<uintptr_t>(vWinSize4KPtr), PlayerSettingsPDQ.RES.Resolution.y);
                 spdlog::info("Resolution: Patched Internal 4K Native Window Size to {}x{}.", *hWinSize4KPtr, *vWinSize4KPtr);
             }
             else { spdlog::error("Resolution: 4K Native Horizontal and Vertical Window Size Pointers came back as null pointers."); }
@@ -157,7 +157,7 @@ namespace EnigmaFix
             spdlog::info("Aspect Ratio: Found First Block Function Signature at: {}", reinterpret_cast<void*>(native4kText));
 
             // Generate resolution string (max 9 bytes including null terminator)
-            std::string replacement = std::to_string(PlayerSettingsPDQ.RES.HorizontalRes) + "x" + std::to_string(PlayerSettingsPDQ.RES.VerticalRes);
+            std::string replacement = std::to_string(PlayerSettingsPDQ.RES.Resolution.x) + "x" + std::to_string(PlayerSettingsPDQ.RES.Resolution.y);
 
             // Ensure we do not exceed 9 bytes
             if (replacement.size() > 9) {

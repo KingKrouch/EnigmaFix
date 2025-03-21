@@ -50,12 +50,12 @@ ID3D11RenderTargetView* mainRenderTargetView;
 auto& PlayerSettingsRm      = EnigmaFix::PlayerSettings::Get();
 auto& LocalizationRm        = EnigmaFix::Localization::Get();
 bool UseCustomRes           = PlayerSettingsRm.RES.UseCustomRes;
-int HorizontalRes           = PlayerSettingsRm.RES.HorizontalRes;
-int VerticalRes             = PlayerSettingsRm.RES.VerticalRes;
+int HorizontalRes           = PlayerSettingsRm.RES.Resolution.x;
+int VerticalRes             = PlayerSettingsRm.RES.Resolution.y;
 bool UseResolutionScale     = PlayerSettingsRm.RES.UseCustomResScale;
 int ResolutionScale         = PlayerSettingsRm.RES.CustomResScale;
-int InternalHorizontalRes   = PlayerSettingsRm.INS.InternalHorizontalRes;
-int InternalVerticalRes     = PlayerSettingsRm.INS.InternalVerticalRes;
+int InternalHorizontalRes   = PlayerSettingsRm.INS.InternalResolution.x;
+int InternalVerticalRes     = PlayerSettingsRm.INS.InternalResolution.y;
 int ScreenSpaceEffectsScale = PlayerSettingsRm.RS.ScreenSpaceEffectsDivider;
 //// Hook Init Check
 bool InitHook               = false;

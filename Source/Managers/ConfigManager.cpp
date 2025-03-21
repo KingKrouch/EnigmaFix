@@ -112,8 +112,8 @@ namespace EnigmaFix {
 
         // Resolution Settings
         inipp::extract(config.sections["Resolution"]["useCustomResolution"], PlayerSettingsConf.RES.UseCustomRes);
-        inipp::extract(config.sections["Resolution"]["HorizontalResolution"], PlayerSettingsConf.RES.HorizontalRes);
-        inipp::extract(config.sections["Resolution"]["VerticalResolution"], PlayerSettingsConf.RES.VerticalRes);
+        inipp::extract(config.sections["Resolution"]["HorizontalResolution"], PlayerSettingsConf.RES.Resolution.x);
+        inipp::extract(config.sections["Resolution"]["VerticalResolution"], PlayerSettingsConf.RES.Resolution.y);
         inipp::extract(config.sections["Resolution"]["UseResolutionScale"], PlayerSettingsConf.RES.UseCustomResScale);
         inipp::extract(config.sections["Resolution"]["ResolutionScalePercentage"], PlayerSettingsConf.RES.CustomResScale);
         // FOV Settings
@@ -163,10 +163,12 @@ namespace EnigmaFix {
         inipp::extract(config.sections["Launcher"]["IgnoreUpdates"], PlayerSettingsConf.LS.IgnoreUpdates);
 
         // Check if the Horizontal or Vertical Res is 0. If so, default the custom resolution to the current display resolution.
-        if (PlayerSettingsConf.RES.HorizontalRes == 0 || PlayerSettingsConf.RES.VerticalRes == 0) {
-            auto CurrentResolution    = Util::GetCurrentDisplayResolution();
-            PlayerSettingsConf.RES.HorizontalRes = CurrentResolution.x;
-            PlayerSettingsConf.RES.VerticalRes   = CurrentResolution.y;
+        if (PlayerSettingsConf.RES.Resolution.x == 0 || PlayerSettingsConf.RES.Resolution.y == 0) {
+            auto CurrentResolution                = Util::GetCurrentDisplayResolution();
+            PlayerSettingsConf.RES.Resolution.x   = CurrentResolution.x;
+            PlayerSettingsConf.RES.Resolution.y   = CurrentResolution.y;
+
+
         }
         AlreadyReadConfig = true; // After the INI file has successfully been read for the first time, allow writing.
     }

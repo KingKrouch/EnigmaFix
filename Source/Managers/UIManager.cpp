@@ -289,7 +289,7 @@ namespace EnigmaFix {
                 ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale, &SettingsUI.RES.CustomResScale, 25, 100);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale);
             }
-            ImGui::Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalHorizontalRes), static_cast<int>(SettingsUI.INS.InternalVerticalRes));
+            ImGui::Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
         }
         if (CollapsingHeader(LocUI.Strings.collapsingHeader_Fov), ImGuiTreeNodeFlags_Leaf)
         {
