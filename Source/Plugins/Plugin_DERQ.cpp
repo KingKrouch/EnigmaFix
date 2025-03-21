@@ -246,6 +246,7 @@ namespace EnigmaFix
         // Address that accesses object aspect ratio ptr: "8B 87 ? ? ? ? 89 87 ? ? ? ? 8B 87 ? ? ? ? 89 87 ? ? ? ? 8B 87 ? ? ? ? 89 87 ? ? ? ? E8" - Application.exe + 0x006E069B (mov eax,[rdi+000004D0])
 
         // Write to the object aspect ratio pointer
+        // TODO: Figure out why the object aspect ratio pointer isn't working right.
         auto* objectAspectRatioPtr = reinterpret_cast<float*>(reinterpret_cast<intptr_t>(baseModule) + 0x01043B30 + 0xC90);
         if (objectAspectRatioPtr != nullptr) {
             spdlog::info("Object Aspect Ratio: {}", *objectAspectRatioPtr);
