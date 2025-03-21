@@ -74,6 +74,8 @@ void InitImGui() // Initializes ImGui, alongside the needed fonts.
 {
     CreateContext();
     ImGuiIO& io = GetIO();
+    // TODO: Figure out how to disable gamepad input to the game when the interface is open, and also make sure gamepad input is consistent.
+    // TODO: Find a way to add a gamepad hotkey to open the menu.
     io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange | ImGuiConfigFlags_NavEnableGamepad | ImGuiConfigFlags_NavEnableKeyboard;
     LocalizationRm.InitFont(PlayerSettingsRm.INS.dpiScale / 100.0f * PlayerSettingsRm.INS.dpiScaleMultiplier);
 
@@ -81,13 +83,43 @@ void InitImGui() // Initializes ImGui, alongside the needed fonts.
     ImGui_ImplDX11_Init(pDevice, pContext);
 }
 
-// Another function relating to imgui functionality.
+// TODO: Figure out why this isn't disabling input from gameplay.
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) {
-        return true;
+    if (InitHook) {
+        // Toggle UI visibility with key presses
+        if (uMsg == WM_KEYUP) {
+            if (wParam == VK_DELETE)
+                PlayerSettingsRm.ShowEFUI = !PlayerSettingsRm.ShowEFUI;
+            else if (wParam == VK_OEM_3)
+                PlayerSettingsRm.ShowDevConsole = !PlayerSettingsRm.ShowDevConsole;
+        }
+        // If UI is active, block input from the game, but allow ImGui to handle it
+        if (PlayerSettingsRm.ShowEFUI) {
+            // Pass input to ImGui first
+            if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) {
+                return true; // ImGui handled the input, return early
+            }
+            // If ImGui didn't handle the input, block it from reaching the game
+            switch (uMsg)
+            {
+                case WM_MOUSEMOVE:
+                case WM_LBUTTONDOWN: case WM_LBUTTONUP:
+                case WM_RBUTTONDOWN: case WM_RBUTTONUP:
+                case WM_MBUTTONDOWN: case WM_MBUTTONUP:
+                case WM_MOUSEWHEEL:
+                case WM_KEYDOWN: case WM_KEYUP:
+                case WM_CHAR:
+                case WM_INPUT:  // Block Raw Input if game uses DirectInput
+                    return 0;  // Absorb the event (block the game)
+            }
+        }
     }
-    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+    // If UI is not active, pass input to the original window procedure (game)
+    if (oWndProc)
+        return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+    else
+        return DefWindowProc(hWnd, uMsg, wParam, lParam);  // Fallback if oWndProc is invalid
 }
 
 // An easily callable function to make the CreateTexture2D hook a little cleaner.
@@ -360,8 +392,8 @@ namespace EnigmaFix {
     // A hook that contains the needed logic for adding the imgui interface, and forcing flip model presentation.
     HRESULT __stdcall RenderManager::hkPresent(IDXGISwapChain *pSwapChain, UINT SyncInterval, UINT Flags) // Here's what happens when the swapchain is ready to be presented.
     {
-        if (!InitHook) { // Checks if the hook hasn't been initalized, and if not, does the needed deeds to hook ImGui.
-            HRESULT hr = pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&pDevice);
+        if (!InitHook) { // Checks if the hook hasn't been initialized, and if not, does the needed deeds to hook ImGui.
+            HRESULT hr = pSwapChain->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void**>(&pDevice));
             if (SUCCEEDED(hr))
             {
                 pDevice->GetImmediateContext(&pContext);
@@ -371,25 +403,17 @@ namespace EnigmaFix {
                 PlayerSettingsRm.INS.dpiScale = Util::GetDPIScaleForWindow(window) * 100.0f;
                 spdlog::info("RenderManager: Current DPI Scale is {}%.", PlayerSettingsRm.INS.dpiScale);
                 ID3D11Texture2D* pBackBuffer;
-                hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+                hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<LPVOID*>(&pBackBuffer));
                 if (SUCCEEDED(hr)) {
                     pDevice->CreateRenderTargetView(pBackBuffer, NULL, &mainRenderTargetView);
                     pBackBuffer->Release();
                 }
                 else { throw std::runtime_error("Failed to get swapchain back buffer."); } // Throw a standard C++ exception with an error message.
-                oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
+                oWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WndProc)));
                 InitImGui();
                 InitHook = true;
             }
             else { throw std::runtime_error("Failed to get swapchain device."); }
-        }
-
-        if (GetAsyncKeyState(VK_DELETE) & 1) { // Checks if "DEL" key was pressed, and toggles the boolean that shows the UI.
-            PlayerSettingsRm.ShowEFUI = !PlayerSettingsRm.ShowEFUI;
-        }
-
-        if (GetAsyncKeyState(VK_OEM_3) & 1) { // Checks if "~/`/Tilde" key was pressed, and toggles the developer console UI.
-            PlayerSettingsRm.ShowDevConsole = !PlayerSettingsRm.ShowDevConsole;
         }
 
         // TODO: Implement developer console and find a way to pipe SpdLog and standard logging to it.
