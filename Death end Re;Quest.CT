@@ -5,23 +5,27 @@
       <ID>5077</ID>
       <Description>"EnigmaFix (DERQ)"</Description>
       <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>637</ID>
           <Description>"Resolution Stuff"</Description>
           <Options moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>3030</ID>
               <Description>"Aspect Ratio (Make sure to keep the "Disable Aspect Ratio Values from being overwritten" script enabled)"</Description>
               <Options moRecursiveSetValue="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>3185</ID>
                   <Description>"Aspect Ratio (Value 1)"</Description>
+                  <LastState Value="1.777777791" RealAddress="14025EFC6"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Float</VariableType>
                   <Address>Application.exe+25EFC6</Address>
@@ -29,6 +33,7 @@
                 <CheatEntry>
                   <ID>3186</ID>
                   <Description>"Aspect Ratio (Value 2)"</Description>
+                  <LastState Value="1.777777791" RealAddress="140789B2C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Float</VariableType>
                   <Address>Application.exe+789B2C</Address>
@@ -36,6 +41,7 @@
                 <CheatEntry>
                   <ID>3187</ID>
                   <Description>"Aspect Ratio (Value 3)"</Description>
+                  <LastState Value="1.777777791" RealAddress="140E32A30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Float</VariableType>
                   <Address>Application.exe+E32A30</Address>
@@ -43,6 +49,7 @@
                 <CheatEntry>
                   <ID>3184</ID>
                   <Description>"Aspect Ratio for Objects (Such as save crystals and glowing bugs)"</Description>
+                  <LastState Value="1.777777791" RealAddress="3B4513F0"/>
                   <VariableType>Float</VariableType>
                   <Address>"Application.exe"+01043B30</Address>
                   <Offsets>
@@ -52,6 +59,7 @@
                 <CheatEntry>
                   <ID>5057</ID>
                   <Description>"Disable Aspect Ratio Values from being overwritten"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 "Application.exe"+6DDBB7:
@@ -100,17 +108,20 @@
               <ID>5074</ID>
               <Description>"Internal Resolution"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>5075</ID>
                   <Description>"Non-4K Native"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5070</ID>
                       <Description>"Horizontal Internal Resolution (Non-4K Native)"</Description>
+                      <LastState Value="2560" RealAddress="1404858CC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+4858CC </Address>
@@ -118,6 +129,7 @@
                     <CheatEntry>
                       <ID>5071</ID>
                       <Description>"Vertical Internal Resolution (Non-4K Native)"</Description>
+                      <LastState Value="1440" RealAddress="1404858D3"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+4858D3 </Address>
@@ -125,6 +137,7 @@
                     <CheatEntry>
                       <ID>3010</ID>
                       <Description>"Internal Resolution (1080p and other resolutions) (1920 = 80 07, 1080 = 38 04)"</Description>
+                      <LastState Value="00 0A 00 00 C7 45 C3 A0 05" RealAddress="1404858CC"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>9</ByteLength>
@@ -136,11 +149,13 @@
                   <ID>5076</ID>
                   <Description>"4K Native"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5072</ID>
                       <Description>"Horizontal Internal Resolution (4K Native)"</Description>
+                      <LastState Value="3840" RealAddress="1404858A7"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+4858A7 </Address>
@@ -148,6 +163,7 @@
                     <CheatEntry>
                       <ID>5086</ID>
                       <Description>"Vertical Internal Resolution (4K Native)"</Description>
+                      <LastState Value="2160" RealAddress="1404858AE"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+4858AE</Address>
@@ -155,6 +171,7 @@
                     <CheatEntry>
                       <ID>3011</ID>
                       <Description>"Internal Resolution (4K Native Mode) (3840 = 00 0F, 2160 = 70 08)"</Description>
+                      <LastState Value="00 0F 00 00 C7 45 C3 70 08" RealAddress="1404858A7"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>9</ByteLength>
@@ -165,6 +182,7 @@
                 <CheatEntry>
                   <ID>5476</ID>
                   <Description>"Some extra resolution checks that need to be patched (Seemingly only changes the zoom level of the window). DONT TOUCH."</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -215,6 +233,7 @@ db E8 89 BF C5 FF
                 <CheatEntry>
                   <ID>5087</ID>
                   <Description>"4K Native Resolution Selection Text"</Description>
+                  <LastState RealAddress="140C3AA78"/>
                   <VariableType>String</VariableType>
                   <Length>9</Length>
                   <Unicode>0</Unicode>
@@ -225,6 +244,7 @@ db E8 89 BF C5 FF
                 <CheatEntry>
                   <ID>5089</ID>
                   <Description>"Disable Resolution Checking that prevents the 4K Native option from being selected below a 2160p monitor resolution"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -294,17 +314,20 @@ db 8B 53 0C
               <ID>3023</ID>
               <Description>"Scaling Stuff"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>3135</ID>
                   <Description>"UI Stuff"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>3134</ID>
                       <Description>"Horizontal UI and Character Bustup Scale (Doesn't work in battles)"</Description>
+                      <LastState Value="2560" RealAddress="43A58AD0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>"Application.exe"+01044C00</Address>
                       <Offsets>
@@ -314,6 +337,7 @@ db 8B 53 0C
                     <CheatEntry>
                       <ID>5090</ID>
                       <Description>"Vertical UI and Character Bustup Scale (Doesn't work in battles)"</Description>
+                      <LastState Value="1440" RealAddress="43A58AD4"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>"Application.exe"+01044C00</Address>
@@ -324,12 +348,14 @@ db 8B 53 0C
                     <CheatEntry>
                       <ID>3640</ID>
                       <Description>"Something Vertical UI Scale Related (on the pause menu)"</Description>
+                      <LastState Value="1" RealAddress="1405755C4"/>
                       <VariableType>Float</VariableType>
                       <Address>Application.exe+5755C4</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>5033</ID>
                       <Description>"Something Horizontal UI Scale Related (on the pause menu)"</Description>
+                      <LastState Value="1" RealAddress="1405755BA"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>Float</VariableType>
                       <Address>Application.exe+5755BA </Address>
@@ -339,6 +365,7 @@ db 8B 53 0C
                 <CheatEntry>
                   <ID>5360</ID>
                   <Description>"pointerscan result"</Description>
+                  <LastState Value="1920" RealAddress="74E50B20"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+01304550</Address>
                   <Offsets>
@@ -348,6 +375,7 @@ db 8B 53 0C
                 <CheatEntry>
                   <ID>5363</ID>
                   <Description>"pointerscan result"</Description>
+                  <LastState Value="1080" RealAddress="74E50B24"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+01304550</Address>
                   <Offsets>
@@ -360,11 +388,13 @@ db 8B 53 0C
               <ID>5056</ID>
               <Description>"Settings (Use for calculating aspect ratio, and determining the proper internal resolution to use)"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>511</ID>
                   <Description>"Current Horizontal Window Resolution"</Description>
+                  <LastState Value="2562" RealAddress="0022EE30"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+013393C8</Address>
                   <Offsets>
@@ -374,6 +404,7 @@ db 8B 53 0C
                 <CheatEntry>
                   <ID>705</ID>
                   <Description>"Current Vertical Window Resolution"</Description>
+                  <LastState Value="1420" RealAddress="0022EE34"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+013393C8</Address>
                   <Offsets>
@@ -383,6 +414,7 @@ db 8B 53 0C
                 <CheatEntry>
                   <ID>5037</ID>
                   <Description>"Currently Selected Resolution Index (Use this for modifying the internal resolution in C++)"</Description>
+                  <LastState Value="10" RealAddress="751E54C4"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+01017E18</Address>
                   <Offsets>
@@ -392,12 +424,14 @@ db 8B 53 0C
                 <CheatEntry>
                   <ID>5058</ID>
                   <Description>"Max Supported Resolution (Range from 0-11)"</Description>
+                  <LastState Value="11" RealAddress="140F5850C"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>Application.exe+F5850C</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>5053</ID>
                   <Description>"Currently Selected Screen Mode Index (Use this for modifying the internal resolution in C++)"</Description>
+                  <LastState Value="0" RealAddress="751E54C8"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"Application.exe"+01017E18</Address>
                   <Offsets>
@@ -410,11 +444,13 @@ db 8B 53 0C
               <ID>5524</ID>
               <Description>"UI Adjustment"</Description>
               <Options moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>5523</ID>
                   <Description>"UI Adjustment 1"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -458,6 +494,7 @@ mov rax,[rsp+48]
                 <CheatEntry>
                   <ID>5411</ID>
                   <Description>"UI Adjustment 2"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -501,17 +538,20 @@ mov [rsp+000000F0],eax
               <ID>5055</ID>
               <Description>"Windowed Mode Size Values"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>5489</ID>
                   <Description>"640x360"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5487</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="640" RealAddress="140F58720"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58720</Address>
@@ -519,6 +559,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5488</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="360" RealAddress="140F58724"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58724</Address>
@@ -526,6 +567,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>14</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="80 02 00 00 68 01" RealAddress="140F58720"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -537,11 +579,13 @@ mov [rsp+000000F0],eax
                   <ID>5492</ID>
                   <Description>"720x405"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5490</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="720" RealAddress="140F58728"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58728</Address>
@@ -549,6 +593,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5491</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="405" RealAddress="140F5872C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5872C</Address>
@@ -556,6 +601,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>13</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="D0 02 00 00 95 01" RealAddress="140F58728"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -567,11 +613,13 @@ mov [rsp+000000F0],eax
                   <ID>5495</ID>
                   <Description>"800x450"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5493</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="800" RealAddress="140F58730"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58730</Address>
@@ -579,6 +627,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5494</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="450" RealAddress="140F58734"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58734</Address>
@@ -586,6 +635,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>12</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="20 03 00 00 C2 01" RealAddress="140F58730"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -597,11 +647,13 @@ mov [rsp+000000F0],eax
                   <ID>5498</ID>
                   <Description>"1024x576"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5496</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1024" RealAddress="140F58738"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58738</Address>
@@ -609,6 +661,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5497</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="576" RealAddress="140F5873C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5873C</Address>
@@ -616,6 +669,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>11</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="00 04 00 00 40 02" RealAddress="140F58738"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -627,11 +681,13 @@ mov [rsp+000000F0],eax
                   <ID>5501</ID>
                   <Description>"1152x648"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5499</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1152" RealAddress="140F58740"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58740</Address>
@@ -639,6 +695,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5500</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="648" RealAddress="140F58744"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58744</Address>
@@ -646,6 +703,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>10</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="80 04 00 00 88 02" RealAddress="140F58740"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -657,11 +715,13 @@ mov [rsp+000000F0],eax
                   <ID>5504</ID>
                   <Description>"1280x720"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5502</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1280" RealAddress="140F58748"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58748</Address>
@@ -669,6 +729,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5503</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="720" RealAddress="140F5874C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5874C</Address>
@@ -676,6 +737,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>9</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="00 05 00 00 D0 02" RealAddress="140F58748"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -687,11 +749,13 @@ mov [rsp+000000F0],eax
                   <ID>5507</ID>
                   <Description>"1360x765"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5505</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1360" RealAddress="140F58750"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58750</Address>
@@ -699,6 +763,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5506</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="765" RealAddress="140F58754"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58754</Address>
@@ -706,6 +771,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>8</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="50 05 00 00 FD 02" RealAddress="140F58750"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -717,11 +783,13 @@ mov [rsp+000000F0],eax
                   <ID>5510</ID>
                   <Description>"1366x768"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5508</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1366" RealAddress="140F58758"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58758</Address>
@@ -729,6 +797,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5509</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="768" RealAddress="140F5875C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5875C</Address>
@@ -736,6 +805,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>7</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="56 05 00 00 00 03" RealAddress="140F58758"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -747,11 +817,13 @@ mov [rsp+000000F0],eax
                   <ID>5513</ID>
                   <Description>"1600x900"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5511</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1600" RealAddress="140F58760"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58760</Address>
@@ -759,6 +831,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5512</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="900" RealAddress="140F58764"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58764</Address>
@@ -766,6 +839,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5091</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="40 06 00 00 84 03" RealAddress="140F58760"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -777,11 +851,13 @@ mov [rsp+000000F0],eax
                   <ID>5516</ID>
                   <Description>"1920x1080"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5514</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="1920" RealAddress="140F58768"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58768</Address>
@@ -789,6 +865,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5515</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="1080" RealAddress="140F5876C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5876C</Address>
@@ -796,6 +873,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5092</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="80 07 00 00 38 04" RealAddress="140F58768"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -807,11 +885,13 @@ mov [rsp+000000F0],eax
                   <ID>5519</ID>
                   <Description>"2560x1440"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5517</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="2560" RealAddress="140F58770"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58770</Address>
@@ -819,6 +899,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5518</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="1440" RealAddress="140F58774"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58774</Address>
@@ -826,6 +907,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>6</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="00 0A 00 00 A0 05" RealAddress="140F58770"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -837,11 +919,13 @@ mov [rsp+000000F0],eax
                   <ID>5522</ID>
                   <Description>"3840x2160"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5520</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="3840" RealAddress="140F58778"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F58778</Address>
@@ -849,6 +933,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5521</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="2160" RealAddress="140F5877C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>140F5877C</Address>
@@ -856,6 +941,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5093</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="00 0F 00 00 70 08" RealAddress="140F58778"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -867,11 +953,13 @@ mov [rsp+000000F0],eax
                   <ID>5094</ID>
                   <Description>"4K Native"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5095</ID>
                       <Description>"Horizontal Res"</Description>
+                      <LastState Value="3840" RealAddress="140F58780"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+F58780</Address>
@@ -879,6 +967,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5088</ID>
                       <Description>"Vertical Res"</Description>
+                      <LastState Value="2160" RealAddress="140F58784"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>Application.exe+F58784</Address>
@@ -886,6 +975,7 @@ mov [rsp+000000F0],eax
                     <CheatEntry>
                       <ID>5096</ID>
                       <Description>"Hex"</Description>
+                      <LastState Value="00 0F 00 00 70 08" RealAddress="140F58780"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>6</ByteLength>
@@ -901,11 +991,13 @@ mov [rsp+000000F0],eax
           <ID>3144</ID>
           <Description>"Framerate"</Description>
           <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>5481</ID>
               <Description>"Framerate Uncap (Even Better! It jumps straight past the checks)"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -951,6 +1043,7 @@ db 8B 80 A0 00 00 00
             <CheatEntry>
               <ID>5458</ID>
               <Description>"Framerate Uncap"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -990,18 +1083,21 @@ mov eax,[rax+000000A0]
             <CheatEntry>
               <ID>3188</ID>
               <Description>"Framerate Cap (Seems to be something Sleep related, 16.66666603 by default)"</Description>
+              <LastState Value="16.66666603" RealAddress="140E32C3C"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+E32C3C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>5394</ID>
               <Description>"No description"</Description>
+              <LastState Value="144" RealAddress="1405B7C58"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+5B7C58</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>5081</ID>
               <Description>"Post Processing Delta Time (1 / Current Framerate)"</Description>
+              <LastState Value="0.02382659912" RealAddress="1098CD42C"/>
               <VariableType>Float</VariableType>
               <Address>"Application.exe"+0104AC78</Address>
               <Offsets>
@@ -1012,11 +1108,13 @@ mov eax,[rax+000000A0]
               <ID>5425</ID>
               <Description>"Fixes"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>5407</ID>
                   <Description>"WIP Battle Movement Fix 1 (When FPS Uncapped)"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -1089,6 +1187,7 @@ mulss xmm2,[Application.exe+E325E4]
                 <CheatEntry>
                   <ID>5408</ID>
                   <Description>"WIP Battle Movement Fix 2 (When FPS Uncapped)"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -1159,6 +1258,7 @@ mulss xmm2,[Application.exe+E32580]
                 <CheatEntry>
                   <ID>5426</ID>
                   <Description>"WIP Bustup Animation, 3D Animation, and 2D Effect Fixes"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 // Animation Interpolation Speed Adjustments
@@ -1263,11 +1363,13 @@ movss xmm10,[Application.exe+E32910]
           <ID>5066</ID>
           <Description>"Graphics"</Description>
           <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>5065</ID>
               <Description>"Disable IBL (Requires Pausing/Unpausing, or going into a new area to apply)"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //call Application.exe+293040
@@ -1286,6 +1388,7 @@ db E8 8E AE FF FF
             <CheatEntry>
               <ID>5067</ID>
               <Description>"Post Process Modification"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 // Disable tonemapping
@@ -1661,6 +1764,7 @@ mov [rcx+r13+68],al
             <CheatEntry>
               <ID>5427</ID>
               <Description>"Disable all Post Processing"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -1703,6 +1807,7 @@ jne Application.exe+6D8695
             <CheatEntry>
               <ID>5429</ID>
               <Description>"Toggle overwriting Vignette intensity"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -1744,12 +1849,14 @@ movss [rax+r13+00000164],xmm1
             <CheatEntry>
               <ID>5428</ID>
               <Description>"Vignette (Requires keeping always enabled as some DirectX API functions seemingly write to this value for some reason)"</Description>
+              <LastState Value="0.200000003" RealAddress="14009DC9C"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+9DC9C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>5432</ID>
               <Description>"Motion Blur Tweaks"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 alloc(newmem4,2048,"Application.exe"+29D093) 
@@ -1877,12 +1984,14 @@ mov [rcx+r13+58],al
             <CheatEntry>
               <ID>5430</ID>
               <Description>"Motion Blur Shutter Ratio"</Description>
+              <LastState Value="0.67542696" RealAddress="1407735D8"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+7735D8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>5431</ID>
               <Description>"Motion Blur Max Blur Length"</Description>
+              <LastState Value="0.1000000015" RealAddress="14025EE50"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+25EE50</Address>
             </CheatEntry>
@@ -1892,17 +2001,20 @@ mov [rcx+r13+58],al
           <ID>3151</ID>
           <Description>"Other Tweaks"</Description>
           <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>5483</ID>
               <Description>"Video Playback"</Description>
               <Options moManualExpandCollapse="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>3146</ID>
                   <Description>"Skip Opening Videos (Doesn't skip notice screens)"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : Death end re;Quest
   Version:
@@ -1924,6 +2036,7 @@ mov [rcx+r13+58],al
                 <CheatEntry>
                   <ID>5482</ID>
                   <Description>"Game OP"</Description>
+                  <LastState Value="2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 67 61 6D 65 5F 6F 70 2E 75 73 6D" RealAddress="140BF4B80"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>47</ByteLength>
@@ -1932,6 +2045,7 @@ mov [rcx+r13+58],al
                 <CheatEntry>
                   <ID>5484</ID>
                   <Description>"Logo IF"</Description>
+                  <LastState Value="2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 69 66 2E 75 73 6D" RealAddress="140BF4BB0"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>47</ByteLength>
@@ -1940,6 +2054,7 @@ mov [rcx+r13+58],al
                 <CheatEntry>
                   <ID>5485</ID>
                   <Description>"Logo CH"</Description>
+                  <LastState Value="2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 63 68 2E 75 73 6D" RealAddress="140BF4BE0"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>47</ByteLength>
@@ -1948,6 +2063,7 @@ mov [rcx+r13+58],al
                 <CheatEntry>
                   <ID>5486</ID>
                   <Description>"Logo Silicon Studio"</Description>
+                  <LastState Value="2E 2E 2F 2E 2E 2F 72 65 73 6F 75 72 63 65 2F 66 69 6E 61 6C 69 7A 65 64 57 69 6E 36 34 2F 4D 4F 56 49 45 2F 6C 6F 67 6F 5F 73 69 6C 69 63 6F 6E 2E 75 73 6D" RealAddress="140BF4C10"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>52</ByteLength>
@@ -1959,11 +2075,13 @@ mov [rcx+r13+58],al
               <ID>691</ID>
               <Description>"Camera Stuff"</Description>
               <Options moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>678</ID>
                   <Description>"Unclamp Pitch"</Description>
+                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : Death end re;Quest
   Version:
@@ -2021,11 +2139,13 @@ mov [rcx+r13+58],al
                   <ID>5022</ID>
                   <Description>"Field of View (WIP, will break things, need to find FOV for render targets)"</Description>
                   <Options moManualExpandCollapse="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>5061</ID>
                       <Description>"Disable Opcodes that write to the FOV value (Warning: Will affect in-engine cutscenes)"</Description>
+                      <LastState/>
                       <VariableType>Auto Assembler Script</VariableType>
                       <AssemblerScript>[ENABLE]
 // Disables the main write to the FOV value during regular gameplay
@@ -2076,6 +2196,7 @@ db F3 0F 11 81 C4 04 00 00
                     <CheatEntry>
                       <ID>5456</ID>
                       <Description>"Overwrite FOV"</Description>
+                      <LastState/>
                       <VariableType>Auto Assembler Script</VariableType>
                       <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2116,6 +2237,7 @@ movss [rcx+000004C4],xmm0
                     <CheatEntry>
                       <ID>5457</ID>
                       <Description>"Overwrite Battle FOV"</Description>
+                      <LastState/>
                       <VariableType>Auto Assembler Script</VariableType>
                       <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2158,6 +2280,7 @@ movss xmm0,[rcx+000004C4]
                     <CheatEntry>
                       <ID>5062</ID>
                       <Description>"FOV (45 Degrees Hor+ by default) (Warning: affects in-engine cutscenes)"</Description>
+                      <LastState Value="43.60281754" RealAddress="3B4513E4"/>
                       <VariableType>Float</VariableType>
                       <Address>"Application.exe"+01046660</Address>
                       <Offsets>
@@ -2167,6 +2290,7 @@ movss xmm0,[rcx+000004C4]
                     <CheatEntry>
                       <ID>5063</ID>
                       <Description>"FOV Backup Pointer"</Description>
+                      <LastState Value="43.60281754" RealAddress="3B4513E4"/>
                       <VariableType>Float</VariableType>
                       <Address>"Application.exe"+01043B30</Address>
                       <Offsets>
@@ -2177,11 +2301,13 @@ movss xmm0,[rcx+000004C4]
                       <ID>5064</ID>
                       <Description>"DEPRECATED"</Description>
                       <Options moManualExpandCollapse="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
                           <ID>5032</ID>
                           <Description>"Overworld FOV (Save Crystals may break) (Default is "57.29577637")"</Description>
+                          <LastState Value="57.29577637" RealAddress="140E32C68"/>
                           <VariableType>Float</VariableType>
                           <Address>Application.exe+E32C68</Address>
                         </CheatEntry>
@@ -2194,6 +2320,7 @@ movss xmm0,[rcx+000004C4]
             <CheatEntry>
               <ID>5085</ID>
               <Description>"Disable Alt+F4 Prompt"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2223,6 +2350,7 @@ db 83 F8 02
           <ID>5019</ID>
           <Description>"Some Experimental Values that lead to other useful ones."</Description>
           <Options moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -2242,12 +2370,14 @@ db 83 F8 02
             <CheatEntry>
               <ID>3191</ID>
               <Description>"No description"</Description>
+              <LastState Value="0.5" RealAddress="14008FF84"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+8FF84</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>5392</ID>
               <Description>"No description"</Description>
+              <LastState Value="0.4166666567" RealAddress="140C0B470"/>
               <VariableType>Float</VariableType>
               <Address>Application.exe+C0B470</Address>
             </CheatEntry>
@@ -2259,11 +2389,13 @@ db 83 F8 02
       <ID>5475</ID>
       <Description>"Freecam_Shenanigans"</Description>
       <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>5462</ID>
           <Description>"Freeze Physics"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2302,6 +2434,7 @@ call Application.exe+3572D0
         <CheatEntry>
           <ID>5463</ID>
           <Description>"Freeze World?"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2340,6 +2473,7 @@ call Application.exe+3572D0
         <CheatEntry>
           <ID>5460</ID>
           <Description>"Toggle HUD (Crashes when toggled back on)"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2381,6 +2515,7 @@ mov rax,[Application.exe+13395A0]
         <CheatEntry>
           <ID>5461</ID>
           <Description>"Disable Character Culling (CRASHES)"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2423,6 +2558,7 @@ mov [rbx+14],eax
         <CheatEntry>
           <ID>5464</ID>
           <Description>"Disable Pause on Unfocused (needs to be toggled while in-game)"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2464,16 +2600,19 @@ mov [rsp+000000A0],rax
         <CheatEntry>
           <ID>5465</ID>
           <Description>"Player Coordinate Candidate 1 (f3 0f 11 89 ? ? ? ? f3 0f 11 91 ? ? ? ? f3 0f 11 99 ? ? ? ? 48 8b 89 ? ? ? ? e9 ? ? ? ? cc cc cc cc cc cc cc cc cc cc cc cc 48 89 5c 24 ? 48 89 6c 24)"</Description>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
         </CheatEntry>
         <CheatEntry>
           <ID>5466</ID>
           <Description>"Player Coordinate Candidate 2 (f3 0f 11 89 ? ? ? ? f3 0f 11 91 ? ? ? ? f3 0f 11 99 ? ? ? ? 48 8b 89 ? ? ? ? e9 ? ? ? ? cc cc cc cc cc cc cc cc cc cc cc cc 48 89 5c 24 ? 48 89 74 24)"</Description>
+          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
         </CheatEntry>
         <CheatEntry>
           <ID>5467</ID>
           <Description>"Nop cutscene camera movement maybe?"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2513,6 +2652,7 @@ movss [rdx+00000114],xmm0
         <CheatEntry>
           <ID>5468</ID>
           <Description>"Nop cutscene camera movement maybe? 2"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2552,6 +2692,7 @@ movss [rdx+00000494],xmm0
         <CheatEntry>
           <ID>5469</ID>
           <Description>"NopCutscene Call 2?"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2591,6 +2732,7 @@ movss [rdx+00000498],xmm1
         <CheatEntry>
           <ID>5470</ID>
           <Description>"Disable Env map 1"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2629,6 +2771,7 @@ call Application.exe+9F2190
         <CheatEntry>
           <ID>5471</ID>
           <Description>"Disable env map 2"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2667,6 +2810,7 @@ call Application.exe+15B8B0
         <CheatEntry>
           <ID>5472</ID>
           <Description>"hide pause notice?"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -2705,6 +2849,7 @@ call Application.exe+71A9E0
         <CheatEntry>
           <ID>5473</ID>
           <Description>"PCordCandidate1"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 assert("Application.exe"+68D410,F3 0F 11 89 F8 01 00 00 F3)
@@ -2748,6 +2893,7 @@ dealloc(playerStructMem)
         <CheatEntry>
           <ID>5474</ID>
           <Description>"pCordCandidate2"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 assert("Application.exe"+68D4C0, F3 0F 11 89 E0 01 00 00 F3)
@@ -2795,11 +2941,13 @@ dealloc(playerStruct2Mem)
       <ID>5356</ID>
       <Description>"Misc"</Description>
       <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>5351</ID>
           <Description>"No description"</Description>
+          <LastState Value="80 07 00 00 C7 83 24 01 00 00 38 04" RealAddress="140B8DA2C"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>Array of byte</VariableType>
           <ByteLength>12</ByteLength>
@@ -2808,6 +2956,7 @@ dealloc(playerStruct2Mem)
         <CheatEntry>
           <ID>5355</ID>
           <Description>"No description"</Description>
+          <LastState Value="1.555635095" RealAddress="1409B5754"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>Application.exe+9B5754</Address>
@@ -2818,17 +2967,20 @@ dealloc(playerStruct2Mem)
       <ID>5459</ID>
       <Description>"Something"</Description>
       <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>5410</ID>
           <Description>"No description"</Description>
+          <LastState Value="2580" RealAddress="14028B524"/>
           <VariableType>4 Bytes</VariableType>
           <Address>Application.exe+28B524</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>5433</ID>
           <Description>"No description"</Description>
+          <LastState Value="00 00 00 00 00 00 00 00 80 07 00 00 38 04 00 00" RealAddress="140C0AA20"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>Array of byte</VariableType>
           <ByteLength>16</ByteLength>
@@ -2851,6 +3003,7 @@ dealloc(playerStruct2Mem)
         <CheatEntry>
           <ID>5436</ID>
           <Description>"Auto Assemble script"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -3007,6 +3160,7 @@ mov [rsp+000000F4],eax
         <CheatEntry>
           <ID>5454</ID>
           <Description>"Auto Assemble script"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
@@ -3068,14 +3222,61 @@ cvtsi2ss xmm1,[rax+40]
     <CheatEntry>
       <ID>5479</ID>
       <Description>"No description"</Description>
+      <LastState Value="1280" RealAddress="140BF6A80"/>
       <VariableType>Float</VariableType>
       <Address>Application.exe+BF6A80</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>5480</ID>
       <Description>"No description"</Description>
+      <LastState Value="720" RealAddress="140BF566C"/>
       <VariableType>Float</VariableType>
       <Address>Application.exe+BF566C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5525</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"Application.exe"+D9702) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+mov [rax+78],02
+
+originalcode:
+//mov [rax+78],ecx
+mov rax,[rsp+00000210]
+
+
+//Address of signature = Application.exe + 0x000D9702
+//"\x89\x48\x00\x48\x8B\x00\x00\x00\x00\x00\x00\x8B\x8C\x00\x00\x00\x00\x00\x89\x48\x00\x48\x8B\x00\x00\x00\x00\x00\x00\x48\x8B\x00\x00\x00\x00\x00\x00\x8B\x49", "xx?xx??????xx?????xx?xx??????xx??????xx"
+//"89 48 ? 48 8B ? ? ? ? ? ? 8B 8C ? ? ? ? ? 89 48 ? 48 8B ? ? ? ? ? ? 48 8B ? ? ? ? ? ? 8B 49"
+
+exit:
+jmp returnhere
+
+"Application.exe"+D9702:
+jmp newmem
+nop 6
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Application.exe"+D9702:
+db 89 48 78 48 8B 84 24 10 02 00 00
+//mov [rax+78],ecx
+//mov rax,[rsp+00000210]
+</AssemblerScript>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
