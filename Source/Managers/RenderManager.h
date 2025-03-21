@@ -25,6 +25,7 @@ SOFTWARE.
 
 // System Libraries
 #include <d3d11.h>
+#include <directxmath.h>
 #include <dxgi.h>
 // Variables
 typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
