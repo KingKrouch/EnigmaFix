@@ -42,7 +42,7 @@ bool LoadTextureFromMemory(const void* data, size_t data_size, ID3D11ShaderResou
     int image_height = 0;
     unsigned char* image_data = stbi_load_from_memory((const unsigned char*)data, (int)data_size, &image_width, &image_height, NULL, 4);
     if (image_data == NULL)
-      	spdlog::error("Image data is null.");
+      	spdlog::error("Texture: Image data is null.");
         return false;
 
     // Create texture
@@ -88,11 +88,11 @@ bool LoadTextureFromFile(const char* file_name, ID3D11ShaderResourceView** out_s
     FILE* f = nullptr;
     if (errno_t err = fopen_s(&f, file_name, "rb"); err != 0) {
         // Handle the error, e.g., print an error message or exit.
-        spdlog::error("Failed to open file {}", file_name);
+        spdlog::error("Texture: Failed to open file {}", file_name);
         return false; // or other error handling mechanism
     }
     if (f == nullptr)
-      	spdlog::error("File '{}' is null.", file_name);
+      	spdlog::error("Texture: File '{}' is null.", file_name);
         return false;
     fseek(f, 0, SEEK_END);
     const auto file_size = static_cast<size_t>(ftell(f));
