@@ -111,8 +111,31 @@ namespace EnigmaFix {
         if (::Begin(LocUI.Strings.aboutEnigmaFix, p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
         {
             float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
+
+            float logoWidth = (static_cast<float>(LogoWidth) / 4) * dpiScaleLogo;
+            float logoHeight = (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo;
+
+            // Save the current cursor position
+            float originalCursorPosX = ImGui::GetCursorPosX();
+
+            // Calculate the horizontal center position and set the cursor position
+            float windowWidth = ImGui::GetWindowWidth();
+            float imageXPos = (windowWidth - logoWidth) * 0.5f;  // Center the image horizontally
+            ImGui::SetCursorPosX(imageXPos);
+
             ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / 4) * dpiScaleLogo, (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo));
-            Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
+
+            // Restore the cursor position after the image
+            ImGui::SetCursorPosX(originalCursorPosX);
+
+            // Calculate the text width (this will give you the length of the text in pixels)
+            float textWidth = ImGui::CalcTextSize(LocUI.Strings.enigmaFixName).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber).x + 10.0f; // 10.0f for a small space between the two strings
+
+            // Set the cursor to the center of the window minus half the text width
+            ImGui::SetCursorPosX((windowWidth - textWidth) * 0.5f);
+
+            // Render the centered text
+            Text("%s %s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
             Separator();
             Text("(C) 2021 Bryce Q.");
             Text("%s", LocUI.Strings.enigmaFixLicense);
@@ -121,17 +144,22 @@ namespace EnigmaFix {
             Text("%s", LocUI.Strings.specialThanksTo);
             Text("%s", LocUI.Strings.specialThanksLine);
             Text("%s", LocUI.Strings.specialThanksLine2);
+            Text("%s", LocUI.Strings.specialThanksLine3);
+            ImGui::PushTextWrapPos(ImGui::GetWindowWidth() * 0.8f);  // Wrap text at 80% of the window width
+            Text("%s", LocUI.Strings.alsoSpecialThanksToLine);
+            Text("%s", LocUI.Strings.specialThanksLine4);
             Separator();
             Text("%s", LocUI.Strings.thirdPartySoftware);
             Text("%s", LocUI.Strings.imguiLicense);
             Text("%s", LocUI.Strings.kieroHookLicense);
             Text("%s", LocUI.Strings.ghFearLicense);
-            Text("%s", LocUI.Strings.thirteenAGIniLicense);
+            Text("%s", LocUI.Strings.inippLicense);
             Text("%s", LocUI.Strings.thirteenAGAsiLicense);
-            Text("%s", LocUI.Strings.minHookLicense);
-            Text("%s", LocUI.Strings.modUtilsLicense);
+            Text("%s", LocUI.Strings.safetyHookLicense);
+            Text("%s", LocUI.Strings.zydisLicense);
             Text("%s", LocUI.Strings.fontsLicense);
             Text("%s", LocUI.Strings.fontAwesomeLicense);
+            ImGui::PopTextWrapPos();  // Reset word wrap
             Separator();
             if (Button(LocUI.Strings.button_Close)) {
                 aboutPage = false;
