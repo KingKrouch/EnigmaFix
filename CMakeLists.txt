@@ -177,6 +177,8 @@ add_library(EnigmaFix SHARED
         Source/Utilities/DisplayHelper.h
         Source/Utilities/DisplayHelper.cpp
         Source/Utilities/MemoryHelper.h
+        Source/Utilities/JsonHelper.cpp
+        Source/Utilities/JsonHelper.h
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
