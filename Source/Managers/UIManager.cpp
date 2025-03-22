@@ -108,22 +108,21 @@ namespace EnigmaFix {
 
     void UIManager::ShowAboutWindow(bool* p_open)
     {
-        if (::Begin(LocUI.Strings.aboutEnigmaFix, p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse))
-        {
+        if (::Begin(LocUI.Strings.aboutEnigmaFix, p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
+            int logoSizeDivider = 4;
 
-            float logoWidth = (static_cast<float>(LogoWidth) / 4) * dpiScaleLogo;
-            float logoHeight = (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo;
+            float logoWidthNew = (static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo;
 
             // Save the current cursor position
             float originalCursorPosX = ImGui::GetCursorPosX();
 
             // Calculate the horizontal center position and set the cursor position
             float windowWidth = ImGui::GetWindowWidth();
-            float imageXPos = (windowWidth - logoWidth) * 0.5f;  // Center the image horizontally
+            float imageXPos = (windowWidth - logoWidthNew) * 0.5f;  // Center the image horizontally
             ImGui::SetCursorPosX(imageXPos);
 
-            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / 4) * dpiScaleLogo, (static_cast<float>(LogoHeight) / 4) * dpiScaleLogo));
+            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo, (static_cast<float>(LogoHeight) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo));
 
             // Restore the cursor position after the image
             ImGui::SetCursorPosX(originalCursorPosX);
@@ -182,17 +181,16 @@ namespace EnigmaFix {
 
     void UIManager::InitLocalization()
     {
-        while (!initLoc) {
-            // Initialize localization strings. I still need to find a way to get Japanese and Traditional Chinese strings to appear without "????"s.
+        if (!initLoc) {
+            // Initialize localization strings.
             LocUI.InitLoc();
-            break;
+            initLoc = true; // Confirms that these values have been initialized.
         }
-        initLoc = true; // Confirms that these values have been initialized.
     }
 
     ImVec4 VectorToVec4(std::vector<float> Vec){
         Vec.resize(4);
-        return ImVec4(Vec[0], Vec[1], Vec[2], Vec[3]);
+        return {Vec[0], Vec[1], Vec[2], Vec[3]};
     }
 
     void UIManager::ActivateTheme()
@@ -285,17 +283,17 @@ namespace EnigmaFix {
         std::vector<Util::DesktopResolution> resolutions = Util::GetAvailableDisplayResolutions();
         auto currentResolution = SettingsUI.RES.Resolution;
         // Check if currentResolution is in the list
-        if (std::find(resolutions.begin(), resolutions.end(), currentResolution) == resolutions.end()) {
+        if (std::ranges::find(resolutions, currentResolution) == resolutions.end()) {
             resolutions.push_back(currentResolution); // Add it if it's not in the list
         }
         // Sort the resolutions from smallest to largest based on area (width * height)
-        std::sort(resolutions.begin(), resolutions.end(), [](const Util::DesktopResolution& a, const Util::DesktopResolution& b) {
+        std::ranges::sort(resolutions, [](const Util::DesktopResolution& a, const Util::DesktopResolution& b) {
             return (a.x * a.y) < (b.x * b.y);  // Compare by resolution area
         });
         // Convert resolution list to ImGui-friendly format
         std::vector<std::string> resolutionStrings;
-        for (const auto& res : resolutions) {
-            resolutionStrings.push_back(std::to_string(res.x) + "x" + std::to_string(res.y));
+        for (const auto& [x, y] : resolutions) {
+            resolutionStrings.push_back(std::to_string(x) + "x" + std::to_string(y));
         }
         // Convert to a format ImGui::Combo can use
         std::vector<const char*> resolutionCStrs;
@@ -310,7 +308,7 @@ namespace EnigmaFix {
                 break;
             }
         }
-        ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), resolutionCStrs.size());
+        ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), static_cast<int>(resolutionCStrs.size()));
     }
 
     void UIManager::MainMenuOptions()
@@ -344,8 +342,8 @@ namespace EnigmaFix {
         }
         if (CollapsingHeader(LocUI.Strings.collapsingHeader_Framerate), ImGuiTreeNodeFlags_Leaf)
         {
-            ImVec4 framerateBad = ImVec4(1.0f, 0.7f, 0.7f, 1.0f);
-            ImVec4 framerateGood = ImVec4(0.7f, 1.0f, 0.7f, 1.0f);
+            constexpr auto framerateBad = ImVec4(1.0f, 0.7f, 0.7f, 1.0f);
+            constexpr auto framerateGood = ImVec4(0.7f, 1.0f, 0.7f, 1.0f);
             ImGui::Checkbox(LocUI.Strings.checkbox_VSync, &SettingsUI.SYNC.VSync);
             SameLine(); HelpMarker(LocUI.Strings.helpmarker_VSync);
             if (SettingsUI.SYNC.VSync) {
@@ -423,7 +421,7 @@ namespace EnigmaFix {
         if (Button(LocUI.Strings.button_Close)) {
             //showUI = false;
             // Always center this window when appearing
-            ImVec2 center = GetMainViewport()->GetCenter();
+            const auto center = GetMainViewport()->GetCenter();
             SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
             OpenPopup(LocUI.Strings.gameExit);
         }
@@ -450,7 +448,7 @@ namespace EnigmaFix {
     {
         if (startupNotice) { ShowStartupOverlay(&startupNotice); }
         if (aboutPage) { ShowAboutWindow(&aboutPage); }
-        if (BeginPopupModal(LocUI.Strings.gameExit, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
+        if (BeginPopupModal(LocUI.Strings.gameExit, nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             ShowExitPrompt();
         }
         ShadowResolution = ShadowOptionResolution[SelectedShadowOption];
@@ -501,9 +499,9 @@ namespace EnigmaFix {
             // Creates the main menu UI and enables our custom theming.
             um_Instance.ActivateTheme();
             // Spawns the main menu logic.
-            um_Instance.MainMenuOptions();
+            EnigmaFix::UIManager::MainMenuOptions();
             Separator();
-            um_Instance.WindowButtons();
+            EnigmaFix::UIManager::WindowButtons();
         }
     }
 
@@ -511,16 +509,16 @@ namespace EnigmaFix {
     {
         if (!Logo) { // Prevent reloading each frame.
             // TODO: Figure out why the texture is missing.
-            bool ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, pDevice, &LogoWidth, &LogoHeight);
+            const auto ret = LoadTextureFromFile("Resources/EnigmaFix_Logo.png", &Logo, pDevice, &LogoWidth, &LogoHeight);
             IM_ASSERT(ret);
         }
     }
 
     void UIManager::BeginRender()
     {
-        um_Instance.ShowMainMenu(&SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
+        EnigmaFix::UIManager::ShowMainMenu(&SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
         // Runs some menu checks per-frame, since I seemingly can't get it so these checks don't happen per-frame.
-        um_Instance.LoopChecks();
+        EnigmaFix::UIManager::LoopChecks();
     }
 
     void UIManager::Begin(ID3D11Device* pDevice)
@@ -530,10 +528,10 @@ namespace EnigmaFix {
         // TODO: Figure out how to adjust the style settings only when necessary. Right now it keeps writing to them and causes problems.
         //um_Instance.AdjustDPIScaling(SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier);
         // Checks if the localization strings have been initialized.
-        um_Instance.InitLocalization();
+        EnigmaFix::UIManager::InitLocalization();
         // Loads the About screen's logo texture.
-        um_Instance.LoadLogoTexture(pDevice);
+        EnigmaFix::UIManager::LoadLogoTexture(pDevice);
         // Begins drawing the UI.
-        um_Instance.BeginRender();
+        EnigmaFix::UIManager::BeginRender();
     }
 }
