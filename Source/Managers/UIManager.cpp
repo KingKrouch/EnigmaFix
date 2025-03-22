@@ -20,6 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
+
 // Internal Functionality
 #include "UIManager.h"
 #include "PluginManager.h"
@@ -134,7 +137,7 @@ namespace EnigmaFix {
             ImGui::SetCursorPosX((windowWidth - textWidth) * 0.5f);
 
             // Render the centered text
-            Text("%s %s", LocUI.Strings.enigmaFixName.c_str(), LocUI.Strings.versionNumber.c_str());
+            Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber.c_str());
             Separator();
             Text("(C) 2025 Bryce Q.");
             Text(LocUI.Strings.enigmaFixLicense.c_str());
@@ -544,3 +547,5 @@ namespace EnigmaFix {
         EnigmaFix::UIManager::BeginRender();
     }
 }
+
+#pragma GCC diagnostic pop
