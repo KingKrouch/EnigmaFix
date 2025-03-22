@@ -30,9 +30,11 @@ namespace JsonUtils {
             std::cerr << "Failed to open JSON file: " << path << std::endl;
             return {};  // Return an empty JSON object instead of void
         }
+        std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
         json loadedJson;
         try {
-            file >> loadedJson;
+            loadedJson = json::parse(content);
         } catch (const json::parse_error& e) {
             std::cerr << "JSON parsing error: " << e.what() << std::endl;
             return {};  // Return an empty JSON object if parsing fails
