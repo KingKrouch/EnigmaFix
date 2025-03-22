@@ -354,6 +354,7 @@ namespace EnigmaFix {
             }
             else { SettingsUI.SYNC.SyncInterval = 0; }
             ImGui::InputInt(LocUI.Strings.sliderInt_FramerateCap, &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
+            SettingsUI.SYNC.MaxFPS = ImClamp(SettingsUI.SYNC.MaxFPS, 0, std::numeric_limits<int>::max()); // Clamp to prevent anything below 0 from being set.
             SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_FramerateCap);
             // Adds the Framerate and Frametime counter and changes the color of the text based on if the framerate is < 60FPS (red), or >= 60FPS (green).
             // Since I can't put this in a Switch/Case statement apparently, the YandereDev-tier "IF/ELSE" statement shenanigans will have to do for now.
