@@ -34,6 +34,7 @@
     "kieroHookLicense": "* rdboのImGui-DirectX-11-Kiero-Hookを使用しています。",
     "ghFearLicense": "* GHFearのUniversal-ImGui-D3D11-Hook-WithResizeの一部を使用しています。",
     "stbLicense": "* ショーン・バレット (nothings)のSTBライブラリを使用しており、MITライセンスのもとでライセンスされています。",
+    "jsonLicense": "* ニールス・ローマン (nlohmann) の JSON ライブラリを使用しており、これは MIT ライセンスのもとでライセンスされています。",
     "inippLicense": "* IniPPを使用しており、MITライセンスのもとでライセンスされています。",
     "thirteenAGAsiLicense": "* ThirteenAGのUltimate-ASI-Loaderを使用しており、MITライセンスのもとでライセンスされています。",
     "safetyHookLicense": "* SafetyHookを使用しており、Boost Software Licenseのもとでライセンスされています。",

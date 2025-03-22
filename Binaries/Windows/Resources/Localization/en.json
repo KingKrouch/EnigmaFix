@@ -34,6 +34,7 @@
     "kieroHookLicense": "* Uses rdbo's ImGui-DirectX-11-Kiero-Hook.",
     "ghFearLicense": "* Uses portions of GHFear's Universal-ImGui-D3D11-Hook-WithResize.",
     "stbLicense": "* Uses Sean Barrett (nothings)'s STB library, which is licensed under the MIT License.",
+    "jsonLicense": "* Uses Niels Lohmann (nlohmann)'s JSON library, which is licensed under the MIT License.",
     "inippLicense": "* Uses IniPP, which is licensed under the MIT License.",
     "thirteenAGAsiLicense": "* Uses ThirteenAG's Ultimate-ASI-Loader, which is licensed under the MIT License.",
     "safetyHookLicense": "* Uses SafetyHook, which is licensed under the Boost Software License.",

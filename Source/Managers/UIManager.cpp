@@ -152,6 +152,8 @@ namespace EnigmaFix {
             Text(LocUI.Strings.imguiLicense.c_str());
             Text(LocUI.Strings.kieroHookLicense.c_str());
             Text(LocUI.Strings.ghFearLicense.c_str());
+            Text(LocUI.Strings.stbLicense.c_str());
+            Text(LocUI.Strings.jsonLicense.c_str());
             Text(LocUI.Strings.inippLicense.c_str());
             Text(LocUI.Strings.thirteenAGAsiLicense.c_str());
             Text(LocUI.Strings.safetyHookLicense.c_str());

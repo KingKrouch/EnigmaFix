@@ -57,6 +57,7 @@ namespace EnigmaFix {
             std::string imguiLicense;
             std::string kieroHookLicense;
             std::string stbLicense;
+            std::string jsonLicense;
             std::string ghFearLicense;
             std::string inippLicense;
             std::string thirteenAGAsiLicense;
