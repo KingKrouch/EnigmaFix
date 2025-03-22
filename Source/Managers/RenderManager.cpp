@@ -112,6 +112,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
                 case WM_CHAR:
                 case WM_INPUT:  // Block Raw Input if game uses DirectInput
                     return 0;  // Absorb the event (block the game)
+                default: break;
             }
         }
     }
@@ -496,6 +497,7 @@ namespace EnigmaFix {
                         resizeRt(pDesc, (InternalHorizontalRes / 2), (InternalVerticalRes / 2), (InternalHorizontalRes / ScreenSpaceEffectsScale), (InternalVerticalRes / ScreenSpaceEffectsScale));
                         break;
                     }
+                    default: { break; }
                 }
             }
 
@@ -506,6 +508,7 @@ namespace EnigmaFix {
                         resizeRt(pDesc, 2048, 2048, ShadowRes, ShadowRes);
                         break;
                     }
+                    default: { break; }
                 }
             }
 
@@ -555,6 +558,7 @@ namespace EnigmaFix {
                         resizeRt(pDesc, 1920, 1080, InternalHorizontalRes, InternalVerticalRes);
                         break;
                     }
+                    default: { break; }
                     }
                 }
             }

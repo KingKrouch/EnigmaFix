@@ -103,6 +103,7 @@ namespace EnigmaFix {
             }
             case PlayerSettingsPm.E_GameMode::MSF: {
             }
+            default: break;
         }
     }
 }

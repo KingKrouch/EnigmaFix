@@ -32,14 +32,15 @@ auto& hkMgr = EnigmaFix::HookManager::Get(); // Declares a pointer to the HookMa
 BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 {
 	switch (dwReason) {
-	case DLL_PROCESS_ATTACH: {
-		hkMgr.BeginHook(); // Begins the hooking process when the DLL file attaches.
-		break;
-	}
-	case DLL_PROCESS_DETACH: {
-		hkMgr.EndHook(); // Cleans up odds and ends when the DLL file detaches.
-		break;
-	}
+		case DLL_PROCESS_ATTACH: {
+			hkMgr.BeginHook(); // Begins the hooking process when the DLL file attaches.
+			break;
+		}
+		case DLL_PROCESS_DETACH: {
+			hkMgr.EndHook(); // Cleans up odds and ends when the DLL file detaches.
+			break;
+		}
+		default: break;
 	}
 	return TRUE;
 }
