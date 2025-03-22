@@ -23,22 +23,34 @@ SOFTWARE.
 #include "JsonHelper.h"
 
 namespace JsonUtils {
-    json LoadJson(const std::string& path)
+    // Function to load a JSON file and return the parsed object
+    nlohmann::json LoadJson(const std::string& path)
     {
-        std::ifstream file(path);
+        // Open the file in binary mode to avoid issues with encoding
+        std::ifstream file(path, std::ios::in | std::ios::binary);
+
+        // Check if the file was successfully opened
         if (!file.is_open()) {
             std::cerr << "Failed to open JSON file: " << path << std::endl;
-            return {};  // Return an empty JSON object instead of void
+            return {};  // Return an empty JSON object if file cannot be opened
         }
+
+        // Read the entire file content into a string
         std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
-        json loadedJson;
+        // Declare a JSON object to hold the parsed data
+        nlohmann::json loadedJson;
+
         try {
-            loadedJson = json::parse(content);
-        } catch (const json::parse_error& e) {
+            // Attempt to parse the file content into a JSON object
+            loadedJson = nlohmann::json::parse(content);
+        } catch (const nlohmann::json::parse_error& e) {
+            // If parsing fails, output the error and return an empty JSON object
             std::cerr << "JSON parsing error: " << e.what() << std::endl;
             return {};  // Return an empty JSON object if parsing fails
         }
+
+        // Return the successfully parsed JSON object
         return loadedJson;
     }
 } // JsonUtils

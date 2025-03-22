@@ -98,17 +98,17 @@ namespace EnigmaFix {
         }
         if (::Begin("Startup Overlay", p_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove))
         {
-            Text("%s", LocUI.Strings.startupWindowWelcome);
-            Text("%s", LocUI.Strings.startupWindowInputPrompt);
+            Text(LocUI.Strings.startupWindowWelcome.c_str());
+            Text(LocUI.Strings.startupWindowInputPrompt.c_str());
             Separator();
-            Text("%s", LocUI.Strings.startupWindowCrackWarning);
+            Text(LocUI.Strings.startupWindowCrackWarning.c_str());
         }
         End();
     }
 
     void UIManager::ShowAboutWindow(bool* p_open)
     {
-        if (::Begin(LocUI.Strings.aboutEnigmaFix, p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
+        if (::Begin(LocUI.Strings.aboutEnigmaFix.c_str(), p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
             int logoSizeDivider = 4;
 
@@ -128,39 +128,39 @@ namespace EnigmaFix {
             ImGui::SetCursorPosX(originalCursorPosX);
 
             // Calculate the text width (this will give you the length of the text in pixels)
-            float textWidth = ImGui::CalcTextSize(LocUI.Strings.enigmaFixName).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber).x + 10.0f; // 10.0f for a small space between the two strings
+            float textWidth = ImGui::CalcTextSize(LocUI.Strings.enigmaFixName.c_str()).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber.c_str()).x + 10.0f; // 10.0f for a small space between the two strings
 
             // Set the cursor to the center of the window minus half the text width
             ImGui::SetCursorPosX((windowWidth - textWidth) * 0.5f);
 
             // Render the centered text
-            Text("%s %s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber);
+            Text("%s %s", LocUI.Strings.enigmaFixName.c_str(), LocUI.Strings.versionNumber.c_str());
             Separator();
-            Text("(C) 2021 Bryce Q.");
-            Text("%s", LocUI.Strings.enigmaFixLicense);
-            Text("%s", LocUI.Strings.donations);
+            Text("(C) 2025 Bryce Q.");
+            Text(LocUI.Strings.enigmaFixLicense.c_str());
+            Text(LocUI.Strings.donations.c_str());
             Separator();
-            Text("%s", LocUI.Strings.specialThanksTo);
-            Text("%s", LocUI.Strings.specialThanksLine);
-            Text("%s", LocUI.Strings.specialThanksLine2);
-            Text("%s", LocUI.Strings.specialThanksLine3);
+            Text(LocUI.Strings.specialThanksTo.c_str());
+            Text(LocUI.Strings.specialThanksLine1.c_str());
+            Text(LocUI.Strings.specialThanksLine2.c_str());
+            Text(LocUI.Strings.specialThanksLine3.c_str());
             ImGui::PushTextWrapPos(ImGui::GetWindowWidth() * 0.8f);  // Wrap text at 80% of the window width
-            Text("%s", LocUI.Strings.alsoSpecialThanksToLine);
-            Text("%s", LocUI.Strings.specialThanksLine4);
+            Text(LocUI.Strings.alsoSpecialThanksToLine.c_str());
+            Text(LocUI.Strings.specialThanksLine4.c_str());
             Separator();
-            Text("%s", LocUI.Strings.thirdPartySoftware);
-            Text("%s", LocUI.Strings.imguiLicense);
-            Text("%s", LocUI.Strings.kieroHookLicense);
-            Text("%s", LocUI.Strings.ghFearLicense);
-            Text("%s", LocUI.Strings.inippLicense);
-            Text("%s", LocUI.Strings.thirteenAGAsiLicense);
-            Text("%s", LocUI.Strings.safetyHookLicense);
-            Text("%s", LocUI.Strings.zydisLicense);
-            Text("%s", LocUI.Strings.fontsLicense);
-            Text("%s", LocUI.Strings.fontAwesomeLicense);
+            Text(LocUI.Strings.thirdPartySoftware.c_str());
+            Text(LocUI.Strings.imguiLicense.c_str());
+            Text(LocUI.Strings.kieroHookLicense.c_str());
+            Text(LocUI.Strings.ghFearLicense.c_str());
+            Text(LocUI.Strings.inippLicense.c_str());
+            Text(LocUI.Strings.thirteenAGAsiLicense.c_str());
+            Text(LocUI.Strings.safetyHookLicense.c_str());
+            Text(LocUI.Strings.zydisLicense.c_str());
+            Text(LocUI.Strings.fontsLicense.c_str());
+            Text(LocUI.Strings.fontAwesomeLicense.c_str());
             ImGui::PopTextWrapPos();  // Reset word wrap
             Separator();
-            if (Button(LocUI.Strings.button_Close)) {
+            if (Button(LocUI.Strings.button_Close.c_str())) {
                 aboutPage = false;
             }
         }
@@ -308,137 +308,144 @@ namespace EnigmaFix {
                 break;
             }
         }
-        ImGui::Combo(LocUI.Strings.combobox_CustomResolution, &selectedResolutionOption, resolutionCStrs.data(), static_cast<int>(resolutionCStrs.size()));
+        ImGui::Combo(LocUI.Strings.combobox_CustomResolution.c_str(), &selectedResolutionOption, resolutionCStrs.data(), static_cast<int>(resolutionCStrs.size()));
     }
 
     void UIManager::MainMenuOptions()
     {
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Resolution), ImGuiTreeNodeFlags_Leaf) {
+        std::string res = std::string("\xef\x89\xac ") + LocUI.Strings.collapsingHeader_Resolution;
+        if (CollapsingHeader(res.c_str()), ImGuiTreeNodeFlags_Leaf) {
             ResolutionOptions();
-            SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResolution);
+            SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResolution.c_str());
             // NOTE: Planning on phasing out the custom resolution checkbox. It's only here currently for debugging issues with crashing on startup.
             //ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomRes, &SettingsUI.RES.UseCustomRes);
             //if (SettingsUI.RES.UseCustomRes)
             //{
             //}
-            ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomResScale, &SettingsUI.RES.UseCustomResScale);
+            ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomResScale.c_str(), &SettingsUI.RES.UseCustomResScale);
             if (SettingsUI.RES.UseCustomResScale) {
                 // TODO: Figure out why this doesn't work.
-                ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale, &SettingsUI.RES.CustomResScale, 25, 100);
-                SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale);
+                ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale.c_str(), &SettingsUI.RES.CustomResScale, 25, 100);
+                SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale.c_str());
             }
             ImGui::Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Fov), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_customFOV, &SettingsUI.FOV.UseCustomFOV);
+        std::string fov = std::string("\xef\x81\xae ") + LocUI.Strings.collapsingHeader_Fov;
+        if (CollapsingHeader(fov.c_str()), ImGuiTreeNodeFlags_Leaf) {
+            ImGui::Checkbox(LocUI.Strings.checkbox_customFOV.c_str(), &SettingsUI.FOV.UseCustomFOV);
             if (SettingsUI.FOV.UseCustomFOV) {
-                ImGui::SliderInt(LocUI.Strings.sliderInt_customFOV, &SettingsUI.FOV.FieldOfView, 44, 90);
-                SameLine(); HelpMarker(LocUI.Strings.helpmarker_customFOV);
+                ImGui::SliderInt(LocUI.Strings.sliderInt_customFOV.c_str(), &SettingsUI.FOV.FieldOfView, 44, 90);
+                SameLine(); HelpMarker(LocUI.Strings.helpmarker_customFOV.c_str());
                 //fovPatch(SettingsUI.FOV.FieldOfView);
             }
             else {
 
             }
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Framerate), ImGuiTreeNodeFlags_Leaf)
+        std::string framerate = std::string("\xef\x8f\xbd ") + LocUI.Strings.collapsingHeader_Framerate;
+        if (CollapsingHeader(framerate.c_str()), ImGuiTreeNodeFlags_Leaf)
         {
             constexpr auto framerateBad = ImVec4(1.0f, 0.7f, 0.7f, 1.0f);
             constexpr auto framerateGood = ImVec4(0.7f, 1.0f, 0.7f, 1.0f);
-            ImGui::Checkbox(LocUI.Strings.checkbox_VSync, &SettingsUI.SYNC.VSync);
-            SameLine(); HelpMarker(LocUI.Strings.helpmarker_VSync);
+            ImGui::Checkbox(LocUI.Strings.checkbox_VSync.c_str(), &SettingsUI.SYNC.VSync);
+            SameLine(); HelpMarker(LocUI.Strings.helpmarker_VSync.c_str());
             if (SettingsUI.SYNC.VSync) {
-                ImGui::SliderInt(LocUI.Strings.sliderInt_syncInterval, &SettingsUI.SYNC.SyncInterval, 1, 4);
-                SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_syncInterval);
+                ImGui::SliderInt(LocUI.Strings.sliderInt_syncInterval.c_str(), &SettingsUI.SYNC.SyncInterval, 1, 4);
+                SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_syncInterval.c_str());
             }
             else { SettingsUI.SYNC.SyncInterval = 0; }
-            ImGui::InputInt(LocUI.Strings.sliderInt_FramerateCap, &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
+            ImGui::InputInt(LocUI.Strings.sliderInt_FramerateCap.c_str(), &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
             SettingsUI.SYNC.MaxFPS = ImClamp(SettingsUI.SYNC.MaxFPS, 0, std::numeric_limits<int>::max()); // Clamp to prevent anything below 0 from being set.
-            SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_FramerateCap);
+            SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_FramerateCap.c_str());
             // Adds the Framerate and Frametime counter and changes the color of the text based on if the framerate is < 60FPS (red), or >= 60FPS (green).
             // Since I can't put this in a Switch/Case statement apparently, the YandereDev-tier "IF/ELSE" statement shenanigans will have to do for now.
             if (GetIO().Framerate >= 60.0f) {
-                Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateGood, "%.3f ms", 1000.0f / GetIO().Framerate);
-                Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateGood, "%.1f FPS", GetIO().Framerate);
+                Text(LocUI.Strings.text_Frametime.c_str()); SameLine(); TextColored(framerateGood, "%.3f ms", 1000.0f / GetIO().Framerate);
+                Text(LocUI.Strings.text_Framerate.c_str()); SameLine(); TextColored(framerateGood, "%.1f FPS", GetIO().Framerate);
             }
             else {
-                Text("%s", LocUI.Strings.text_Frametime); SameLine(); TextColored(framerateBad, "%.3f ms", 1000.0f / GetIO().Framerate);
-                Text("%s", LocUI.Strings.text_Framerate); SameLine(); TextColored(framerateBad, "%.1f FPS", GetIO().Framerate);
+                Text(LocUI.Strings.text_Frametime.c_str()); SameLine(); TextColored(framerateBad, "%.3f ms", 1000.0f / GetIO().Framerate);
+                Text(LocUI.Strings.text_Framerate.c_str()); SameLine(); TextColored(framerateBad, "%.1f FPS", GetIO().Framerate);
             }
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Rendering), ImGuiTreeNodeFlags_Leaf)
+        std::string rendering = std::string("\xef\x87\xbc ") + LocUI.Strings.collapsingHeader_Rendering;
+        if (CollapsingHeader(rendering.c_str()), ImGuiTreeNodeFlags_Leaf)
         {
-            ImGui::Checkbox(LocUI.Strings.checkbox_ShadowRendering, &SettingsUI.RS.Shadows);
+            ImGui::Checkbox(LocUI.Strings.checkbox_ShadowRendering.c_str(), &SettingsUI.RS.Shadows);
             if (SettingsUI.RS.Shadows) {
-                Combo(LocUI.Strings.combobox_ShadowQuality, &SelectedShadowOption, ShadowOptions, IM_ARRAYSIZE(ShadowOptions));
+                Combo(LocUI.Strings.combobox_ShadowQuality.c_str(), &SelectedShadowOption, ShadowOptions, IM_ARRAYSIZE(ShadowOptions));
                 SameLine();
-                HelpMarker(LocUI.Strings.helpmarker_ShadowQuality);
+                HelpMarker(LocUI.Strings.helpmarker_ShadowQuality.c_str());
             }
-            ImGui::Checkbox(LocUI.Strings.checkbox_SSAO, &SettingsUI.RS.SSAO);
+            ImGui::Checkbox(LocUI.Strings.checkbox_SSAO.c_str(), &SettingsUI.RS.SSAO);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_SSAO);
-            ImGui::Checkbox(LocUI.Strings.checkbox_CharacterOutlines, &SettingsUI.RS.EdgeRendering);
+            HelpMarker(LocUI.Strings.helpmarker_SSAO.c_str());
+            ImGui::Checkbox(LocUI.Strings.checkbox_CharacterOutlines.c_str(), &SettingsUI.RS.EdgeRendering);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_CharacterOutlines);
-            ImGui::Checkbox(LocUI.Strings.checkbox_GI, &SettingsUI.RS.IBL);
+            HelpMarker(LocUI.Strings.helpmarker_CharacterOutlines.c_str());
+            ImGui::Checkbox(LocUI.Strings.checkbox_GI.c_str(), &SettingsUI.RS.IBL);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_GI);
-            ImGui::Checkbox(LocUI.Strings.checkbox_DoF, &SettingsUI.RS.DepthOfField);
+            HelpMarker(LocUI.Strings.helpmarker_GI.c_str());
+            ImGui::Checkbox(LocUI.Strings.checkbox_DoF.c_str(), &SettingsUI.RS.DepthOfField);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_DoF);
-            ImGui::Checkbox(LocUI.Strings.checkbox_TAA, &SettingsUI.RS.TAA);
+            HelpMarker(LocUI.Strings.helpmarker_DoF.c_str());
+            ImGui::Checkbox(LocUI.Strings.checkbox_TAA.c_str(), &SettingsUI.RS.TAA);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_TAA);
-            ImGui::Checkbox(LocUI.Strings.checkbox_Foliage, &SettingsUI.RS.FoliageRendering);
+            HelpMarker(LocUI.Strings.helpmarker_TAA.c_str());
+            ImGui::Checkbox(LocUI.Strings.checkbox_Foliage.c_str(), &SettingsUI.RS.FoliageRendering);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_Foliage);
+            HelpMarker(LocUI.Strings.helpmarker_Foliage.c_str());
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Input), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Combo(LocUI.Strings.combobox_ControlType, &SettingsUI.IS.InputDeviceType, InputOptions, IM_ARRAYSIZE(InputOptions));
+        std::string input = std::string("\xef\x84\x9b ") + LocUI.Strings.collapsingHeader_Input;
+        if (CollapsingHeader(input.c_str()), ImGuiTreeNodeFlags_Leaf) {
+            ImGui::Combo(LocUI.Strings.combobox_ControlType.c_str(), &SettingsUI.IS.InputDeviceType, InputOptions, IM_ARRAYSIZE(InputOptions));
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_ControlType);
+            HelpMarker(LocUI.Strings.helpmarker_ControlType.c_str());
             // Add something here for KB/M prompts if that ever becomes a thing, due to the complexities of remapping, and other circumstances.
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Misc), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_SkipOP, &SettingsUI.MS.SkipOpeningVideos);
-            ImGui::Checkbox(LocUI.Strings.checkbox_CameraTweaks, &SettingsUI.MS.CameraTweaks);
+        std::string misc = std::string("\xef\x81\x99 ") + LocUI.Strings.collapsingHeader_Misc;
+        if (CollapsingHeader(misc.c_str()), ImGuiTreeNodeFlags_Leaf) {
+            ImGui::Checkbox(LocUI.Strings.checkbox_SkipOP.c_str(), &SettingsUI.MS.SkipOpeningVideos);
+            ImGui::Checkbox(LocUI.Strings.checkbox_CameraTweaks.c_str(), &SettingsUI.MS.CameraTweaks);
             SameLine();
-            HelpMarker(LocUI.Strings.helpmarker_CameraTweaks);
+            HelpMarker(LocUI.Strings.helpmarker_CameraTweaks.c_str());
         }
-        if (CollapsingHeader(LocUI.Strings.collapsingHeader_Launcher), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_IgnoreUpdates, &SettingsUI.LS.IgnoreUpdates);
+        std::string launcher = std::string("\xef\x8b\x90 ") + LocUI.Strings.collapsingHeader_Misc;
+        if (CollapsingHeader(launcher.c_str()), ImGuiTreeNodeFlags_Leaf) {
+            ImGui::Checkbox(LocUI.Strings.checkbox_IgnoreUpdates.c_str(), &SettingsUI.LS.IgnoreUpdates);
         }
     }
 
     void UIManager::WindowButtons()
     {
-        if (Button(LocUI.Strings.button_Save)) {
+        if (Button(LocUI.Strings.button_Save.c_str())) {
             ConManUI.SaveConfig();
             startupNotice = true; // For now, this is tied to the save function for quick testing.
         }
         SameLine();
-        if (Button(LocUI.Strings.button_About)) { aboutPage = true; }
+        if (Button(LocUI.Strings.button_About.c_str())) { aboutPage = true; }
         SameLine();
-        if (Button(LocUI.Strings.button_Close)) {
+        if (Button(LocUI.Strings.button_Close.c_str())) {
             //showUI = false;
             // Always center this window when appearing
             const auto center = GetMainViewport()->GetCenter();
             SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-            OpenPopup(LocUI.Strings.gameExit);
+            OpenPopup(LocUI.Strings.gameExit.c_str());
         }
     }
 
     void UIManager::ShowExitPrompt()
     {
-        Text("%s", LocUI.Strings.exitTextPrompt);
+        Text(LocUI.Strings.exitTextPrompt.c_str());
         Separator();
         PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
         PopStyleVar();
-        if (Button(LocUI.Strings.exitOK, ImVec2(120, 0))) {
+        if (Button(LocUI.Strings.exitOK.c_str(), ImVec2(120, 0))) {
             exit(0);
         }
         SetItemDefaultFocus();
         SameLine();
-        if (Button(LocUI.Strings.exitCancel, ImVec2(120, 0))) {
+        if (Button(LocUI.Strings.exitCancel.c_str(), ImVec2(120, 0))) {
             CloseCurrentPopup();
         }
         EndPopup();
@@ -448,7 +455,7 @@ namespace EnigmaFix {
     {
         if (startupNotice) { ShowStartupOverlay(&startupNotice); }
         if (aboutPage) { ShowAboutWindow(&aboutPage); }
-        if (BeginPopupModal(LocUI.Strings.gameExit, nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
+        if (BeginPopupModal(LocUI.Strings.gameExit.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             ShowExitPrompt();
         }
         ShadowResolution = ShadowOptionResolution[SelectedShadowOption];
@@ -495,7 +502,7 @@ namespace EnigmaFix {
 
     void UIManager::ShowMainMenu(bool* p_open)
     {
-        if (ImGui::Begin(LocUI.Strings.gameName, p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
+        if (ImGui::Begin(LocUI.Strings.gameName.c_str(), p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
             // Creates the main menu UI and enables our custom theming.
             um_Instance.ActivateTheme();
             // Spawns the main menu logic.

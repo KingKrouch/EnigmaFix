@@ -22,6 +22,7 @@ SOFTWARE.
 
 #ifndef ENIGMAFIX_LOCALIZATION_H
 #define ENIGMAFIX_LOCALIZATION_H
+#include <nlohmann/json.hpp>
 
 namespace EnigmaFix {
     class Localization {
@@ -32,105 +33,106 @@ namespace EnigmaFix {
         // Localization Functionality
         void InitLoc();
         void InitFont(float scale_factor = 1.0f);
+        void LoadStringsFromJson(nlohmann::json loadedJSON);
         // Variables
         float fontSize = 18.0;
         int language;
         // Strings
         struct S_Strings {
             // Common Strings
-            const char* enigmaFixName;
-            const char* gameName;
+            std::string enigmaFixName;
+            std::string gameName;
             // About Window Strings
-            const char* aboutEnigmaFix;
-            const char* versionNumber;
-            const char* enigmaFixLicense;
-            const char* donations;
-            const char* specialThanksTo;
-            const char* specialThanksLine;
-            const char* specialThanksLine2;
-            const char* specialThanksLine3;
-            const char* alsoSpecialThanksToLine;
-            const char* specialThanksLine4;
-            const char* thirdPartySoftware;
-            const char* imguiLicense;
-            const char* kieroHookLicense;
-            const char* stbLicense;
-            const char* ghFearLicense;
-            const char* inippLicense;
-            const char* thirteenAGAsiLicense;
-            const char* safetyHookLicense;
-            const char* zydisLicense;
-            const char* fontsLicense;
-            const char* fontAwesomeLicense;
-            const char* iconFontCppHeadersLicense;
-            const char* button_Close;
+            std::string aboutEnigmaFix;
+            std::string versionNumber;
+            std::string enigmaFixLicense;
+            std::string donations;
+            std::string specialThanksTo;
+            std::string specialThanksLine1;
+            std::string specialThanksLine2;
+            std::string specialThanksLine3;
+            std::string alsoSpecialThanksToLine;
+            std::string specialThanksLine4;
+            std::string thirdPartySoftware;
+            std::string imguiLicense;
+            std::string kieroHookLicense;
+            std::string stbLicense;
+            std::string ghFearLicense;
+            std::string inippLicense;
+            std::string thirteenAGAsiLicense;
+            std::string safetyHookLicense;
+            std::string zydisLicense;
+            std::string fontsLicense;
+            std::string fontAwesomeLicense;
+            std::string iconFontCppHeadersLicense;
+            std::string button_Close;
             // User Interface Strings
-            const char* collapsingHeader_Resolution;
-            const char* checkbox_UseCustomRes;
-            const char* combobox_CustomResolution;
-            const char* helpmarker_CustomResolution;
-            const char* checkbox_UseCustomResScale;
-            const char* dragInt_CustomResScale;
-            const char* helpmarker_CustomResScale;
-            const char* collapsingHeader_Fov;
-            const char* checkbox_customFOV;
-            const char* sliderInt_customFOV;
-            const char* helpmarker_customFOV;
-            const char* checkbox_VSync;
-            const char* helpmarker_VSync;
-            const char* sliderInt_syncInterval;
-            const char* helpmarker_syncInterval;
-            const char* collapsingHeader_Framerate;
-            const char* sliderInt_FramerateCap;
-            const char* helpmarker_FramerateCap;
-            const char* text_Frametime;
-            const char* text_Framerate;
-            const char* collapsingHeader_Rendering;
-            const char* checkbox_ShadowRendering;
-            const char* combobox_ShadowQuality;
-            const char* helpmarker_ShadowQuality;
-            const char* checkbox_SSAO;
-            const char* helpmarker_SSAO;
-            const char* combobox_ssaoQuality;
-            const char* helpmarker_ssaoQuality;
-            const char* checkbox_SSR;
-            const char* helpmarker_SSR;
-            const char* helpmarker_ssrQuality;
-            const char* combobox_ssrQuality;
-            const char* checkbox_CharacterOutlines;
-            const char* helpmarker_CharacterOutlines;
-            const char* checkbox_GI;
-            const char* helpmarker_GI;
-            const char* checkbox_DoF;
-            const char* helpmarker_DoF;
-            const char* checkbox_TAA;
-            const char* helpmarker_TAA;
-            const char* checkbox_MotionBlur;
-            const char* helpmarker_MotionBlur;
-            const char* checkbox_Foliage;
-            const char* helpmarker_Foliage;
-            const char* collapsingHeader_Input;
-            const char* combobox_ControlType;
-            const char* helpmarker_ControlType;
-            const char* collapsingHeader_Misc;
-            const char* checkbox_SkipOP;
-            const char* checkbox_CameraTweaks;
-            const char* helpmarker_CameraTweaks;
-            const char* collapsingHeader_Launcher;
-            const char* checkbox_IgnoreUpdates;
-            const char* button_Save;
-            const char* button_About;
+            std::string collapsingHeader_Resolution;
+            std::string checkbox_UseCustomRes;
+            std::string combobox_CustomResolution;
+            std::string helpmarker_CustomResolution;
+            std::string checkbox_UseCustomResScale;
+            std::string dragInt_CustomResScale;
+            std::string helpmarker_CustomResScale;
+            std::string collapsingHeader_Fov;
+            std::string checkbox_customFOV;
+            std::string sliderInt_customFOV;
+            std::string helpmarker_customFOV;
+            std::string checkbox_VSync;
+            std::string helpmarker_VSync;
+            std::string sliderInt_syncInterval;
+            std::string helpmarker_syncInterval;
+            std::string collapsingHeader_Framerate;
+            std::string sliderInt_FramerateCap;
+            std::string helpmarker_FramerateCap;
+            std::string text_Frametime;
+            std::string text_Framerate;
+            std::string collapsingHeader_Rendering;
+            std::string checkbox_ShadowRendering;
+            std::string combobox_ShadowQuality;
+            std::string helpmarker_ShadowQuality;
+            std::string checkbox_SSAO;
+            std::string helpmarker_SSAO;
+            std::string combobox_ssaoQuality;
+            std::string helpmarker_ssaoQuality;
+            std::string checkbox_SSR;
+            std::string helpmarker_SSR;
+            std::string helpmarker_ssrQuality;
+            std::string combobox_ssrQuality;
+            std::string checkbox_CharacterOutlines;
+            std::string helpmarker_CharacterOutlines;
+            std::string checkbox_GI;
+            std::string helpmarker_GI;
+            std::string checkbox_DoF;
+            std::string helpmarker_DoF;
+            std::string checkbox_TAA;
+            std::string helpmarker_TAA;
+            std::string checkbox_MotionBlur;
+            std::string helpmarker_MotionBlur;
+            std::string checkbox_Foliage;
+            std::string helpmarker_Foliage;
+            std::string collapsingHeader_Input;
+            std::string combobox_ControlType;
+            std::string helpmarker_ControlType;
+            std::string collapsingHeader_Misc;
+            std::string checkbox_SkipOP;
+            std::string checkbox_CameraTweaks;
+            std::string helpmarker_CameraTweaks;
+            std::string collapsingHeader_Launcher;
+            std::string checkbox_IgnoreUpdates;
+            std::string button_Save;
+            std::string button_About;
             // Developer Console
-            const char* consoleName;
+            std::string consoleName;
             // Startup Overlay Strings
-            const char* startupWindowWelcome;
-            const char* startupWindowInputPrompt;
-            const char* startupWindowCrackWarning;
+            std::string startupWindowWelcome;
+            std::string startupWindowInputPrompt;
+            std::string startupWindowCrackWarning;
             // Game Exit Strings
-            const char* gameExit;
-            const char* exitTextPrompt;
-            const char* exitOK;
-            const char* exitCancel;
+            std::string gameExit;
+            std::string exitTextPrompt;
+            std::string exitOK;
+            std::string exitCancel;
         };
         S_Strings Strings;
     private:
