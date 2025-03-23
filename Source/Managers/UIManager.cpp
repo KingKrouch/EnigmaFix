@@ -38,6 +38,7 @@ SOFTWARE.
 #include <imgui_internal.h>
 
 #include "imgui.h"
+#include "../Utilities/JsonHelper.h"
 
 
 using namespace ImGui;
@@ -210,76 +211,85 @@ namespace EnigmaFix {
         style->WindowRounding    = 6.0f;
         style->PopupRounding     = 6.0f;
         style->ScrollbarRounding = 6.0f;
-        UIProperties Color;
+        //UIProperties Color;
+        json theme;
 
         // Color Scheme
         switch (SettingsUI.GameMode) { // I should find out how to put this in a struct instead and just have it access a pointer that switches the reference based on the game mode.
             case PlayerSettings::DERQ: { // Death end re;Quest
-                Color = ColorSchemeDERQ;
+                if (theme = JsonUtils::LoadJson("Resources/Themes/DERQ.json"); theme == nullptr) {
+                    throw std::runtime_error("Failed to load DERQ Theme JSON.");
+                }
                 break;
             }
             case PlayerSettings::DERQ2: { // Death end re;Quest 2
-                Color = ColorSchemeDERQ2;
+                if (theme = JsonUtils::LoadJson("Resources/Themes/DERQ2.json"); theme == nullptr) {
+                    throw std::runtime_error("Failed to load DERQ2 Theme JSON.");
+                }
                 break;
             }
             default: { // Misc
-                Color = ColorSchemeMISC;
+                if (theme = JsonUtils::LoadJson("Resources/Themes/MISC.json"); theme == nullptr) {
+                    throw std::runtime_error("Failed to load MISC Theme JSON.");
+                }
                 break;
             }
         }
-        colors[ImGuiCol_Text]                  = VectorToVec4(Color.ImGuiCol_Text);
-        colors[ImGuiCol_TextDisabled]          = VectorToVec4(Color.ImGuiCol_Text);
-        colors[ImGuiCol_WindowBg]              = VectorToVec4(Color.ImGuiCol_WindowBg);
-        colors[ImGuiCol_ChildBg]               = VectorToVec4(Color.ImGuiCol_ChildBg);
-        colors[ImGuiCol_PopupBg]               = VectorToVec4(Color.ImGuiCol_PopupBg);
-        colors[ImGuiCol_Border]                = VectorToVec4(Color.ImGuiCol_Border);
-        colors[ImGuiCol_BorderShadow]          = VectorToVec4(Color.ImGuiCol_BorderShadow);
-        colors[ImGuiCol_FrameBg]               = VectorToVec4(Color.ImGuiCol_FrameBg);
-        colors[ImGuiCol_FrameBgHovered]        = VectorToVec4(Color.ImGuiCol_FrameBgHovered);
-        colors[ImGuiCol_FrameBgActive]         = VectorToVec4(Color.ImGuiCol_FrameBgActive);
-        colors[ImGuiCol_TitleBg]               = VectorToVec4(Color.ImGuiCol_TitleBg);
-        colors[ImGuiCol_TitleBgActive]         = VectorToVec4(Color.ImGuiCol_TitleBgActive);
-        colors[ImGuiCol_TitleBgCollapsed]      = VectorToVec4(Color.ImGuiCol_TitleBgCollapsed);
-        colors[ImGuiCol_MenuBarBg]             = VectorToVec4(Color.ImGuiCol_MenuBarBg);
-        colors[ImGuiCol_ScrollbarBg]           = VectorToVec4(Color.ImGuiCol_ScrollbarBg);
-        colors[ImGuiCol_ScrollbarGrab]         = VectorToVec4(Color.ImGuiCol_ScrollbarGrab);
-        colors[ImGuiCol_ScrollbarGrabHovered]  = VectorToVec4(Color.ImGuiCol_ScrollbarGrabHovered);
-        colors[ImGuiCol_ScrollbarGrabActive]   = VectorToVec4(Color.ImGuiCol_ScrollbarGrabActive);
-        colors[ImGuiCol_CheckMark]             = VectorToVec4(Color.ImGuiCol_CheckMark);
-        colors[ImGuiCol_SliderGrab]            = VectorToVec4(Color.ImGuiCol_SliderGrab);
-        colors[ImGuiCol_SliderGrabActive]      = VectorToVec4(Color.ImGuiCol_SliderGrabActive);
-        colors[ImGuiCol_Button]                = VectorToVec4(Color.ImGuiCol_Button);
-        colors[ImGuiCol_ButtonHovered]         = VectorToVec4(Color.ImGuiCol_ButtonHovered);
-        colors[ImGuiCol_ButtonActive]          = VectorToVec4(Color.ImGuiCol_ButtonActive);
-        colors[ImGuiCol_Header]                = VectorToVec4(Color.ImGuiCol_Header);
-        colors[ImGuiCol_HeaderHovered]         = VectorToVec4(Color.ImGuiCol_HeaderHovered);
-        colors[ImGuiCol_HeaderActive]          = VectorToVec4(Color.ImGuiCol_HeaderActive);
-        colors[ImGuiCol_Separator]             = VectorToVec4(Color.ImGuiCol_Separator);
-        colors[ImGuiCol_SeparatorHovered]      = VectorToVec4(Color.ImGuiCol_SeparatorHovered);
-        colors[ImGuiCol_SeparatorActive]       = VectorToVec4(Color.ImGuiCol_SeparatorActive);
-        colors[ImGuiCol_ResizeGrip]            = VectorToVec4(Color.ImGuiCol_ResizeGrip);
-        colors[ImGuiCol_ResizeGripHovered]     = VectorToVec4(Color.ImGuiCol_ResizeGripHovered);
-        colors[ImGuiCol_ResizeGripActive]      = VectorToVec4(Color.ImGuiCol_ResizeGripActive);
-        colors[ImGuiCol_Tab]                   = VectorToVec4(Color.ImGuiCol_Tab);
-        colors[ImGuiCol_TabHovered]            = VectorToVec4(Color.ImGuiCol_TabHovered);
-        colors[ImGuiCol_TabActive]             = VectorToVec4(Color.ImGuiCol_TabActive);
-        colors[ImGuiCol_TabUnfocused]          = VectorToVec4(Color.ImGuiCol_TabUnfocused);
-        colors[ImGuiCol_TabUnfocusedActive]    = VectorToVec4(Color.ImGuiCol_TabUnfocusedActive);
-        colors[ImGuiCol_PlotLines]             = VectorToVec4(Color.ImGuiCol_PlotLines);
-        colors[ImGuiCol_PlotLinesHovered]      = VectorToVec4(Color.ImGuiCol_PlotLinesHovered);
-        colors[ImGuiCol_PlotHistogram]         = VectorToVec4(Color.ImGuiCol_PlotHistogram);
-        colors[ImGuiCol_PlotHistogramHovered]  = VectorToVec4(Color.ImGuiCol_PlotHistogramHovered);
-        colors[ImGuiCol_TableHeaderBg]         = VectorToVec4(Color.ImGuiCol_TableHeaderBg);
-        colors[ImGuiCol_TableBorderStrong]     = VectorToVec4(Color.ImGuiCol_TableBorderStrong);
-        colors[ImGuiCol_TableBorderLight]      = VectorToVec4(Color.ImGuiCol_TableBorderLight);
-        colors[ImGuiCol_TableRowBg]            = VectorToVec4(Color.ImGuiCol_TableRowBg);
-        colors[ImGuiCol_TableRowBgAlt]         = VectorToVec4(Color.ImGuiCol_TableRowBgAlt);
-        colors[ImGuiCol_TextSelectedBg]        = VectorToVec4(Color.ImGuiCol_TextSelectedBg);
-        colors[ImGuiCol_DragDropTarget]        = VectorToVec4(Color.ImGuiCol_DragDropTarget);
-        colors[ImGuiCol_NavHighlight]          = VectorToVec4(Color.ImGuiCol_NavHighlight);
-        colors[ImGuiCol_NavWindowingHighlight] = VectorToVec4(Color.ImGuiCol_NavWindowingHighlight);
-        colors[ImGuiCol_NavWindowingDimBg]     = VectorToVec4(Color.ImGuiCol_NavWindowingDimBg);
-        colors[ImGuiCol_ModalWindowDimBg]      = VectorToVec4(Color.ImGuiCol_ModalWindowDimBg);
+
+        // Finally grab our theme color values from our parsed JSON file.
+        colors[ImGuiCol_Text] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Text"]));
+        colors[ImGuiCol_TextDisabled] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TextDisabled"]));
+        colors[ImGuiCol_WindowBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_WindowBg"]));
+        colors[ImGuiCol_ChildBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ChildBg"]));
+        colors[ImGuiCol_PopupBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_PopupBg"]));
+        colors[ImGuiCol_Border] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Border"]));
+        colors[ImGuiCol_BorderShadow] = VectorToVec4(HexToRGBA(theme["ImGuiCol_BorderShadow"]));
+        colors[ImGuiCol_FrameBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_FrameBg"]));
+        colors[ImGuiCol_FrameBgHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_FrameBgHovered"]));
+        colors[ImGuiCol_FrameBgActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_FrameBgActive"]));
+        colors[ImGuiCol_TitleBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TitleBg"]));
+        colors[ImGuiCol_TitleBgActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TitleBgActive"]));
+        colors[ImGuiCol_TitleBgCollapsed] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TitleBgCollapsed"]));
+        colors[ImGuiCol_MenuBarBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_MenuBarBg"]));
+        colors[ImGuiCol_ScrollbarBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ScrollbarBg"]));
+        colors[ImGuiCol_ScrollbarGrab] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ScrollbarGrab"]));
+        colors[ImGuiCol_ScrollbarGrabHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ScrollbarGrabHovered"]));
+        colors[ImGuiCol_ScrollbarGrabActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ScrollbarGrabActive"]));
+        colors[ImGuiCol_CheckMark] = VectorToVec4(HexToRGBA(theme["ImGuiCol_CheckMark"]));
+        colors[ImGuiCol_SliderGrab] = VectorToVec4(HexToRGBA(theme["ImGuiCol_SliderGrab"]));
+        colors[ImGuiCol_SliderGrabActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_SliderGrabActive"]));
+        colors[ImGuiCol_Button] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Button"]));
+        colors[ImGuiCol_ButtonHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ButtonHovered"]));
+        colors[ImGuiCol_ButtonActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ButtonActive"]));
+        colors[ImGuiCol_Header] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Header"]));
+        colors[ImGuiCol_HeaderHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_HeaderHovered"]));
+        colors[ImGuiCol_HeaderActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_HeaderActive"]));
+        colors[ImGuiCol_Separator] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Separator"]));
+        colors[ImGuiCol_SeparatorHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_SeparatorHovered"]));
+        colors[ImGuiCol_SeparatorActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_SeparatorActive"]));
+        colors[ImGuiCol_ResizeGrip] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ResizeGrip"]));
+        colors[ImGuiCol_ResizeGripHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ResizeGripHovered"]));
+        colors[ImGuiCol_ResizeGripActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ResizeGripActive"]));
+        colors[ImGuiCol_Tab] = VectorToVec4(HexToRGBA(theme["ImGuiCol_Tab"]));
+        colors[ImGuiCol_TabHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TabHovered"]));
+        colors[ImGuiCol_TabActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TabActive"]));
+        colors[ImGuiCol_TabUnfocused] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TabUnfocused"]));
+        colors[ImGuiCol_TabUnfocusedActive] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TabUnfocusedActive"]));
+        colors[ImGuiCol_PlotLines] = VectorToVec4(HexToRGBA(theme["ImGuiCol_PlotLines"]));
+        colors[ImGuiCol_PlotLinesHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_PlotLinesHovered"]));
+        colors[ImGuiCol_PlotHistogram] = VectorToVec4(HexToRGBA(theme["ImGuiCol_PlotHistogram"]));
+        colors[ImGuiCol_PlotHistogramHovered] = VectorToVec4(HexToRGBA(theme["ImGuiCol_PlotHistogramHovered"]));
+        colors[ImGuiCol_TableHeaderBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TableHeaderBg"]));
+        colors[ImGuiCol_TableBorderStrong] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TableBorderStrong"]));
+        colors[ImGuiCol_TableBorderLight] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TableBorderLight"]));
+        colors[ImGuiCol_TableRowBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TableRowBg"]));
+        colors[ImGuiCol_TableRowBgAlt] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TableRowBgAlt"]));
+        colors[ImGuiCol_TextSelectedBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_TextSelectedBg"]));
+        colors[ImGuiCol_DragDropTarget] = VectorToVec4(HexToRGBA(theme["ImGuiCol_DragDropTarget"]));
+        colors[ImGuiCol_NavHighlight] = VectorToVec4(HexToRGBA(theme["ImGuiCol_NavHighlight"]));
+        colors[ImGuiCol_NavWindowingHighlight] = VectorToVec4(HexToRGBA(theme["ImGuiCol_NavWindowingHighlight"]));
+        colors[ImGuiCol_NavWindowingDimBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_NavWindowingDimBg"]));
+        colors[ImGuiCol_ModalWindowDimBg] = VectorToVec4(HexToRGBA(theme["ImGuiCol_ModalWindowDimBg"]));
     }
 
     void UIManager::ResolutionOptions()
