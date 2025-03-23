@@ -115,7 +115,7 @@ namespace EnigmaFix {
     {
         if (::Begin(LocUI.Strings.aboutEnigmaFix.c_str(), p_open, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
             float dpiScaleLogo = SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier;
-            int logoSizeDivider = 4;
+            int logoSizeDivider = 8;
 
             float logoWidthNew = (static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo;
 
@@ -123,20 +123,20 @@ namespace EnigmaFix {
             float originalCursorPosX = ImGui::GetCursorPosX();
 
             // Calculate the horizontal center position and set the cursor position
-            float windowWidth = ImGui::GetWindowWidth();
+            float windowWidth = GetWindowWidth();
             float imageXPos = (windowWidth - logoWidthNew) * 0.5f;  // Center the image horizontally
-            ImGui::SetCursorPosX(imageXPos);
+            SetCursorPosX(imageXPos);
 
-            ImGui::Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo, (static_cast<float>(LogoHeight) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo));
+            Image(reinterpret_cast<ImTextureID>(Logo), ImVec2((static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo, (static_cast<float>(LogoHeight) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo));
 
             // Restore the cursor position after the image
-            ImGui::SetCursorPosX(originalCursorPosX);
+            SetCursorPosX(originalCursorPosX);
 
             // Calculate the text width (this will give you the length of the text in pixels)
-            float textWidth = ImGui::CalcTextSize(LocUI.Strings.enigmaFixName.c_str()).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber.c_str()).x + 10.0f; // 10.0f for a small space between the two strings
+            float textWidth = CalcTextSize(LocUI.Strings.enigmaFixName.c_str()).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber.c_str()).x + 10.0f; // 10.0f for a small space between the two strings
 
             // Set the cursor to the center of the window minus half the text width
-            ImGui::SetCursorPosX((windowWidth - textWidth) * 0.5f);
+            SetCursorPosX((windowWidth - textWidth) * 0.5f);
 
             // Render the centered text
             Text("%s %s", LocUI.Strings.enigmaFixName, LocUI.Strings.versionNumber.c_str());
@@ -149,7 +149,7 @@ namespace EnigmaFix {
             Text(LocUI.Strings.specialThanksLine1.c_str());
             Text(LocUI.Strings.specialThanksLine2.c_str());
             Text(LocUI.Strings.specialThanksLine3.c_str());
-            ImGui::PushTextWrapPos(ImGui::GetWindowWidth() * 0.8f);  // Wrap text at 80% of the window width
+            PushTextWrapPos(GetWindowWidth() * 0.8f);  // Wrap text at 80% of the window width
             Text(LocUI.Strings.alsoSpecialThanksToLine.c_str());
             Text(LocUI.Strings.specialThanksLine4.c_str());
             Separator();
@@ -165,7 +165,7 @@ namespace EnigmaFix {
             Text(LocUI.Strings.zydisLicense.c_str());
             Text(LocUI.Strings.fontsLicense.c_str());
             Text(LocUI.Strings.fontAwesomeLicense.c_str());
-            ImGui::PopTextWrapPos();  // Reset word wrap
+            PopTextWrapPos();  // Reset word wrap
             Separator();
             if (Button(LocUI.Strings.button_Close.c_str())) {
                 aboutPage = false;
@@ -324,7 +324,7 @@ namespace EnigmaFix {
                 break;
             }
         }
-        ImGui::Combo(LocUI.Strings.combobox_CustomResolution.c_str(), &selectedResolutionOption, resolutionCStrs.data(), static_cast<int>(resolutionCStrs.size()));
+        Combo(LocUI.Strings.combobox_CustomResolution.c_str(), &selectedResolutionOption, resolutionCStrs.data(), static_cast<int>(resolutionCStrs.size()));
     }
 
     void UIManager::MainMenuOptions()
@@ -338,19 +338,19 @@ namespace EnigmaFix {
             //if (SettingsUI.RES.UseCustomRes)
             //{
             //}
-            ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomResScale.c_str(), &SettingsUI.RES.UseCustomResScale);
+            Checkbox(LocUI.Strings.checkbox_UseCustomResScale.c_str(), &SettingsUI.RES.UseCustomResScale);
             if (SettingsUI.RES.UseCustomResScale) {
                 // TODO: Figure out why this doesn't work.
                 ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale.c_str(), &SettingsUI.RES.CustomResScale, 25, 100);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale.c_str());
             }
-            ImGui::Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
+            Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
         }
         std::string fov = std::string("\xef\x81\xae ") + LocUI.Strings.collapsingHeader_Fov;
         if (CollapsingHeader(fov.c_str()), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_customFOV.c_str(), &SettingsUI.FOV.UseCustomFOV);
+            Checkbox(LocUI.Strings.checkbox_customFOV.c_str(), &SettingsUI.FOV.UseCustomFOV);
             if (SettingsUI.FOV.UseCustomFOV) {
-                ImGui::SliderInt(LocUI.Strings.sliderInt_customFOV.c_str(), &SettingsUI.FOV.FieldOfView, 44, 90);
+                SliderInt(LocUI.Strings.sliderInt_customFOV.c_str(), &SettingsUI.FOV.FieldOfView, 44, 90);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_customFOV.c_str());
                 //fovPatch(SettingsUI.FOV.FieldOfView);
             }
@@ -363,14 +363,14 @@ namespace EnigmaFix {
         {
             constexpr auto framerateBad = ImVec4(1.0f, 0.7f, 0.7f, 1.0f);
             constexpr auto framerateGood = ImVec4(0.7f, 1.0f, 0.7f, 1.0f);
-            ImGui::Checkbox(LocUI.Strings.checkbox_VSync.c_str(), &SettingsUI.SYNC.VSync);
+            Checkbox(LocUI.Strings.checkbox_VSync.c_str(), &SettingsUI.SYNC.VSync);
             SameLine(); HelpMarker(LocUI.Strings.helpmarker_VSync.c_str());
             if (SettingsUI.SYNC.VSync) {
-                ImGui::SliderInt(LocUI.Strings.sliderInt_syncInterval.c_str(), &SettingsUI.SYNC.SyncInterval, 1, 4);
+                SliderInt(LocUI.Strings.sliderInt_syncInterval.c_str(), &SettingsUI.SYNC.SyncInterval, 1, 4);
                 SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_syncInterval.c_str());
             }
             else { SettingsUI.SYNC.SyncInterval = 0; }
-            ImGui::InputInt(LocUI.Strings.sliderInt_FramerateCap.c_str(), &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
+            InputInt(LocUI.Strings.sliderInt_FramerateCap.c_str(), &SettingsUI.SYNC.MaxFPS, 1, 100, 0);
             SettingsUI.SYNC.MaxFPS = ImClamp(SettingsUI.SYNC.MaxFPS, 0, std::numeric_limits<int>::max()); // Clamp to prevent anything below 0 from being set.
             SameLine(0.0, -1.0); HelpMarker(LocUI.Strings.helpmarker_FramerateCap.c_str());
             // Adds the Framerate and Frametime counter and changes the color of the text based on if the framerate is < 60FPS (red), or >= 60FPS (green).
@@ -387,48 +387,48 @@ namespace EnigmaFix {
         std::string rendering = std::string("\xef\x87\xbc ") + LocUI.Strings.collapsingHeader_Rendering;
         if (CollapsingHeader(rendering.c_str()), ImGuiTreeNodeFlags_Leaf)
         {
-            ImGui::Checkbox(LocUI.Strings.checkbox_ShadowRendering.c_str(), &SettingsUI.RS.Shadows);
+            Checkbox(LocUI.Strings.checkbox_ShadowRendering.c_str(), &SettingsUI.RS.Shadows);
             if (SettingsUI.RS.Shadows) {
                 Combo(LocUI.Strings.combobox_ShadowQuality.c_str(), &SelectedShadowOption, ShadowOptions, IM_ARRAYSIZE(ShadowOptions));
                 SameLine();
                 HelpMarker(LocUI.Strings.helpmarker_ShadowQuality.c_str());
             }
-            ImGui::Checkbox(LocUI.Strings.checkbox_SSAO.c_str(), &SettingsUI.RS.SSAO);
+            Checkbox(LocUI.Strings.checkbox_SSAO.c_str(), &SettingsUI.RS.SSAO);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_SSAO.c_str());
-            ImGui::Checkbox(LocUI.Strings.checkbox_CharacterOutlines.c_str(), &SettingsUI.RS.EdgeRendering);
+            Checkbox(LocUI.Strings.checkbox_CharacterOutlines.c_str(), &SettingsUI.RS.EdgeRendering);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_CharacterOutlines.c_str());
-            ImGui::Checkbox(LocUI.Strings.checkbox_GI.c_str(), &SettingsUI.RS.IBL);
+            Checkbox(LocUI.Strings.checkbox_GI.c_str(), &SettingsUI.RS.IBL);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_GI.c_str());
-            ImGui::Checkbox(LocUI.Strings.checkbox_DoF.c_str(), &SettingsUI.RS.DepthOfField);
+            Checkbox(LocUI.Strings.checkbox_DoF.c_str(), &SettingsUI.RS.DepthOfField);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_DoF.c_str());
-            ImGui::Checkbox(LocUI.Strings.checkbox_TAA.c_str(), &SettingsUI.RS.TAA);
+            Checkbox(LocUI.Strings.checkbox_TAA.c_str(), &SettingsUI.RS.TAA);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_TAA.c_str());
-            ImGui::Checkbox(LocUI.Strings.checkbox_Foliage.c_str(), &SettingsUI.RS.FoliageRendering);
+            Checkbox(LocUI.Strings.checkbox_Foliage.c_str(), &SettingsUI.RS.FoliageRendering);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_Foliage.c_str());
         }
         std::string input = std::string("\xef\x84\x9b ") + LocUI.Strings.collapsingHeader_Input;
         if (CollapsingHeader(input.c_str()), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Combo(LocUI.Strings.combobox_ControlType.c_str(), &SettingsUI.IS.InputDeviceType, InputOptions, IM_ARRAYSIZE(InputOptions));
+            Combo(LocUI.Strings.combobox_ControlType.c_str(), &SettingsUI.IS.InputDeviceType, InputOptions, IM_ARRAYSIZE(InputOptions));
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_ControlType.c_str());
             // Add something here for KB/M prompts if that ever becomes a thing, due to the complexities of remapping, and other circumstances.
         }
         std::string misc = std::string("\xef\x81\x99 ") + LocUI.Strings.collapsingHeader_Misc;
         if (CollapsingHeader(misc.c_str()), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_SkipOP.c_str(), &SettingsUI.MS.SkipOpeningVideos);
-            ImGui::Checkbox(LocUI.Strings.checkbox_CameraTweaks.c_str(), &SettingsUI.MS.CameraTweaks);
+            Checkbox(LocUI.Strings.checkbox_SkipOP.c_str(), &SettingsUI.MS.SkipOpeningVideos);
+            Checkbox(LocUI.Strings.checkbox_CameraTweaks.c_str(), &SettingsUI.MS.CameraTweaks);
             SameLine();
             HelpMarker(LocUI.Strings.helpmarker_CameraTweaks.c_str());
         }
         std::string launcher = std::string("\xef\x8b\x90 ") + LocUI.Strings.collapsingHeader_Misc;
         if (CollapsingHeader(launcher.c_str()), ImGuiTreeNodeFlags_Leaf) {
-            ImGui::Checkbox(LocUI.Strings.checkbox_IgnoreUpdates.c_str(), &SettingsUI.LS.IgnoreUpdates);
+            Checkbox(LocUI.Strings.checkbox_IgnoreUpdates.c_str(), &SettingsUI.LS.IgnoreUpdates);
         }
     }
 
@@ -476,55 +476,60 @@ namespace EnigmaFix {
         }
         ShadowResolution = ShadowOptionResolution[SelectedShadowOption];
     }
-
+    
+    bool scaled = false;
     void UIManager::AdjustDPIScaling(float scale_factor = 1.0f)
     {
-        style->WindowPadding.x                  = ImTrunc(style->WindowPadding.x * scale_factor);
-        style->WindowPadding.y                  = ImTrunc(style->WindowPadding.y * scale_factor);
-        style->WindowRounding                   = ImTrunc(style->WindowRounding * scale_factor);
-        style->WindowMinSize.x                  = ImTrunc(style->WindowMinSize.x * scale_factor);
-        style->WindowMinSize.y                  = ImTrunc(style->WindowMinSize.y * scale_factor);
-        style->ChildRounding                    = ImTrunc(style->ChildRounding * scale_factor);
-        style->PopupRounding                    = ImTrunc(style->PopupRounding * scale_factor);
-        style->FramePadding.x                   = ImTrunc(style->FramePadding.x * scale_factor);
-        style->FramePadding.y                   = ImTrunc(style->FramePadding.y * scale_factor);
-        style->FrameRounding                    = ImTrunc(style->FrameRounding * scale_factor);
-        style->ItemSpacing.x                    = ImTrunc(style->ItemSpacing.x * scale_factor);
-        style->ItemSpacing.y                    = ImTrunc(style->ItemSpacing.x * scale_factor);
-        style->ItemInnerSpacing.x               = ImTrunc(style->ItemInnerSpacing.x * scale_factor);
-        style->ItemInnerSpacing.y               = ImTrunc(style->ItemInnerSpacing.y * scale_factor);
-        style->CellPadding.x                    = ImTrunc(style->CellPadding.x * scale_factor);
-        style->CellPadding.y                    = ImTrunc(style->CellPadding.y * scale_factor);
-        style->TouchExtraPadding.x              = ImTrunc(style->TouchExtraPadding.x * scale_factor);
-        style->TouchExtraPadding.y              = ImTrunc(style->TouchExtraPadding.y * scale_factor);
-        style->IndentSpacing                    = ImTrunc(style->IndentSpacing * scale_factor);
-        style->ColumnsMinSpacing                = ImTrunc(style->ColumnsMinSpacing * scale_factor);
-        style->ScrollbarSize                    = ImTrunc(style->ScrollbarSize * scale_factor);
-        style->ScrollbarRounding                = ImTrunc(style->ScrollbarRounding * scale_factor);
-        style->GrabMinSize                      = ImTrunc(style->GrabMinSize * scale_factor);
-        style->GrabRounding                     = ImTrunc(style->GrabRounding * scale_factor);
-        style->LogSliderDeadzone                = ImTrunc(style->LogSliderDeadzone * scale_factor);
-        style->TabRounding                      = ImTrunc(style->TabRounding * scale_factor);
-        style->TabCloseButtonMinWidthSelected   = ImTrunc(style->TabCloseButtonMinWidthSelected * scale_factor);
-        style->TabCloseButtonMinWidthUnselected = ImTrunc(style->TabCloseButtonMinWidthUnselected * scale_factor);
-        style->SeparatorTextPadding.x           = ImTrunc(style->SeparatorTextPadding.x * scale_factor);
-        style->SeparatorTextPadding.y           = ImTrunc(style->SeparatorTextPadding.y * scale_factor);
-        style->DisplayWindowPadding.x           = ImTrunc(style->DisplayWindowPadding.x * scale_factor);
-        style->DisplayWindowPadding.y           = ImTrunc(style->DisplayWindowPadding.y * scale_factor);
-        style->DisplaySafeAreaPadding.x         = ImTrunc(style->DisplaySafeAreaPadding.x * scale_factor);
-        style->DisplaySafeAreaPadding.y         = ImTrunc(style->DisplaySafeAreaPadding.y * scale_factor);
-        style->MouseCursorScale                 = ImTrunc(style->MouseCursorScale * scale_factor);
+        if (!scaled) {
+            style->WindowPadding.x                  = ImTrunc(style->WindowPadding.x * scale_factor);
+            style->WindowPadding.y                  = ImTrunc(style->WindowPadding.y * scale_factor);
+            style->WindowRounding                   = ImTrunc(style->WindowRounding * scale_factor);
+            style->WindowMinSize.x                  = ImTrunc(style->WindowMinSize.x * scale_factor);
+            style->WindowMinSize.y                  = ImTrunc(style->WindowMinSize.y * scale_factor);
+            style->ChildRounding                    = ImTrunc(style->ChildRounding * scale_factor);
+            style->PopupRounding                    = ImTrunc(style->PopupRounding * scale_factor);
+            style->FramePadding.x                   = ImTrunc(style->FramePadding.x * scale_factor);
+            style->FramePadding.y                   = ImTrunc(style->FramePadding.y * scale_factor);
+            style->FrameRounding                    = ImTrunc(style->FrameRounding * scale_factor);
+            style->ItemSpacing.x                    = ImTrunc(style->ItemSpacing.x * scale_factor);
+            style->ItemSpacing.y                    = ImTrunc(style->ItemSpacing.x * scale_factor);
+            style->ItemInnerSpacing.x               = ImTrunc(style->ItemInnerSpacing.x * scale_factor);
+            style->ItemInnerSpacing.y               = ImTrunc(style->ItemInnerSpacing.y * scale_factor);
+            style->CellPadding.x                    = ImTrunc(style->CellPadding.x * scale_factor);
+            style->CellPadding.y                    = ImTrunc(style->CellPadding.y * scale_factor);
+            style->TouchExtraPadding.x              = ImTrunc(style->TouchExtraPadding.x * scale_factor);
+            style->TouchExtraPadding.y              = ImTrunc(style->TouchExtraPadding.y * scale_factor);
+            style->IndentSpacing                    = ImTrunc(style->IndentSpacing * scale_factor);
+            style->ColumnsMinSpacing                = ImTrunc(style->ColumnsMinSpacing * scale_factor);
+            style->ScrollbarSize                    = ImTrunc(style->ScrollbarSize * scale_factor);
+            style->ScrollbarRounding                = ImTrunc(style->ScrollbarRounding * scale_factor);
+            style->GrabMinSize                      = ImTrunc(style->GrabMinSize * scale_factor);
+            style->GrabRounding                     = ImTrunc(style->GrabRounding * scale_factor);
+            style->LogSliderDeadzone                = ImTrunc(style->LogSliderDeadzone * scale_factor);
+            style->TabRounding                      = ImTrunc(style->TabRounding * scale_factor);
+            style->TabCloseButtonMinWidthSelected   = ImTrunc(style->TabCloseButtonMinWidthSelected * scale_factor);
+            style->TabCloseButtonMinWidthUnselected = ImTrunc(style->TabCloseButtonMinWidthUnselected * scale_factor);
+            style->SeparatorTextPadding.x           = ImTrunc(style->SeparatorTextPadding.x * scale_factor);
+            style->SeparatorTextPadding.y           = ImTrunc(style->SeparatorTextPadding.y * scale_factor);
+            style->DisplayWindowPadding.x           = ImTrunc(style->DisplayWindowPadding.x * scale_factor);
+            style->DisplayWindowPadding.y           = ImTrunc(style->DisplayWindowPadding.y * scale_factor);
+            style->DisplaySafeAreaPadding.x         = ImTrunc(style->DisplaySafeAreaPadding.x * scale_factor);
+            style->DisplaySafeAreaPadding.y         = ImTrunc(style->DisplaySafeAreaPadding.y * scale_factor);
+            style->MouseCursorScale                 = ImTrunc(style->MouseCursorScale * scale_factor);
+            scaled = true;
+        }
+        
     }
 
     void UIManager::ShowMainMenu(bool* p_open)
     {
         if (ImGui::Begin(LocUI.Strings.gameName.c_str(), p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
             // Creates the main menu UI and enables our custom theming.
-            um_Instance.ActivateTheme();
+            ActivateTheme();
             // Spawns the main menu logic.
-            EnigmaFix::UIManager::MainMenuOptions();
+            MainMenuOptions();
             Separator();
-            EnigmaFix::UIManager::WindowButtons();
+            WindowButtons();
         }
     }
 
@@ -539,9 +544,9 @@ namespace EnigmaFix {
 
     void UIManager::BeginRender()
     {
-        EnigmaFix::UIManager::ShowMainMenu(&SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
+        ShowMainMenu(&SettingsUI.ShowUI); // showMainMenu is fine on it's own, we just need a boolean that actually works
         // Runs some menu checks per-frame, since I seemingly can't get it so these checks don't happen per-frame.
-        EnigmaFix::UIManager::LoopChecks();
+        LoopChecks();
     }
 
     void UIManager::Begin(ID3D11Device* pDevice)
@@ -549,13 +554,13 @@ namespace EnigmaFix {
         // First, get our ImGui style before we do anything else.
         style = &GetStyle();
         // TODO: Figure out how to adjust the style settings only when necessary. Right now it keeps writing to them and causes problems.
-        //um_Instance.AdjustDPIScaling(SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier);
+        AdjustDPIScaling(SettingsUI.INS.dpiScale / 100.0f * SettingsUI.INS.dpiScaleMultiplier);
         // Checks if the localization strings have been initialized.
-        EnigmaFix::UIManager::InitLocalization();
+        InitLocalization();
         // Loads the About screen's logo texture.
-        EnigmaFix::UIManager::LoadLogoTexture(pDevice);
+        LoadLogoTexture(pDevice);
         // Begins drawing the UI.
-        EnigmaFix::UIManager::BeginRender();
+        BeginRender();
     }
 }
 

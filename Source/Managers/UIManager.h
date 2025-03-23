@@ -44,7 +44,7 @@ namespace EnigmaFix {
         static void ShowAboutWindow(bool* p_open);
         static void HelpMarker(const char* desc);
         static void InitLocalization();
-        void ActivateTheme();
+        static void ActivateTheme();
         static void MainMenuOptions();
         static void LoopChecks();
         static void ShowExitPrompt();
