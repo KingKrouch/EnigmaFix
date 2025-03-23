@@ -181,6 +181,8 @@ add_library(EnigmaFix SHARED
         Source/Utilities/JsonHelper.h
         Source/Utilities/FOVHelper.cpp
         Source/Utilities/FOVHelper.h
+        Source/Utilities/ColorHelper.cpp
+        Source/Utilities/ColorHelper.h
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.

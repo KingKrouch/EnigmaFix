@@ -20,39 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
-#ifndef ENIGMAFIX_CLION_UIMANAGER_H
-#define ENIGMAFIX_CLION_UIMANAGER_H
+#ifndef COLORHELPER_H
+#define COLORHELPER_H
 
-// System Libraries
-#include <d3d11.h>
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
-namespace EnigmaFix {
-    class UIManager {
-    public:
-        static UIManager &Get() {
-            return um_Instance;
-        };
-        static void Begin(ID3D11Device* pDevice);
-    private:
-        static UIManager um_Instance;
-        static void BeginRender();
-        static void ShowMainMenu(bool* p_open);
-        static void ShowStartupOverlay(bool* p_open);
-        static void ShowAboutWindow(bool* p_open);
-        static void HelpMarker(const char* desc);
-        static void InitLocalization();
-        void ActivateTheme();
-        static void MainMenuOptions();
-        static void LoopChecks();
-        static void ShowExitPrompt();
-        static void WindowButtons();
-        static void LoadLogoTexture(ID3D11Device* pDevice);
-        static void ResolutionOptions();
-        static void AdjustDPIScaling(float scale_factor);
-    };
-}
+namespace Utils {
+    std::vector<float> HexToRGBA(const std::string& hex);
+} // Utils
 
-#endif //ENIGMAFIX_CLION_UIMANAGER_H
+#endif //COLORHELPER_H
