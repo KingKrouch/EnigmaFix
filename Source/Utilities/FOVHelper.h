@@ -29,7 +29,7 @@ SOFTWARE.
 #include <cmath>
 
 namespace FOV {
-    float AdjustFOVHorPlusToVertPlus(float aspectRatio = (16.0f / 9.0f), float horizontalFOV = 50.0f, float aspectRatioThreshold = (16.0f / 9.0f));
+    float AdjustFOVHorPlusToVertPlus(float aspectRatio = (16.0f / 9.0f), float horizontalFOV = 60.0f, float aspectRatioThreshold = (16.0f / 9.0f));
 } // FOV
 
 #endif //FOVHELPER_H
