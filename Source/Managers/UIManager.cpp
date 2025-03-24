@@ -89,8 +89,7 @@ namespace EnigmaFix {
     {
         const float PAD = 10.0f / (SettingsUI.INS.dpiScale * SettingsUI.INS.dpiScaleMultiplier);
         static int corner = 0;
-        if (corner != -1)
-        {
+        if (corner != -1) {
             const ImGuiViewport* viewport = GetMainViewport();
             ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
             ImVec2 work_size = viewport->WorkSize;
@@ -120,7 +119,7 @@ namespace EnigmaFix {
             float logoWidthNew = (static_cast<float>(LogoWidth) / static_cast<float>(logoSizeDivider)) * dpiScaleLogo;
 
             // Save the current cursor position
-            float originalCursorPosX = ImGui::GetCursorPosX();
+            float originalCursorPosX = GetCursorPosX();
 
             // Calculate the horizontal center position and set the cursor position
             float windowWidth = GetWindowWidth();
@@ -133,7 +132,7 @@ namespace EnigmaFix {
             SetCursorPosX(originalCursorPosX);
 
             // Calculate the text width (this will give you the length of the text in pixels)
-            float textWidth = CalcTextSize(LocUI.Strings.enigmaFixName.c_str()).x + ImGui::CalcTextSize(LocUI.Strings.versionNumber.c_str()).x + 10.0f; // 10.0f for a small space between the two strings
+            float textWidth = CalcTextSize(LocUI.Strings.enigmaFixName.c_str()).x + CalcTextSize(LocUI.Strings.versionNumber.c_str()).x + 10.0f; // 10.0f for a small space between the two strings
 
             // Set the cursor to the center of the window minus half the text width
             SetCursorPosX((windowWidth - textWidth) * 0.5f);
@@ -311,7 +310,7 @@ namespace EnigmaFix {
         for (const auto& [x, y] : resolutions) {
             resolutionStrings.push_back(std::to_string(x) + "x" + std::to_string(y));
         }
-        // Convert to a format ImGui::Combo can use
+        // Convert to a format Combo can use
         std::vector<const char*> resolutionCStrs;
         for (const auto& str : resolutionStrings) {
             resolutionCStrs.push_back(str.c_str());
@@ -334,14 +333,14 @@ namespace EnigmaFix {
             ResolutionOptions();
             SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResolution.c_str());
             // NOTE: Planning on phasing out the custom resolution checkbox. It's only here currently for debugging issues with crashing on startup.
-            //ImGui::Checkbox(LocUI.Strings.checkbox_UseCustomRes, &SettingsUI.RES.UseCustomRes);
+            //Checkbox(LocUI.Strings.checkbox_UseCustomRes, &SettingsUI.RES.UseCustomRes);
             //if (SettingsUI.RES.UseCustomRes)
             //{
             //}
             Checkbox(LocUI.Strings.checkbox_UseCustomResScale.c_str(), &SettingsUI.RES.UseCustomResScale);
             if (SettingsUI.RES.UseCustomResScale) {
                 // TODO: Figure out why this doesn't work.
-                ImGui::DragInt(LocUI.Strings.dragInt_CustomResScale.c_str(), &SettingsUI.RES.CustomResScale, 25, 100);
+                DragInt(LocUI.Strings.dragInt_CustomResScale.c_str(), &SettingsUI.RES.CustomResScale, 25, 100);
                 SameLine(); HelpMarker(LocUI.Strings.helpmarker_CustomResScale.c_str());
             }
             Text("Internal Resolution: %d x %d", static_cast<int>(SettingsUI.INS.InternalResolution.x), static_cast<int>(SettingsUI.INS.InternalResolution.y));
@@ -523,7 +522,7 @@ namespace EnigmaFix {
 
     void UIManager::ShowMainMenu(bool* p_open)
     {
-        if (ImGui::Begin(LocUI.Strings.gameName.c_str(), p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
+        if (Begin(LocUI.Strings.gameName.c_str(), p_open, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
             // Creates the main menu UI and enables our custom theming.
             ActivateTheme();
             // Spawns the main menu logic.
@@ -549,7 +548,7 @@ namespace EnigmaFix {
         LoopChecks();
     }
 
-    void UIManager::Begin(ID3D11Device* pDevice)
+    void UIManager::Start(ID3D11Device* pDevice)
     {
         // First, get our ImGui style before we do anything else.
         style = &GetStyle();

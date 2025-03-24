@@ -35,7 +35,7 @@ namespace EnigmaFix {
         static UIManager &Get() {
             return um_Instance;
         };
-        static void Begin(ID3D11Device* pDevice);
+        static void Start(ID3D11Device* pDevice);
     private:
         static UIManager um_Instance;
         static void BeginRender();
