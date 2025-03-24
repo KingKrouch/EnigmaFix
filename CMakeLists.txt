@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.21)
 set(PROJECT_NAME                EnigmaFix)
 # Set the name of the target operating system.
 set(CMAKE_SYSTEM_NAME           Windows)
+set(MINGW_TOOLCHAIN_PREFIX      x86_64-w64-mingw32)
 
 if (UNIX) # If compiling on Linux, manually configure MingW-64.
     # Try to get NAME by checking for NixOS in /etc/os-release
@@ -19,12 +20,14 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
         # NOTE: We might not even need to adjust the CMAKE_FIND_ROOT_PATH on NixOS, at least with development toolchains.
     else()
         # Set the Toolchain to MinGW on Linux.
-        set(CMAKE_FIND_ROOT_PATH    /usr/x86_64-w64-mingw32)
+        set(CMAKE_FIND_ROOT_PATH    /usr/${MINGW_TOOLCHAIN_PREFIX})
         link_directories(${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/lib) # TODO: Fix to also work with MinGW on Windows.
         message(STATUS "This system is not NixOS. It is: ${NAME}. Root Path declaration is necessary.")
     endif()
-    set(CMAKE_C_COMPILER        x86_64-w64-mingw32-gcc)
-    set(CMAKE_CXX_COMPILER      x86_64-w64-mingw32-g++)
+
+    set(CMAKE_C_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-gcc)
+    set(CMAKE_CXX_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-g++)
+    set(CMAKE_RC_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-windres)
     # adjust the default behavior of the FIND_XXX() commands:
     # Never search for programs in the host environment
     set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
