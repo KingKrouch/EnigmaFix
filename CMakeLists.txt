@@ -5,6 +5,9 @@ set(PROJECT_NAME                EnigmaFix)
 set(CMAKE_SYSTEM_NAME           Windows)
 set(MINGW_TOOLCHAIN_PREFIX      x86_64-w64-mingw32)
 
+set(ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Resources/EnigmaFix_Icon.ico")
+set(RESOURCE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Resources/Resources.rc")
+
 if (UNIX) # If compiling on Linux, manually configure MingW-64.
     # Try to get NAME by checking for NixOS in /etc/os-release
     execute_process(
@@ -186,6 +189,7 @@ add_library(EnigmaFix SHARED
         Source/Utilities/FOVHelper.h
         Source/Utilities/ColorHelper.cpp
         Source/Utilities/ColorHelper.h
+        ${RESOURCE_FILE}
 )
 ## Add the dependencies we set up previously.
 # NOTE: Add "" to the "add_dependencies" section when you finally get that shit working.
