@@ -118,7 +118,7 @@ target_link_libraries(imgui imguibackends)
 
 ## Kiero
 set(kiero_backend "D3D11" CACHE STRING "Set Kiero backend")
-set(kiero_minhook ON)
+set(kiero_minhook ON CACHE BOOL "Enable MinHook support" FORCE)
 set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero-CMake")
 message(STATUS "Using SafetyHook from submodule...")
 add_subdirectory("${KIERO_SOURCE_DIR}")
