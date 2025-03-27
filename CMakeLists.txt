@@ -9,25 +9,6 @@ set(ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Resources/EnigmaFix_Icon.ico")
 set(RESOURCE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Resources/Resources.rc")
 
 if (UNIX) # If compiling on Linux, manually configure MingW-64.
-    # Try to get NAME by checking for NixOS in /etc/os-release
-    execute_process(
-            COMMAND sh -c "grep ^NAME= /etc/os-release | cut -d '=' -f 2 | tr -d '\"'"
-            OUTPUT_VARIABLE NAME
-            ERROR_QUIET
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-    # Check if NAME is "nixos"
-    if(NAME STREQUAL "NixOS")
-        message(STATUS "This system is NixOS. Root Path declaration is unnecessary.")
-        # TODO: Add the necessary root path and link directories for NixOS.
-        # NOTE: We might not even need to adjust the CMAKE_FIND_ROOT_PATH on NixOS, at least with development toolchains.
-    else()
-        # Set the Toolchain to MinGW on Linux.
-        set(CMAKE_FIND_ROOT_PATH    /usr/${MINGW_TOOLCHAIN_PREFIX})
-        link_directories(${CMAKE_FIND_ROOT_PATH}/sys-root/mingw/lib) # TODO: Fix to also work with MinGW on Windows.
-        message(STATUS "This system is not NixOS. It is: ${NAME}. Root Path declaration is necessary.")
-    endif()
-
     set(CMAKE_C_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-gcc)
     set(CMAKE_CXX_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-g++)
     set(CMAKE_RC_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-windres)
@@ -65,6 +46,10 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -DDEBUG -ggdb3")
 # Set compile flags for release builds, this should strip the debug symbols and optimizes it.
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -s")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -s")
+
+# Uncomment these flags if you need verbose output for whatever reason.
+#set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
 
 ## Setup Boost (Still need to sort out the error regarding "the target platform not supporting dynamic linking"
 #find_package(Boost REQUIRED COMPONENTS) # Add Boost Components Here.
@@ -122,13 +107,6 @@ set(kiero_minhook ON CACHE BOOL "Enable MinHook support" FORCE)
 set(KIERO_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/Kiero-CMake")
 message(STATUS "Using SafetyHook from submodule...")
 add_subdirectory("${KIERO_SOURCE_DIR}")
-
-## MinHook (Using a fork of MinHook)
-#set(MINHOOK_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/MinHook")
-#message(STATUS "Using MinHook from submodule...")
-#add_subdirectory("${MINHOOK_SOURCE_DIR}")
-#target_link_libraries(kiero minhook) # Link MinHook with Kiero
-#target_include_directories(kiero PRIVATE "${MINHOOK_SOURCE_DIR}/include")
 
 ## IniPP
 set(INIPP_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source/ThirdParty/IniPP")
