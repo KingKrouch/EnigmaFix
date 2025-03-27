@@ -12,7 +12,9 @@ if (UNIX) # If compiling on Linux, manually configure MingW-64.
     set(CMAKE_C_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-gcc)
     set(CMAKE_CXX_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-g++)
     set(CMAKE_RC_COMPILER ${MINGW_TOOLCHAIN_PREFIX}-windres)
-    # adjust the default behavior of the FIND_XXX() commands:
+    set(CMAKE_LINKER ${MINGW_TOOLCHAIN_PREFIX}-ld)
+    set(CMAKE_AR ${MINGW_TOOLCHAIN_PREFIX}-ar)
+    # Adjust the default behavior of the FIND_XXX() commands:
     # Never search for programs in the host environment
     set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
     # Search for headers and libraries only in the target environment
