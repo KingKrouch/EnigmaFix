@@ -29,3 +29,7 @@
 [submodule "Source/ThirdParty/Zydis"]
 	path = Source/ThirdParty/Zydis
 	url = https://github.com/zyantific/zydis.git
+[submodule "Source/ThirdParty/MinHook"]
+	path = Source/ThirdParty/MinHook
+	url = https://github.com/TsudaKageyu/minhook
+	branch = master
