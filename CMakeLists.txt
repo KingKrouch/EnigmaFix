@@ -101,6 +101,14 @@ target_link_libraries(imguibackends d3dcompiler dwmapi)
 ### We then finally link together ImGui and ImGuiBackends, so they're dependent on each other.
 target_link_libraries(imgui imguibackends)
 
+## MinHook (Required for Kiero)
+FetchContent_Declare(
+        minhook
+        SOURCE_DIR ${CMAKE_SOURCE_DIR}/Source/ThirdParty/MinHook
+)
+FetchContent_MakeAvailable(minhook)
+message(STATUS "Using MinHook from submodule...")
+
 ## Kiero
 set(kiero_backend "D3D11" CACHE STRING "Set Kiero backend")
 set(kiero_minhook ON CACHE BOOL "Enable MinHook support" FORCE)
